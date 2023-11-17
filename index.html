@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursery Cost Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+		<h2 class="mt-5">Nursery Cost Calculator</h2>
+
+		<div class="alert alert-info">
+			<h4>Government Childcare Funding: Eligibility & Limitations</h4>
+			<p>
+				The government provides funding for 15 to 30 hours of childcare per week for eligible children. 
+				Key points to consider:
+			</p>
+			<ul>
+				<li><strong>Eligibility:</strong> Available for children aged 3 to 4 years.</li>
+				<li><strong>Duration:</strong> 38 weeks per year, aligning with the term time.</li>
+				<li><strong>Additional Costs:</strong> Funding covers only the educational service. Costs like meals, nappies, and trips may be extra.</li>
+				<li><strong>Provider Policies:</strong> Each childcare provider may apply the funding differently based on their policies.</li>
+			</ul>
+			<p>For full details and criteria, please consult the official government childcare funding guidelines.</p>
+		</div>
+
+        <form id="costCalculator">
+			<div class="form-group">
+				<label>Enter Nursery Rate Type:</label>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="rateType" id="monthlyRateOption" value="monthly" checked>
+					<label class="form-check-label" for="monthlyRateOption">
+						Monthly Rate
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="rateType" id="hourlyRateOption" value="hourly">
+					<label class="form-check-label" for="hourlyRateOption">
+						Hourly Rate
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group" id="monthlyRateGroup">
+				<label for="monthlyRate">Nursery Monthly Rate (£)</label>
+				<input type="number" class="form-control" id="monthlyRate" placeholder="Enter monthly rate">
+			</div>
+
+			<div class="form-group d-none" id="hourlyRateGroup">
+				<label for="hourlyRate">Nursery Hourly Rate (£)</label>
+				<input type="number" class="form-control" id="hourlyRate" placeholder="Enter hourly rate">
+			</div>
+            <div class="form-group">
+                <label for="governmentRate">Government Funding Rate per Hour (£)</label>
+                <input type="number" class="form-control" id="governmentRate" placeholder="Enter government funding rate" data-toggle="tooltip" data-placement="right" title="Enter the hourly rate provided by the government for funded hours. Each council has it's own rate.">
+            </div>
+			<div class="form-group">
+				<label for="weeklyFundedHours">Number of Funded Hours per Week</label>
+				<select class="form-control" id="weeklyFundedHours" data-toggle="tooltip" data-placement="right" title="Select the number of hours per week that are funded by the government.">
+					<option value="15">15 hours</option>
+					<option value="30">30 hours</option>
+				</select>
+			</div>
+            <div class="form-group">
+                <label for="weeklyHours">Total Hours Attended per Week</label>
+                <input type="number" class="form-control" id="weeklyHours" placeholder="Enter total hours per week" data-toggle="tooltip" data-placement="right" title="Enter the total number of hours per week your child attends the nursery.">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="calculateCost()">Calculate</button>
+        </form>
+
+        <div class="mt-4" id="result"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="calculator.js"></script>
+</body>
+</html>
