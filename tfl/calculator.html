@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TfL Travel Cost Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TfL Travel Cost Calculator</h1>
+        
+        <!-- Passenger Information -->
+        <section>
+            <h2>Passenger Information</h2>
+            <label for="passengerType">Passenger Type:</label>
+            <select id="passengerType" onchange="showTravelDetails()">
+                <option value="">Select Passenger Type</option>
+                <option value="adult">Adult</option>
+                <option value="16-17">16-17</option>
+                <option value="student">Student</option>
+                <option value="child">Child</option>
+                <option value="senior">Senior</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </section>
+        
+        <!-- Daily Travel Details -->
+        <section id="travelDetails" class="hidden">
+            <h2>Daily Travel Details</h2>
+            <button id="addDayBtn">Add Day</button>
+            <div id="daysContainer"></div>
+        </section>
+
+        <!-- Results -->
+        <section>
+            <div id="results"></div>
+        </section>
+
+        <!-- Pricing Assumptions -->
+        <section id="pricingAssumptions">
+            <h3>Pricing Assumptions</h3>
+            <div id="assumptions"></div>
+        </section>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
