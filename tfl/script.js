@@ -284,6 +284,39 @@ const stationZoneMap = {
     "Woolwich Arsenal": 4
 };
 
+const fareStructure = {
+    adult: {
+        tube: { peak: 2.50, offPeak: 2.40 },
+        bus: { peak: 1.55, offPeak: 1.55 },
+        tram: { peak: 1.55, offPeak: 1.55 },
+    },
+    "16-17": {
+        tube: { peak: 1.25, offPeak: 1.20 },
+        bus: { peak: 0.75, offPeak: 0.75 },
+        tram: { peak: 0.75, offPeak: 0.75 },
+    },
+    student: {
+        tube: { peak: 1.75, offPeak: 1.60 },
+        bus: { peak: 1.00, offPeak: 1.00 },
+        tram: { peak: 1.00, offPeak: 1.00 },
+    },
+    child: {
+        tube: { peak: 0.75, offPeak: 0.70 },
+        bus: { peak: 0.55, offPeak: 0.55 },
+        tram: { peak: 0.55, offPeak: 0.55 },
+    },
+    senior: {
+        tube: { peak: 1.00, offPeak: 0.90 },
+        bus: { peak: 0.75, offPeak: 0.75 },
+        tram: { peak: 0.75, offPeak: 0.75 },
+    },
+    disabled: {
+        tube: { peak: 1.00, offPeak: 0.90 },
+        bus: { peak: 0.75, offPeak: 0.75 },
+        tram: { peak: 0.75, offPeak: 0.75 },
+    }
+};
+
 const dailyFareCap = 13.10;  // Example value
 const weeklyFareCap = 40.00;
 const monthlyFareCap = 150.00;
@@ -354,7 +387,7 @@ function addTrip(dayId) {
             <option value="peak">Peak</option>
             <option value="off-peak">Off-Peak</option>
         </select>
-        <p class="time-explanation" id="timeExplanation${dayId}-${tripCount}">Peak: £2.10 Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £1.90 at all other times including public holidays.</p>
+        <p class="time-explanation" id="timeExplanation${dayId}-${tripCount}">Peak: £2.50 Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £2.40 at all other times including public holidays.</p>
         <button class="removeBtn" onclick="removeTrip(this, ${dayId}); calculateCosts();">Remove Trip</button>
     `;
     tripsContainer.appendChild(tripDiv);
@@ -377,10 +410,10 @@ function updateTripFields(dayId, tripCount) {
     
     if (tripType === 'bus' || tripType === 'tram') {
         zoneFields.classList.add('hidden');
-        timeExplanation.textContent = "Bus/Tram: Peak: £2.10 Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £1.90 at all other times including public holidays.";
+        timeExplanation.textContent = `Bus/Tram: Peak: £${fareStructure.adult.bus.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure.adult.bus.offPeak} at all other times including public holidays.`;
     } else {
         zoneFields.classList.remove('hidden');
-        timeExplanation.textContent = "Tube/DLR/Overground/National Rail: Peak: £2.50 Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £2.40 at all other times including public holidays.";
+        timeExplanation.textContent = `Tube/DLR/Overground/National Rail: Peak: £${fareStructure.adult.tube.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure.adult.tube.offPeak} at all other times including public holidays.`;
     }
 }
 
@@ -440,12 +473,8 @@ function calculateCosts() {
 }
 
 function calculateTripCost(passengerType, tripType, startZone, endZone, time) {
-    let tripCost;
-    if (tripType === 'bus' || tripType === 'tram') {
-        tripCost = time === 'peak' ? 2.10 : 1.90;
-    } else {
-        tripCost = time === 'peak' ? 2.50 : 2.40;
-    }
+    const fares = fareStructure[passengerType][tripType];
+    const tripCost = time === 'peak' ? fares.peak : fares.offPeak;
     return tripCost;
 }
 
