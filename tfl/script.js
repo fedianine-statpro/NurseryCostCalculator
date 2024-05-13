@@ -289,38 +289,81 @@ const fareStructure = {
         tube: { peak: 2.50, offPeak: 2.40 },
         bus: { peak: 1.55, offPeak: 1.55 },
         tram: { peak: 1.55, offPeak: 1.55 },
+        dailyCap: 13.10,
+        weeklyCap: 40.00,
+        monthlyCap: 150.00,
+        annualCap: 1600.00,
+        dailyPass: 12.70,
+        weeklyPass: 37.00,
+        monthlyPass: 142.10,
+        annualPass: 1480.00
     },
     "16-17": {
         tube: { peak: 1.25, offPeak: 1.20 },
         bus: { peak: 0.75, offPeak: 0.75 },
         tram: { peak: 0.75, offPeak: 0.75 },
+        dailyCap: 6.55,
+        weeklyCap: 20.00,
+        monthlyCap: 75.00,
+        annualCap: 800.00,
+        dailyPass: 6.35,
+        weeklyPass: 18.50,
+        monthlyPass: 71.00,
+        annualPass: 740.00
     },
     student: {
         tube: { peak: 1.75, offPeak: 1.60 },
         bus: { peak: 1.00, offPeak: 1.00 },
         tram: { peak: 1.00, offPeak: 1.00 },
+        dailyCap: 9.10,
+        weeklyCap: 28.00,
+        monthlyCap: 105.00,
+        annualCap: 1100.00,
+        dailyPass: 8.85,
+        weeklyPass: 24.20,
+        monthlyPass: 98.50,
+        annualPass: 1020.00
     },
     child: {
         tube: { peak: 0.75, offPeak: 0.70 },
         bus: { peak: 0.55, offPeak: 0.55 },
         tram: { peak: 0.55, offPeak: 0.55 },
+        dailyCap: 3.25,
+        weeklyCap: 10.00,
+        monthlyCap: 37.50,
+        annualCap: 400.00,
+        dailyPass: 3.15,
+        weeklyPass: 9.50,
+        monthlyPass: 35.50,
+        annualPass: 370.00
     },
     senior: {
         tube: { peak: 1.00, offPeak: 0.90 },
         bus: { peak: 0.75, offPeak: 0.75 },
         tram: { peak: 0.75, offPeak: 0.75 },
+        dailyCap: 6.50,
+        weeklyCap: 20.00,
+        monthlyCap: 75.00,
+        annualCap: 800.00,
+        dailyPass: 6.25,
+        weeklyPass: 18.00,
+        monthlyPass: 70.00,
+        annualPass: 750.00
     },
     disabled: {
         tube: { peak: 1.00, offPeak: 0.90 },
         bus: { peak: 0.75, offPeak: 0.75 },
         tram: { peak: 0.75, offPeak: 0.75 },
+        dailyCap: 6.50,
+        weeklyCap: 20.00,
+        monthlyCap: 75.00,
+        annualCap: 800.00,
+        dailyPass: 6.25,
+        weeklyPass: 18.00,
+        monthlyPass: 70.00,
+        annualPass: 750.00
     }
 };
-
-const dailyFareCap = 13.10;  // Example value
-const weeklyFareCap = 40.00;
-const monthlyFareCap = 150.00;
-const annualFareCap = 1600.00;
 
 document.getElementById('addDayBtn').addEventListener('click', addDay);
 
@@ -407,13 +450,14 @@ function updateTripFields(dayId, tripCount) {
     const tripType = document.getElementById(`tripType${dayId}-${tripCount}`).value;
     const zoneFields = document.getElementById(`zoneFields${dayId}-${tripCount}`);
     const timeExplanation = document.getElementById(`timeExplanation${dayId}-${tripCount}`);
-    
+    const passengerType = document.getElementById('passengerType').value;
+
     if (tripType === 'bus' || tripType === 'tram') {
         zoneFields.classList.add('hidden');
-        timeExplanation.textContent = `Bus/Tram: Peak: £${fareStructure.adult.bus.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure.adult.bus.offPeak} at all other times including public holidays.`;
+        timeExplanation.textContent = `Bus/Tram: Peak: £${fareStructure[passengerType].bus.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure[passengerType].bus.offPeak} at all other times including public holidays.`;
     } else {
         zoneFields.classList.remove('hidden');
-        timeExplanation.textContent = `Tube/DLR/Overground/National Rail: Peak: £${fareStructure.adult.tube.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure.adult.tube.offPeak} at all other times including public holidays.`;
+        timeExplanation.textContent = `Tube/DLR/Overground/National Rail: Peak: £${fareStructure[passengerType].tube.peak} Monday to Thursday from 06:30 to 09:30 and from 16:00 to 19:00. Off-Peak: £${fareStructure[passengerType].tube.offPeak} at all other times including public holidays.`;
     }
 }
 
@@ -457,7 +501,8 @@ function calculateCosts() {
             costDetails.push(detail);
         });
 
-        totalCostPerDay[dayId] = dayCost > dailyFareCap ? dailyFareCap : dayCost;
+        const dailyCap = fareStructure[passengerType].dailyCap;
+        totalCostPerDay[dayId] = dayCost > dailyCap ? dailyCap : dayCost;
     });
 
     totalCost = Object.values(totalCostPerDay).reduce((a, b) => a + b, 0);
@@ -479,10 +524,11 @@ function calculateTripCost(passengerType, tripType, startZone, endZone, time) {
 }
 
 function compareWithPasses(totalCost) {
-    const dailyPassCost = 13.10;  // Example values
-    const weeklyPassCost = 40.00;
-    const monthlyPassCost = 150.00;
-    const annualPassCost = 1600.00;
+    const passengerType = document.getElementById('passengerType').value;
+    const dailyPassCost = fareStructure[passengerType].dailyPass;
+    const weeklyPassCost = fareStructure[passengerType].weeklyPass;
+    const monthlyPassCost = fareStructure[passengerType].monthlyPass;
+    const annualPassCost = fareStructure[passengerType].annualPass;
 
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML += `
@@ -493,22 +539,27 @@ function compareWithPasses(totalCost) {
         <p>Annual Pass: £${annualPassCost.toFixed(2)} (Cheaper: ${totalCost > annualPassCost})</p>
     `;
 
-    displayPricingAssumptions();
+    displayPricingAssumptions(passengerType);
 }
 
-function displayPricingAssumptions() {
+function displayPricingAssumptions(passengerType) {
     const assumptionsDiv = document.getElementById('assumptions');
+    const fares = fareStructure[passengerType];
     assumptionsDiv.innerHTML = `
-        <p>Assumptions are made based on the following fare structure:</p>
+        <p>Assumptions are made based on the following fare structure for ${capitalizeFirstLetter(passengerType)}:</p>
         <ul>
-            <li>Bus/Tram Peak: £2.10</li>
-            <li>Bus/Tram Off-Peak: £1.90</li>
-            <li>Tube/DLR/Overground/National Rail Peak: £2.50</li>
-            <li>Tube/DLR/Overground/National Rail Off-Peak: £2.40</li>
-            <li>Daily fare cap: £13.10</li>
-            <li>Weekly fare cap: £40.00</li>
-            <li>Monthly fare cap: £150.00</li>
-            <li>Annual fare cap: £1600.00</li>
+            <li>Bus/Tram Peak: £${fares.bus.peak}</li>
+            <li>Bus/Tram Off-Peak: £${fares.bus.offPeak}</li>
+            <li>Tube/DLR/Overground/National Rail Peak: £${fares.tube.peak}</li>
+            <li>Tube/DLR/Overground/National Rail Off-Peak: £${fares.tube.offPeak}</li>
+            <li>Daily fare cap: £${fares.dailyCap}</li>
+            <li>Weekly fare cap: £${fares.weeklyCap}</li>
+            <li>Monthly fare cap: £${fares.monthlyCap}</li>
+            <li>Annual fare cap: £${fares.annualCap}</li>
+            <li>Daily Travelcard: £${fares.dailyPass}</li>
+            <li>Weekly Travelcard: £${fares.weeklyPass}</li>
+            <li>Monthly Travelcard: £${fares.monthlyPass}</li>
+            <li>Annual Travelcard: £${fares.annualPass}</li>
         </ul>
     `;
 }
