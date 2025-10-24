@@ -14,8 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Fedianine - CV</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
 </head>
-<body>
+<body class="stackedit">
     <!-- Navigation Menu -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,87 +37,173 @@
       </div>
     </nav>
 
-    <div class="container mt-5">
-        <h1 class="mb-3">Victor Fedianine</h1>
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/fedianine/" target="_blank">www.linkedin.com/in/fedianine</a></p>
+  <div class="stackedit__html"><p><strong>Victor Fedianine</strong> — Principal .NET and Cloud Engineer<br>
+London, UK | +44 7407 050 215 | <a href="mailto:fedianine@gmail.com">fedianine@gmail.com</a> | <a href="https://linkedin.com/in/fedianine-statpro">https://linkedin.com/in/fedianine-statpro</a> | <a href="https://github.com/fedianine-statpro">https://github.com/fedianine-statpro</a></p>
+<hr>
+<h2 id="professional-summary">Professional Summary</h2>
+<p>Principal-level .NET engineer with 17+ years in fintech delivering high-scale, secure, cloud-native platforms. Led migrations from on-premises to public cloud, event-driven systems, and data pipelines processing multiple terabytes in minutes. I build and operate <strong>CI/CD pipelines</strong>, <strong>infrastructure as code</strong>, <strong>SLO-driven observability</strong>, and <strong>security controls</strong> that help teams ship faster and more safely—consistently improving latency, availability, and cost.</p>
+<h3 id="impact-snapshot">Impact Snapshot</h3>
+<ul>
+<li>
+<p><strong>API modernisation:</strong> Upgraded and modernised a high-traffic REST API from .NET Framework 4.7.2 to .NET 8 serving <strong>200+ requests/second</strong>; p95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, and error rate reduced by <strong>60%</strong> after full async adoption and runtime tuning.</p>
+</li>
+<li>
+<p><strong>Analytics at scale:</strong> Azure Batch pipeline processing approximately <strong>5 TB in under 45 minutes</strong> with <strong>standardised ingestion, restart-safe checkpoints, and adaptive back-pressure</strong>; <strong>reused across three data types</strong> to meet new SLAs.</p>
+</li>
+<li>
+<p><strong>Messaging modernisation:</strong> Replaced MSMQ with RabbitMQ and implemented <strong>idempotent consumers</strong>, <strong>publisher confirms</strong>, and <strong>controlled retries</strong>; handled <strong>up to ~3,000 messages/min</strong> with multi-KB/MB payloads, <strong>retry rate reduced by 65%</strong>, and <strong>99th-percentile consumer lag ≤ 2 minutes</strong> under peak load.</p>
+</li>
+</ul>
+<hr>
+<h2 id="core-skills">Core Skills</h2>
+<ul>
+<li>
+<p><strong>Languages &amp; Frameworks:</strong> C# (.NET 8, <a href="http://ASP.NET">ASP.NET</a> Core), T-SQL, JavaScript</p>
+</li>
+<li>
+<p><strong>Architectures:</strong> Microservices, event-driven systems, idempotency, sagas &amp; orchestration, domain-driven design</p>
+</li>
+<li>
+<p><strong>APIs &amp; Messaging:</strong> REST, gRPC, RabbitMQ, SignalR, WebSockets</p>
+</li>
+<li>
+<p><strong>Data &amp; Caching:</strong> SQL Server, DynamoDB, Redis, Azure SQL, Azure Data Factory, Flyway (versioned DB migrations)</p>
+</li>
+<li>
+<p><strong>Cloud &amp; IaC:</strong> AWS (ECS, Lambda, S3, IAM, Secrets Manager), Azure (App Services, Service Bus, Storage, Logic Apps), Terraform, Docker, NGINX</p>
+</li>
+<li>
+<p><strong>CI/CD &amp; DevEx:</strong> TeamCity, GitHub Actions, Octopus Deploy, Git, feature flags, blue/green &amp; canary releases</p>
+</li>
+<li>
+<p><strong>Observability &amp; Quality:</strong> Datadog, OpenTelemetry (metrics, traces, logs), xUnit, Moq, FluentAssertions, Testcontainers, Artillery</p>
+</li>
+<li>
+<p><strong>Security &amp; Compliance:</strong> authentication and authorisation, secrets management and rotation, secure coding practices, Veracode (SAST/DAST) &amp; dependency scanning, basic threat modelling; privacy-aware data handling (GDPR).</p>
+</li>
+<li>
+<p><strong>Ways of Working:</strong> Scrum &amp; Kanban, architecture decision records, technical strategy &amp; roadmaps, mentoring &amp; coaching, stakeholder management</p>
+</li>
+</ul>
+<hr>
+<h2 id="professional-experience">Professional Experience</h2>
+<p><strong>Confluence (StatPro), London — Principal Software Engineer</strong><br>
+Oct 2019 – Present<br>
+Confluence provides data-driven investment management solutions used by tier-1 asset managers.</p>
+<ul>
+<li>
+<p><strong>Modernised high-traffic REST API (.NET Framework 4.7.2 to .NET 8):</strong> Planned and executed an in-place upgrade with <strong>parallel runs and canary releases</strong> to ensure zero customer disruption. Rewrote blocking paths to <strong>async/await end-to-end</strong>, eliminated thread-pool starvation and sync-over-async hotspots, consolidated <strong>HttpClientFactory</strong> usage to prevent socket exhaustion, and tuned <strong>Kestrel</strong> and <strong>GC</strong> settings. Implemented <strong>Redis-backed caching</strong> on hot paths and introduced <strong>highly customised throttling</strong> (per-client and per-endpoint quotas with burst allowances and concurrency limits). Result: p95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, CPU per request reduced by <strong>25%</strong>, and error rate reduced by <strong>60%</strong> across <strong>200+ requests/second</strong>.<br>
+<strong>Quality &amp; reliability:</strong> Expanded automated tests to <strong>1,400+ unit tests</strong>, <strong>600+ integration tests</strong>, and <strong>100+ Artillery load tests</strong>.</p>
+</li>
+<li>
+<p>Designed a <strong>high-throughput Azure analytics platform</strong> processing approximately <strong>5 TB</strong> end-to-end in <strong>under 45 minutes</strong> across large financial datasets. Standardised <strong>ingestion</strong>, implemented <strong>checkpointing</strong> for restart safety, and added <strong>back-pressure controls</strong> to keep the system stable under spikes; <strong>reused across three data types</strong> to enable new SLAs and faster feature delivery.<br>
+<em>Tech:</em> Azure SQL, Azure Data Factory, App Services, Service Bus, .NET 8.</p>
+</li>
+<li>
+<p><strong>Messaging modernisation (MSMQ to RabbitMQ):</strong> Introduced exchanges/queues, publisher confirms, controlled retries &amp; poison handling, and <strong>idempotent consumers</strong>. <strong>Results:</strong> sustained peaks of <strong>~3,000 messages/min</strong> with multi-KB/MB payloads, <strong>retry rate −65%</strong>, and <strong>p99 consumer lag ≤ 2 minutes</strong> with self-healing under spikes.</p>
+</li>
+<li>
+<p>Rolled out <strong>OpenTelemetry</strong> tracing and <strong>Datadog</strong> dashboards &amp; alerts following RED (Rate, Errors, Duration) and USE (Utilisation, Saturation, Errors) methodologies; mean time to recovery reduced from <strong>60 to 30</strong> minutes, alert noise pruned.</p>
+</li>
+<li>
+<p>Created <strong>TeamCity</strong> and <strong>Octopus Deploy</strong> templates and <strong>Terraform</strong> modules; new services ship with <strong>blue/green deployments</strong>, automated schema migrations, and <strong>one-click pipelines</strong>; lead time reduced by <strong>35%</strong>.</p>
+</li>
+<li>
+<p><strong>Security leadership:</strong> facilitated threat-modelling workshops; added <strong>SAST &amp; DAST checks</strong> and dependency scanning; closed <strong>30+ high/critical findings pre-audit</strong> and aligned with <strong>SOC2</strong> and <strong>ISO27001</strong> controls.</p>
+</li>
+<li>
+<p><strong>Mentorship &amp; leadership:</strong> mentored <strong>4–6 engineers</strong> through code reviews, pairing, and growth plans; authored <strong>ADRs</strong>, set quarterly technical roadmaps, and partnered with Product, SRE, and InfoSec on <strong>SLAs, SLOs, and error budgets</strong>.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Confluence (StatPro), London — Senior Software Engineer</strong><br>
+Jan 2015 – Sep 2019</p>
+<ul>
+<li>
+<p>Shipped a client-services web application that <strong>reduced information retrieval time from hours to seconds</strong> by centralising data and introducing role-based caching; boosted NPS and supported upsell motions.</p>
+</li>
+<li>
+<p>Built SignalR-based real-time notifications for <strong>StatPro Revolution (Confluence)</strong>, decreasing polling overhead and increasing user engagement; request volume reduced by <strong>25%</strong> on key endpoints.</p>
+</li>
+<li>
+<p>Drove performance tuning across hot SQL paths (indexing, partitioning, parameter sniffing) and .NET allocations; <strong>p95 latency reduced by 30%</strong> on high-traffic APIs.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Confluence (StatPro), London — Software Engineer</strong><br>
+Oct 2012 – Dec 2014</p>
+<ul>
+<li>
+<p>Delivered foundational microservices (REST and gRPC) with robust error handling, retries, and circuit breakers; established early CI and environment-parity practices.</p>
+</li>
+<li>
+<p>Contributed to service-oriented architecture adoption, coding standards (SOLID), and automated test baselines using xUnit and Moq.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Gavel &amp; Gown Software Inc. — Senior Web Developer</strong><br>
+2011 – 2012</p>
+<ul>
+<li>Delivered features to a CRM platform used by <strong>1,000+ clients</strong> across North America; improved mobile usability for iOS and Android and mentored junior developers.</li>
+</ul>
+<p><strong>Alocet Inc. — Web Developer and Team Lead</strong><br>
+2009 – 2011</p>
+<ul>
+<li>Led the redesign of a QuickBooks-integrated CRM; unified look and feel across modern browsers; integrated <strong>Intuit Merchant Services</strong>, <strong><a href="http://Authorize.Net">Authorize.Net</a></strong>, and <strong>PayPal</strong>; delivered a screen-builder for rapid lead-capture customisations.</li>
+</ul>
+<p><strong>CIBC — Intermediate Web Developer</strong><br>
+2009</p>
+<ul>
+<li>Contributed to a high-traffic internal portal serving approximately <strong>25k monthly users</strong>; optimised SQL and application code to support around <strong>2,000 concurrent users</strong>.</li>
+</ul>
+<p><strong>RBC — Intermediate Web Developer</strong><br>
+2008</p>
+<ul>
+<li>Contributed to internal <a href="http://ASP.NET">ASP.NET</a> applications; introduced NUnit tests and Active Directory-integrated authentication improvements.</li>
+</ul>
+<hr>
+<h2 id="education--professional-development">Education &amp; Professional Development</h2>
+<ul>
+<li>
+<p>Computer Programming and Analysis (Honours) — Seneca College</p>
+</li>
+<li>
+<p>Project Management Certificate (Honours) — Humber College</p>
+</li>
+<li>
+<p>WCF in the .NET Framework (A+) — Ryerson University</p>
+</li>
+<li>
+<p>AWS Solutions Architect – Associate (in progress, target 2026)</p>
+</li>
+</ul>
+<hr>
+<h2 id="selected-talks-writing--community">Selected Talks, Writing, &amp; Community</h2>
+<ul>
+<li>
+<p>Internal tech talk: “From MSMQ to RabbitMQ — idempotency, DLQs, and back-pressure at scale”</p>
+</li>
+<li>
+<p>Tech Talk: “Intro to OpenTelemetry for .NET teams”</p>
+</li>
+<li>
+<p>Blog post draft: “Designing token-bucket throttling for multi-tenant APIs”</p>
+</li>
+<li>
+<p>Mentored graduates and junior engineers through onboarding plans and pairing sessions</p>
+</li>
+<li>
+<p>Hands-on clinic: “<strong>.NET Performance Triage in 30 minutes</strong>” — using <code>dotnet-counters</code>  to spot hot paths and <code>dotnet-dump</code> for snapshot analysis; live demo of finding thread-pool starvation and GC pressure.</p>
+</li>
+<li>
+<p>Tech Talk: “Intro to <strong>Artillery</strong> for API load testing”</p>
+</li>
+</ul>
+<hr>
+<h2 id="keywords-ats">Keywords (ATS)</h2>
+<p>.NET 8, <a href="http://ASP.NET">ASP.NET</a> Core, C#, REST, gRPC, RabbitMQ, Redis, SQL Server, DynamoDB, Azure Service Bus, Azure Data Factory, AWS ECS, AWS Lambda, S3, IAM, Secrets Manager, Docker, Terraform, TeamCity, Octopus Deploy, OpenTelemetry, Datadog, OAuth2, microservices, event-driven architecture, idempotency, sagas, blue/green deployments, canary releases, threat modelling, OWASP, GDPR, SOC2, ISO27001, Flyway, Veracode, GitHub Actions</p>
+</div>
 
-        <h3>Profile</h3>
-        <p>Innovative solutions expert, skilled in leading development teams, designing and building software using .NET Core technologies, and delivering cloud-based microservices.</p>
-
-        <h3>Skills</h3>
-        <ul>
-            <li>Strong leadership skills and a proven track record in software architecture.</li>
-            <li>Expertise in cloud-based solutions (Azure & AWS).</li>
-            <li>Passion for technology, innovation, application security, and DevOps.</li>
-            <li>Skilled in .NET 8, C#, SQL Server, JavaScript, and various other technologies.</li>
-            <li>Knowledge of Microservices Architecture, SOLID principles, TDD, CI/CD, and Scrum methodologies.</li>
-        </ul>
-
-        <h3>Experience</h3>
-        <div>
-            <h4>Confluence (StatPro) - Principal Software Engineer</h4>
-            <p>October 2012 – Present</p>
-            <ul>
-                <li>Architected and delivered high-quality, scalable software solutions in the cloud (Azure & AWS).</li>
-                <li>Designed and built mission-critical components focusing on quality, security, high availability, performance, and scalability.</li>
-                <li>Interfaced with IT, InfoSec, business owners, and developers to create solutions for investment banking clients.</li>
-                <li>Key technologies: .NET 8, C#, SQL Server, JavaScript, gRPC, WebAPI, RabbitMQ, Redis, MongoDB, Nginx, XUnit, Docker, Terraform, Git.</li>
-                <li>Cloud platforms: AWS (ECS, DynamoDB, Lambda, Secrets Manager, S3, IAM, EC2) and Azure (Data Lake Analytics, Table & Blob Storage, Data Factory, Logic Apps, App Services, Service Bus).</li>
-                <li>Implemented security best practices and performed security assessments.</li>
-                <li>Developed a real-time notification system and a service for gathering platform usage statistics.</li>
-            </ul>
-        </div>
-        <div>
-            <h4>Gavel & Gown Software Inc. - Senior Web Developer</h4>
-            <p>October 2011 – July 2012</p>
-            <ul>
-                <li>Delivered top-quality code for a CRM web application serving over 10,000 clients across North America.</li>
-                <li>Enhanced user interface, added new features, and developed custom controls.</li>
-                <li>Mentored junior software engineers and contributed to their professional development.</li>
-                <li>Optimized web applications for iOS and Android devices.</li>
-                <li>Technologies used: ASP.NET, C#, SQL Server, JavaScript, jQuery, CSS 3, HTML 5, Azure, Web Services.</li>
-            </ul>
-        </div>
-        <div>
-            <h4>Alocet Inc. - Web Developer and Team Lead</h4>
-            <p>November 2009 – October 2011</p>
-            <ul>
-                <li>Redesigned a CRM platform, leading to significant sales growth.</li>
-                <li>Developed tools for lead capture, significantly boosting client sales.</li>
-                <li>Led a team of developers and QA specialists, focusing on user experience and performance.</li>
-                <li>Integrated various payment gateways into the CRM platform.</li>
-                <li>Tools used: ASP.NET, C#, VB.NET, Winforms, SQL Server, T-SQL, JavaScript, jQuery, CSS 3, HTML 5, Web Services.</li>
-            </ul>
-        </div>
-        <div>
-            <h4>CIBC Bank - Intermediate Web Developer</h4>
-            <p>July 2009 – October 2009</p>
-            <ul>
-                <li>Contributed to the development of an internal portal for branches and call support.</li>
-                <li>Optimized application performance for high throughput and user satisfaction.</li>
-                <li>Collaborated with QA team to meet the bank's high-quality standards.</li>
-                <li>Tools used: ASP.NET 3.5, C# 3.5, SQL Server 2008, T-SQL, JavaScript, CSS, HTML, SharePoint.</li>
-            </ul>
-        </div>
-        <div>
-            <h4>RBC Bank - Intermediate Web Developer</h4>
-            <p>September 2008 - December 2008</p>
-            <ul>
-                <li>Developed a user activity processing application after detailed research and demo presentations.</li>
-                <li>Introduced new technologies to the company, enhancing team capabilities.</li>
-                <li>Tools used: ASP.NET, C#, SQL Server, JavaScript, AJAX, CSS, HTML, XML, Rational Rose, Visio, NUnit, Active Directory.</li>
-            </ul>
-        </div>
-
-        <h3>Education and Professional Development</h3>
-        <ul>
-            <li>WCF in the .NET Framework (A+) - 2012, Ryerson University</li>
-            <li>Project Management Certificate (Honours) - 2010 – 2011, Humber College</li>
-            <li>Outstanding achievement and high quality of work award - 2009, CIBC</li>
-            <li>Computer Programming & Analysis Diploma (Honours) - 2006 – 2009, Seneca College</li>
-        </ul>
-
-    </div>
 
     <!-- Footer -->
     <footer class="footer bg-light mt-5">
