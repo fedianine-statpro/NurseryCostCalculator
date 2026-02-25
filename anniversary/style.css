@@ -1,0 +1,83 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+}
+
+#wrapper { position: relative; }
+
+canvas {
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+}
+
+/* ── Popup overlay ── */
+#popup {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  z-index: 10;
+}
+#popup.hidden { display: none; }
+
+.polaroid {
+  background: #fff;
+  padding: 16px 16px 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transform: rotate(-2deg);
+  text-align: center;
+  animation: popIn 0.3s ease-out;
+}
+@keyframes popIn {
+  from { transform: scale(0.4) rotate(-8deg); opacity: 0; }
+  to   { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+
+#photo-frame {
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+  background: #f0e6d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#popup-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#popup-img.hidden { display: none; }
+#popup-placeholder {
+  color: #999;
+  font-size: 14px;
+  padding: 20px;
+}
+#popup-placeholder.hidden { display: none; }
+
+#popup-title {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+#popup-caption {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  margin: 4px 0 8px;
+}
+.polaroid small {
+  color: #aaa;
+  font-size: 12px;
+}
