@@ -1,218 +1,976 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RH4RRXHSKV"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RH4RRXHSKV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-	  gtag('config', 'G-RH4RRXHSKV');
-	</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Fedianine - CV</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+    gtag('config', 'G-RH4RRXHSKV');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Fedianine - CV</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --text: #0f172a;
+      --muted: #475569;
+      --muted-soft: #64748b;
+      --line: #e2e8f0;
+      --dark: #020617;
+      --dark-soft: #0f172a;
+      --brand: #3b82f6;
+      --brand-dark: #1d4ed8;
+      --brand-soft: #dbeafe;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section { padding: 72px 0; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      margin-bottom: 12px;
+    }
+
+    /* ── Nav ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .site-nav-brand {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .site-nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-nav-links a {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+
+    .site-nav-links a:hover,
+    .site-nav-links a.active {
+      color: var(--brand-dark);
+    }
+
+    .nav-toggle { display: none; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .hamburger svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--text);
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08), transparent 25%),
+        linear-gradient(135deg, #020617 0%, #0f172a 45%, #172554 100%);
+      color: white;
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+      grid-template-columns: 1.2fr 0.85fr;
+      padding: 84px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+    }
+
+    .hero p.lead {
+      margin: 20px 0 0;
+      max-width: 700px;
+      color: rgba(255,255,255,0.84);
+      font-size: 1.14rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button-primary {
+      background: var(--brand);
+      color: white;
+      box-shadow: 0 16px 30px rgba(29, 78, 216, 0.24);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .stat-card {
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .stat-card span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+    }
+
+    /* ── Hero contact card ── */
+    .hero-card-wrap {
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 28px;
+      color: var(--text);
+      background: white;
+      border-radius: 24px;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+    }
+
+    .contact-name {
+      margin-top: 18px;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .info-box {
+      margin-top: 18px;
+      padding: 14px 18px;
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+    }
+
+    .info-box .label {
+      color: var(--muted-soft);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .info-box .value {
+      margin-top: 2px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .info-box .value a {
+      color: var(--brand-dark);
+      word-break: break-all;
+    }
+
+    .small-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* ── Panels & grids ── */
+    .grid-2 {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .panel {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .panel.soft { background: var(--surface-soft); }
+
+    .panel.dark {
+      background: var(--dark-soft);
+      border-color: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .panel.dark .eyebrow { color: #bfdbfe; }
+    .panel.dark p { color: rgba(255,255,255,0.78); }
+
+    .panel h2, .panel h3 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .body-text {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── Impact items ── */
+    .impact-item {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .impact-item > strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .impact-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Cards ── */
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .cards-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .mini-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .mini-card .meta {
+      color: var(--brand-dark);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-marker {
+      position: absolute;
+      left: -36px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: 3px solid var(--brand-soft);
+    }
+
+    .role-header {
+      margin-bottom: 12px;
+    }
+
+    .role-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .role-company {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .role-date {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .role-description {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .role-bullets {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .role-bullets li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .role-bullets li:last-child { margin-bottom: 0; }
+
+    .role-panel {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    /* ── Talks grid ── */
+    .talks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    /* ── Keywords ── */
+    .keywords-text {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .keywords-text a {
+      color: rgba(255,255,255,0.78);
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: white;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .site-footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 26px 0;
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+
+    .site-footer a {
+      color: var(--brand-dark);
+      font-weight: 600;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 980px) {
+      .hero-inner,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .talks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 56px 0; }
+
+      .hero-inner { padding: 60px 0; }
+
+      .container {
+        width: min(var(--max-width), calc(100% - 1.2rem));
+      }
+
+      .panel, .hero-card, .role-panel {
+        padding: 24px;
+      }
+
+      .stats,
+      .cards-3,
+      .cards-2,
+      .site-footer-inner {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .timeline-marker { display: none; }
+
+      .timeline {
+        padding-left: 0;
+      }
+
+      .timeline::before { display: none; }
+
+      /* Mobile nav */
+      .hamburger { display: block; }
+
+      .site-nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: white;
+        border-bottom: 1px solid var(--line);
+        padding: 16px;
+        gap: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+
+      .nav-toggle:checked ~ .site-nav-links {
+        display: flex;
+      }
+    }
+  </style>
 </head>
-<body class="stackedit">
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-		  <li class="nav-item active">
-			<a class="nav-link" href="#">Victor Fedianine - CV <span class="sr-only">(current)</span></a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="morden_running_club_index.html">Morden Running Club</a>
-		  </li>
-        </ul>
+<body>
+
+  <!-- Nav -->
+  <nav class="site-nav">
+    <div class="container site-nav-inner">
+      <span class="site-nav-brand">Victor Fedianine</span>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+      <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </label>
+      <ul class="site-nav-links">
+        <li><a href="#" class="active">CV</a></li>
+        <li><a href="morden_running_club_index.html">Morden Running Club</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="pill">Principal .NET &amp; Cloud Engineer</div>
+        <h1>Victor Fedianine</h1>
+        <p class="lead">
+          Principal-level .NET engineer with 17+ years in fintech delivering high-scale, secure, cloud-native platforms.
+        </p>
+
+        <div class="button-row">
+          <a class="button button-primary" href="mailto:fedianine@gmail.com">Email me</a>
+          <a class="button button-secondary" href="https://linkedin.com/in/fedianine-statpro" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="button button-secondary" href="https://github.com/fedianine-statpro" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <strong>17+</strong>
+            <span>Years in fintech</span>
+          </div>
+          <div class="stat-card">
+            <strong>200+</strong>
+            <span>Requests/second API</span>
+          </div>
+          <div class="stat-card">
+            <strong>5 TB</strong>
+            <span>Processed in &lt;45 min</span>
+          </div>
+          <div class="stat-card">
+            <strong>35%</strong>
+            <span>Latency reduction</span>
+          </div>
+        </div>
       </div>
-    </nav>
 
-  <div class="stackedit__html"><p><strong>Victor Fedianine</strong> — Principal .NET and Cloud Engineer<br>
-London, UK | +44 7407 050 215 | <a href="mailto:fedianine@gmail.com">fedianine@gmail.com</a> | <a href="https://linkedin.com/in/fedianine-statpro">https://linkedin.com/in/fedianine-statpro</a> | <a href="https://github.com/fedianine-statpro">https://github.com/fedianine-statpro</a></p>
-<hr>
-<h2 id="professional-summary">Professional Summary</h2>
-<p>Principal-level .NET engineer with 17+ years in fintech delivering high-scale, secure, cloud-native platforms. Led migrations from on-premises to public cloud, event-driven systems, and data pipelines processing multiple terabytes in minutes. I build and operate <strong>CI/CD pipelines</strong>, <strong>infrastructure as code</strong>, <strong>SLO-driven observability</strong>, and <strong>security controls</strong> that help teams ship faster and more safely—consistently improving latency, availability, and cost.</p>
-<h3 id="impact-snapshot">Impact Snapshot</h3>
-<ul>
-<li>
-<p><strong>API modernisation:</strong> Upgraded and modernised a high-traffic REST API from .NET Framework 4.7.2 to .NET 8 serving <strong>200+ requests/second</strong>; p95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, and error rate reduced by <strong>60%</strong> after full async adoption and runtime tuning.</p>
-</li>
-<li>
-<p><strong>Analytics at scale:</strong> Azure Batch pipeline processing approximately <strong>5 TB in under 45 minutes</strong> with <strong>standardised ingestion, restart-safe checkpoints, and adaptive back-pressure</strong>; <strong>reused across three data types</strong> to meet new SLAs.</p>
-</li>
-<li>
-<p><strong>Messaging modernisation:</strong> Replaced MSMQ with RabbitMQ and implemented <strong>idempotent consumers</strong>, <strong>publisher confirms</strong>, and <strong>controlled retries</strong>; handled <strong>up to ~3,000 messages/min</strong> with multi-KB/MB payloads, <strong>retry rate reduced by 65%</strong>, and <strong>99th-percentile consumer lag ≤ 2 minutes</strong> under peak load.</p>
-</li>
-</ul>
-<hr>
-<h2 id="core-skills">Core Skills</h2>
-<ul>
-<li>
-<p><strong>Languages &amp; Frameworks:</strong> C# (.NET 8, <a href="http://ASP.NET">ASP.NET</a> Core), T-SQL, JavaScript</p>
-</li>
-<li>
-<p><strong>Architectures:</strong> Microservices, event-driven systems, idempotency, sagas &amp; orchestration, domain-driven design</p>
-</li>
-<li>
-<p><strong>APIs &amp; Messaging:</strong> REST, gRPC, RabbitMQ, SignalR, WebSockets</p>
-</li>
-<li>
-<p><strong>Data &amp; Caching:</strong> SQL Server, DynamoDB, Redis, Azure SQL, Azure Data Factory, Flyway (versioned DB migrations)</p>
-</li>
-<li>
-<p><strong>Cloud &amp; IaC:</strong> AWS (ECS, Lambda, S3, IAM, Secrets Manager), Azure (App Services, Service Bus, Storage, Logic Apps), Terraform, Docker, NGINX</p>
-</li>
-<li>
-<p><strong>CI/CD &amp; DevEx:</strong> TeamCity, GitHub Actions, Octopus Deploy, Git, feature flags, blue/green &amp; canary releases</p>
-</li>
-<li>
-<p><strong>Observability &amp; Quality:</strong> Datadog, OpenTelemetry (metrics, traces, logs), xUnit, Moq, FluentAssertions, Testcontainers, Artillery</p>
-</li>
-<li>
-<p><strong>Security &amp; Compliance:</strong> authentication and authorisation, secrets management and rotation, secure coding practices, Veracode (SAST/DAST) &amp; dependency scanning, basic threat modelling; privacy-aware data handling (GDPR).</p>
-</li>
-<li>
-<p><strong>Ways of Working:</strong> Scrum &amp; Kanban, architecture decision records, technical strategy &amp; roadmaps, mentoring &amp; coaching, stakeholder management</p>
-</li>
-</ul>
-<hr>
-<h2 id="professional-experience">Professional Experience</h2>
-<p><strong>Confluence (StatPro), London — Principal Software Engineer</strong><br>
-Oct 2019 – Present<br>
-Confluence provides data-driven investment management solutions used by tier-1 asset managers.</p>
-<ul>
-<li>
-<p><strong>Modernised high-traffic REST API (.NET Framework 4.7.2 to .NET 8):</strong> Planned and executed an in-place upgrade with <strong>parallel runs and canary releases</strong> to ensure zero customer disruption. Rewrote blocking paths to <strong>async/await end-to-end</strong>, eliminated thread-pool starvation and sync-over-async hotspots, consolidated <strong>HttpClientFactory</strong> usage to prevent socket exhaustion, and tuned <strong>Kestrel</strong> and <strong>GC</strong> settings. Implemented <strong>Redis-backed caching</strong> on hot paths and introduced <strong>highly customised throttling</strong> (per-client and per-endpoint quotas with burst allowances and concurrency limits). Result: p95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, CPU per request reduced by <strong>25%</strong>, and error rate reduced by <strong>60%</strong> across <strong>200+ requests/second</strong>.<br>
-<strong>Quality &amp; reliability:</strong> Expanded automated tests to <strong>1,400+ unit tests</strong>, <strong>600+ integration tests</strong>, and <strong>100+ Artillery load tests</strong>.</p>
-</li>
-<li>
-<p>Designed a <strong>high-throughput Azure analytics platform</strong> processing approximately <strong>5 TB</strong> end-to-end in <strong>under 45 minutes</strong> across large financial datasets. Standardised <strong>ingestion</strong>, implemented <strong>checkpointing</strong> for restart safety, and added <strong>back-pressure controls</strong> to keep the system stable under spikes; <strong>reused across three data types</strong> to enable new SLAs and faster feature delivery.<br>
-<em>Tech:</em> Azure SQL, Azure Data Factory, App Services, Service Bus, .NET 8.</p>
-</li>
-<li>
-<p><strong>Messaging modernisation (MSMQ to RabbitMQ):</strong> Introduced exchanges/queues, publisher confirms, controlled retries &amp; poison handling, and <strong>idempotent consumers</strong>. <strong>Results:</strong> sustained peaks of <strong>~3,000 messages/min</strong> with multi-KB/MB payloads, <strong>retry rate −65%</strong>, and <strong>p99 consumer lag ≤ 2 minutes</strong> with self-healing under spikes.</p>
-</li>
-<li>
-<p>Rolled out <strong>OpenTelemetry</strong> tracing and <strong>Datadog</strong> dashboards &amp; alerts following RED (Rate, Errors, Duration) and USE (Utilisation, Saturation, Errors) methodologies; mean time to recovery reduced from <strong>60 to 30</strong> minutes, alert noise pruned.</p>
-</li>
-<li>
-<p>Created <strong>TeamCity</strong> and <strong>Octopus Deploy</strong> templates and <strong>Terraform</strong> modules; new services ship with <strong>blue/green deployments</strong>, automated schema migrations, and <strong>one-click pipelines</strong>; lead time reduced by <strong>35%</strong>.</p>
-</li>
-<li>
-<p><strong>Security leadership:</strong> facilitated threat-modelling workshops; added <strong>SAST &amp; DAST checks</strong> and dependency scanning; closed <strong>30+ high/critical findings pre-audit</strong> and aligned with <strong>SOC2</strong> and <strong>ISO27001</strong> controls.</p>
-</li>
-<li>
-<p><strong>Mentorship &amp; leadership:</strong> mentored <strong>4–6 engineers</strong> through code reviews, pairing, and growth plans; authored <strong>ADRs</strong>, set quarterly technical roadmaps, and partnered with Product, SRE, and InfoSec on <strong>SLAs, SLOs, and error budgets</strong>.</p>
-</li>
-</ul>
-<hr>
-<p><strong>Confluence (StatPro), London — Senior Software Engineer</strong><br>
-Jan 2015 – Sep 2019</p>
-<ul>
-<li>
-<p>Shipped a client-services web application that <strong>reduced information retrieval time from hours to seconds</strong> by centralising data and introducing role-based caching; boosted NPS and supported upsell motions.</p>
-</li>
-<li>
-<p>Built SignalR-based real-time notifications for <strong>StatPro Revolution (Confluence)</strong>, decreasing polling overhead and increasing user engagement; request volume reduced by <strong>25%</strong> on key endpoints.</p>
-</li>
-<li>
-<p>Drove performance tuning across hot SQL paths (indexing, partitioning, parameter sniffing) and .NET allocations; <strong>p95 latency reduced by 30%</strong> on high-traffic APIs.</p>
-</li>
-</ul>
-<hr>
-<p><strong>Confluence (StatPro), London — Software Engineer</strong><br>
-Oct 2012 – Dec 2014</p>
-<ul>
-<li>
-<p>Delivered foundational microservices (REST and gRPC) with robust error handling, retries, and circuit breakers; established early CI and environment-parity practices.</p>
-</li>
-<li>
-<p>Contributed to service-oriented architecture adoption, coding standards (SOLID), and automated test baselines using xUnit and Moq.</p>
-</li>
-</ul>
-<hr>
-<p><strong>Gavel &amp; Gown Software Inc. — Senior Web Developer</strong><br>
-2011 – 2012</p>
-<ul>
-<li>Delivered features to a CRM platform used by <strong>1,000+ clients</strong> across North America; improved mobile usability for iOS and Android and mentored junior developers.</li>
-</ul>
-<p><strong>Alocet Inc. — Web Developer and Team Lead</strong><br>
-2009 – 2011</p>
-<ul>
-<li>Led the redesign of a QuickBooks-integrated CRM; unified look and feel across modern browsers; integrated <strong>Intuit Merchant Services</strong>, <strong><a href="http://Authorize.Net">Authorize.Net</a></strong>, and <strong>PayPal</strong>; delivered a screen-builder for rapid lead-capture customisations.</li>
-</ul>
-<p><strong>CIBC — Intermediate Web Developer</strong><br>
-2009</p>
-<ul>
-<li>Contributed to a high-traffic internal portal serving approximately <strong>25k monthly users</strong>; optimised SQL and application code to support around <strong>2,000 concurrent users</strong>.</li>
-</ul>
-<p><strong>RBC — Intermediate Web Developer</strong><br>
-2008</p>
-<ul>
-<li>Contributed to internal <a href="http://ASP.NET">ASP.NET</a> applications; introduced NUnit tests and Active Directory-integrated authentication improvements.</li>
-</ul>
-<hr>
-<h2 id="education--professional-development">Education &amp; Professional Development</h2>
-<ul>
-<li>
-<p>Computer Programming and Analysis (Honours) — Seneca College</p>
-</li>
-<li>
-<p>Project Management Certificate (Honours) — Humber College</p>
-</li>
-<li>
-<p>WCF in the .NET Framework (A+) — Ryerson University</p>
-</li>
-<li>
-<p>AWS Solutions Architect – Associate (in progress, target 2026)</p>
-</li>
-</ul>
-<hr>
-<h2 id="selected-talks-writing--community">Selected Talks, Writing, &amp; Community</h2>
-<ul>
-<li>
-<p>Internal tech talk: “From MSMQ to RabbitMQ — idempotency, DLQs, and back-pressure at scale”</p>
-</li>
-<li>
-<p>Tech Talk: “Intro to OpenTelemetry for .NET teams”</p>
-</li>
-<li>
-<p>Blog post draft: “Designing token-bucket throttling for multi-tenant APIs”</p>
-</li>
-<li>
-<p>Mentored graduates and junior engineers through onboarding plans and pairing sessions</p>
-</li>
-<li>
-<p>Hands-on clinic: “<strong>.NET Performance Triage in 30 minutes</strong>” — using <code>dotnet-counters</code>  to spot hot paths and <code>dotnet-dump</code> for snapshot analysis; live demo of finding thread-pool starvation and GC pressure.</p>
-</li>
-<li>
-<p>Tech Talk: “Intro to <strong>Artillery</strong> for API load testing”</p>
-</li>
-</ul>
-<hr>
-<h2 id="keywords-ats">Keywords (ATS)</h2>
-<p>.NET 8, <a href="http://ASP.NET">ASP.NET</a> Core, C#, REST, gRPC, RabbitMQ, Redis, SQL Server, DynamoDB, Azure Service Bus, Azure Data Factory, AWS ECS, AWS Lambda, S3, IAM, Secrets Manager, Docker, Terraform, TeamCity, Octopus Deploy, OpenTelemetry, Datadog, OAuth2, microservices, event-driven architecture, idempotency, sagas, blue/green deployments, canary releases, threat modelling, OWASP, GDPR, SOC2, ISO27001, Flyway, Veracode, GitHub Actions</p>
-</div>
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="contact-label">Contact details</div>
+          <div class="contact-name">Victor Fedianine</div>
 
+          <div class="info-box">
+            <div class="label">Phone</div>
+            <div class="value">+44 7407 050 215</div>
+          </div>
 
-    <!-- Footer -->
-    <footer class="footer bg-light mt-5">
-      <div class="container text-center">
-        <span class="text-muted">Created by Victor Fedianine | 
-          <a href="https://www.linkedin.com/in/fedianine/" target="_blank">LinkedIn</a>
-        </span>
+          <div class="info-box">
+            <div class="label">Email</div>
+            <div class="value"><a href="mailto:fedianine@gmail.com">fedianine@gmail.com</a></div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">Location</div>
+            <div class="value">London, UK</div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">LinkedIn</div>
+            <div class="value"><a href="https://linkedin.com/in/fedianine-statpro" target="_blank" rel="noopener">linkedin.com/in/fedianine-statpro</a></div>
+          </div>
+
+          <div class="info-box">
+            <div class="label">GitHub</div>
+            <div class="value"><a href="https://github.com/fedianine-statpro" target="_blank" rel="noopener">github.com/fedianine-statpro</a></div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
+  </header>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <main>
+
+    <!-- Professional Summary + Impact Snapshot -->
+    <section class="section">
+      <div class="container grid-2">
+        <div class="panel">
+          <div class="eyebrow">Professional summary</div>
+          <h2>Building high-scale fintech platforms</h2>
+          <p class="body-text">
+            Principal-level .NET engineer with 17+ years in fintech delivering high-scale, secure, cloud-native platforms. Led migrations from on-premises to public cloud, event-driven systems, and data pipelines processing multiple terabytes in minutes. I build and operate <strong>CI/CD pipelines</strong>, <strong>infrastructure as code</strong>, <strong>SLO-driven observability</strong>, and <strong>security controls</strong> that help teams ship faster and more safely—consistently improving latency, availability, and cost.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="eyebrow">Impact snapshot</div>
+          <h2>Key achievements</h2>
+
+          <div class="impact-item">
+            <strong>API modernisation</strong>
+            <p>Upgraded and modernised a high-traffic REST API from .NET Framework 4.7.2 to .NET 8 serving <strong>200+ requests/second</strong>. P95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, and error rate reduced by <strong>60%</strong> after full async adoption and runtime tuning.</p>
+          </div>
+
+          <div class="impact-item">
+            <strong>Analytics at scale</strong>
+            <p>Azure Batch pipeline processing approximately <strong>5 TB in under 45 minutes</strong> with <strong>standardised ingestion, restart-safe checkpoints, and adaptive back-pressure</strong>. <strong>Reused across three data types</strong> to meet new SLAs.</p>
+          </div>
+
+          <div class="impact-item">
+            <strong>Messaging modernisation</strong>
+            <p>Replaced MSMQ with RabbitMQ and implemented <strong>idempotent consumers</strong>, <strong>publisher confirms</strong>, and <strong>controlled retries</strong>. Handled <strong>up to ~3,000 messages/min</strong> with multi-KB/MB payloads. <strong>Retry rate reduced by 65%</strong> and <strong>99th-percentile consumer lag ≤ 2 minutes</strong> under peak load.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Skills -->
+    <section class="section" style="background: white;">
+      <div class="container panel soft">
+        <div class="eyebrow">Core skills</div>
+        <h2>Technical expertise</h2>
+
+        <div class="cards-3">
+          <div class="mini-card" style="background: white;">
+            <strong>Languages &amp; Frameworks</strong>
+            <p>C# (.NET 8, ASP.NET Core), T-SQL, JavaScript</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Architectures</strong>
+            <p>Microservices, event-driven systems, idempotency, sagas &amp; orchestration, domain-driven design</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>APIs &amp; Messaging</strong>
+            <p>REST, gRPC, RabbitMQ, SignalR, WebSockets</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Data &amp; Caching</strong>
+            <p>SQL Server, DynamoDB, Redis, Azure SQL, Azure Data Factory, Flyway (versioned DB migrations)</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Cloud &amp; IaC</strong>
+            <p>AWS (ECS, Lambda, S3, IAM, Secrets Manager), Azure (App Services, Service Bus, Storage, Logic Apps), Terraform, Docker, NGINX</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>CI/CD &amp; DevEx</strong>
+            <p>TeamCity, GitHub Actions, Octopus Deploy, Git, feature flags, blue/green &amp; canary releases</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Observability &amp; Quality</strong>
+            <p>Datadog, OpenTelemetry (metrics, traces, logs), xUnit, Moq, FluentAssertions, Testcontainers, Artillery</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Security &amp; Compliance</strong>
+            <p>Authentication and authorisation, secrets management and rotation, secure coding practices, Veracode (SAST/DAST) &amp; dependency scanning, basic threat modelling. Privacy-aware data handling (GDPR)</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Ways of Working</strong>
+            <p>Scrum &amp; Kanban, architecture decision records, technical strategy &amp; roadmaps, mentoring &amp; coaching, stakeholder management</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+      <div class="container">
+        <div class="eyebrow">Professional experience</div>
+        <h2 style="margin-bottom: 36px;">Career history</h2>
+
+        <div class="timeline">
+
+          <!-- Role 1: Principal -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Principal Software Engineer</div>
+                <div class="role-company">Confluence (StatPro), London</div>
+                <span class="role-date">Oct 2019 – Present</span>
+              </div>
+              <p class="role-description">Confluence provides data-driven investment management solutions used by tier-1 asset managers.</p>
+              <ul class="role-bullets">
+                <li><strong>Modernised high-traffic REST API (.NET Framework 4.7.2 to .NET 8):</strong> Planned and executed an in-place upgrade with <strong>parallel runs and canary releases</strong> to ensure zero customer disruption. Rewrote blocking paths to <strong>async/await end-to-end</strong>, eliminated thread-pool starvation and sync-over-async hotspots, consolidated <strong>HttpClientFactory</strong> usage to prevent socket exhaustion, and tuned <strong>Kestrel</strong> and <strong>GC</strong> settings. Implemented <strong>Redis-backed caching</strong> on hot paths and introduced <strong>highly customised throttling</strong> (per-client and per-endpoint quotas with burst allowances and concurrency limits). Result: p95 latency reduced by <strong>35%</strong>, throughput increased by <strong>40%</strong>, CPU per request reduced by <strong>25%</strong>, and error rate reduced by <strong>60%</strong> across <strong>200+ requests/second</strong>.<br><strong>Quality &amp; reliability:</strong> expanded automated tests to <strong>1,400+ unit tests</strong>, <strong>600+ integration tests</strong>, and <strong>100+ Artillery load tests</strong>.</li>
+                <li>Designed a <strong>high-throughput Azure analytics platform</strong> processing approximately <strong>5 TB</strong> end-to-end in <strong>under 45 minutes</strong> across large financial datasets. Standardised <strong>ingestion</strong>, implemented <strong>checkpointing</strong> for restart safety, and added <strong>back-pressure controls</strong> to keep the system stable under spikes. <strong>Reused across three data types</strong> to enable new SLAs and faster feature delivery.<br><em>Tech:</em> Azure SQL, Azure Data Factory, App Services, Service Bus, .NET 8.</li>
+                <li><strong>Messaging modernisation (MSMQ to RabbitMQ):</strong> Introduced exchanges/queues, publisher confirms, controlled retries &amp; poison handling, and <strong>idempotent consumers</strong>. <strong>Results:</strong> sustained peaks of <strong>~3,000 messages/min</strong> with multi-KB/MB payloads. <strong>Retry rate −65%</strong> and <strong>p99 consumer lag ≤ 2 minutes</strong> with self-healing under spikes.</li>
+                <li>Rolled out <strong>OpenTelemetry</strong> tracing and <strong>Datadog</strong> dashboards &amp; alerts following RED (Rate, Errors, Duration) and USE (Utilisation, Saturation, Errors) methodologies. Mean time to recovery reduced from <strong>60 to 30</strong> minutes. Alert noise pruned.</li>
+                <li>Created <strong>TeamCity</strong> and <strong>Octopus Deploy</strong> templates and <strong>Terraform</strong> modules; new services ship with <strong>blue/green deployments</strong>, automated schema migrations, and <strong>one-click pipelines</strong>. Lead time reduced by <strong>35%</strong>.</li>
+                <li><strong>Security leadership:</strong> facilitated threat-modelling workshops. Added <strong>SAST &amp; DAST checks</strong> and dependency scanning. Closed <strong>30+ high/critical findings pre-audit</strong> and aligned with <strong>SOC2</strong> and <strong>ISO27001</strong> controls.</li>
+                <li><strong>Mentorship &amp; leadership:</strong> mentored <strong>4–6 engineers</strong> through code reviews, pairing, and growth plans. Authored <strong>ADRs</strong>, set quarterly technical roadmaps, and partnered with Product, SRE, and InfoSec on <strong>SLAs, SLOs, and error budgets</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 2: Senior -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Senior Software Engineer</div>
+                <div class="role-company">Confluence (StatPro), London</div>
+                <span class="role-date">Jan 2015 – Sep 2019</span>
+              </div>
+              <ul class="role-bullets">
+                <li>Shipped a client-services web application that <strong>reduced information retrieval time from hours to seconds</strong> by centralising data and introducing role-based caching. Boosted NPS and supported upsell motions.</li>
+                <li>Built SignalR-based real-time notifications for <strong>StatPro Revolution (Confluence)</strong>, decreasing polling overhead and increasing user engagement. Request volume reduced by <strong>25%</strong> on key endpoints.</li>
+                <li>Drove performance tuning across hot SQL paths (indexing, partitioning, parameter sniffing) and .NET allocations; <strong>p95 latency reduced by 30%</strong> on high-traffic APIs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 3: Software Engineer -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Software Engineer</div>
+                <div class="role-company">Confluence (StatPro), London</div>
+                <span class="role-date">Oct 2012 – Dec 2014</span>
+              </div>
+              <ul class="role-bullets">
+                <li>Delivered foundational microservices (REST and gRPC) with robust error handling, retries, and circuit breakers; established early CI and environment-parity practices.</li>
+                <li>Contributed to service-oriented architecture adoption, coding standards (SOLID), and automated test baselines using xUnit and Moq.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 4: Gavel & Gown -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Senior Web Developer</div>
+                <div class="role-company">Gavel &amp; Gown Software Inc.</div>
+                <span class="role-date">2011 – 2012</span>
+              </div>
+              <ul class="role-bullets">
+                <li>Delivered features to a CRM platform used by <strong>1,000+ clients</strong> across North America; improved mobile usability for iOS and Android and mentored junior developers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 5: Alocet -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Web Developer and Team Lead</div>
+                <div class="role-company">Alocet Inc.</div>
+                <span class="role-date">2009 – 2011</span>
+              </div>
+              <ul class="role-bullets">
+                <li>Led the redesign of a QuickBooks-integrated CRM; unified look and feel across modern browsers; integrated <strong>Intuit Merchant Services</strong>, <strong>Authorize.Net</strong>, and <strong>PayPal</strong>; delivered a screen-builder for rapid lead-capture customisations.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Role 6: CIBC + RBC -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="role-panel">
+              <div class="role-header">
+                <div class="role-title">Intermediate Web Developer</div>
+                <div class="role-company">CIBC &amp; RBC</div>
+                <span class="role-date">2008 – 2009</span>
+              </div>
+              <ul class="role-bullets">
+                <li><strong>CIBC:</strong> Contributed to a high-traffic internal portal serving approximately <strong>25k monthly users</strong>; optimised SQL and application code to support around <strong>2,000 concurrent users</strong>.</li>
+                <li><strong>RBC:</strong> Contributed to internal ASP.NET applications; introduced NUnit tests and Active Directory-integrated authentication improvements.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section" style="background: white;">
+      <div class="container panel soft">
+        <div class="eyebrow">Education &amp; professional development</div>
+        <h2>Qualifications</h2>
+
+        <div class="cards-2">
+          <div class="mini-card" style="background: white;">
+            <strong>Computer Programming and Analysis (Honours)</strong>
+            <p>Seneca College</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Project Management Certificate (Honours)</strong>
+            <p>Humber College</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>WCF in the .NET Framework (A+)</strong>
+            <p>Ryerson University</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>AWS Solutions Architect – Associate</strong>
+            <p class="meta">In progress, target 2026</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Talks & Community -->
+    <section class="section">
+      <div class="container panel">
+        <div class="eyebrow">Selected talks, writing, &amp; community</div>
+        <h2>Sharing knowledge</h2>
+
+        <div class="talks-grid">
+          <div class="faq-item">
+            <strong>Tech Talk</strong>
+            <div class="small-text">"From MSMQ to RabbitMQ — idempotency, DLQs, and back-pressure at scale"</div>
+          </div>
+          <div class="faq-item">
+            <strong>Tech Talk</strong>
+            <div class="small-text">"Intro to OpenTelemetry for .NET teams"</div>
+          </div>
+          <div class="faq-item">
+            <strong>Blog Post Draft</strong>
+            <div class="small-text">"Designing token-bucket throttling for multi-tenant APIs"</div>
+          </div>
+          <div class="faq-item">
+            <strong>Mentoring</strong>
+            <div class="small-text">Mentored graduates and junior engineers through onboarding plans and pairing sessions</div>
+          </div>
+          <div class="faq-item">
+            <strong>Hands-on Clinic</strong>
+            <div class="small-text">".NET Performance Triage in 30 minutes" — using dotnet-counters to spot hot paths and dotnet-dump for snapshot analysis; live demo of finding thread-pool starvation and GC pressure</div>
+          </div>
+          <div class="faq-item">
+            <strong>Tech Talk</strong>
+            <div class="small-text">"Intro to Artillery for API load testing"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keywords (ATS) -->
+    <section class="section" style="background: white;">
+      <div class="container panel dark">
+        <div class="eyebrow">Keywords (ATS)</div>
+        <h2>Technology keywords</h2>
+        <p class="keywords-text">
+          .NET 8, ASP.NET Core, C#, REST, gRPC, RabbitMQ, Redis, SQL Server, DynamoDB, Azure Service Bus, Azure Data Factory, AWS ECS, AWS Lambda, S3, IAM, Secrets Manager, Docker, Terraform, TeamCity, Octopus Deploy, OpenTelemetry, Datadog, OAuth2, microservices, event-driven architecture, idempotency, sagas, blue/green deployments, canary releases, threat modelling, OWASP, GDPR, SOC2, ISO27001, Flyway, Veracode, GitHub Actions
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <div>Victor Fedianine</div>
+      <div><a href="https://www.linkedin.com/in/fedianine/" target="_blank" rel="noopener">LinkedIn</a></div>
+    </div>
+  </footer>
+
 </body>
 </html>
