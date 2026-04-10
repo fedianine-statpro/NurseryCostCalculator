@@ -408,21 +408,7 @@
       color: white;
     }
 
-    .contact-card {
-      padding: 32px;
-      border-radius: var(--radius-xl);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
 
-    .fake-field {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(0,0,0,0.12);
-      color: rgba(255,255,255,0.42);
-    }
 
     .site-footer {
       background: white;
@@ -439,51 +425,13 @@
       color: var(--muted);
     }
 
-    .rsvp-note {
-      margin-top: 12px;
-      font-size: 0.8rem;
-      color: var(--muted-soft);
-    }
-
-    .success-message {
-      display: none;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: var(--brand-soft);
-      color: #166534;
-      font-size: 0.94rem;
-      font-weight: 600;
-    }
-
-    .success-message.show {
-      display: block;
-    }
-
-    .image-placeholders {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .image-box {
-      min-height: 180px;
-      border-radius: var(--radius-lg);
-      border: 2px dashed var(--line);
-      background: linear-gradient(180deg, #ffffff, #f8fafc);
-      padding: 18px;
-      color: var(--muted-soft);
-      font-size: 0.92rem;
-    }
 
     @media (max-width: 980px) {
       .hero-inner,
       .grid-2,
       .grid-3,
       .cards-3,
-      .cards-2,
-      .image-placeholders {
+      .cards-2 {
         grid-template-columns: 1fr;
       }
 
@@ -576,19 +524,11 @@
           </div>
 
           <div class="button-row" style="margin-top: 22px;">
-            <button class="button" id="rsvpButton" style="background: #020617; color: white;">I’m coming</button>
+            <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdqG5n8aVJ2dak1aDe8yiTBtTWOaJxxl1jgHLCeszWhLEe5yw/viewform?usp=dialog" target="_blank" rel="noopener" style="background: #020617; color: white;">I'm coming</a>
             <a class="button" href="mailto:fedianine@gmail.com" style="border: 1px solid var(--line); background: white; color: var(--text);">
               Email organiser
             </a>
           </div>
-
-          <div id="rsvpSuccess" class="success-message">
-            Thanks. For now this RSVP button is just a simple client-side placeholder. Later, it can be connected to a Google Form or similar.
-          </div>
-
-          <p class="rsvp-note">
-            GitHub Pages friendly version: the button currently shows a confirmation message only. Later you can connect it to Google Forms, Formspree, Airtable, Supabase, or a Google Sheet workflow.
-          </p>
         </div>
       </div>
     </div>
@@ -600,19 +540,11 @@
         <div class="panel">
           <div class="eyebrow">What to expect</div>
           <h2>Friendly local running, without the intimidation</h2>
-          <p class="small-text" style="font-size: 1rem; margin-top: 18px; max-width: 720px;">
-            This page can be updated each week with the next meetup details. The goal is to make it easy for local people to join, even if they have never joined a running group before.
-          </p>
 
           <div class="cards-3">
             <div class="mini-card">
-              <strong>Easy Social Run</strong>
-              <div class="meta">3 to 4 km</div>
-              <p class="small-text">Relaxed, chat-friendly pace for beginners, returners, and anyone who wants a comfortable run.</p>
-            </div>
-            <div class="mini-card">
               <strong>Steady Run</strong>
-              <div class="meta">5 to 6 km</div>
+              <div class="meta">4 to 5 km</div>
               <p class="small-text">A simple steady option for runners who want a bit more movement without anything intense.</p>
             </div>
             <div class="mini-card">
@@ -625,7 +557,6 @@
 
         <div class="panel dark">
           <div class="eyebrow">Weekly update block</div>
-          <h3>Edit this section each week</h3>
 
           <div class="weekly-box">
             <div class="row">
@@ -645,10 +576,6 @@
               <div class="value">Easy social pace, likely around 35 to 40 minutes total. New people especially welcome.</div>
             </div>
           </div>
-
-          <p style="margin-top: 18px;">
-            Keep this as a clearly visible announcement area so returning visitors always know whether the run is happening and what to expect.
-          </p>
         </div>
       </div>
     </section>
@@ -709,7 +636,7 @@
           <div class="cards-2">
             <div class="mini-card">
               <strong>When</strong>
-              <p class="small-text">Weekly meetup. Update the site each week with the confirmed date and time.</p>
+              <p class="small-text">Weekly meetup. The site will be updated each week with the confirmed date and time.</p>
             </div>
             <div class="mini-card">
               <strong>Who can join</strong>
@@ -739,9 +666,9 @@
             <div style="margin-top: 6px; font-size: 0.98rem; color: rgba(255,255,255,0.88);">Morden Station</div>
           </div>
 
-          <button class="button" id="rsvpButton2" style="width: 100%; margin-top: 22px; background: white; color: var(--brand-dark);">
+          <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdqG5n8aVJ2dak1aDe8yiTBtTWOaJxxl1jgHLCeszWhLEe5yw/viewform?usp=dialog" target="_blank" rel="noopener" style="width: 100%; margin-top: 22px; background: white; color: var(--brand-dark);">
             Count me in
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -771,29 +698,6 @@
       </div>
     </section>
 
-    <section class="section" style="background: white; padding-top: 0;">
-      <div class="container panel soft">
-        <div class="eyebrow">Images to add later</div>
-        <h2>Suggested image placeholders</h2>
-        <p class="small-text" style="font-size: 1rem; margin-top: 18px; max-width: 760px;">
-          You do not need images to launch the page, but these would work well later and make the site feel more welcoming.
-        </p>
-        <div class="image-placeholders">
-          <div class="image-box">
-            <strong>Hero image</strong><br />
-            A wide friendly photo of local runners in a park or on a pavement in daylight. Nothing too intense or elite.
-          </div>
-          <div class="image-box">
-            <strong>Meetup image</strong><br />
-            A simple photo of the meeting point area near Morden Station so newcomers know what to expect.
-          </div>
-          <div class="image-box">
-            <strong>Atmosphere image</strong><br />
-            A candid social shot such as runners chatting before or after a run, ideally looking relaxed and approachable.
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section id="contact" class="section contact-section">
       <div class="container grid-2">
@@ -808,18 +712,6 @@
           </div>
         </div>
 
-        <div class="contact-card">
-          <h3 style="font-size: 1.4rem; margin: 0;">Contact form placeholder</h3>
-          <p style="margin-top: 12px; color: rgba(255,255,255,0.75);">
-            Because this site is client-side only on GitHub Pages, a real contact form needs a third-party form service. For now, this can stay as a visual placeholder or be connected later to Formspree, Basin, Getform, or a Google Form.
-          </p>
-          <div class="fake-field">Name</div>
-          <div class="fake-field">Email</div>
-          <div class="fake-field">Message</div>
-          <button class="button" style="margin-top: 14px; width: 100%; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
-            Send message
-          </button>
-        </div>
       </div>
     </section>
   </main>
@@ -831,18 +723,5 @@
     </div>
   </footer>
 
-  <script>
-    const rsvpButtons = [document.getElementById('rsvpButton'), document.getElementById('rsvpButton2')].filter(Boolean);
-    const rsvpSuccess = document.getElementById('rsvpSuccess');
-
-    rsvpButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        if (rsvpSuccess) {
-          rsvpSuccess.classList.add('show');
-          rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
