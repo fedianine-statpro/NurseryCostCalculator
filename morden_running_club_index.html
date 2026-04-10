@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morden Running Club</title>
+  <meta
+    name="description"
+    content="Informal social running meetup in Morden. All abilities welcome. Weekly updates with the next run date, time, and meeting point."
+  />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --text: #0f172a;
+      --muted: #475569;
+      --muted-soft: #64748b;
+      --line: #e2e8f0;
+      --dark: #020617;
+      --dark-soft: #0f172a;
+      --brand: #22c55e;
+      --brand-dark: #15803d;
+      --brand-soft: #dcfce7;
+      --warning-bg: #fffbeb;
+      --warning-line: #fde68a;
+      --warning-text: #78350f;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      margin-bottom: 12px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255, 255, 255, 0.08), transparent 25%),
+        linear-gradient(135deg, #020617 0%, #0f172a 45%, #14532d 100%);
+      color: white;
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+      grid-template-columns: 1.2fr 0.85fr;
+      padding: 84px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      max-width: 10ch;
+    }
+
+    .hero p.lead {
+      margin: 20px 0 0;
+      max-width: 700px;
+      color: rgba(255,255,255,0.84);
+      font-size: 1.14rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button,
+    button.button {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    button.button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--brand);
+      color: #052e16;
+      box-shadow: 0 16px 30px rgba(21, 128, 61, 0.24);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .stat-card {
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .stat-card span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-wrap {
+      padding: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 28px;
+      color: var(--text);
+      background: white;
+      border-radius: 24px;
+    }
+
+    .next-run-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+    }
+
+    .next-run-date {
+      margin-top: 18px;
+      font-size: 2.1rem;
+      font-weight: 800;
+    }
+
+    .next-run-time {
+      margin-top: 6px;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .info-box {
+      margin-top: 22px;
+      padding: 18px;
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+    }
+
+    .info-box .label {
+      color: var(--muted-soft);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .info-box .value {
+      margin-top: 4px;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .small-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 28px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr 0.9fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .panel {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .panel.soft {
+      background: var(--surface-soft);
+    }
+
+    .panel.dark {
+      background: var(--dark-soft);
+      border-color: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .panel.dark .eyebrow,
+    .cta .eyebrow {
+      color: #bbf7d0;
+    }
+
+    .panel.dark p,
+    .cta p,
+    .site-footer {
+      color: rgba(255,255,255,0.78);
+    }
+
+    .panel h2,
+    .panel h3 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .cards-3,
+    .cards-2,
+    .faq-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .cards-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .mini-card .meta {
+      color: var(--brand-dark);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .weekly-box {
+      margin-top: 28px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .weekly-box .row {
+      margin-bottom: 14px;
+    }
+
+    .weekly-box .row:last-child {
+      margin-bottom: 0;
+    }
+
+    .weekly-box .label {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .weekly-box .value {
+      margin-top: 3px;
+      font-size: 1.06rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .notice {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--warning-line);
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      font-size: 0.95rem;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      color: white;
+      border: 0;
+      box-shadow: var(--shadow);
+    }
+
+    .cta .current-run {
+      margin-top: 28px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .contact-section {
+      background: var(--dark);
+      color: white;
+    }
+
+    .contact-card {
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .fake-field {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.12);
+      color: rgba(255,255,255,0.42);
+    }
+
+    .site-footer {
+      background: white;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .site-footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 26px 0;
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+
+    .rsvp-note {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--muted-soft);
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--brand-soft);
+      color: #166534;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .image-placeholders {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .image-box {
+      min-height: 180px;
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--line);
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      padding: 18px;
+      color: var(--muted-soft);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .grid-2,
+      .grid-3,
+      .cards-3,
+      .cards-2,
+      .image-placeholders {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 56px 0;
+      }
+
+      .hero-inner {
+        padding: 60px 0;
+      }
+
+      .container {
+        width: min(var(--max-width), calc(100% - 1.2rem));
+      }
+
+      .panel,
+      .hero-card,
+      .contact-card {
+        padding: 24px;
+      }
+
+      .stats,
+      .site-footer-inner {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="pill">Fun, informal local running group in Morden</div>
+        <h1>Morden Running Club</h1>
+        <p class="lead">
+          A simple weekly meetup for anyone who wants company while getting out for a run. No pressure, no membership, no elite vibe. Just turn up and move.
+        </p>
+
+        <div class="button-row">
+          <a class="button button-primary" href="#next-run">See next meetup</a>
+          <a class="button button-secondary" href="#contact">Contact organiser</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <strong>6-12</strong>
+            <span>Typical group size</span>
+          </div>
+          <div class="stat-card">
+            <strong>30-45 mins</strong>
+            <span>Likely run time</span>
+          </div>
+          <div class="stat-card">
+            <strong>Friendly</strong>
+            <span>Atmosphere</span>
+          </div>
+          <div class="stat-card">
+            <strong>Free</strong>
+            <span>Cost</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap">
+        <div class="hero-card card">
+          <div class="next-run-tag">Next meetup</div>
+          <div class="next-run-date">Tuesday 14 April</div>
+          <div class="next-run-time">17:30</div>
+
+          <div class="info-box">
+            <div class="label">Meet at</div>
+            <div class="value">Morden Station</div>
+            <p class="small-text">Look for the organiser in a neon green T-shirt.</p>
+          </div>
+
+          <div style="margin-top: 22px; display: grid; gap: 10px;">
+            <p class="small-text" style="margin: 0;">
+              This club is being started simply to make it easier for local people to have someone to exercise with.
+            </p>
+            <p class="small-text" style="margin: 0;">
+              <strong>Important:</strong> This is an informal social meetup, not a coached session or professional fitness service. The organiser does not hold running, fitness, or medical qualifications.
+            </p>
+          </div>
+
+          <div class="button-row" style="margin-top: 22px;">
+            <button class="button" id="rsvpButton" style="background: #020617; color: white;">I’m coming</button>
+            <a class="button" href="mailto:fedianine@gmail.com" style="border: 1px solid var(--line); background: white; color: var(--text);">
+              Email organiser
+            </a>
+          </div>
+
+          <div id="rsvpSuccess" class="success-message">
+            Thanks. For now this RSVP button is just a simple client-side placeholder. Later, it can be connected to a Google Form or similar.
+          </div>
+
+          <p class="rsvp-note">
+            GitHub Pages friendly version: the button currently shows a confirmation message only. Later you can connect it to Google Forms, Formspree, Airtable, Supabase, or a Google Sheet workflow.
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="next-run" class="section">
+      <div class="container grid-2">
+        <div class="panel">
+          <div class="eyebrow">What to expect</div>
+          <h2>Friendly local running, without the intimidation</h2>
+          <p class="small-text" style="font-size: 1rem; margin-top: 18px; max-width: 720px;">
+            This page can be updated each week with the next meetup details. The goal is to make it easy for local people to join, even if they have never joined a running group before.
+          </p>
+
+          <div class="cards-3">
+            <div class="mini-card">
+              <strong>Easy Social Run</strong>
+              <div class="meta">3 to 4 km</div>
+              <p class="small-text">Relaxed, chat-friendly pace for beginners, returners, and anyone who wants a comfortable run.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Steady Run</strong>
+              <div class="meta">5 to 6 km</div>
+              <p class="small-text">A simple steady option for runners who want a bit more movement without anything intense.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Flexible Finish</strong>
+              <div class="meta">Optional extra 1 to 2 km</div>
+              <p class="small-text">If people feel good, the group can extend slightly. If not, it stays short and social.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel dark">
+          <div class="eyebrow">Weekly update block</div>
+          <h3>Edit this section each week</h3>
+
+          <div class="weekly-box">
+            <div class="row">
+              <div class="label">Date</div>
+              <div class="value">Tuesday 14 April</div>
+            </div>
+            <div class="row">
+              <div class="label">Time</div>
+              <div class="value">17:30</div>
+            </div>
+            <div class="row">
+              <div class="label">Meeting point</div>
+              <div class="value">Outside Morden Station</div>
+            </div>
+            <div class="row">
+              <div class="label">This week’s note</div>
+              <div class="value">Easy social pace, likely around 35 to 40 minutes total. New people especially welcome.</div>
+            </div>
+          </div>
+
+          <p style="margin-top: 18px;">
+            Keep this as a clearly visible announcement area so returning visitors always know whether the run is happening and what to expect.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: white;">
+      <div class="container grid-2">
+        <div class="panel soft">
+          <div class="eyebrow">About the meetup</div>
+          <h2>A simple local social run</h2>
+          <p class="small-text" style="font-size: 1rem; margin-top: 18px;">
+            This meetup is being organised to bring together local people who want company for regular exercise, without the pressure of joining a formal club.
+          </p>
+          <p class="small-text" style="font-size: 1rem; margin-top: 12px;">
+            It is intentionally informal and is not coaching, personal training, or medical advice. Participants should use their own judgement, choose a pace that suits them, and only join if the session feels appropriate for their own fitness and health.
+          </p>
+
+          <div class="notice">
+            <strong>Important notice:</strong> By attending, runners are joining a casual social meetup rather than a coached session or supervised fitness programme. Everyone takes part voluntarily and at their own discretion.
+          </div>
+        </div>
+
+        <div class="panel soft">
+          <div class="eyebrow">Good to know</div>
+          <h2>FAQs</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <strong>Do I need to be fit or experienced?</strong>
+              <div class="small-text">No. All abilities are welcome. This is intended to be friendly and low-pressure.</div>
+            </div>
+            <div class="faq-item">
+              <strong>Is this coaching or a professional training group?</strong>
+              <div class="small-text">No. This is an informal social meetup, not coached training or a professional fitness service. The organiser does not hold running or fitness qualifications.</div>
+            </div>
+            <div class="faq-item">
+              <strong>What if I am slow?</strong>
+              <div class="small-text">That is completely fine. Nobody is expected to race. The aim is to move, chat, and make it easy for people to join.</div>
+            </div>
+            <div class="faq-item">
+              <strong>How will I find the group?</strong>
+              <div class="small-text">The organiser will be wearing a neon green T-shirt at the meetup point.</div>
+            </div>
+            <div class="faq-item">
+              <strong>What should I bring?</strong>
+              <div class="small-text">Comfortable running shoes, weather-appropriate clothing, and water if you want it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-3">
+        <div class="panel">
+          <div class="eyebrow">Club basics</div>
+          <h2>Simple and approachable</h2>
+
+          <div class="cards-2">
+            <div class="mini-card">
+              <strong>When</strong>
+              <p class="small-text">Weekly meetup. Update the site each week with the confirmed date and time.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Who can join</strong>
+              <p class="small-text">All abilities welcome, including beginners, returners, and regular runners.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Cost</strong>
+              <p class="small-text">Free. No membership and no subscription. Just check the weekly update and turn up.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Vibe</strong>
+              <p class="small-text">Social first. The aim is consistency and company, not pressure or performance targets.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel cta">
+          <div class="eyebrow">Join in</div>
+          <h2>Thinking of coming?</h2>
+          <p>
+            You do not need to commit long-term. If this week works for you, come along and see how it feels.
+          </p>
+
+          <div class="current-run">
+            <div style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">Current meetup</div>
+            <div style="font-size: 1.35rem; font-weight: 800; margin-top: 6px;">Tuesday 14 April at 17:30</div>
+            <div style="margin-top: 6px; font-size: 0.98rem; color: rgba(255,255,255,0.88);">Morden Station</div>
+          </div>
+
+          <button class="button" id="rsvpButton2" style="width: 100%; margin-top: 22px; background: white; color: var(--brand-dark);">
+            Count me in
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: white;">
+      <div class="container panel soft">
+        <div class="eyebrow">Safety and participation</div>
+        <h2>Important before joining</h2>
+        <div class="cards-2">
+          <div class="mini-card" style="background: white;">
+            <strong>Run at your own pace</strong>
+            <p class="small-text">This is a casual social meetup. There is no obligation to match anyone else’s speed or distance.</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Use your own judgement</strong>
+            <p class="small-text">Only join if the session feels suitable for your current fitness, health, and confidence level.</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Be sensible outdoors</strong>
+            <p class="small-text">Please obey crossings, traffic signals, and general road and pavement safety at all times.</p>
+          </div>
+          <div class="mini-card" style="background: white;">
+            <strong>Stop if needed</strong>
+            <p class="small-text">If you feel unwell, uncomfortable, or unable to continue, stop and look after yourself first.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: white; padding-top: 0;">
+      <div class="container panel soft">
+        <div class="eyebrow">Images to add later</div>
+        <h2>Suggested image placeholders</h2>
+        <p class="small-text" style="font-size: 1rem; margin-top: 18px; max-width: 760px;">
+          You do not need images to launch the page, but these would work well later and make the site feel more welcoming.
+        </p>
+        <div class="image-placeholders">
+          <div class="image-box">
+            <strong>Hero image</strong><br />
+            A wide friendly photo of local runners in a park or on a pavement in daylight. Nothing too intense or elite.
+          </div>
+          <div class="image-box">
+            <strong>Meetup image</strong><br />
+            A simple photo of the meeting point area near Morden Station so newcomers know what to expect.
+          </div>
+          <div class="image-box">
+            <strong>Atmosphere image</strong><br />
+            A candid social shot such as runners chatting before or after a run, ideally looking relaxed and approachable.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container grid-2">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2 style="color: white;">Questions before joining?</h2>
+          <p style="max-width: 680px; margin-top: 18px; color: rgba(255,255,255,0.8);">
+            If you want to check whether the pace will suit you, ask about the route, or say hello before the meetup, send an email.
+          </p>
+          <div class="button-row">
+            <a class="button" href="mailto:fedianine@gmail.com" style="background: white; color: var(--dark);">fedianine@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3 style="font-size: 1.4rem; margin: 0;">Contact form placeholder</h3>
+          <p style="margin-top: 12px; color: rgba(255,255,255,0.75);">
+            Because this site is client-side only on GitHub Pages, a real contact form needs a third-party form service. For now, this can stay as a visual placeholder or be connected later to Formspree, Basin, Getform, or a Google Form.
+          </p>
+          <div class="fake-field">Name</div>
+          <div class="fake-field">Email</div>
+          <div class="fake-field">Message</div>
+          <button class="button" style="margin-top: 14px; width: 100%; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
+            Send message
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <div>Morden Running Club • Informal social running meetup</div>
+      <div>Not a coaching service. Attend at your own discretion.</div>
+    </div>
+  </footer>
+
+  <script>
+    const rsvpButtons = [document.getElementById('rsvpButton'), document.getElementById('rsvpButton2')].filter(Boolean);
+    const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+    rsvpButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (rsvpSuccess) {
+          rsvpSuccess.classList.add('show');
+          rsvpSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
