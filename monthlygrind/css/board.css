@@ -7,31 +7,6 @@
   position: relative;
   overflow: hidden;
 }
-.deck-counters {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-bottom: 8px;
-}
-.deck-counter {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: var(--r-pill);
-  background: var(--cream);
-  border: 1px solid var(--line);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-.deck-counter__icon {
-  font-size: 12px;
-  line-height: 1;
-}
 .stage::before {
   content: "";
   position: absolute;
