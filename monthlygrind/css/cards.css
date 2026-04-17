@@ -93,6 +93,30 @@
   gap: 14px;
   align-content: space-between;
 }
+.card__continue {
+  justify-self: stretch;
+  margin-top: 6px;
+  padding: 12px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+}
+.card__continue:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.card__continue::after {
+  content: " ↵";
+  opacity: 0.6;
+  font-weight: 500;
+}
 .card__flavor {
   font-size: 14px;
   color: var(--ink-soft);

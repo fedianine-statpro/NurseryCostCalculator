@@ -259,6 +259,34 @@ a:focus-visible {
   color: var(--muted);
 }
 
+/* End-of-month pacing banner */
+.mg-banner {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 45;
+  opacity: 0;
+  transition: opacity 220ms var(--ease-out);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 72px);
+  color: #fff;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  letter-spacing: 0.02em;
+  background: radial-gradient(ellipse at center, rgba(20, 20, 40, 0.4), transparent 65%);
+}
+.mg-banner.is-visible {
+  opacity: 1;
+  animation: banner-pulse 900ms var(--ease-out);
+}
+@keyframes banner-pulse {
+  0%   { transform: scale(0.92); letter-spacing: 0.12em; }
+  40%  { transform: scale(1.02); letter-spacing: 0.02em; }
+  100% { transform: scale(1); }
+}
+
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {

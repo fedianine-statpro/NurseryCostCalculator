@@ -129,3 +129,40 @@ export function sfxLose() {
     osc.stop(t + 0.38);
   });
 }
+
+// Ominous descending bass drop — plays when a player crosses into the red.
+export function sfxOverdraft() {
+  if (!enabled) return;
+  const c = ensureCtx();
+  if (!c) return;
+  const now = c.currentTime;
+  const osc = c.createOscillator();
+  const g = c.createGain();
+  osc.type = "sawtooth";
+  osc.frequency.setValueAtTime(220, now);
+  osc.frequency.exponentialRampToValueAtTime(55, now + 0.6);
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.exponentialRampToValueAtTime(0.12, now + 0.05);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
+  osc.connect(g).connect(c.destination);
+  osc.start(now);
+  osc.stop(now + 0.75);
+}
+
+// Soft clock tick for end-of-month pacing beats.
+export function sfxTick() {
+  if (!enabled) return;
+  const c = ensureCtx();
+  if (!c) return;
+  const now = c.currentTime;
+  const osc = c.createOscillator();
+  const g = c.createGain();
+  osc.type = "square";
+  osc.frequency.value = 2200;
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.exponentialRampToValueAtTime(0.02, now + 0.005);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+  osc.connect(g).connect(c.destination);
+  osc.start(now);
+  osc.stop(now + 0.06);
+}

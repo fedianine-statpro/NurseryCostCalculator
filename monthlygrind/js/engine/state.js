@@ -8,6 +8,9 @@ export const STARTING_BALANCE = 1000;
 export const MAX_PERKS_HELD = 2;
 export const MAX_PERK_DRAW_ATTEMPTS = 2;
 export const BANK_FEE_RATE = 0.1;
+// Flat living expenses paid at the start of each of the player's turns
+// (rent, groceries, utilities). Creates the base pressure that makes budgeting matter.
+export const COST_OF_LIVING = 115;
 
 export function makeInitialState({ seed = pickSeed() } = {}) {
   const rng = makeRng(seed);
@@ -46,9 +49,14 @@ function makePlayer(id, name, isHuman) {
     perkDrawAttempts: 0,
     skipTurnsRemaining: 0,
     grantExtraTurn: false,
-    recurringEffects: [],       // [{ amount, turnsLeft, source }]
+    recurringEffects: [],       // [{ amount, turnsLeft, source } | { phases, phaseIndex, ... }]
     deferredWorkBonus: 0,       // Designer card payout on the next work turn
-    hasDrawnPerkThisTurn: false
+    hasDrawnPerkThisTurn: false,
+    consecutiveWorkTurns: 0,    // Work-in-a-row streak counter
+    wentBelowZero: false,       // achievement tracker
+    eventCardsDrawn: 0,
+    workCardsDrawn: 0,
+    biggestHitAbsorbed: 0
   };
 }
 

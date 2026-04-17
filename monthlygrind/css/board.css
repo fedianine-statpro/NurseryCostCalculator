@@ -7,6 +7,31 @@
   position: relative;
   overflow: hidden;
 }
+.deck-counters {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+.deck-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.deck-counter__icon {
+  font-size: 12px;
+  line-height: 1;
+}
 .stage::before {
   content: "";
   position: absolute;
@@ -68,9 +93,8 @@
 }
 
 .tile--start   { --tile-bg: #d7eee2; }
-.tile--event   { --tile-bg: #fff3d8; }
-.tile--payday  { --tile-bg: #d9efd4; }
-.tile--rest    { --tile-bg: var(--cream); }
+.tile--day     { --tile-bg: var(--cream); }
+.tile--weekend { --tile-bg: #ffe8c9; }
 .tile--finish  {
   --tile-bg: linear-gradient(135deg, #ffe58a, #ffbf52);
   border-color: var(--gold);
@@ -79,7 +103,7 @@
     0 8px 24px -6px rgba(198, 161, 74, 0.5);
 }
 
-.tile--event .tile__glyph {
+.tile--weekend .tile__glyph {
   animation: glyph-float 4s ease-in-out infinite;
 }
 @keyframes glyph-float {
@@ -138,45 +162,6 @@
   box-shadow:
     0 0 0 3px var(--pawn-color, var(--gold)),
     0 12px 30px -8px var(--pawn-color, var(--gold));
-}
-
-/* dice */
-.dice-stage {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 40;
-}
-.dice-stage.is-visible { display: flex; }
-.dice {
-  width: 96px;
-  height: 96px;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow:
-    0 20px 40px -10px rgba(0, 0, 0, 0.3),
-    inset 0 0 0 2px var(--line);
-  position: relative;
-  display: grid;
-  place-items: center;
-  animation: dice-tumble 600ms var(--ease-out);
-}
-.dice__face {
-  position: absolute;
-  font-size: 90px;
-  line-height: 1;
-  color: var(--ink);
-  opacity: 0;
-  transition: opacity 120ms;
-}
-.dice__face.is-active { opacity: 1; }
-@keyframes dice-tumble {
-  0%   { transform: rotate(-20deg) scale(0.6); opacity: 0; }
-  50%  { transform: rotate(15deg)  scale(1.1); opacity: 1; }
-  100% { transform: rotate(0deg)   scale(1);   opacity: 1; }
 }
 
 @media (max-width: 720px) {

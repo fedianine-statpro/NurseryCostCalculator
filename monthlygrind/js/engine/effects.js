@@ -1,34 +1,61 @@
-import { perkFiresForEvent } from "../data/perk-event-map.js";
 import { randInt } from "./rng.js";
-import { logEvent } from "./state.js";
+
+const DEFAULT_RECURRING_TURNS = 3;
+const MAX_RECURRING_STACK = 2;
 
 // Apply an event card effect to the active player.
 // Mutates `player` and `state`. Returns a summary object for the UI log.
 export function applyEventEffect(state, player, card, rng) {
   const e = card.effect || {};
-  const summary = { balanceDelta: 0, recurringAdded: 0, skipTurns: 0, grantExtraTurn: false, notes: [], appliedPerks: [] };
+  const summary = {
+    balanceDelta: 0,
+    recurringAdded: 0,
+    skipTurns: 0,
+    grantExtraTurn: false,
+    notes: [],
+    appliedPerks: [],
+    displacedRecurring: null
+  };
 
   // --- discounts/bonuses from held perks ---
   let immediate = e.immediate || 0;
   let recurring = e.recurring || 0;
 
+  // Positive-category multiplier perks (e.g. Savvy Financial Advisor Access)
+  if (immediate > 0) {
+    for (const perk of player.perks) {
+      const mult = (perk.positiveCategoryMultiplier || {})[card.category];
+      if (mult && mult !== 1) {
+        const bonus = Math.round(immediate * (mult - 1));
+        immediate += bonus;
+        summary.appliedPerks.push(`${perk.title} boosted +$${bonus}`);
+      }
+    }
+  }
+
+  // Category-discount perks
   for (const perk of player.perks) {
-    // Category discounts apply to the event's category if it matches.
     const discount = (perk.categoryDiscounts || {})[card.category];
-    const perkTriggersOnTitle = perkFiresForEvent(perk.id, card.title);
-    if (discount && (discount > 0) && (immediate < 0 || recurring < 0)) {
-      if (immediate < 0) {
-        const saved = Math.round(immediate * -discount);
-        immediate = immediate + saved;
-        summary.appliedPerks.push(`${perk.title} saved $${saved}`);
-      }
-      if (recurring < 0) {
-        const savedR = Math.round(recurring * -discount);
-        recurring = recurring + savedR;
-      }
-    } else if (perkTriggersOnTitle && perk.oneTimeBonus && !perk.hasFired) {
-      // Named-event nudges: pay out the one-time bonus if not already fired.
-      // (We don't actually mark it fired here — perk is considered permanent.)
+    if (!discount) continue;
+    if (immediate < 0) {
+      const saved = Math.round(immediate * -discount);
+      immediate += saved;
+      summary.appliedPerks.push(`${perk.title} saved $${saved}`);
+    }
+    if (recurring < 0) {
+      const savedR = Math.round(recurring * -discount);
+      recurring += savedR;
+    }
+  }
+
+  // Rainy Day Fund — once, absorbs a $300+ immediate loss
+  if (immediate <= -300) {
+    const rainyIdx = player.perks.findIndex((p) => p.absorbBigLoss && !p.consumed);
+    if (rainyIdx >= 0) {
+      summary.appliedPerks.push(`Rainy Day Fund absorbed $${Math.abs(immediate)}`);
+      immediate = 0;
+      player.perks[rainyIdx].consumed = true;
+      player.perks[rainyIdx].spent = true;
     }
   }
 
@@ -54,31 +81,51 @@ export function applyEventEffect(state, player, card, rng) {
     summary.notes.push(`Lost half your money`);
   }
 
-  // --- clear balance (spend all savings -> goes to 0 if positive) ---
+  // --- clear balance (spend all savings) ---
   if (e.clearBalance && player.balance > 0) {
     summary.balanceDelta -= player.balance;
     player.balance = 0;
     summary.notes.push(`Savings cleared`);
   }
 
-  // --- lose all balance (including going to 0 even if already negative) ---
+  // --- lose all balance (including negatives going to 0) ---
   if (e.loseAllBalance) {
     summary.balanceDelta -= player.balance;
     player.balance = 0;
     summary.notes.push(`Lost everything`);
   }
 
-  // --- recurring effect (capped by days remaining so effects can't run forever) ---
-  if (recurring) {
+  // --- recurring effect(s) — plain `recurring` or multi-phase ---
+  const toPush = [];
+  if (e.recurringPhases && Array.isArray(e.recurringPhases) && e.recurringPhases.length) {
+    // Store all phases as a single compound effect with a phase index.
+    toPush.push({
+      source: card.title,
+      phases: e.recurringPhases.map((p) => ({ amount: p.amount, turns: p.turns })),
+      phaseIndex: 0,
+      turnsLeftInPhase: e.recurringPhases[0].turns,
+      amount: e.recurringPhases[0].amount // initial active amount
+    });
+  } else if (recurring) {
     const remaining = Math.max(0, state.totalDays - player.position);
-    if (remaining > 0) {
-      player.recurringEffects.push({
-        amount: recurring,
-        turnsLeft: remaining,
-        source: card.title
-      });
-      summary.recurringAdded = recurring;
+    const configured = e.recurringTurns ?? DEFAULT_RECURRING_TURNS;
+    const turnsLeft = Math.min(configured, remaining);
+    // Global positive-recurring damper — keeps the economy tight without
+    // needing to rewrite every card. Negatives pass through at full strength.
+    const dampened = recurring > 0 ? Math.round(recurring * 0.7) : recurring;
+    if (turnsLeft > 0 && dampened !== 0) {
+      toPush.push({ amount: dampened, turnsLeft, source: card.title });
+      summary.recurringAdded = dampened;
     }
+  }
+
+  // --- cap stacking: max 3 active recurring effects ---
+  for (const r of toPush) {
+    if (player.recurringEffects.length >= MAX_RECURRING_STACK) {
+      const removed = player.recurringEffects.shift();
+      summary.displacedRecurring = removed?.source || null;
+    }
+    player.recurringEffects.push(r);
   }
 
   // --- skip turns ---
@@ -87,8 +134,15 @@ export function applyEventEffect(state, player, card, rng) {
     summary.skipTurns = e.skipTurns;
   }
 
-  // --- grant extra turn ---
-  if (e.grantExtraTurn) {
+  // --- grant extra turn (from the card OR from a perk matched to this category) ---
+  let grantExtra = !!e.grantExtraTurn;
+  for (const perk of player.perks) {
+    if (perk.extraTurnOnCategory && perk.extraTurnOnCategory === card.category) {
+      grantExtra = true;
+      summary.appliedPerks.push(`${perk.title} grants an extra turn`);
+    }
+  }
+  if (grantExtra) {
     player.grantExtraTurn = true;
     summary.grantExtraTurn = true;
   }
@@ -96,9 +150,20 @@ export function applyEventEffect(state, player, card, rng) {
   return summary;
 }
 
-// Apply a work card: base income + perk bonuses. Mutates player, returns { earned }.
-export function applyWorkEffect(state, player, card) {
-  let income = card.income || 0;
+// Apply a work card: base income + perk bonuses + small random variance.
+// Mutates player, returns { earned, baseIncome, variance }.
+export function applyWorkEffect(state, player, card, rng) {
+  const baseIncome = card.income || 0;
+  let income = baseIncome;
+
+  // ±10% random variance on non-zero income
+  let variance = 0;
+  if (income > 0 && rng) {
+    // integer in [-10, +10]
+    const pct = randInt(rng, -10, 10) / 100;
+    variance = Math.round(income * pct);
+    income += variance;
+  }
 
   // Deferred bonus from an earlier Designer card
   if (player.deferredWorkBonus) {
@@ -106,34 +171,54 @@ export function applyWorkEffect(state, player, card) {
     player.deferredWorkBonus = 0;
   }
 
-  // Promotion / negotiation perks stack
+  // Perk multipliers (promotion, negotiation, networking)
   let multiplier = 1;
+  let flatBonus = 0;
   for (const perk of player.perks) {
     if (perk.workIncomeBonus) multiplier += perk.workIncomeBonus;
+    if (perk.workFlatBonus) flatBonus += perk.workFlatBonus;
   }
-  income = Math.round(income * multiplier);
+  income = Math.round(income * multiplier) + flatBonus;
 
-  // If this card is the Designer deferred-payment card, queue the bonus for next work turn
+  // If this card is the Designer deferred-payment card, queue the bonus
   if (card.deferredBonus) {
     player.deferredWorkBonus += card.deferredBonus;
   }
 
   player.balance += income;
-  return { earned: income };
+  return { earned: income, baseIncome, variance };
 }
 
-// Apply each of a player's recurring effects at the start of their turn (before they act).
-// Decrement turnsLeft; drop expired ones.
+// Tick recurring effects at the start of a player's turn.
+// Handles multi-phase effects too.
 export function tickRecurringEffects(state, player) {
   if (!player.recurringEffects.length) return { total: 0, breakdown: [] };
   const breakdown = [];
   let total = 0;
   const kept = [];
   for (const r of player.recurringEffects) {
-    total += r.amount;
-    breakdown.push({ amount: r.amount, source: r.source });
-    r.turnsLeft -= 1;
-    if (r.turnsLeft > 0) kept.push(r);
+    // Multi-phase: pay the current phase's amount, tick its counter.
+    if (r.phases) {
+      total += r.amount;
+      breakdown.push({ amount: r.amount, source: r.source });
+      r.turnsLeftInPhase -= 1;
+      if (r.turnsLeftInPhase <= 0) {
+        r.phaseIndex += 1;
+        if (r.phaseIndex < r.phases.length) {
+          r.turnsLeftInPhase = r.phases[r.phaseIndex].turns;
+          r.amount = r.phases[r.phaseIndex].amount;
+          kept.push(r);
+        }
+        // else: expired
+      } else {
+        kept.push(r);
+      }
+    } else {
+      total += r.amount;
+      breakdown.push({ amount: r.amount, source: r.source });
+      r.turnsLeft -= 1;
+      if (r.turnsLeft > 0) kept.push(r);
+    }
   }
   player.recurringEffects = kept;
   player.balance += total;
@@ -141,7 +226,6 @@ export function tickRecurringEffects(state, player) {
 }
 
 // Apply per-turn effects from held perks (passive income, random returns).
-// Returns aggregate { total, breakdown }.
 export function tickPerkPassives(state, player, rng) {
   let total = 0;
   const breakdown = [];
@@ -160,4 +244,32 @@ export function tickPerkPassives(state, player, rng) {
   }
   player.balance += total;
   return { total, breakdown };
+}
+
+// Called at start of a turn to apply overdraft fee. Respects Safety Net perk.
+export function computeOverdraftFee(player, baseRate = 0.1) {
+  if (player.balance >= 0) return 0;
+  let rate = baseRate;
+  if (player.perks.some((p) => p.halveBankFee)) rate = rate / 2;
+  return Math.floor(Math.abs(player.balance) * rate);
+}
+
+// Called when a perk with `clearNegativeRecurringCategory` is bought to wipe
+// matching active debts. Returns number of effects removed.
+export function clearRecurringByCategoryHint(player, categoryHint) {
+  if (!categoryHint) return 0;
+  const before = player.recurringEffects.length;
+  // We match by source title containing category-indicative keywords. Simple and good enough.
+  const keywords = {
+    education: ["School", "Degree", "Course", "Study", "Training", "Abroad"],
+    home: ["Home", "House", "DIY"],
+    car: ["Car"]
+  };
+  const needles = keywords[categoryHint] || [];
+  player.recurringEffects = player.recurringEffects.filter((r) => {
+    if (r.amount >= 0) return true; // only clear negatives
+    const hit = needles.some((n) => r.source.includes(n));
+    return !hit;
+  });
+  return before - player.recurringEffects.length;
 }

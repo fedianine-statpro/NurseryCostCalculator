@@ -1,11 +1,10 @@
 import { getCategory } from "../data/categories.js";
 
 const TILE_GLYPHS = {
-  start:  { glyph: "🚩", label: "START" },
-  event:  { glyph: "🎲", label: "EVENT" },
-  payday: { glyph: "💵", label: "PAYDAY" },
-  rest:   { glyph: "🌿", label: "REST" },
-  finish: { glyph: "🏁", label: "FINISH" }
+  start:   { glyph: "🚩", label: "START" },
+  day:     { glyph: "",    label: "" },
+  weekend: { glyph: "☕",  label: "WEEK" },
+  finish:  { glyph: "🏁", label: "FINISH" }
 };
 
 let boardEl = null;
@@ -17,7 +16,7 @@ export function initBoard(state) {
   boardEl.innerHTML = "";
   tileEls = [];
 
-  state.board.forEach((tile, i) => {
+  state.board.forEach((tile) => {
     const el = document.createElement("div");
     el.className = `tile tile--${tile.type}`;
     el.setAttribute("role", "listitem");
@@ -28,9 +27,6 @@ export function initBoard(state) {
       <div class="tile__glyph" aria-hidden="true">${glyph}</div>
       <div class="tile__label">${label}</div>
     `;
-    if (tile.type === "payday") {
-      el.title = `Payday +$${tile.paydayAmount}`;
-    }
     boardEl.appendChild(el);
     tileEls.push(el);
   });
@@ -83,27 +79,6 @@ export function highlightTile(day, color) {
   tile.style.setProperty("--pawn-color", color || "var(--gold)");
   tile.classList.add("is-highlight");
   setTimeout(() => tile.classList.remove("is-highlight"), 900);
-}
-
-export async function showDice(rollValue) {
-  const stage = document.getElementById("dice-stage");
-  const faces = document.querySelectorAll(".dice__face");
-  stage.classList.add("is-visible");
-
-  // flicker through a few random faces
-  for (let i = 0; i < 6; i++) {
-    faces.forEach((f) => f.classList.remove("is-active"));
-    const n = 1 + Math.floor(Math.random() * 6);
-    const face = document.querySelector(`.dice__face[data-face="${n}"]`);
-    if (face) face.classList.add("is-active");
-    await delay(60);
-  }
-  // settle on the real value
-  faces.forEach((f) => f.classList.remove("is-active"));
-  const final = document.querySelector(`.dice__face[data-face="${rollValue}"]`);
-  if (final) final.classList.add("is-active");
-  await delay(520);
-  stage.classList.remove("is-visible");
 }
 
 export function relayoutOnResize(state) {

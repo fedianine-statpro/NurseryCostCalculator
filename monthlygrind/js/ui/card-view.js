@@ -12,9 +12,12 @@ async function fetchIcon(slug) {
   return p;
 }
 
-// Show a card centered on screen for `duration` ms, then auto-dismiss.
-// kind: "event" | "work" | "perk"
-export async function presentCard({ kind, card, summary, duration = 1800 }) {
+// Show a card centered on screen.
+//   kind:          "event" | "work" | "perk"
+//   manualDismiss: if true, only a click/keypress dismisses (human-triggered)
+//                  if false, auto-dismisses after `duration` ms (AI turns)
+//   duration:      auto-dismiss delay (ignored when manualDismiss is true)
+export async function presentCard({ kind, card, summary, duration = 1800, manualDismiss = false }) {
   const stage = cardStageEl();
   stage.innerHTML = "";
   stage.classList.add("is-visible");
@@ -50,20 +53,36 @@ export async function presentCard({ kind, card, summary, duration = 1800 }) {
         ${priceTag}
         ${workAmount}
       </div>
+      <button type="button" class="card__continue">Continue</button>
     </div>
   `;
 
   stage.appendChild(el);
 
-  // Allow click-to-dismiss to hurry things along
-  const dismiss = () => {
-    stage.classList.remove("is-visible");
-    stage.removeEventListener("click", dismiss);
-  };
-  stage.addEventListener("click", dismiss);
+  return new Promise((resolve) => {
+    let done = false;
+    const dismiss = () => {
+      if (done) return;
+      done = true;
+      stage.removeEventListener("click", dismiss);
+      window.removeEventListener("keydown", onKey);
+      stage.classList.remove("is-visible");
+      resolve();
+    };
+    const onKey = (e) => {
+      if (["Enter", " ", "Escape"].includes(e.key)) {
+        e.preventDefault();
+        dismiss();
+      }
+    };
+    stage.addEventListener("click", dismiss);
+    window.addEventListener("keydown", onKey);
 
-  await delay(duration);
-  stage.classList.remove("is-visible");
+    // AI turns: still auto-dismiss so the game flows.
+    if (!manualDismiss) {
+      setTimeout(dismiss, duration);
+    }
+  });
 }
 
 function buildEffectChips(kind, card, summary) {

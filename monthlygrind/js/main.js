@@ -5,21 +5,27 @@ import {
   doMove,
   drawPerk,
   resolvePerkOffer,
+  resolveEventChoice,
+  resolveWeekendChoice,
+  WEEKEND_OPTIONS,
   canMove,
   canDrawPerk
 } from "./engine/rules.js";
 import {
   aiDecideAction,
   aiDecideDrawPerk,
-  aiDecidePerkPurchase,
+  aiChoosePerk,
+  aiChooseEventOption,
+  aiChooseWeekend,
   aiThinkingDelay
 } from "./engine/ai.js";
-import { initBoard, placeAllPawns, placePawn, hopPawn, highlightTile, showDice, relayoutOnResize } from "./ui/board-view.js";
+import { initBoard, placeAllPawns, placePawn, hopPawn, highlightTile, relayoutOnResize } from "./ui/board-view.js";
 import { presentCard } from "./ui/card-view.js";
 import { renderHud, updateControls } from "./ui/hud-view.js";
 import { renderLog } from "./ui/diary-view.js";
-import { openModal, closeModal, wireDismissable, showPerkOffer, showEndGame } from "./ui/modal-view.js";
-import { sfxDice, sfxCoin, sfxCardFlip, sfxWin, sfxLose, toggleSound, isSoundOn } from "./ui/sound.js";
+import { openModal, closeModal, wireDismissable, showPerkOffer, showEventChoice, showWeekendChoice, showEndGame } from "./ui/modal-view.js";
+import { sfxDice, sfxCoin, sfxCardFlip, sfxWin, sfxLose, sfxOverdraft, sfxTick, toggleSound, isSoundOn } from "./ui/sound.js";
+import { maybeShowEndMonthBanner, resetBannerState } from "./ui/banner.js";
 
 let state;
 let running = false; // input lock while a turn is animating
@@ -32,6 +38,7 @@ async function startGame() {
   renderHud(state);
   renderLog(state);
   updateSoundIcon();
+  resetBannerState();
   running = false;
   // kick off the first turn
   await runTurn();
@@ -81,8 +88,8 @@ async function aiTakeTurn() {
     await replayEvents(offerEvents);
     const offer = state.pendingPerkOffer;
     if (offer) {
-      const decision = aiDecidePerkPurchase(state, offer.card) ? "buy" : "pass";
-      const resolve = resolvePerkOffer(state, decision);
+      const choice = aiChoosePerk(state, offer.cards);
+      const resolve = resolvePerkOffer(state, choice);
       await replayEvents(resolve);
       renderHud(state);
       renderLog(state);
@@ -133,11 +140,10 @@ async function humanPerk() {
   running = true;
   const events = drawPerk(state);
   await replayEvents(events);
-  // Offer modal
   const offer = state.pendingPerkOffer;
   if (offer) {
-    const canAfford = activePlayer(state).balance >= offer.card.cost;
-    const decision = await showPerkOffer(offer.card, { canAfford });
+    const balance = activePlayer(state).balance;
+    const decision = await showPerkOffer(offer.cards, { balance });
     const resolveEvents = resolvePerkOffer(state, decision);
     await replayEvents(resolveEvents);
   }
@@ -164,7 +170,7 @@ function handleGameOver() {
   }
   if (winnerId === "you") sfxWin();
   else sfxLose();
-  showEndGame({ winnerId, summary });
+  showEndGame({ winnerId, summary, players: state.players });
   updateControls(state);
 }
 
@@ -189,48 +195,79 @@ async function replayEvents(events) {
         break;
       }
       case "overdraft-fee": {
-        sfxCoin(false);
+        sfxOverdraft();
         renderHud(state);
         await delay(500);
         break;
       }
       case "work-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "work", card: ev.card, duration: 1500 });
+        await presentCard({ kind: "work", card: ev.card, duration: 1500, manualDismiss: ev.playerId === "you" });
         if (ev.earned > 0) sfxCoin(true);
         renderHud(state);
         break;
       }
-      case "dice-rolled": {
+      case "advance": {
         sfxDice();
-        await showDice(ev.roll);
-        // animate pawn along the path
+        const color = ev.playerId === "you" ? "var(--you-color)" : "var(--ai-color)";
         const player = state.players.find((p) => p.id === ev.playerId);
-        for (let d = ev.from + 1; d <= ev.to; d++) {
-          player.position = d;
-          placePawn(state, ev.playerId);
-          hopPawn(ev.playerId);
-          await delay(180);
-        }
-        break;
-      }
-      case "tile-landed": {
-        highlightTile(ev.tile.day, ev.playerId === "you" ? "var(--you-color)" : "var(--ai-color)");
-        await delay(150);
+        player.position = ev.to;
+        placePawn(state, ev.playerId);
+        hopPawn(ev.playerId);
+        highlightTile(ev.to, color);
+        await delay(260);
+        // End-of-month pacing beat (days 28/29/30) with a ticking clock cue
+        await maybeShowEndMonthBanner(state, ev.playerId, { onTick: sfxTick });
         break;
       }
       case "event-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 2100 });
+        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 2100, manualDismiss: ev.playerId === "you" });
         if (ev.summary.balanceDelta > 0) sfxCoin(true);
         else if (ev.summary.balanceDelta < 0) sfxCoin(false);
         renderHud(state);
         break;
       }
-      case "payday": {
-        sfxCoin(true);
-        renderHud(state);
+      case "finish": {
+        highlightTile(state.totalDays, "var(--gold)");
         await delay(300);
+        break;
+      }
+      case "cost-of-living": {
+        renderHud(state);
+        await delay(120);
+        break;
+      }
+      case "event-choice-needed": {
+        // Pause: ask the active player to pick an option.
+        const p = state.players.find((pl) => pl.id === ev.playerId);
+        let pickedIndex;
+        if (p.isHuman) {
+          pickedIndex = await showEventChoice(ev.card);
+        } else {
+          await aiThinkingDelay(300, 550);
+          pickedIndex = aiChooseEventOption(state, ev.card);
+        }
+        const resolveEvents = resolveEventChoice(state, pickedIndex);
+        await replayEvents(resolveEvents);
+        break;
+      }
+      case "weekend-choice-needed": {
+        const p = state.players.find((pl) => pl.id === ev.playerId);
+        let pickedIndex;
+        if (p.isHuman) {
+          pickedIndex = await showWeekendChoice(WEEKEND_OPTIONS);
+        } else {
+          await aiThinkingDelay(200, 400);
+          pickedIndex = aiChooseWeekend(state);
+        }
+        const resolveEvents = resolveWeekendChoice(state, pickedIndex);
+        await replayEvents(resolveEvents);
+        break;
+      }
+      case "weekend-chosen": {
+        renderHud(state);
+        await delay(180);
         break;
       }
       case "perk-offered": {
@@ -241,7 +278,7 @@ async function replayEvents(events) {
       }
       case "perk-bought": {
         sfxCoin(true);
-        await presentCard({ kind: "perk", card: ev.card, duration: 1500 });
+        await presentCard({ kind: "perk", card: ev.card, duration: 1500, manualDismiss: ev.playerId === "you" });
         renderHud(state);
         break;
       }

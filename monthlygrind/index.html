@@ -90,6 +90,11 @@
       </section>
 
       <section class="stage" aria-label="Game board">
+        <div class="deck-counters" id="deck-counters" aria-label="Cards remaining">
+          <span class="deck-counter" title="Event deck"><span class="deck-counter__icon">📰</span> <span id="deck-count-event">177</span></span>
+          <span class="deck-counter" title="Work deck"><span class="deck-counter__icon">🧾</span> <span id="deck-count-work">62</span></span>
+          <span class="deck-counter" title="Perk deck"><span class="deck-counter__icon">✨</span> <span id="deck-count-perk">36</span></span>
+        </div>
         <div class="board" id="board" role="list"></div>
       </section>
 
@@ -99,12 +104,12 @@
           <button class="action-btn action-btn--work" id="btn-work">
             <span class="action-btn__icon">👷</span>
             <span class="action-btn__label">Work</span>
-            <span class="action-btn__hint">Earn a paycheck</span>
+            <span class="action-btn__hint">+1 day · steady paycheck</span>
           </button>
           <button class="action-btn action-btn--move" id="btn-move">
             <span class="action-btn__icon">🎲</span>
-            <span class="action-btn__label">Move</span>
-            <span class="action-btn__hint">Roll &amp; advance</span>
+            <span class="action-btn__label">Live it up</span>
+            <span class="action-btn__hint">+1 day · draw an event</span>
           </button>
           <button class="action-btn action-btn--perk" id="btn-perk">
             <span class="action-btn__icon">✨</span>
@@ -123,26 +128,23 @@
     <!-- Card reveal layer -->
     <div class="card-stage" id="card-stage" aria-hidden="true"></div>
 
-    <!-- Dice layer -->
-    <div class="dice-stage" id="dice-stage" aria-hidden="true">
-      <div class="dice" id="dice">
-        <span class="dice__face" data-face="1">⚀</span>
-        <span class="dice__face" data-face="2">⚁</span>
-        <span class="dice__face" data-face="3">⚂</span>
-        <span class="dice__face" data-face="4">⚃</span>
-        <span class="dice__face" data-face="5">⚄</span>
-        <span class="dice__face" data-face="6">⚅</span>
+    <!-- Event choice modal (A/B) -->
+    <div class="modal" id="event-choice-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal__backdrop"></div>
+      <div class="modal__body modal__body--wide">
+        <div class="event-choice__header" id="event-choice-header"></div>
+        <div class="event-choice__options" id="event-choice-options"></div>
       </div>
     </div>
 
     <!-- Perk offer modal -->
     <div class="modal" id="perk-modal" aria-hidden="true" role="dialog" aria-modal="true">
       <div class="modal__backdrop" data-close></div>
-      <div class="modal__body">
-        <h2 class="modal__title">A perk came up</h2>
+      <div class="modal__body modal__body--wider">
+        <h2 class="modal__title">Pick your perk</h2>
         <div id="perk-offer-card"></div>
         <div class="modal__actions">
-          <button class="ghost-btn" id="perk-decline">Pass</button>
+          <button class="ghost-btn" id="perk-decline">Pass on all</button>
           <button class="primary-btn" id="perk-buy">Buy</button>
         </div>
       </div>
@@ -156,25 +158,28 @@
         <div class="rules">
           <p>
             Survive one calendar month. You and your rival each start with
-            <strong>$1,000</strong> on Day 1 and must reach <strong>Day 31</strong>.
+            <strong>$1,000</strong> on Day 1 and race to <strong>Day 31</strong>.
+            Every turn moves you forward exactly one day — the choice is how you spend it.
           </p>
           <h3>Each turn, pick one:</h3>
           <ul>
-            <li><strong>Work</strong> — draw a job and cash a paycheck ($0–$250).</li>
             <li>
-              <strong>Move</strong> — roll a die and advance. Landing on an event tile draws a life
-              event (good or bad).
+              <strong>Work</strong> — a steady paycheck ($0–$250). Boring, reliable, safe.
+            </li>
+            <li>
+              <strong>Live it up</strong> — draw a life-event card. Could be a bonus check, a
+              windfall inheritance, or a $750 natural disaster. Fortune favors the bold.
             </li>
           </ul>
           <h3>Perks</h3>
           <p>
-            Twice per game you may draw a perk. If you can afford it, buy it. Perks give one-time
-            bonuses, passive income, or discounts on matching life events.
+            Twice per game you may draw a perk card. If you can afford it, buy it — they give
+            one-time bonuses, passive income, or discounts on matching life events.
           </p>
           <h3>Overdraft</h3>
           <p>
-            Balance below $0? You must work, and the bank takes 10% of your debt as a fee each
-            turn until you recover.
+            Balance below $0? You're forced to work, and the bank takes 10% of your debt each
+            turn until you're back in the black.
           </p>
           <h3>Win</h3>
           <p>
@@ -183,7 +188,7 @@
           </p>
           <h3>Hotkeys</h3>
           <p>
-            <kbd>W</kbd> work · <kbd>M</kbd>/<kbd>Space</kbd> move · <kbd>P</kbd> perk ·
+            <kbd>W</kbd> work · <kbd>M</kbd>/<kbd>Space</kbd> live it up · <kbd>P</kbd> perk ·
             <kbd>Esc</kbd> close
           </p>
         </div>
@@ -196,11 +201,12 @@
     <!-- End-game modal -->
     <div class="modal" id="end-modal" aria-hidden="true" role="dialog" aria-modal="true">
       <div class="modal__backdrop"></div>
-      <div class="modal__body">
+      <div class="modal__body modal__body--wide">
         <div class="end__confetti" id="end-confetti" aria-hidden="true"></div>
         <h2 class="modal__title" id="end-title">Month complete</h2>
         <p class="end__subtitle" id="end-subtitle"></p>
         <div class="end__final" id="end-final"></div>
+        <div class="end__badges" id="end-badges"></div>
         <div class="modal__actions">
           <button class="primary-btn" id="end-again">Play again</button>
         </div>

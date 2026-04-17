@@ -1,21 +1,27 @@
 // 177 Event Cards from Documentation/Event Cards.md.
 // Each card: { id, title, desc, category, effect }
 // effect shape (any field optional):
-//   immediate:      one-shot $ delta (+/-) applied to current balance
-//   recurring:      $ delta applied each of the drawer's remaining turns
-//   multiplier:     e.g. 2 means "double your money" (applied to positive balance)
-//   halveBalance:   true  -> balance becomes max(0, balance / 2) for positive balance
-//   clearBalance:   true  -> spend all your current savings (set balance to 0)
-//   loseAllBalance: true  -> lose everything (including debts reset to 0)
-//   skipTurns:      integer, number of upcoming turns the player must skip
-//   grantExtraTurn: true  -> player immediately gets another turn after this
+//   immediate:       one-shot $ delta (+/-) applied to current balance
+//   recurring:       $ delta applied each of the drawer's upcoming turns
+//   recurringTurns:  how long `recurring` lasts (default 5 turns, capped by days left)
+//   recurringPhases: [{ amount, turns }, ...] — multi-phase lifecycle (e.g. cost-then-payoff)
+//                    overrides plain `recurring`
+//   multiplier:      e.g. 2 means "double your money" (applied to positive balance)
+//   halveBalance:    true  -> balance becomes max(0, balance / 2) for positive balance
+//   clearBalance:    true  -> spend all your current savings (set balance to 0)
+//   loseAllBalance:  true  -> lose everything (including debts reset to 0)
+//   skipTurns:       integer, number of upcoming turns the player must skip
+//   grantExtraTurn:  true  -> player immediately gets another turn after this
+//
+// Default recurringTurns = 5 so most ongoing effects expire after a work-week.
+// Life-commitment events (marriage, home, job loss) set longer durations explicitly.
 //
 // Title strings are kept verbatim so the perk->event mapping resolves by title.
 // Two intentional duplicates exist (e.g. "DIY Disaster") matching the source deck.
 
 export const EVENT_CARDS = [
-  { id: "e-001", title: "Birth of a Child",               desc: "A new arrival reshapes your budget — and your heart.",              category: "family",        effect: { immediate: -200, recurring: -50, grantExtraTurn: true } },
-  { id: "e-002", title: "New Relationship",               desc: "Wedding bells! Miss a turn, then thrive on dual income.",           category: "family",        effect: { skipTurns: 1, recurring: 50 } },
+  { id: "e-001", title: "Birth of a Child",               desc: "A new arrival reshapes your budget — and your heart.",              category: "family",        effect: { immediate: -200, recurring: -50, recurringTurns: 10, grantExtraTurn: true } },
+  { id: "e-002", title: "New Relationship",               desc: "Wedding bells! Miss a turn, then thrive on dual income.",           category: "family",        effect: { skipTurns: 1, recurring: 50, recurringTurns: 8 } },
   { id: "e-003", title: "Car Repair",                     desc: "An unexpected breakdown costs $300.",                                category: "car",           effect: { immediate: -300 } },
   { id: "e-004", title: "Medical Bill",                   desc: "A sudden illness runs up a $250 bill.",                              category: "health",        effect: { immediate: -250 } },
   { id: "e-005", title: "Emergency Travel",               desc: "You rush home on short notice. $400 gone.",                          category: "travel",        effect: { immediate: -400 } },
@@ -86,16 +92,16 @@ export const EVENT_CARDS = [
   { id: "e-070", title: "Unfortunate Hair Dye",           desc: "$100 for a salon fix. Skip a turn.",                                 category: "shopping",      effect: { immediate: -100, skipTurns: 1 } },
   { id: "e-071", title: "Wilderness Whoops",              desc: "Camping trip ends up costing $150.",                                 category: "travel",        effect: { immediate: -150 } },
   { id: "e-072", title: "Lottery Letdown",                desc: "A handful of losing tickets. -$100.",                                category: "luck",          effect: { immediate: -100 } },
-  { id: "e-073", title: "Rehab Reality",                  desc: "Program costs $500 and 2 skipped turns; gain $50/turn afterwards.",  category: "health",        effect: { immediate: -500, skipTurns: 2, recurring: 50 } },
-  { id: "e-074", title: "Starting School",                desc: "$200 on supplies; $50/turn from new skills.",                        category: "education",     effect: { immediate: -200, recurring: 50 } },
+  { id: "e-073", title: "Rehab Reality",                  desc: "Program costs $500 and 2 skipped turns; gain $50/turn afterwards.",  category: "health",        effect: { immediate: -500, skipTurns: 2, recurring: 50, recurringTurns: 6 } },
+  { id: "e-074", title: "Starting School",                desc: "$200 on supplies; struggle first, then new skills pay off.",         category: "education",     effect: { immediate: -200, recurringPhases: [{ amount: -30, turns: 3 }, { amount: 60, turns: 5 }] } },
   { id: "e-075", title: "First Job",                      desc: "Your first paycheck: +$150.",                                        category: "career",        effect: { immediate: 150 } },
   { id: "e-076", title: "First Full-time Job",            desc: "Career boost: +$200 this turn.",                                     category: "career",        effect: { immediate: 200 } },
   { id: "e-077", title: "First Major Purchase",           desc: "Buy a car for $400, save $50/turn on transport.",                    category: "car",           effect: { immediate: -400, recurring: 50 } },
-  { id: "e-078", title: "Wedding Day",                    desc: "$500 wedding, skip next turn for honeymoon, $50/turn after.",        category: "family",        effect: { immediate: -500, skipTurns: 1, recurring: 50 } },
-  { id: "e-079", title: "First Child",                    desc: "$600 on necessities, skip a turn, +$30/turn in benefits.",           category: "family",        effect: { immediate: -600, skipTurns: 1, recurring: 30 } },
-  { id: "e-080", title: "Home Sweet Home",                desc: "You spend all your savings but gain $200/turn in equity.",           category: "home",          effect: { clearBalance: true, recurring: 200 } },
+  { id: "e-078", title: "Wedding Day",                    desc: "$500 wedding, skip next turn for honeymoon, $50/turn after.",        category: "family",        effect: { immediate: -500, skipTurns: 1, recurring: 50, recurringTurns: 10 } },
+  { id: "e-079", title: "First Child",                    desc: "$600 on necessities, skip a turn, +$30/turn in benefits.",           category: "family",        effect: { immediate: -600, skipTurns: 1, recurring: 30, recurringTurns: 10 } },
+  { id: "e-080", title: "Home Sweet Home",                desc: "You spend all your savings but gain equity over time.",              category: "home",          effect: { clearBalance: true, recurring: 100, recurringTurns: 10 } },
   { id: "e-081", title: "Major Health Issue",             desc: "$300 in bills, $50/turn in new perspective.",                        category: "health",        effect: { immediate: -300, recurring: 50 } },
-  { id: "e-082", title: "Lost Job Shock",                 desc: "You lose everything, but earn $100/turn in benefits.",               category: "career",        effect: { loseAllBalance: true, recurring: 100 } },
+  { id: "e-082", title: "Lost Job Shock",                 desc: "You lose everything, but earn $80/turn in benefits.",                category: "career",        effect: { loseAllBalance: true, recurring: 80, recurringTurns: 8 } },
   { id: "e-083", title: "Inheritance Surprise",           desc: "A distant relative leaves you $500.",                                category: "family",        effect: { immediate: 500 } },
   { id: "e-084", title: "Market Master",                  desc: "A wise pick doubles your current money.",                            category: "finance",       effect: { multiplier: 2 } },
   { id: "e-085", title: "Charity Work Wonder",            desc: "Skip a turn to volunteer, then gain $100/turn in connections.",      category: "nature",        effect: { skipTurns: 1, recurring: 100 } },
@@ -115,27 +121,27 @@ export const EVENT_CARDS = [
   { id: "e-099", title: "Significant Breakup",            desc: "Moving-out costs $200, skip a turn to recover.",                     category: "family",        effect: { immediate: -200, skipTurns: 1 } },
   { id: "e-100", title: "Volunteering Milestone",         desc: "Skip a turn, then gain $60/turn in networking.",                     category: "nature",        effect: { skipTurns: 1, recurring: 60 } },
   { id: "e-101", title: "Mastering a Skill",              desc: "$150 on classes, $50/turn in opportunities.",                        category: "education",     effect: { immediate: -150, recurring: 50 } },
-  { id: "e-102", title: "Buying a First Home",            desc: "Half your savings down; $150/turn in property value.",               category: "home",          effect: { halveBalance: true, recurring: 150 } },
-  { id: "e-103", title: "Master's Degree Triumph",        desc: "$300 in tuition, then $100/turn in earnings.",                       category: "education",     effect: { immediate: -300, recurring: 100 } },
+  { id: "e-102", title: "Buying a First Home",            desc: "Half your savings down; equity grows over time.",                    category: "home",          effect: { halveBalance: true, recurring: 80, recurringTurns: 10 } },
+  { id: "e-103", title: "Master's Degree Triumph",        desc: "$300 in tuition; months of study before the earnings boost.",        category: "education",     effect: { immediate: -300, recurringPhases: [{ amount: -30, turns: 4 }, { amount: 80, turns: 5 }] } },
   { id: "e-104", title: "Career Peak",                    desc: "A promotion lands: +$200 this turn.",                                category: "career",        effect: { immediate: 200 } },
-  { id: "e-105", title: "Getting a Tattoo",               desc: "$100 for ink, $30/turn in confidence.",                              category: "entertainment", effect: { immediate: -100, recurring: 30 } },
-  { id: "e-106", title: "Spiritual Awakening",            desc: "Clarity of thought yields $50/turn.",                                category: "nature",        effect: { recurring: 50 } },
+  { id: "e-105", title: "Getting a Tattoo",               desc: "$100 for ink; healing period pinches for a bit.",                    category: "entertainment", effect: { immediate: -100, recurring: -20, recurringTurns: 3 } },
+  { id: "e-106", title: "Spiritual Awakening",            desc: "Clarity of thought yields a modest boost.",                          category: "nature",        effect: { recurring: 25 } },
   { id: "e-107", title: "First Big Project at Work",      desc: "You nail it: +$200 bonus.",                                          category: "career",        effect: { immediate: 200 } },
   { id: "e-108", title: "Overcoming a Phobia",            desc: "Newfound confidence grants an extra turn.",                          category: "luck",          effect: { grantExtraTurn: true } },
   { id: "e-109", title: "Reconnecting with a Lost Relative", desc: "$50 in travel, then $70/turn in family support.",                  category: "family",        effect: { immediate: -50, recurring: 70 } },
   { id: "e-110", title: "Surviving a Natural Disaster",   desc: "Half your money gone, but $100/turn in community support.",          category: "disaster",      effect: { halveBalance: true, recurring: 100 } },
   { id: "e-111", title: "Major Political Activism",       desc: "Skip a turn; +$60/turn in social influence.",                        category: "legal",         effect: { skipTurns: 1, recurring: 60 } },
   { id: "e-112", title: "First Major Surgery",            desc: "$400 in medical costs, $50/turn in improved health.",                category: "health",        effect: { immediate: -400, recurring: 50 } },
-  { id: "e-113", title: "Discovering a Personal Philosophy", desc: "Life satisfaction adds $50/turn.",                                  category: "nature",        effect: { recurring: 50 } },
+  { id: "e-113", title: "Discovering a Personal Philosophy", desc: "Life satisfaction adds a small recurring boost.",                   category: "nature",        effect: { recurring: 25 } },
   { id: "e-114", title: "Grandchildren Joy",              desc: "$100 on gifts, +$30/turn in happiness.",                             category: "family",        effect: { immediate: -100, recurring: 30 } },
   { id: "e-115", title: "Renewing Vows",                  desc: "$200 ceremony grants an extra turn of renewed commitment.",          category: "family",        effect: { immediate: -200, grantExtraTurn: true } },
   { id: "e-116", title: "Building a Dream Project",       desc: "$300 invested, then $100/turn if successful.",                       category: "career",        effect: { immediate: -300, recurring: 100 } },
   { id: "e-117", title: "Experiencing a Major Betrayal",  desc: "Fallout costs $200, but $50/turn in resilience.",                    category: "legal",         effect: { immediate: -200, recurring: 50 } },
-  { id: "e-118", title: "Learning a Crucial Life Lesson", desc: "Wisdom compounds at $70/turn.",                                      category: "education",     effect: { recurring: 70 } },
+  { id: "e-118", title: "Learning a Crucial Life Lesson", desc: "Wisdom pays in small, steady returns.",                              category: "education",     effect: { recurring: 40 } },
   { id: "e-119", title: "Major Personal Style Change",    desc: "$150 on wardrobe, $30/turn in confidence.",                          category: "shopping",      effect: { immediate: -150, recurring: 30 } },
-  { id: "e-120", title: "Witnessing a Miracle",           desc: "Hope and inspiration pay $50/turn.",                                 category: "luck",          effect: { recurring: 50 } },
+  { id: "e-120", title: "Witnessing a Miracle",           desc: "Hope and inspiration pay a modest dividend.",                        category: "luck",          effect: { recurring: 30 } },
   { id: "e-121", title: "First Time Voting",              desc: "Civic engagement grants $30/turn.",                                  category: "legal",         effect: { recurring: 30 } },
-  { id: "e-122", title: "Experiencing Significant Fame",  desc: "Skip a turn to the media, then $50/turn in opportunities.",          category: "entertainment", effect: { skipTurns: 1, recurring: 50 } },
+  { id: "e-122", title: "Experiencing Significant Fame",  desc: "Media coach costs $200 and a turn, then $50/turn in opportunities.", category: "entertainment", effect: { immediate: -200, skipTurns: 1, recurring: 50 } },
   { id: "e-123", title: "Surviving a Serious Accident",   desc: "$300 in medical, $50/turn in insurance.",                            category: "disaster",      effect: { immediate: -300, recurring: 50 } },
   { id: "e-124", title: "Major Financial Investment",     desc: "Half your savings invested; $100/turn in returns.",                  category: "finance",       effect: { halveBalance: true, recurring: 100 } },
   { id: "e-125", title: "Life-Altering Decision",         desc: "A fateful call: $60/turn from here on.",                             category: "luck",          effect: { recurring: 60 } },
@@ -147,7 +153,7 @@ export const EVENT_CARDS = [
   { id: "e-131", title: "Learning a New Language",        desc: "$100 on courses, +$40/turn in new doors.",                           category: "education",     effect: { immediate: -100, recurring: 40 } },
   { id: "e-132", title: "Joining a Book Club",            desc: "Good company earns you an extra turn.",                              category: "nature",        effect: { grantExtraTurn: true } },
   { id: "e-133", title: "First Marathon Completion",      desc: "Health gains pay $30/turn.",                                         category: "health",        effect: { recurring: 30 } },
-  { id: "e-134", title: "Starting a Side Business",       desc: "$200 to launch; +$80/turn if it takes off.",                         category: "career",        effect: { immediate: -200, recurring: 80 } },
+  { id: "e-134", title: "Starting a Side Business",       desc: "$200 to launch; lean months first, payoff later.",                   category: "career",        effect: { immediate: -200, recurringPhases: [{ amount: -30, turns: 3 }, { amount: 80, turns: 5 }] } },
   { id: "e-135", title: "Adopting a Pet",                 desc: "$50 in fees, +$30/turn in companionship.",                           category: "pet",           effect: { immediate: -50, recurring: 30 } },
   { id: "e-136", title: "Undergoing a Health Scare",      desc: "$150 in bills, $40/turn in lifestyle changes.",                      category: "health",        effect: { immediate: -150, recurring: 40 } },
   { id: "e-137", title: "Participating in Community Theater", desc: "Creative joy returns $30/turn.",                                   category: "entertainment", effect: { recurring: 30 } },
@@ -155,11 +161,11 @@ export const EVENT_CARDS = [
   { id: "e-139", title: "Taking a Sabbatical",            desc: "Lose $200 in wages, gain an extra turn for reflection.",             category: "travel",        effect: { immediate: -200, grantExtraTurn: true } },
   { id: "e-140", title: "Starting a Garden",              desc: "$50 in supplies, $20/turn in savings and joy.",                      category: "nature",        effect: { immediate: -50, recurring: 20 } },
   { id: "e-141", title: "Attending a Major Sports Event", desc: "$100 ticket; grants an extra turn of excitement.",                   category: "entertainment", effect: { immediate: -100, grantExtraTurn: true } },
-  { id: "e-142", title: "Writing a Book",                 desc: "$150 to publish; $70/turn in royalties.",                            category: "career",        effect: { immediate: -150, recurring: 70 } },
-  { id: "e-143", title: "Experiencing a Home Burglary",   desc: "$200 in stolen goods, $50/turn in reimbursements.",                  category: "disaster",      effect: { immediate: -200, recurring: 50 } },
+  { id: "e-142", title: "Writing a Book",                 desc: "$150 to publish; quiet months, then royalties roll in.",             category: "career",        effect: { immediate: -150, recurringPhases: [{ amount: -20, turns: 3 }, { amount: 70, turns: 5 }] } },
+  { id: "e-143", title: "Experiencing a Home Burglary",   desc: "$200 in stolen goods, $50/turn in reimbursements.",                  category: "disaster",      effect: { immediate: -200, recurring: 50, recurringTurns: 8 } },
   { id: "e-144", title: "Participating in a Protest",     desc: "Skip a turn; gain $30/turn in social awareness.",                    category: "legal",         effect: { skipTurns: 1, recurring: 30 } },
-  { id: "e-145", title: "Experiencing an Artistic Breakthrough", desc: "Creative output pays $60/turn.",                               category: "entertainment", effect: { recurring: 60 } },
-  { id: "e-146", title: "Overcoming an Addiction",        desc: "Healthier living pays $50/turn.",                                    category: "health",        effect: { recurring: 50 } },
+  { id: "e-145", title: "Experiencing an Artistic Breakthrough", desc: "Creative output pays a steady modest return.",                 category: "entertainment", effect: { recurring: 40 } },
+  { id: "e-146", title: "Overcoming an Addiction",        desc: "Healthier living yields modest savings per turn.",                   category: "health",        effect: { recurring: 40 } },
   { id: "e-147", title: "Receiving a Prestigious Award",  desc: "Recognition pays out: +$150.",                                       category: "career",        effect: { immediate: 150 } },
   { id: "e-148", title: "Encountering a Wild Animal",     desc: "A once-in-a-lifetime moment grants an extra turn.",                  category: "nature",        effect: { grantExtraTurn: true } },
   { id: "e-149", title: "Attending a Historical Event",   desc: "$50 in travel, $30/turn in cultural enrichment.",                    category: "travel",        effect: { immediate: -50, recurring: 30 } },
@@ -169,7 +175,7 @@ export const EVENT_CARDS = [
   { id: "e-153", title: "Helping a Friend in Crisis",     desc: "$100 in aid, $30/turn in strengthened friendship.",                  category: "family",        effect: { immediate: -100, recurring: 30 } },
   { id: "e-154", title: "Participating in a Scientific Study", desc: "Compensation pays $50/turn.",                                    category: "education",     effect: { recurring: 50 } },
   { id: "e-155", title: "Dealing with a Lawsuit",         desc: "$200 in legal fees; $100/turn in settlements.",                      category: "legal",         effect: { immediate: -200, recurring: 100 } },
-  { id: "e-156", title: "Having a Viral Video",           desc: "$60/turn from online popularity.",                                   category: "entertainment", effect: { recurring: 60 } },
+  { id: "e-156", title: "Having a Viral Video",           desc: "$50/turn from online popularity — while it lasts.",                  category: "entertainment", effect: { recurring: 50 } },
   { id: "e-157", title: "Experiencing a Cultural Shock",  desc: "$200 moving costs, $50/turn in new experiences.",                    category: "travel",        effect: { immediate: -200, recurring: 50 } },
   { id: "e-158", title: "Found a Lost Valuable",          desc: "A $250 find.",                                                       category: "luck",          effect: { immediate: 250 } },
   { id: "e-159", title: "Attending a Celebrity Wedding",  desc: "$100 on a gift, but you gain an extra networking turn.",             category: "entertainment", effect: { immediate: -100, grantExtraTurn: true } },
@@ -177,7 +183,7 @@ export const EVENT_CARDS = [
   { id: "e-161", title: "Experiencing a Natural Disaster", desc: "$150 in damages, $40/turn in rebuilding support.",                  category: "disaster",      effect: { immediate: -150, recurring: 40 } },
   { id: "e-162", title: "Attending a Famous Art Exhibition", desc: "$50 ticket, $30/turn in cultural enrichment.",                     category: "entertainment", effect: { immediate: -50, recurring: 30 } },
   { id: "e-163", title: "Volunteering Abroad",            desc: "$100 travel; you gain an extra turn in personal growth.",            category: "travel",        effect: { immediate: -100, grantExtraTurn: true } },
-  { id: "e-164", title: "Getting Involved in Local Politics", desc: "Community influence pays $30/turn.",                               category: "legal",         effect: { recurring: 30 } },
+  { id: "e-164", title: "Getting Involved in Local Politics", desc: "Community influence pays small returns for a while.",              category: "legal",         effect: { recurring: 20 } },
   { id: "e-165", title: "Encountering a Rare Animal in the Wild", desc: "A unique wildlife moment grants an extra turn.",               category: "nature",        effect: { grantExtraTurn: true } },
   { id: "e-166", title: "Participating in an Archaeological Dig", desc: "$100 travel, $40/turn in educational dividends.",              category: "education",     effect: { immediate: -100, recurring: 40 } },
   { id: "e-167", title: "Receiving a Professional Certification", desc: "$150 fees, $60/turn in career advancement.",                   category: "education",     effect: { immediate: -150, recurring: 60 } },
@@ -186,9 +192,98 @@ export const EVENT_CARDS = [
   { id: "e-170", title: "Winning a Cooking Contest",      desc: "Prize money: +$150.",                                                category: "food",          effect: { immediate: 150 } },
   { id: "e-171", title: "Attending a Space Launch",       desc: "$50 travel, $30/turn in inspiration.",                               category: "travel",        effect: { immediate: -50, recurring: 30 } },
   { id: "e-172", title: "Facing an Unexpected Legal Issue", desc: "$200 in legal fees, $70/turn in settlements.",                       category: "legal",         effect: { immediate: -200, recurring: 70 } },
-  { id: "e-173", title: "Discovering a Hidden Talent",    desc: "Personal growth earns $40/turn.",                                    category: "luck",          effect: { recurring: 40 } },
+  { id: "e-173", title: "Discovering a Hidden Talent",    desc: "Personal growth earns small returns for a while.",                   category: "luck",          effect: { recurring: 30 } },
   { id: "e-174", title: "Going on a Wilderness Survival Trip", desc: "$100 gear grants an extra turn of confidence.",                    category: "nature",        effect: { immediate: -100, grantExtraTurn: true } },
   { id: "e-175", title: "Participating in a Film Festival", desc: "$50 pass, $30/turn in cinematic networking.",                        category: "entertainment", effect: { immediate: -50, recurring: 30 } },
   { id: "e-176", title: "Launching a Successful YouTube Channel", desc: "$70/turn from ads and sponsorships.",                           category: "entertainment", effect: { recurring: 70 } },
-  { id: "e-177", title: "Being Part of a Historic Scientific Discovery", desc: "Recognition brings +$100.",                              category: "education",     effect: { immediate: 100 } }
+  { id: "e-177", title: "Being Part of a Historic Scientific Discovery", desc: "Recognition brings +$100.",                              category: "education",     effect: { immediate: 100 } },
+
+  // ─── New "lingering drain" events — all-negative recurring to pressure budgets ─
+  { id: "e-178", title: "Streaming Service Stack",        desc: "You finally notice how many subscriptions you have.",                category: "entertainment", effect: { recurring: -25, recurringTurns: 5 } },
+  { id: "e-179", title: "Credit Card Interest",           desc: "The APR is worse than you remembered.",                              category: "finance",       effect: { recurring: -40, recurringTurns: 4 } },
+  { id: "e-180", title: "Subscription Box Trap",          desc: "Monthly 'surprise' box you can't quite cancel.",                     category: "shopping",      effect: { recurring: -30, recurringTurns: 5 } },
+  { id: "e-181", title: "Rent Hike",                      desc: "Your lease just got more expensive.",                                category: "home",          effect: { recurring: -60, recurringTurns: 6 } },
+  { id: "e-182", title: "Gym Auto-Renew",                 desc: "The annual contract kicks in whether you go or not.",                category: "health",        effect: { recurring: -45, recurringTurns: 5 } },
+  { id: "e-183", title: "Student Loan Payment",           desc: "Your deferment is over.",                                            category: "education",     effect: { recurring: -50, recurringTurns: 6 } },
+  { id: "e-184", title: "Insurance Premium Hike",         desc: "A rough year for the whole actuarial table.",                        category: "legal",         effect: { recurring: -35, recurringTurns: 5 } },
+  { id: "e-185", title: "Pet Food Inflation",             desc: "Your pet's fancy kibble costs more now.",                            category: "pet",           effect: { recurring: -20, recurringTurns: 5 } },
+
+  // ─── A/B choice events — the heart of Tier 2 depth ────────────────────
+  // These events pause the engine and let the player pick between two outcomes.
+  // The AI picks the higher-EV option given days remaining.
+  { id: "e-200", title: "Side Project Pitch", desc: "A startup wants your idea. In or out?", category: "career",
+    choice: { options: [
+      { label: "Pitch it — pay $300 to incorporate",       effect: { immediate: -300, recurring: 80, recurringTurns: 5 } },
+      { label: "Keep it to yourself",                      effect: {} }
+    ]}},
+  { id: "e-201", title: "Friend's Wedding", desc: "Beautiful ceremony, expensive plane ticket.", category: "family",
+    choice: { options: [
+      { label: "Attend — $250, strengthen friendship",     effect: { immediate: -250, recurring: 30, recurringTurns: 5 } },
+      { label: "Send regrets",                             effect: {} }
+    ]}},
+  { id: "e-202", title: "Overtime Offer", desc: "Boss needs a crunch weekend.", category: "career",
+    choice: { options: [
+      { label: "Take it — +$300 but skip next turn",       effect: { immediate: 300, skipTurns: 1 } },
+      { label: "Decline",                                  effect: {} }
+    ]}},
+  { id: "e-203", title: "Risky Investment", desc: "A friend's hot tip. Your call.", category: "finance",
+    choice: { options: [
+      { label: "Go in for $300",                           effect: { immediate: -300, recurring: 80, recurringTurns: 4 } },
+      { label: "Pass",                                     effect: {} }
+    ]}},
+  { id: "e-204", title: "Family Emergency", desc: "They need help. Money or distance?", category: "family",
+    choice: { options: [
+      { label: "Help out — $400 upfront, $40/turn gratitude", effect: { immediate: -400, recurring: 40, recurringTurns: 5 } },
+      { label: "Can't afford it",                          effect: {} }
+    ]}},
+  { id: "e-205", title: "Gym Subscription", desc: "Annual or monthly? Marketing wants you to decide.", category: "health",
+    choice: { options: [
+      { label: "Annual — $150 upfront, cheaper long-run",  effect: { immediate: -150, recurring: 15, recurringTurns: 6 } },
+      { label: "Monthly — cheap start, pricey over time",  effect: { recurring: -40, recurringTurns: 5 } }
+    ]}},
+  { id: "e-206", title: "Job Offer", desc: "Another company's recruiting you.", category: "career",
+    choice: { options: [
+      { label: "Switch — $200 transition cost, +$60/turn", effect: { immediate: -200, recurring: 60, recurringTurns: 5 } },
+      { label: "Stay put",                                 effect: {} }
+    ]}},
+  { id: "e-207", title: "Stock Tip", desc: "A coworker swears this one's going up.", category: "finance",
+    choice: { options: [
+      { label: "Buy in for $200 (high risk, high reward)", effect: { immediate: -200, recurring: 70, recurringTurns: 4 } },
+      { label: "Ignore and keep working",                  effect: {} }
+    ]}},
+  { id: "e-208", title: "Fancy Wedding RSVP", desc: "Cousin's destination wedding.", category: "travel",
+    choice: { options: [
+      { label: "Attend — $350, worth the memories",        effect: { immediate: -350, recurring: 20, recurringTurns: 4 } },
+      { label: "Send a small gift",                        effect: { immediate: -50 } }
+    ]}},
+  { id: "e-209", title: "Car Upgrade Deal", desc: "Dealer's got a tempting trade-in offer.", category: "car",
+    choice: { options: [
+      { label: "Upgrade — $400, save on repairs",          effect: { immediate: -400, recurring: 30, recurringTurns: 6 } },
+      { label: "Keep the old clunker",                     effect: {} }
+    ]}},
+  { id: "e-210", title: "Real Estate Flip", desc: "A fixer-upper at a decent price.", category: "home",
+    choice: { options: [
+      { label: "Buy and flip — $500, payoff later",        effect: { immediate: -500, recurringPhases: [{ amount: -30, turns: 2 }, { amount: 120, turns: 4 }] } },
+      { label: "Too risky, pass",                          effect: {} }
+    ]}},
+  { id: "e-211", title: "Generous Stranger", desc: "Someone offers you a lottery ticket — or $50 cash.", category: "luck",
+    choice: { options: [
+      { label: "Take the cash",                            effect: { immediate: 50 } },
+      { label: "Take the ticket — maybe a jackpot?",       effect: { multiplier: 1 } } // resolved as gamble below
+    ]}},
+  { id: "e-212", title: "Night Out Invite", desc: "Friends want you out on the town.", category: "entertainment",
+    choice: { options: [
+      { label: "Go — $100, +$30/turn good vibes",          effect: { immediate: -100, recurring: 30, recurringTurns: 4 } },
+      { label: "Stay in",                                  effect: {} }
+    ]}},
+  { id: "e-213", title: "Certification Exam", desc: "Professional cert, paid out of pocket.", category: "education",
+    choice: { options: [
+      { label: "Take it — $200, +$50/turn for future hire-ability", effect: { immediate: -200, recurring: 50, recurringTurns: 5 } },
+      { label: "Skip for now",                             effect: {} }
+    ]}},
+  { id: "e-214", title: "Charity Drive", desc: "Local cause you care about is raising funds.", category: "nature",
+    choice: { options: [
+      { label: "Donate $150 — good karma",                 effect: { immediate: -150, recurring: 25, recurringTurns: 4 } },
+      { label: "Can't contribute this month",              effect: {} }
+    ]}}
 ];

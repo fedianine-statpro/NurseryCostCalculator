@@ -7,24 +7,33 @@ import {
   BANK_FEE_RATE,
   MAX_PERKS_HELD,
   MAX_PERK_DRAW_ATTEMPTS,
-  STARTING_BALANCE
+  STARTING_BALANCE,
+  COST_OF_LIVING
 } from "./state.js";
-import { applyEventEffect, applyWorkEffect, tickRecurringEffects, tickPerkPassives } from "./effects.js";
-import { rollD6 } from "./rng.js";
+import {
+  applyEventEffect,
+  applyWorkEffect,
+  tickRecurringEffects,
+  tickPerkPassives,
+  computeOverdraftFee,
+  clearRecurringByCategoryHint
+} from "./effects.js";
 
-// A single "beat" of the turn loop is represented as a sequence of events the UI
-// can animate. Each rule function pushes events onto a list and returns it.
+// Each turn advances the player exactly one day. The choice is:
+//   - WORK: take a modest, steady paycheck (low variance)
+//   - MOVE: draw an event card (high variance — could be great or catastrophic)
+//
+// The UI replays each rule-emitted event in order to animate the turn.
 //
 // Event shapes:
 //   { type: "turn-start",   playerId }
 //   { type: "recurring",    playerId, total, breakdown }
 //   { type: "perk-passive", playerId, total, breakdown }
 //   { type: "overdraft-fee",playerId, fee }
+//   { type: "advance",      playerId, from, to }
 //   { type: "work-drawn",   playerId, card, earned }
-//   { type: "dice-rolled",  playerId, roll, from, to }
-//   { type: "tile-landed",  playerId, tile }
 //   { type: "event-drawn",  playerId, card, summary }
-//   { type: "payday",       playerId, amount }
+//   { type: "finish",       playerId }
 //   { type: "perk-offered", playerId, card, affordable }
 //   { type: "perk-bought",  playerId, card }
 //   { type: "perk-skipped", playerId, reason }
@@ -44,6 +53,18 @@ export function beginPlayerTurn(state) {
     events.push({ type: "skip-turn", playerId: player.id });
     events.push(...endPlayerTurn(state));
     return events;
+  }
+
+  // Flat cost of living first — rent/groceries/utilities don't care about your hustle.
+  if (COST_OF_LIVING > 0) {
+    player.balance -= COST_OF_LIVING;
+    events.push({ type: "cost-of-living", playerId: player.id, amount: COST_OF_LIVING });
+    logEvent(state, {
+      actor: player.id,
+      text: `Cost of living: −$${COST_OF_LIVING}`,
+      kind: "sys",
+      delta: -COST_OF_LIVING
+    });
   }
 
   // Apply recurring effects then perk passives at the top of the turn.
@@ -70,14 +91,16 @@ export function beginPlayerTurn(state) {
   }
 
   // If the player is in debt, charge an overdraft fee and force work.
+  // Safety Net perk halves the fee.
   if (player.balance < 0) {
-    const fee = Math.floor(Math.abs(player.balance) * BANK_FEE_RATE);
+    const fee = computeOverdraftFee(player, BANK_FEE_RATE);
     if (fee > 0) {
       player.balance -= fee;
       events.push({ type: "overdraft-fee", playerId: player.id, fee });
+      const rateLabel = player.perks.some((p) => p.halveBankFee) ? "5%" : "10%";
       logEvent(state, {
         actor: player.id,
-        text: `Bank fee: −$${fee} (10% of debt)`,
+        text: `Bank fee: −$${fee} (${rateLabel} of debt)`,
         kind: "sys",
         delta: -fee
       });
@@ -88,9 +111,15 @@ export function beginPlayerTurn(state) {
   return events;
 }
 
+// Move is allowed as long as the player isn't in debt and hasn't finished yet.
+// In debt? You're forced to work until you're back in the black.
 export function canMove(state) {
   const player = activePlayer(state);
   return player.balance >= 0 && player.position < state.totalDays;
+}
+export function canWork(state) {
+  const player = activePlayer(state);
+  return player.position < state.totalDays;
 }
 export function canDrawPerk(state) {
   const player = activePlayer(state);
@@ -102,19 +131,61 @@ export function canDrawPerk(state) {
   );
 }
 
+// Advance the active player by one day. Returns the "advance" event entry.
+function advanceOneDay(state, player) {
+  const from = player.position;
+  const to = Math.min(state.totalDays, from + 1);
+  player.position = to;
+  return { type: "advance", playerId: player.id, from, to };
+}
+
 export function doWork(state) {
   const events = [];
   const player = activePlayer(state);
+  if (!canWork(state)) return events;
+
+  // Advance first so the player moves onto the day as they work it.
+  events.push(advanceOneDay(state, player));
+
   const card = drawFrom(state, "work");
-  const { earned } = applyWorkEffect(state, player, card);
+  const { earned } = applyWorkEffect(state, player, card, state.rng);
   discardTo(state, "work", card);
-  events.push({ type: "work-drawn", playerId: player.id, card, earned });
+  player.workCardsDrawn = (player.workCardsDrawn || 0) + 1;
+
+  // Work streak bonus: three consecutive Work turns pays a +$100 kicker.
+  player.consecutiveWorkTurns = (player.consecutiveWorkTurns || 0) + 1;
+  let streakBonus = 0;
+  if (player.consecutiveWorkTurns >= 3) {
+    streakBonus = 100;
+    player.balance += streakBonus;
+    player.consecutiveWorkTurns = 0; // reset after paying out
+    logEvent(state, { actor: player.id, text: `${player.name} hit a work streak! +$100`, kind: "sys", delta: streakBonus });
+  }
+
+  // Weekend Warrior perk: bonus on weekend tiles
+  const tile = state.board[player.position - 1];
+  if (tile?.type === "weekend") {
+    for (const perk of player.perks) {
+      if (perk.weekendBonus) {
+        player.balance += perk.weekendBonus;
+        logEvent(state, { actor: player.id, text: `${perk.title}: +$${perk.weekendBonus}`, kind: "sys", delta: perk.weekendBonus });
+      }
+    }
+  }
+
+  events.push({ type: "work-drawn", playerId: player.id, card, earned, streakBonus });
   logEvent(state, {
     actor: player.id,
     text: `${player.name} worked as ${card.title}.`,
     kind: player.id,
     delta: earned
   });
+
+  if (player.position >= state.totalDays) {
+    events.push({ type: "finish", playerId: player.id });
+    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: "sys" });
+  }
+
   events.push(...endPlayerTurn(state));
   return events;
 }
@@ -124,59 +195,166 @@ export function doMove(state) {
   const player = activePlayer(state);
   if (!canMove(state)) return events;
 
-  const roll = rollD6(state.rng);
-  const from = player.position;
-  const to = Math.min(state.totalDays, from + roll);
-  player.position = to;
-  events.push({ type: "dice-rolled", playerId: player.id, roll, from, to });
+  // Choosing Move breaks the work-streak counter.
+  player.consecutiveWorkTurns = 0;
 
-  const tile = state.board[to - 1];
-  events.push({ type: "tile-landed", playerId: player.id, tile });
+  events.push(advanceOneDay(state, player));
 
-  // Handle tile effect
-  if (tile.type === "event") {
-    const card = drawFrom(state, "event");
-    const summary = applyEventEffect(state, player, card, state.rng);
-    discardTo(state, "event", card);
-    events.push({ type: "event-drawn", playerId: player.id, card, summary });
-
-    const logParts = [`${player.name} drew “${card.title}”.`];
-    if (summary.appliedPerks.length) logParts.push(summary.appliedPerks.join(", "));
-    logEvent(state, {
-      actor: player.id,
-      text: logParts.join(" "),
-      kind: player.id,
-      delta: summary.balanceDelta || undefined
-    });
-  } else if (tile.type === "payday") {
-    player.balance += tile.paydayAmount;
-    events.push({ type: "payday", playerId: player.id, amount: tile.paydayAmount });
-    logEvent(state, {
-      actor: player.id,
-      text: `${player.name} hit a payday tile.`,
-      kind: player.id,
-      delta: tile.paydayAmount
-    });
-  } else if (tile.type === "finish") {
-    logEvent(state, {
-      actor: player.id,
-      text: `${player.name} reached Day 31!`,
-      kind: "sys"
-    });
-  } else {
-    logEvent(state, {
-      actor: player.id,
-      text: `${player.name} rolled ${roll} and landed on Day ${to}.`,
-      kind: player.id
-    });
+  // Weekend Warrior perk: bonus on weekend tiles (also fires on Move)
+  const landedTile = state.board[player.position - 1];
+  if (landedTile?.type === "weekend") {
+    for (const perk of player.perks) {
+      if (perk.weekendBonus) {
+        player.balance += perk.weekendBonus;
+        logEvent(state, { actor: player.id, text: `${perk.title}: +$${perk.weekendBonus}`, kind: "sys", delta: perk.weekendBonus });
+      }
+    }
   }
+
+  // The final tile is safe — reaching day 31 shouldn't trigger one last event draw.
+  if (player.position >= state.totalDays) {
+    events.push({ type: "finish", playerId: player.id });
+    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: "sys" });
+    events.push(...endPlayerTurn(state));
+    return events;
+  }
+
+  // Weekend tile: pause for a mini-choice (chill / eat out / weekend job) before the event card.
+  if (landedTile?.type === "weekend") {
+    state.phase = "weekend-choice";
+    state.pendingWeekendChoice = { playerId: player.id };
+    events.push({ type: "weekend-choice-needed", playerId: player.id });
+    return events;
+  }
+
+  // Otherwise moving is the risky action — always draw an event card.
+  const card = drawFrom(state, "event");
+
+  // A/B choice cards pause the engine; caller must call resolveEventChoice.
+  if (card.choice && Array.isArray(card.choice.options) && card.choice.options.length >= 2) {
+    state.phase = "event-choice";
+    state.pendingEventChoice = { card, playerId: player.id };
+    events.push({ type: "event-choice-needed", playerId: player.id, card });
+    return events;
+  }
+
+  const summary = applyEventEffect(state, player, card, state.rng);
+  discardTo(state, "event", card);
+  player.eventCardsDrawn = (player.eventCardsDrawn || 0) + 1;
+  if (player.balance < 0) player.wentBelowZero = true;
+  events.push({ type: "event-drawn", playerId: player.id, card, summary });
+
+  const logParts = [`${player.name} drew “${card.title}”.`];
+  if (summary.appliedPerks.length) logParts.push(summary.appliedPerks.join(", "));
+  logEvent(state, {
+    actor: player.id,
+    text: logParts.join(" "),
+    kind: player.id,
+    delta: summary.balanceDelta || undefined
+  });
 
   events.push(...endPlayerTurn(state));
   return events;
 }
 
-// Attempt to draw a perk. Returns an event with the perk card offered.
-// The caller should then call `buyPerk(state)` or `declinePerk(state)`.
+// The 3 weekend-choice options offered on weekend tiles.
+export const WEEKEND_OPTIONS = [
+  { id: "chill",   label: "Chill",         hint: "Nothing happens.",            effect: {} },
+  { id: "eatout",  label: "Eat out",       hint: "−$40 now, +$25/turn × 3.",    effect: { immediate: -40, recurring: 25, recurringTurns: 3 } },
+  { id: "weekend", label: "Weekend job",   hint: "+$150 now, skip next turn.",  effect: { immediate: 150, skipTurns: 1 } }
+];
+
+// Apply a weekend-choice (0-2), then continue with drawing an event card
+// and ending the turn.
+export function resolveWeekendChoice(state, optionIndex = 0) {
+  const events = [];
+  const pending = state.pendingWeekendChoice;
+  if (!pending) return events;
+  const player = state.players.find((p) => p.id === pending.playerId);
+  const option = WEEKEND_OPTIONS[optionIndex] || WEEKEND_OPTIONS[0];
+
+  const chosenCard = {
+    title: `Weekend — ${option.label}`,
+    category: "entertainment",
+    effect: option.effect
+  };
+  const summary = applyEventEffect(state, player, chosenCard, state.rng);
+  logEvent(state, {
+    actor: player.id,
+    text: `${player.name}'s weekend: ${option.label}.`,
+    kind: player.id,
+    delta: summary.balanceDelta || undefined
+  });
+  events.push({ type: "weekend-chosen", playerId: player.id, option });
+
+  state.pendingWeekendChoice = null;
+  state.phase = "awaiting-action";
+
+  // Now continue with an event-card draw as the Move normally would
+  const card = drawFrom(state, "event");
+  if (card.choice && Array.isArray(card.choice.options) && card.choice.options.length >= 2) {
+    state.phase = "event-choice";
+    state.pendingEventChoice = { card, playerId: player.id };
+    events.push({ type: "event-choice-needed", playerId: player.id, card });
+    return events;
+  }
+  const eventSummary = applyEventEffect(state, player, card, state.rng);
+  discardTo(state, "event", card);
+  player.eventCardsDrawn = (player.eventCardsDrawn || 0) + 1;
+  if (player.balance < 0) player.wentBelowZero = true;
+  events.push({ type: "event-drawn", playerId: player.id, card, summary: eventSummary });
+  const logParts = [`${player.name} drew “${card.title}”.`];
+  if (eventSummary.appliedPerks.length) logParts.push(eventSummary.appliedPerks.join(", "));
+  logEvent(state, {
+    actor: player.id,
+    text: logParts.join(" "),
+    kind: player.id,
+    delta: eventSummary.balanceDelta || undefined
+  });
+  events.push(...endPlayerTurn(state));
+  return events;
+}
+
+// Resolve an event-choice card (A/B). optionIndex picks which option's effect
+// to apply. Discards the card, then ends the turn as normal.
+export function resolveEventChoice(state, optionIndex = 0) {
+  const events = [];
+  const pending = state.pendingEventChoice;
+  if (!pending) return events;
+  const player = state.players.find((p) => p.id === pending.playerId);
+  const card = pending.card;
+  const option = card.choice.options[optionIndex] || card.choice.options[0];
+
+  // Synthesize a card-like object with the chosen option's effect
+  const chosenCard = {
+    title: `${card.title} — ${option.label}`,
+    category: card.category,
+    effect: option.effect
+  };
+  const summary = applyEventEffect(state, player, chosenCard, state.rng);
+
+  discardTo(state, "event", card);
+  player.eventCardsDrawn = (player.eventCardsDrawn || 0) + 1;
+  if (player.balance < 0) player.wentBelowZero = true;
+
+  events.push({ type: "event-drawn", playerId: player.id, card: chosenCard, summary });
+  const logParts = [`${player.name} chose: ${option.label}`];
+  if (summary.appliedPerks.length) logParts.push(summary.appliedPerks.join(", "));
+  logEvent(state, {
+    actor: player.id,
+    text: logParts.join(" "),
+    kind: player.id,
+    delta: summary.balanceDelta || undefined
+  });
+
+  state.pendingEventChoice = null;
+  state.phase = "awaiting-action";
+  events.push(...endPlayerTurn(state));
+  return events;
+}
+
+// Attempt to draw perks — shows 3 options so the choice is strategic, not RNG.
+// The caller then calls resolvePerkOffer with { decision, chosenIndex }.
 export function drawPerk(state) {
   const events = [];
   const player = activePlayer(state);
@@ -184,21 +362,31 @@ export function drawPerk(state) {
 
   player.perkDrawAttempts += 1;
   player.hasDrawnPerkThisTurn = true;
-  const card = drawFrom(state, "perk");
-  const affordable = player.balance >= card.cost;
+  const cards = [];
+  const drawCount = Math.min(3, state.decks.perk.length + state.discards.perk.length);
+  for (let i = 0; i < drawCount; i++) {
+    const c = drawFrom(state, "perk");
+    if (c) cards.push(c);
+  }
   state.phase = "perk-offer";
-  state.pendingPerkOffer = { card, playerId: player.id };
-  events.push({ type: "perk-offered", playerId: player.id, card, affordable });
+  state.pendingPerkOffer = { cards, playerId: player.id };
+  events.push({ type: "perk-offered", playerId: player.id, cards });
   return events;
 }
 
-// Actually buy (or decline) the offered perk. Returns more events.
-export function resolvePerkOffer(state, decision /* "buy" | "pass" */) {
+// Resolve the choice. `decision` is "buy" or "pass". `chosenIndex` selects
+// which of the 3 offered perks to act on (only meaningful on "buy").
+// Unchosen cards return to the bottom of the perk deck for later draws.
+export function resolvePerkOffer(state, arg /* "buy"|"pass" | { decision, chosenIndex } */) {
   const events = [];
   const offer = state.pendingPerkOffer;
   if (!offer) return events;
+
+  const decision = typeof arg === "string" ? arg : arg.decision;
+  const chosenIndex = typeof arg === "string" ? 0 : (arg.chosenIndex ?? 0);
   const player = state.players.find((p) => p.id === offer.playerId);
-  const card = offer.card;
+  const offered = offer.cards || [];
+  const card = offered[chosenIndex] || offered[0];
 
   if (decision === "buy" && player.balance >= card.cost) {
     player.balance -= card.cost;
@@ -213,6 +401,17 @@ export function resolvePerkOffer(state, decision /* "buy" | "pass" */) {
     if (card.skipOnBuy) {
       player.skipTurnsRemaining += card.skipOnBuy;
     }
+    // Clear matching negative recurring on buy (Student Loan Angel Investor)
+    if (card.clearNegativeRecurringCategory) {
+      const removed = clearRecurringByCategoryHint(player, card.clearNegativeRecurringCategory);
+      if (removed > 0) {
+        logEvent(state, {
+          actor: player.id,
+          text: `${card.title} cleared ${removed} lingering ${card.clearNegativeRecurringCategory} debt${removed > 1 ? "s" : ""}.`,
+          kind: "sys"
+        });
+      }
+    }
 
     events.push({ type: "perk-bought", playerId: player.id, card });
     logEvent(state, {
@@ -221,12 +420,17 @@ export function resolvePerkOffer(state, decision /* "buy" | "pass" */) {
       kind: player.id,
       delta: (card.oneTimeBonus || 0) - card.cost
     });
+    // Return the other two unchosen perks to the bottom of the deck
+    for (let i = 0; i < offered.length; i++) {
+      if (i !== chosenIndex) state.decks.perk.unshift(offered[i]);
+    }
   } else {
-    discardTo(state, "perk", card);
+    // Pass — discard all three
+    for (const c of offered) discardTo(state, "perk", c);
     events.push({ type: "perk-skipped", playerId: player.id, reason: decision });
     logEvent(state, {
       actor: player.id,
-      text: `${player.name} passed on “${card.title}”.`,
+      text: `${player.name} passed on the perk offers.`,
       kind: player.id
     });
   }

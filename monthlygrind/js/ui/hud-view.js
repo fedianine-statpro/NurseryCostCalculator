@@ -41,6 +41,17 @@ export function renderHud(state) {
   document.documentElement.style.setProperty("--mood-hue", moodHue);
   document.querySelector(".mood-backdrop")?.style.setProperty("--mood-hue", moodHue);
 
+  // Deck counters (remaining + discard pool, since decks reshuffle)
+  const eCount = state.decks.event.length + state.discards.event.length;
+  const wCount = state.decks.work.length + state.discards.work.length;
+  const pCount = state.decks.perk.length + state.discards.perk.length;
+  const eEl = $("deck-count-event");
+  const wEl = $("deck-count-work");
+  const pEl = $("deck-count-perk");
+  if (eEl) eEl.textContent = eCount;
+  if (wEl) wEl.textContent = wCount;
+  if (pEl) pEl.textContent = pCount;
+
   updateControls(state);
 }
 
@@ -66,7 +77,7 @@ export function updateControls(state) {
   if (inDebt) {
     hint.textContent = "You're in the red — you must work this turn.";
   } else {
-    hint.textContent = "Your turn — work, move, or try a perk.";
+    hint.textContent = "Your turn — play it safe or live it up?";
   }
 
   $("btn-work").disabled = state.phase !== "awaiting-action";
