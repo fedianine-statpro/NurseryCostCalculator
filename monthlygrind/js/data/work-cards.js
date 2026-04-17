@@ -65,7 +65,18 @@ export const WORK_CARDS = [
   { id: "w-horticulturist", title: "Horticulturist", flavor: "Grew a rare flower bought by a collector.", income: 120, category: "nature" },
   { id: "w-massage", title: "Massage Therapist", flavor: "High-profile client tipped generously.", income: 115, category: "health" },
   { id: "w-pilot", title: "Pilot", flavor: "Flew a charter flight for VIPs; smooth journey.", income: 190, category: "travel" },
-  { id: "w-ranger", title: "Wildlife Ranger", flavor: "Rescued endangered wildlife for a conservation fund.", income: 130, category: "nature" }
+  { id: "w-ranger", title: "Wildlife Ranger", flavor: "Rescued endangered wildlife for a conservation fund.", income: 130, category: "nature" },
+
+  // ─── Work risk cards — the reason you can't just Work on autopilot ───────
+  // ~9% of the deck has zero-or-negative outcomes: three layoff-style $0 cards,
+  // one reduced-shift card, a mild fine, and the rare $180 "hacked" hit.
+  // Keeps Work from being a guaranteed paycheck without making it unplayable.
+  { id: "w-laid-off",      title: "Laid Off",              flavor: "Economic downturn — your role was cut. No pay this week.",             income: 0,    category: "career" },
+  { id: "w-fired",         title: "Fired",                 flavor: "The boss said it just isn't working out. No severance.",               income: 0,    category: "career" },
+  { id: "w-sick-day",      title: "Sick Day",              flavor: "Down with a nasty flu. You rest at home and clock zero hours.",        income: 0,    category: "health" },
+  { id: "w-short-shift",   title: "Short Shift",           flavor: "Slow day — the manager sent you home early.",                          income: 60,   category: "career" },
+  { id: "w-parking-fine",  title: "Parking Fine at Work",  flavor: "You parked in the wrong spot — the fine ate most of your shift.",     income: -30,  category: "car" },
+  { id: "w-hacked",        title: "Company Hacked",        flavor: "A phishing link you clicked exposed the whole team. You're billed for incident response.", income: -180, category: "career" }
 ];
 
 // Quick sanity check exposed in dev tools: `console.log(WORK_CARDS.length)` should be 62.

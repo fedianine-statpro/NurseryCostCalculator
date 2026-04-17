@@ -10,7 +10,7 @@ export const MAX_PERK_DRAW_ATTEMPTS = 2;
 export const BANK_FEE_RATE = 0.1;
 // Flat living expenses paid at the start of each of the player's turns
 // (rent, groceries, utilities). Creates the base pressure that makes budgeting matter.
-export const COST_OF_LIVING = 115;
+export const COST_OF_LIVING = 105;
 // Perks are *earned*: the player must have chosen Work this many times before
 // their first and second perk draws unlock. Rewards work-heavy strategies.
 export const PERK_WORK_GATES = [5, 10];

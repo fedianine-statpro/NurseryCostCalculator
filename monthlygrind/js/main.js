@@ -202,7 +202,7 @@ async function replayEvents(events) {
       }
       case "work-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "work", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "work", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you", owner: ownerFor(ev.playerId) });
         if (ev.earned > 0) sfxCoin(true);
         renderHud(state);
         break;
@@ -222,7 +222,7 @@ async function replayEvents(events) {
       }
       case "event-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 10000, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 10000, manualDismiss: ev.playerId === "you", owner: ownerFor(ev.playerId) });
         if (ev.summary.balanceDelta > 0) sfxCoin(true);
         else if (ev.summary.balanceDelta < 0) sfxCoin(false);
         renderHud(state);
@@ -278,7 +278,7 @@ async function replayEvents(events) {
       }
       case "perk-bought": {
         sfxCoin(true);
-        await presentCard({ kind: "perk", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "perk", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you", owner: ownerFor(ev.playerId) });
         renderHud(state);
         break;
       }
@@ -303,6 +303,11 @@ async function replayEvents(events) {
 
 function delay(ms) {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+function ownerFor(playerId) {
+  const p = state?.players?.find((pl) => pl.id === playerId);
+  return p ? { id: p.id, name: p.name } : null;
 }
 
 function updateSoundIcon() {

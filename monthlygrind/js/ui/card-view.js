@@ -14,10 +14,11 @@ async function fetchIcon(slug) {
 
 // Show a card centered on screen.
 //   kind:          "event" | "work" | "perk"
+//   owner:         { id: "you"|"ai", name: string } — colored badge in header
 //   manualDismiss: if true, only a click/keypress dismisses (human-triggered)
 //                  if false, auto-dismisses after `duration` ms (AI turns)
 //   duration:      auto-dismiss delay (ignored when manualDismiss is true)
-export async function presentCard({ kind, card, summary, duration = 1800, manualDismiss = false }) {
+export async function presentCard({ kind, card, summary, duration = 1800, manualDismiss = false, owner = null }) {
   const stage = cardStageEl();
   stage.innerHTML = "";
   stage.classList.add("is-visible");
@@ -28,6 +29,7 @@ export async function presentCard({ kind, card, summary, duration = 1800, manual
 
   const el = document.createElement("article");
   el.className = `card card--${kind}`;
+  if (owner?.id) el.dataset.owner = owner.id;
   el.dataset.category = categoryKey;
 
   const kindLabel = { event: "Event card", work: "Work card", perk: "Perk card" }[kind] || "Card";
@@ -35,10 +37,23 @@ export async function presentCard({ kind, card, summary, duration = 1800, manual
   const effectChips = buildEffectChips(kind, card, summary);
   const flavor = kind === "work" ? (card.flavor || "") : (card.desc || card.flavor || "");
   const priceTag = kind === "perk" ? `<div class="card__price">$${card.cost}</div>` : "";
-  const workAmount = kind === "work" && card.income > 0 ? `<div class="card__price">+$${card.income}</div>` : "";
+  let workAmount = "";
+  if (kind === "work") {
+    if (card.income > 0) workAmount = `<div class="card__price card__price--gain">+$${card.income}</div>`;
+    else if (card.income < 0) workAmount = `<div class="card__price card__price--loss">−$${Math.abs(card.income)}</div>`;
+    else workAmount = `<div class="card__price card__price--zero">$0</div>`;
+  }
+
+  const ownerBadge = owner
+    ? `<div class="card__owner" data-owner="${owner.id}">
+         <span class="card__owner-dot" aria-hidden="true"></span>
+         <span class="card__owner-name">${escapeHtml(owner.name)}</span>
+       </div>`
+    : "";
 
   el.innerHTML = `
     <header class="card__header">
+      ${ownerBadge}
       <div class="card__kind">${kindLabel} · ${cat.label}</div>
       <div class="card__icon-wrap">
         ${iconMarkup}
