@@ -24,9 +24,9 @@ export async function presentCard({ kind, card, summary, duration = 1800, manual
   stage.innerHTML = "";
   stage.classList.add("is-visible");
 
-  // Auto-advance setting overrides the manual-dismiss request for user cards.
-  // Pick a shorter duration so the player can keep clicking through.
-  if (manualDismiss && isAutoAdvance()) {
+  // Auto-advance setting: skip the Continue click on user cards AND shorten
+  // the (already auto-dismissing) rival cards to the same snappy duration.
+  if (isAutoAdvance()) {
     manualDismiss = false;
     duration = 1800;
   }
