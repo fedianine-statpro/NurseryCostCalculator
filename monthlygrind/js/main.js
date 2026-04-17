@@ -26,6 +26,7 @@ import { renderLog } from "./ui/diary-view.js";
 import { openModal, closeModal, wireDismissable, showPerkOffer, showEventChoice, showWeekendChoice, showEndGame } from "./ui/modal-view.js";
 import { sfxDice, sfxCoin, sfxCardFlip, sfxWin, sfxLose, sfxOverdraft, sfxTick, toggleSound, isSoundOn } from "./ui/sound.js";
 import { maybeShowEndMonthBanner, resetBannerState } from "./ui/banner.js";
+import { isAutoAdvance, toggleAutoAdvance } from "./ui/settings.js";
 
 let state;
 let running = false; // input lock while a turn is animating
@@ -38,6 +39,7 @@ async function startGame() {
   renderHud(state);
   renderLog(state);
   updateSoundIcon();
+  updateAutoAdvanceIcon();
   resetBannerState();
   running = false;
   // kick off the first turn
@@ -313,6 +315,15 @@ function ownerFor(playerId) {
 function updateSoundIcon() {
   document.getElementById("sound-icon").textContent = isSoundOn() ? "🔊" : "🔇";
 }
+function updateAutoAdvanceIcon() {
+  const btn = document.getElementById("auto-advance-toggle");
+  const icon = document.getElementById("auto-advance-icon");
+  if (!btn || !icon) return;
+  const on = isAutoAdvance();
+  icon.textContent = on ? "⏩" : "⏸️";
+  btn.setAttribute("aria-pressed", on ? "true" : "false");
+  btn.title = on ? "Auto-advance: ON — your cards will skip after ~2s" : "Auto-advance: OFF — your cards wait for Continue click";
+}
 
 function wireControls() {
   document.getElementById("btn-work").addEventListener("click", humanWork);
@@ -335,6 +346,10 @@ function wireControls() {
   document.getElementById("sound-toggle").addEventListener("click", () => {
     toggleSound();
     updateSoundIcon();
+  });
+  document.getElementById("auto-advance-toggle").addEventListener("click", () => {
+    toggleAutoAdvance();
+    updateAutoAdvanceIcon();
   });
 
   window.addEventListener("keydown", (e) => {

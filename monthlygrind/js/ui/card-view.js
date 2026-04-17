@@ -1,4 +1,5 @@
 import { getCategory } from "../data/categories.js";
+import { isAutoAdvance } from "./settings.js";
 
 const cardStageEl = () => document.getElementById("card-stage");
 const iconCache = new Map();
@@ -22,6 +23,13 @@ export async function presentCard({ kind, card, summary, duration = 1800, manual
   const stage = cardStageEl();
   stage.innerHTML = "";
   stage.classList.add("is-visible");
+
+  // Auto-advance setting overrides the manual-dismiss request for user cards.
+  // Pick a shorter duration so the player can keep clicking through.
+  if (manualDismiss && isAutoAdvance()) {
+    manualDismiss = false;
+    duration = 1800;
+  }
 
   const categoryKey = card.category || "luck";
   const cat = getCategory(categoryKey);
