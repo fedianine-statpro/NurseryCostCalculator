@@ -17,7 +17,7 @@ import {
 import { initBoard, placeAllPawns, placePawn, hopPawn, highlightTile, showDice, relayoutOnResize } from "./ui/board-view.js";
 import { presentCard } from "./ui/card-view.js";
 import { renderHud, updateControls } from "./ui/hud-view.js";
-import { renderLog } from "./ui/log-view.js";
+import { renderLog } from "./ui/diary-view.js";
 import { openModal, closeModal, wireDismissable, showPerkOffer, showEndGame } from "./ui/modal-view.js";
 import { sfxDice, sfxCoin, sfxCardFlip, sfxWin, sfxLose, toggleSound, isSoundOn } from "./ui/sound.js";
 
