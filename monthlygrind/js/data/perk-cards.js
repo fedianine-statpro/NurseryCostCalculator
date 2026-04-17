@@ -2,6 +2,10 @@
 // Source: all 31 from Documentation/Perk Cards.md + 5 new ones designed to
 // fill strategic gaps. Numbers rebalanced for taut budget-sim feel.
 //
+// COST_INFLATION is applied at the end of this module — lets us retune the
+// economy without editing 36 individual cost fields. Perks should feel earned,
+// not auto-bought, so the base cost is nudged above the $1,000 starting bank.
+//
 // Shape:
 //   id, title, desc, cost, category, icon
 //   oneTimeBonus:         $ paid immediately on purchase
@@ -19,7 +23,9 @@
 //   absorbBigLoss:        once, converts any single immediate loss >= $300 to 0; then consumed
 //   clearNegativeRecurringCategory: categoryKey — on buy, removes active negative recurring of this category
 
-export const PERK_CARDS = [
+const COST_INFLATION = 500; // flat $ added — perks feel premium without being unreachable
+
+const PERK_CARDS_RAW = [
   // ─── Rebalanced existing (documented) ──────────────────────────────────
   { id: "p-child-care",    title: "All-Care Child Care Voucher",       cost: 400, category: "family",
     desc: "Eliminates child care expenses and pays a $200 parental bonus.",
@@ -203,6 +209,9 @@ export const PERK_CARDS = [
     icon: "sparkles",
     absorbBigLoss: true }
 ];
+
+// Apply the flat cost inflation so perks are unaffordable from the $1,000 start.
+export const PERK_CARDS = PERK_CARDS_RAW.map((p) => ({ ...p, cost: p.cost + COST_INFLATION }));
 
 export function perkById(id) {
   return PERK_CARDS.find((p) => p.id === id);

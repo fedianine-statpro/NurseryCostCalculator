@@ -8,8 +8,22 @@ import {
   MAX_PERKS_HELD,
   MAX_PERK_DRAW_ATTEMPTS,
   STARTING_BALANCE,
-  COST_OF_LIVING
+  COST_OF_LIVING,
+  PERK_WORK_GATES
 } from "./state.js";
+
+// How many work actions the active player still needs before their next
+// perk draw unlocks. Returns 0 if already unlocked, or Infinity if they
+// have used both lifetime draws.
+export function worksNeededForNextPerk(state) {
+  const p = activePlayer(state);
+  if (!p) return Infinity;
+  const nextAttempt = p.perkDrawAttempts;
+  if (nextAttempt >= MAX_PERK_DRAW_ATTEMPTS) return Infinity;
+  const required = PERK_WORK_GATES[nextAttempt] || 0;
+  const done = p.workCardsDrawn || 0;
+  return Math.max(0, required - done);
+}
 import {
   applyEventEffect,
   applyWorkEffect,
@@ -123,12 +137,14 @@ export function canWork(state) {
 }
 export function canDrawPerk(state) {
   const player = activePlayer(state);
-  return (
-    player.perkDrawAttempts < MAX_PERK_DRAW_ATTEMPTS &&
-    !player.hasDrawnPerkThisTurn &&
-    player.perks.length < MAX_PERKS_HELD &&
-    state.phase === "awaiting-action"
-  );
+  if (player.perkDrawAttempts >= MAX_PERK_DRAW_ATTEMPTS) return false;
+  if (player.hasDrawnPerkThisTurn) return false;
+  if (player.perks.length >= MAX_PERKS_HELD) return false;
+  if (state.phase !== "awaiting-action") return false;
+  // Work-gate: you must have clocked in the required number of workdays.
+  const required = PERK_WORK_GATES[player.perkDrawAttempts] || 0;
+  if ((player.workCardsDrawn || 0) < required) return false;
+  return true;
 }
 
 // Advance the active player by one day. Returns the "advance" event entry.

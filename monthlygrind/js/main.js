@@ -202,7 +202,7 @@ async function replayEvents(events) {
       }
       case "work-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "work", card: ev.card, duration: 1500, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "work", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you" });
         if (ev.earned > 0) sfxCoin(true);
         renderHud(state);
         break;
@@ -222,7 +222,7 @@ async function replayEvents(events) {
       }
       case "event-drawn": {
         sfxCardFlip();
-        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 2100, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "event", card: ev.card, summary: ev.summary, duration: 10000, manualDismiss: ev.playerId === "you" });
         if (ev.summary.balanceDelta > 0) sfxCoin(true);
         else if (ev.summary.balanceDelta < 0) sfxCoin(false);
         renderHud(state);
@@ -278,7 +278,7 @@ async function replayEvents(events) {
       }
       case "perk-bought": {
         sfxCoin(true);
-        await presentCard({ kind: "perk", card: ev.card, duration: 1500, manualDismiss: ev.playerId === "you" });
+        await presentCard({ kind: "perk", card: ev.card, duration: 10000, manualDismiss: ev.playerId === "you" });
         renderHud(state);
         break;
       }

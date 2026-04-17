@@ -4,7 +4,6 @@
   display: none;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
   z-index: 50;
 }
 .card-stage.is-visible { display: flex; }

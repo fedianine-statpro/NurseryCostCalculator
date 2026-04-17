@@ -9,14 +9,13 @@ import { canMove, canDrawPerk } from "./rules.js";
 // Heuristics are intentionally light so the AI feels human-ish, not optimal.
 
 export function aiDecideDrawPerk(state) {
-  if (!canDrawPerk(state)) return false;
+  if (!canDrawPerk(state)) return false; // includes the work-gate
   const p = activePlayer(state);
   const daysLeft = state.totalDays - p.position;
   // Never draw a perk too late — it likely won't pay itself back
-  if (daysLeft < 8) return false;
-  // Only draw if we have budget to seriously consider buying (cheapest perk is $300)
-  if (p.balance < 650) return false;
-  // Don't draw if we're still holding 2 perks
+  if (daysLeft < 6) return false;
+  // Cheapest perk is now $800+; don't bother drawing unless we can meaningfully spend
+  if (p.balance < 900) return false;
   if (p.perks.length >= MAX_PERKS_HELD) return false;
   // Around 55% likelihood when all gates pass — some variance keeps games fresh
   return state.rng() < 0.55;

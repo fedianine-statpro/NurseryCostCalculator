@@ -1,5 +1,5 @@
 import { getCategory } from "../data/categories.js";
-import { canMove, canDrawPerk } from "../engine/rules.js";
+import { canMove, canDrawPerk, worksNeededForNextPerk } from "../engine/rules.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -16,7 +16,8 @@ export function renderHud(state) {
 
     $(`position-${player.id}`).textContent = `Day ${player.position}`;
     const drawsLeft = Math.max(0, 2 - player.perkDrawAttempts);
-    $(`perks-remaining-${player.id}`).textContent = drawsLeft === 1 ? "1 perk draw" : `${drawsLeft} perk draws`;
+    const gateLabel = perksGateLabel(player, drawsLeft);
+    $(`perks-remaining-${player.id}`).textContent = gateLabel;
 
     // perks list
     const list = $(`perks-${player.id}`);
@@ -83,9 +84,33 @@ export function updateControls(state) {
   $("btn-work").disabled = state.phase !== "awaiting-action";
   $("btn-move").disabled = state.phase !== "awaiting-action" || !canMove(state);
   $("btn-perk").disabled = !canDrawPerk(state);
+
+  // Perk button hint: show draws-left when unlocked, else a lock gate.
   const activePlayer = state.players.find((p) => p.id === state.activePlayerId);
   const drawsLeft = Math.max(0, 2 - (activePlayer?.perkDrawAttempts || 0));
-  $("perk-draws-left").textContent = drawsLeft;
+  const label = $("perk-draws-left");
+  if (drawsLeft === 0) {
+    label.textContent = "0 left";
+  } else {
+    const needed = worksNeededForNextPerk(state);
+    if (needed > 0 && activePlayer?.isHuman) {
+      label.textContent = `🔒 work ${needed}×`;
+    } else {
+      label.textContent = `${drawsLeft} left`;
+    }
+  }
+}
+
+// Label for the "perks remaining" slot on each player card.
+// Shows the work-gate hint when relevant.
+function perksGateLabel(player, drawsLeft) {
+  if (drawsLeft === 0) return "Perks maxed";
+  const GATES = [5, 10];
+  const required = GATES[player.perkDrawAttempts] || 0;
+  const done = player.workCardsDrawn || 0;
+  const needed = Math.max(0, required - done);
+  if (needed > 0) return `🔒 ${done}/${required} workdays`;
+  return drawsLeft === 1 ? "1 perk unlocked" : `${drawsLeft} perks unlocked`;
 }
 
 function animateBalance(el, from, to) {
