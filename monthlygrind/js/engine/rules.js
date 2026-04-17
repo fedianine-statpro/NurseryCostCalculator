@@ -63,7 +63,7 @@ export function beginPlayerTurn(state) {
   // If the player is skipping, burn a skip token and end the turn.
   if (player.skipTurnsRemaining > 0) {
     player.skipTurnsRemaining -= 1;
-    logEvent(state, { actor: player.id, text: `${player.name} sits this turn out.`, kind: "sys" });
+    logEvent(state, { actor: player.id, text: `${player.name} sits this turn out.`, kind: player.id });
     events.push({ type: "skip-turn", playerId: player.id });
     events.push(...endPlayerTurn(state));
     return events;
@@ -75,8 +75,8 @@ export function beginPlayerTurn(state) {
     events.push({ type: "cost-of-living", playerId: player.id, amount: COST_OF_LIVING });
     logEvent(state, {
       actor: player.id,
-      text: `Cost of living: −$${COST_OF_LIVING}`,
-      kind: "sys",
+      text: `${player.name}: cost of living −$${COST_OF_LIVING}`,
+      kind: player.id,
       delta: -COST_OF_LIVING
     });
   }
@@ -87,8 +87,8 @@ export function beginPlayerTurn(state) {
     events.push({ type: "recurring", playerId: player.id, ...recurring });
     logEvent(state, {
       actor: player.id,
-      text: `Ongoing effects: ${formatMoney(recurring.total)}`,
-      kind: "sys",
+      text: `${player.name}: ongoing effects ${formatMoney(recurring.total)}`,
+      kind: player.id,
       delta: recurring.total
     });
   }
@@ -98,8 +98,8 @@ export function beginPlayerTurn(state) {
     events.push({ type: "perk-passive", playerId: player.id, ...passives });
     logEvent(state, {
       actor: player.id,
-      text: `Perks: ${formatMoney(passives.total)}`,
-      kind: "sys",
+      text: `${player.name}: perks ${formatMoney(passives.total)}`,
+      kind: player.id,
       delta: passives.total
     });
   }
@@ -114,8 +114,8 @@ export function beginPlayerTurn(state) {
       const rateLabel = player.perks.some((p) => p.halveBankFee) ? "5%" : "10%";
       logEvent(state, {
         actor: player.id,
-        text: `Bank fee: −$${fee} (${rateLabel} of debt)`,
-        kind: "sys",
+        text: `${player.name}: bank fee −$${fee} (${rateLabel} of debt)`,
+        kind: player.id,
         delta: -fee
       });
     }
@@ -175,7 +175,7 @@ export function doWork(state) {
     streakBonus = 100;
     player.balance += streakBonus;
     player.consecutiveWorkTurns = 0; // reset after paying out
-    logEvent(state, { actor: player.id, text: `${player.name} hit a work streak! +$100`, kind: "sys", delta: streakBonus });
+    logEvent(state, { actor: player.id, text: `${player.name} hit a work streak! +$100`, kind: player.id, delta: streakBonus });
   }
 
   // Weekend Warrior perk: bonus on weekend tiles
@@ -184,7 +184,7 @@ export function doWork(state) {
     for (const perk of player.perks) {
       if (perk.weekendBonus) {
         player.balance += perk.weekendBonus;
-        logEvent(state, { actor: player.id, text: `${perk.title}: +$${perk.weekendBonus}`, kind: "sys", delta: perk.weekendBonus });
+        logEvent(state, { actor: player.id, text: `${player.name}: ${perk.title} +$${perk.weekendBonus}`, kind: player.id, delta: perk.weekendBonus });
       }
     }
   }
@@ -199,7 +199,7 @@ export function doWork(state) {
 
   if (player.position >= state.totalDays) {
     events.push({ type: "finish", playerId: player.id });
-    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: "sys" });
+    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: player.id });
   }
 
   events.push(...endPlayerTurn(state));
@@ -222,7 +222,7 @@ export function doMove(state) {
     for (const perk of player.perks) {
       if (perk.weekendBonus) {
         player.balance += perk.weekendBonus;
-        logEvent(state, { actor: player.id, text: `${perk.title}: +$${perk.weekendBonus}`, kind: "sys", delta: perk.weekendBonus });
+        logEvent(state, { actor: player.id, text: `${player.name}: ${perk.title} +$${perk.weekendBonus}`, kind: player.id, delta: perk.weekendBonus });
       }
     }
   }
@@ -230,7 +230,7 @@ export function doMove(state) {
   // The final tile is safe — reaching day 31 shouldn't trigger one last event draw.
   if (player.position >= state.totalDays) {
     events.push({ type: "finish", playerId: player.id });
-    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: "sys" });
+    logEvent(state, { actor: player.id, text: `${player.name} reached Day 31!`, kind: player.id });
     events.push(...endPlayerTurn(state));
     return events;
   }
@@ -476,7 +476,7 @@ export function endPlayerTurn(state) {
     logEvent(state, {
       actor: player.id,
       text: `${player.name} gets another turn!`,
-      kind: "sys"
+      kind: player.id
     });
     return events; // active player unchanged
   }
