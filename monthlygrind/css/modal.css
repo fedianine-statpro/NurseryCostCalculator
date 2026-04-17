@@ -1,0 +1,123 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+.modal.is-open { display: flex; }
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.45);
+  backdrop-filter: blur(4px);
+  animation: fade-in 220ms forwards;
+}
+.modal__body {
+  position: relative;
+  width: min(460px, 92vw);
+  background: #fff;
+  border-radius: var(--r-lg);
+  padding: 28px 28px 22px;
+  box-shadow: var(--shadow-lg);
+  animation: card-pop 380ms var(--ease-out);
+  z-index: 1;
+}
+.modal__body--wide { width: min(620px, 94vw); padding: 32px 32px 26px; }
+.modal__title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.modal__actions .primary-btn { padding: 12px 22px; }
+
+/* Rules modal styling */
+.rules {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.rules h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.rules ul { padding-left: 18px; margin: 4px 0; }
+.rules li { margin: 4px 0; }
+
+/* End-game modal */
+.end__subtitle {
+  color: var(--muted);
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+.end__final {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--r-md);
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+.end__final-player {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+}
+.end__final-player.is-winner {
+  background: #fff8e0;
+  box-shadow: inset 0 0 0 2px var(--gold);
+}
+.end__final-name {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 700;
+}
+.end__final-amount {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+}
+.end__final-note {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Confetti */
+.end__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+}
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 12px;
+  background: var(--c, var(--gold));
+  transform: rotate(var(--r, 0deg));
+  animation: confetti-fall var(--d, 2000ms) var(--ease-out) var(--delay, 0ms) forwards;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+@keyframes confetti-fall {
+  0%   { transform: translate(0, -20px) rotate(var(--r, 0)); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translate(var(--tx, 0), 120%) rotate(calc(var(--r, 0) + 720deg)); opacity: 0; }
+}

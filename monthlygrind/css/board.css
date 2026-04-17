@@ -1,0 +1,186 @@
+.stage {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 22px clamp(12px, 2vw, 24px);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(400px 280px at 10% 10%, rgba(255, 236, 180, 0.5), transparent 60%),
+    radial-gradient(500px 320px at 90% 100%, rgba(207, 223, 252, 0.55), transparent 60%);
+  pointer-events: none;
+}
+
+.board {
+  --cols: 11;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 8px;
+  z-index: 1;
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  background: var(--tile-bg, var(--cream));
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.04) inset,
+    0 4px 12px -8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  overflow: hidden;
+  transition: transform 180ms var(--ease-out);
+}
+.tile:hover { transform: translateY(-2px); }
+
+.tile__day {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+.tile__glyph {
+  font-size: clamp(14px, 2vw, 22px);
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08));
+}
+.tile__label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.tile--start   { --tile-bg: #d7eee2; }
+.tile--event   { --tile-bg: #fff3d8; }
+.tile--payday  { --tile-bg: #d9efd4; }
+.tile--rest    { --tile-bg: var(--cream); }
+.tile--finish  {
+  --tile-bg: linear-gradient(135deg, #ffe58a, #ffbf52);
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 2px rgba(198, 161, 74, 0.25),
+    0 8px 24px -6px rgba(198, 161, 74, 0.5);
+}
+
+.tile--event .tile__glyph {
+  animation: glyph-float 4s ease-in-out infinite;
+}
+@keyframes glyph-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* pawn layer sits on top of tiles */
+.pawn {
+  position: absolute;
+  width: clamp(16px, 2vw, 22px);
+  height: clamp(16px, 2vw, 22px);
+  border-radius: 50%;
+  background: var(--pawn-color);
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    0 6px 12px -4px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%);
+  transition:
+    left 700ms var(--ease-out),
+    top 700ms var(--ease-out);
+  z-index: 3;
+  pointer-events: none;
+}
+.pawn::after {
+  content: "";
+  position: absolute;
+  inset: 30% 30% auto auto;
+  width: 18%;
+  height: 18%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  filter: blur(1px);
+}
+.pawn--you { --pawn-color: var(--you-color); }
+.pawn--ai  { --pawn-color: var(--ai-color); }
+
+.pawn--you { animation: bob 2.4s ease-in-out infinite; }
+.pawn--ai  { animation: bob 2.4s ease-in-out infinite 0.6s; }
+@keyframes bob {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -3px; }
+}
+
+.pawn.is-hopping {
+  animation: hop 260ms var(--ease-out);
+}
+@keyframes hop {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  40%  { transform: translate(-50%, -80%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.tile.is-highlight {
+  box-shadow:
+    0 0 0 3px var(--pawn-color, var(--gold)),
+    0 12px 30px -8px var(--pawn-color, var(--gold));
+}
+
+/* dice */
+.dice-stage {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 40;
+}
+.dice-stage.is-visible { display: flex; }
+.dice {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 2px var(--line);
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: dice-tumble 600ms var(--ease-out);
+}
+.dice__face {
+  position: absolute;
+  font-size: 90px;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 120ms;
+}
+.dice__face.is-active { opacity: 1; }
+@keyframes dice-tumble {
+  0%   { transform: rotate(-20deg) scale(0.6); opacity: 0; }
+  50%  { transform: rotate(15deg)  scale(1.1); opacity: 1; }
+  100% { transform: rotate(0deg)   scale(1);   opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .board { --cols: 8; gap: 6px; }
+  .tile { border-radius: 10px; }
+  .tile__label { display: none; }
+}

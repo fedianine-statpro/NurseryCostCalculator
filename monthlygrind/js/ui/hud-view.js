@@ -1,0 +1,110 @@
+import { getCategory } from "../data/categories.js";
+import { canMove, canDrawPerk } from "../engine/rules.js";
+
+const $ = (id) => document.getElementById(id);
+
+let lastBalances = {};
+
+export function renderHud(state) {
+  $("turn-counter").textContent = state.turn;
+
+  for (const player of state.players) {
+    const balEl = $(`balance-${player.id}`);
+    const prev = lastBalances[player.id] ?? player.balance;
+    animateBalance(balEl, prev, player.balance);
+    lastBalances[player.id] = player.balance;
+
+    $(`position-${player.id}`).textContent = `Day ${player.position}`;
+    const drawsLeft = Math.max(0, 2 - player.perkDrawAttempts);
+    $(`perks-remaining-${player.id}`).textContent = drawsLeft === 1 ? "1 perk draw" : `${drawsLeft} perk draws`;
+
+    // perks list
+    const list = $(`perks-${player.id}`);
+    list.innerHTML = "";
+    for (const perk of player.perks) {
+      const li = document.createElement("li");
+      li.className = "perk-chip";
+      const cat = getCategory(perk.category);
+      li.style.setProperty("--chip-color", cat.color);
+      li.title = perk.desc;
+      li.innerHTML = `<span class="perk-chip__dot"></span><span class="perk-chip__label">${perk.title}</span>`;
+      list.appendChild(li);
+    }
+
+    // active turn highlight
+    const card = document.getElementById(`score-${player.id}`);
+    card.classList.toggle("is-active", player.id === state.activePlayerId);
+  }
+
+  // mood gradient (shifts with turn count)
+  const moodHue = Math.min(180, state.turn * 6) + "deg";
+  document.documentElement.style.setProperty("--mood-hue", moodHue);
+  document.querySelector(".mood-backdrop")?.style.setProperty("--mood-hue", moodHue);
+
+  updateControls(state);
+}
+
+export function updateControls(state) {
+  const controls = document.querySelector(".controls");
+  const hint = $("controls-hint");
+  const activeIsHuman = state.players.find((p) => p.id === state.activePlayerId)?.isHuman;
+  const inDebt = state.players.find((p) => p.id === state.activePlayerId)?.balance < 0;
+
+  if (state.phase === "game-over") {
+    controls.classList.add("is-waiting");
+    hint.textContent = "Month complete.";
+    return;
+  }
+
+  if (!activeIsHuman) {
+    controls.classList.add("is-waiting");
+    hint.textContent = "Rival is deciding…";
+    return;
+  }
+
+  controls.classList.remove("is-waiting");
+  if (inDebt) {
+    hint.textContent = "You're in the red — you must work this turn.";
+  } else {
+    hint.textContent = "Your turn — work, move, or try a perk.";
+  }
+
+  $("btn-work").disabled = state.phase !== "awaiting-action";
+  $("btn-move").disabled = state.phase !== "awaiting-action" || !canMove(state);
+  $("btn-perk").disabled = !canDrawPerk(state);
+  const activePlayer = state.players.find((p) => p.id === state.activePlayerId);
+  const drawsLeft = Math.max(0, 2 - (activePlayer?.perkDrawAttempts || 0));
+  $("perk-draws-left").textContent = drawsLeft;
+}
+
+function animateBalance(el, from, to) {
+  if (!el) return;
+  if (from === to) {
+    el.textContent = formatAmount(to);
+    el.classList.remove("is-up", "is-down");
+    return;
+  }
+  const direction = to > from ? "is-up" : "is-down";
+  el.classList.remove("is-up", "is-down");
+  // re-trigger CSS transition
+  void el.offsetWidth;
+  el.classList.add(direction);
+
+  const steps = 18;
+  const delta = (to - from) / steps;
+  let i = 0;
+  const start = from;
+  const tick = () => {
+    i += 1;
+    const v = i >= steps ? to : Math.round(start + delta * i);
+    el.textContent = formatAmount(v);
+    if (i < steps) requestAnimationFrame(tick);
+    else setTimeout(() => el.classList.remove("is-up", "is-down"), 600);
+  };
+  requestAnimationFrame(tick);
+}
+
+function formatAmount(n) {
+  const s = Math.abs(n).toLocaleString("en-US");
+  return n < 0 ? `−${s}` : s;
+}

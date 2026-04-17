@@ -1,0 +1,204 @@
+.card-stage {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 50;
+}
+.card-stage.is-visible { display: flex; }
+
+.card-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 40, 0.35);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  animation: fade-in 280ms forwards;
+}
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+.card {
+  width: min(360px, 92vw);
+  aspect-ratio: 5 / 7;
+  background: #fff;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  animation: card-pop 520ms var(--ease-out);
+}
+@keyframes card-pop {
+  0%   { transform: translateY(60px) scale(0.7) rotateX(-45deg); opacity: 0; }
+  60%  { transform: translateY(-4px) scale(1.03) rotateX(5deg);  opacity: 1; }
+  100% { transform: translateY(0) scale(1) rotateX(0);          opacity: 1; }
+}
+
+.card__header {
+  position: relative;
+  padding: 22px 24px 18px;
+  background: var(--accent-bg, var(--cream));
+  display: grid;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.card__kind {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+.card__icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.card__icon-wrap svg {
+  width: 40px;
+  height: 40px;
+  color: var(--ink-soft);
+}
+.card__icon-emoji {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  font-size: 26px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.1));
+}
+.card__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.card__body {
+  padding: 18px 24px 22px;
+  display: grid;
+  gap: 14px;
+  align-content: space-between;
+}
+.card__flavor {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+.card__effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.card__effect {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+.card__effect--gain  { background: var(--money-bg); color: var(--money); border-color: transparent; }
+.card__effect--loss  { background: var(--loss-bg);  color: var(--loss);  border-color: transparent; }
+.card__effect--skip  { background: #fff3dc; color: #a47810; border-color: transparent; }
+.card__effect--multi { background: #e8e4ff; color: #5341c3; border-color: transparent; }
+
+/* category accents */
+.card[data-category="career"]        { --accent-bg: #e6eeff; }
+.card[data-category="finance"]       { --accent-bg: #e4f5e9; }
+.card[data-category="health"]        { --accent-bg: #fde4ea; }
+.card[data-category="car"]           { --accent-bg: #fdecd0; }
+.card[data-category="home"]          { --accent-bg: #ece0f8; }
+.card[data-category="family"]        { --accent-bg: #fde1ee; }
+.card[data-category="pet"]           { --accent-bg: #ffe1cc; }
+.card[data-category="education"]     { --accent-bg: #e5e4fb; }
+.card[data-category="food"]          { --accent-bg: #effad3; }
+.card[data-category="entertainment"] { --accent-bg: #fbddf0; }
+.card[data-category="travel"]        { --accent-bg: #d6f1f1; }
+.card[data-category="legal"]         { --accent-bg: #e4e6ee; }
+.card[data-category="disaster"]      { --accent-bg: #fddbd8; }
+.card[data-category="luck"]          { --accent-bg: #fdeecc; }
+.card[data-category="nature"]        { --accent-bg: #dff3e2; }
+.card[data-category="shopping"]      { --accent-bg: #d4f0ec; }
+
+.card--perk .card__kind::before { content: "✨ "; }
+.card--event .card__kind::before { content: "📰 "; }
+.card--work .card__kind::before { content: "🧾 "; }
+
+.card__price {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  color: var(--ink);
+}
+
+/* Perk chip styling that lives inside score cards */
+.perk-chip__label {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* mini condensed card inside the perk modal */
+.perk-preview {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin: 10px 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+.perk-preview__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.7);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+.perk-preview__title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+.perk-preview__desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.perk-preview__cost {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .card { width: min(340px, 90vw); }
+  .card__title { font-size: 20px; }
+  .card__icon-wrap { width: 56px; height: 56px; border-radius: 16px; }
+  .card__icon-wrap svg { width: 32px; height: 32px; }
+}
