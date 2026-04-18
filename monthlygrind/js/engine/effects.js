@@ -1,7 +1,17 @@
 import { randInt } from "./rng.js";
+import { LEVEL_MULTIPLIERS } from "./state.js";
 
 const DEFAULT_RECURRING_TURNS = 3;
 const MAX_RECURRING_STACK = 2;
+
+// Returns the effective base salary (level-adjusted) for a player's current job.
+// Doesn't include variance or perk multipliers — those apply on top each work turn.
+export function effectiveSalary(player) {
+  if (!player?.currentJob) return 0;
+  const base = player.currentJob.income || 0;
+  const mult = LEVEL_MULTIPLIERS[player.jobLevel] ?? 1.0;
+  return Math.round(base * mult);
+}
 
 // Apply an event card effect to the active player.
 // Mutates `player` and `state`. Returns a summary object for the UI log.
@@ -154,7 +164,13 @@ export function applyEventEffect(state, player, card, rng) {
 // Mutates player, returns { earned, baseIncome, variance }.
 export function applyWorkEffect(state, player, card, rng) {
   const baseIncome = card.income || 0;
-  let income = baseIncome;
+
+  // Apply career level multiplier ONLY when this card is the player's current
+  // job (i.e. it's a regular shift). Disruptions (sick day, fired, jury duty)
+  // pay whatever the card listed — your level doesn't apply.
+  const isOwnJob = !card.disruption && player.currentJob && card.id === player.currentJob.id;
+  const levelMult = isOwnJob ? (LEVEL_MULTIPLIERS[player.jobLevel] ?? 1.0) : 1.0;
+  let income = Math.round(baseIncome * levelMult);
 
   // ±10% random variance on non-zero income
   let variance = 0;

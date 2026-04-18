@@ -6,7 +6,7 @@
 export const WORK_CARDS = [
   { id: "w-unemployed", title: "Job Hunt Dry Spell", flavor: "Between gigs with no leads this week.", income: 0, category: "career", disruption: true },
   { id: "w-designer-deferred", title: "Deferred Payment Gig", flavor: "A creative side-job that pays next week, not this one.", income: 0, deferredBonus: 200, category: "career", disruption: true },
-  { id: "w-architect", title: "Architect", flavor: "Designing a skyscraper; the city is talking.", income: 250, category: "career" },
+  { id: "w-architect", title: "Architect", flavor: "Designing a skyscraper; the city is talking.", income: 330, category: "career" },
   { id: "w-gardener", title: "Gardener", flavor: "Pruning and planting in the sunshine.", income: 120, category: "nature" },
   { id: "w-bartender", title: "Bartender", flavor: "Mixing cocktails at the hottest club in town.", income: 140, category: "food" },
   { id: "w-waiter", title: "Waiter", flavor: "Top-notch service at a packed restaurant.", income: 130, category: "food" },

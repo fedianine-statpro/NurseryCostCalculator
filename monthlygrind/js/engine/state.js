@@ -24,6 +24,16 @@ export const RETRAIN_COST_MULT    = 4;     // cost = 4 × current salary
 export const RETRAIN_SALARY_MIN   = 0.9;   // new job ≥ 0.9 × current
 export const RETRAIN_SALARY_MAX   = 1.5;   // new job ≤ 1.5 × current
 
+// Career progression within a job: Junior → Middle → Senior. Rewards players
+// who commit to one role over many turns instead of retraining constantly.
+export const LEVEL_MULTIPLIERS    = { junior: 0.90, middle: 1.00, senior: 1.20 };
+export const LEVEL_ORDER          = ["junior", "middle", "senior"];
+export const PROMOTION_CHANCE     = 0.10;  // per non-disruption work turn
+export const PROMOTION_MIN_TURNS  = 2;     // min turns at level before chance applies
+// Starting pool excludes the very top-earning careers so nobody begins Day 1
+// with a Senior-tier salary by default. Mid-game retraining can still reach them.
+export const STARTING_CAREER_MAX_INCOME = 220;
+
 export function makeInitialState({ seed = pickSeed() } = {}) {
   const rng = makeRng(seed);
   const state = {
@@ -69,7 +79,9 @@ function makePlayer(id, name, isHuman) {
     eventCardsDrawn: 0,
     workCardsDrawn: 0,
     biggestHitAbsorbed: 0,
-    currentJob: null            // the career card the player clocks into each Work turn
+    currentJob: null,           // the career card the player clocks into each Work turn
+    jobLevel: "junior",         // junior | middle | senior
+    workTurnsAtLevel: 0         // counts non-disruption turns at current level
   };
 }
 

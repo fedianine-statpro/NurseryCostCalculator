@@ -13,9 +13,14 @@ import {
   DISRUPTION_CHANCE,
   RETRAIN_COST_MULT,
   RETRAIN_SALARY_MIN,
-  RETRAIN_SALARY_MAX
+  RETRAIN_SALARY_MAX,
+  LEVEL_ORDER,
+  PROMOTION_CHANCE,
+  PROMOTION_MIN_TURNS,
+  STARTING_CAREER_MAX_INCOME
 } from "./state.js";
 import { CAREER_CARDS, DISRUPTION_CARDS } from "../data/work-cards.js";
+import { effectiveSalary } from "./effects.js";
 
 // How many work actions the active player still needs before their next
 // perk draw unlocks. Returns 0 if already unlocked, or Infinity if they
@@ -160,12 +165,25 @@ function advanceOneDay(state, player) {
   return { type: "advance", playerId: player.id, from, to };
 }
 
-// Pick a random career card (no disruptions) — used for first-work assignment
-// and as a fallback after being fired.
-function drawRandomCareer(state) {
-  const pool = CAREER_CARDS.filter((c) => (c.income || 0) > 0);
+// Pick a random career card (no disruptions).
+// `starting === true` restricts the pool to lower-tier roles so nobody begins
+// Day 1 with a top-salary career.
+function drawRandomCareer(state, { starting = false } = {}) {
+  let pool = CAREER_CARDS.filter((c) => (c.income || 0) > 0);
+  if (starting) pool = pool.filter((c) => (c.income || 0) < STARTING_CAREER_MAX_INCOME);
   const i = Math.floor(state.rng() * pool.length);
   return pool[i];
+}
+
+// Promote a player one step up the ladder. Returns true if promoted.
+function tryPromote(player, rng) {
+  const idx = LEVEL_ORDER.indexOf(player.jobLevel);
+  if (idx < 0 || idx >= LEVEL_ORDER.length - 1) return false; // already Senior
+  if (player.workTurnsAtLevel < PROMOTION_MIN_TURNS) return false;
+  if (rng() >= PROMOTION_CHANCE) return false;
+  player.jobLevel = LEVEL_ORDER[idx + 1];
+  player.workTurnsAtLevel = 0;
+  return true;
 }
 
 function drawRandomDisruption(state) {
@@ -187,18 +205,26 @@ export function doWork(state) {
   //     (sick, fired, fined, etc.). Disruptions don't consume the job unless
   //     the card has clearsJob (Fired / Laid Off).
   let card;
-  if (!player.currentJob) {
-    card = drawRandomCareer(state);
+  // firstJobThisTurn means the assignment happens now — use the starting pool.
+  // Post-firing re-assignments later in the game use the FULL pool.
+  const firstJobThisTurn = !player.currentJob;
+  if (firstJobThisTurn) {
+    const starting = (player.workCardsDrawn || 0) === 0;
+    card = drawRandomCareer(state, { starting });
     player.currentJob = card;
+    player.jobLevel = "junior";
+    player.workTurnsAtLevel = 0;
     logEvent(state, {
       actor: player.id,
-      text: `${player.name} starts working as ${card.title}.`,
+      text: `${player.name} starts as a Junior ${card.title}.`,
       kind: player.id
     });
   } else if (state.rng() < DISRUPTION_CHANCE) {
     card = drawRandomDisruption(state);
     if (card.clearsJob) {
       player.currentJob = null;
+      player.jobLevel = "junior";
+      player.workTurnsAtLevel = 0;
     }
   } else {
     card = player.currentJob;
@@ -206,6 +232,22 @@ export function doWork(state) {
 
   const { earned } = applyWorkEffect(state, player, card, state.rng);
   player.workCardsDrawn = (player.workCardsDrawn || 0) + 1;
+
+  // Career progression — only real-shift turns count toward promotion,
+  // and only once the player's had at least PROMOTION_MIN_TURNS at this level.
+  // Starting a brand-new job this turn doesn't immediately count as "at level".
+  if (!card.disruption && !firstJobThisTurn && player.currentJob && card.id === player.currentJob.id) {
+    player.workTurnsAtLevel = (player.workTurnsAtLevel || 0) + 1;
+    const promoted = tryPromote(player, state.rng);
+    if (promoted) {
+      const effNow = effectiveSalary(player);
+      logEvent(state, {
+        actor: player.id,
+        text: `${player.name} promoted to ${capitalize(player.jobLevel)} ${player.currentJob.title}! New salary ≈ $${effNow}.`,
+        kind: player.id
+      });
+    }
+  }
 
   // Work streak bonus: three consecutive Work turns pays a +$100 kicker.
   player.consecutiveWorkTurns = (player.consecutiveWorkTurns || 0) + 1;
@@ -254,14 +296,15 @@ export function doWork(state) {
 
 export function getRetrainCost(player) {
   if (!player?.currentJob) return 0;
-  return Math.floor((player.currentJob.income || 0) * RETRAIN_COST_MULT);
+  return Math.floor(effectiveSalary(player) * RETRAIN_COST_MULT);
 }
 
 export function getRetrainableJobs(player) {
   if (!player?.currentJob) return [];
-  const cur = player.currentJob.income || 0;
+  // Compare against the *effective* (level-adjusted) salary so a Senior player
+  // has a correspondingly wider range of retrain options.
+  const cur = effectiveSalary(player);
   if (cur <= 0) {
-    // If currentJob is (somehow) $0, allow retraining to any career.
     return CAREER_CARDS.filter((c) => (c.income || 0) > 0);
   }
   const min = cur * RETRAIN_SALARY_MIN;
@@ -293,12 +336,17 @@ export function doRetrain(state) {
 
   player.balance -= cost;
   const oldJob = player.currentJob;
+  const oldLevel = player.jobLevel;
   player.currentJob = newJob;
+  // New career ladder starts at Junior regardless of your previous level.
+  player.jobLevel = "junior";
+  player.workTurnsAtLevel = 0;
 
-  events.push({ type: "retrained", playerId: player.id, from: oldJob, to: newJob, cost });
+  events.push({ type: "retrained", playerId: player.id, from: oldJob, to: newJob, cost, fromLevel: oldLevel });
+  const newEffective = effectiveSalary(player);
   logEvent(state, {
     actor: player.id,
-    text: `${player.name} retrained from ${oldJob.title} into ${newJob.title} (−$${cost}, new salary $${newJob.income}).`,
+    text: `${player.name} retrained from ${capitalize(oldLevel)} ${oldJob.title} into Junior ${newJob.title} (−$${cost}, new salary ≈ $${newEffective}).`,
     kind: player.id,
     delta: -cost
   });
@@ -622,4 +670,8 @@ function formatMoney(n) {
   if (n > 0) return `+$${n}`;
   if (n < 0) return `−$${Math.abs(n)}`;
   return "$0";
+}
+
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 }

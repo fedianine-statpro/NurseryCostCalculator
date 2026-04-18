@@ -1,5 +1,6 @@
 import { activePlayer, MAX_PERK_DRAW_ATTEMPTS, MAX_PERKS_HELD, STARTING_BALANCE } from "./state.js";
 import { canMove, canDrawPerk, canRetrain, getRetrainCost, getRetrainableJobs } from "./rules.js";
+import { effectiveSalary } from "./effects.js";
 
 // The AI makes three decisions each turn:
 //   1. Should I draw a perk? (optional, max 2x/game)
@@ -154,14 +155,16 @@ export function aiDecideRetrain(state) {
   if (!canRetrain(state)) return false;
   const p = activePlayer(state);
   const daysLeft = state.totalDays - p.position;
-  if (daysLeft < 12) return false; // too late to recoup
+  if (daysLeft < 14) return false; // retraining resets to Junior now, so need more runway
   const cost = getRetrainCost(p);
   const options = getRetrainableJobs(p);
   if (!options.length) return false;
-  const avgNewSalary = options.reduce((s, c) => s + (c.income || 0), 0) / options.length;
-  const curSalary = p.currentJob?.income || 0;
-  const expectedBump = avgNewSalary - curSalary;
-  // Assume ~0.7 × daysLeft future Work turns (AI also moves), require net +$200
+  // Compare: current effective salary vs the new career's Junior salary (0.7× base).
+  // The candidate list uses base income, so scale by 0.7 for the post-retrain reality.
+  const avgNewJunior = 0.7 * options.reduce((s, c) => s + (c.income || 0), 0) / options.length;
+  const curEffective = effectiveSalary(p);
+  const expectedBump = avgNewJunior - curEffective;
+  // Assume ~0.7 × daysLeft future Work turns; require net +$200
   const expectedGain = expectedBump * daysLeft * 0.7 - cost;
   return expectedGain > 200;
 }

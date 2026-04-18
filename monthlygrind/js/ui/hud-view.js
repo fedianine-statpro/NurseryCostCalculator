@@ -1,5 +1,6 @@
 import { getCategory } from "../data/categories.js";
 import { canMove, canDrawPerk, worksNeededForNextPerk, canRetrain, getRetrainCost, getRetrainableJobs } from "../engine/rules.js";
+import { effectiveSalary } from "../engine/effects.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -29,7 +30,9 @@ export function renderHud(state) {
       metaEl.parentElement.insertBefore(jobEl, metaEl.nextSibling);
     }
     if (player.currentJob) {
-      jobEl.innerHTML = `<span class="score__job-icon">👷</span> <strong>${player.currentJob.title}</strong> <span class="score__job-salary">$${player.currentJob.income}/work</span>`;
+      const levelLabel = capFirst(player.jobLevel);
+      const eff = effectiveSalary(player);
+      jobEl.innerHTML = `<span class="score__job-icon">👷</span> <strong>${levelLabel} ${player.currentJob.title}</strong> <span class="score__job-salary">$${eff}/work</span>`;
       jobEl.hidden = false;
     } else {
       jobEl.innerHTML = `<span class="score__job-icon">❔</span> <em>No job yet</em>`;
@@ -91,12 +94,12 @@ export function updateControls(state) {
   $("btn-move").disabled = state.phase !== "awaiting-action" || !canMove(state);
   $("btn-perk").disabled = !canDrawPerk(state);
 
-  // Dynamic Work-button hint shows the current job + salary when set
+  // Dynamic Work-button hint shows the current role + effective salary
   const activePlayer = state.players.find((p) => p.id === state.activePlayerId);
   const workHint = $("btn-work-hint");
   if (workHint) {
     if (activePlayer?.currentJob) {
-      workHint.textContent = `${activePlayer.currentJob.title} · $${activePlayer.currentJob.income}`;
+      workHint.textContent = `${capFirst(activePlayer.jobLevel)} ${activePlayer.currentJob.title} · $${effectiveSalary(activePlayer)}`;
     } else {
       workHint.textContent = "+1 day · first paycheck picks your job";
     }
@@ -145,6 +148,10 @@ export function updateControls(state) {
 
 // Label for the "perks remaining" slot on each player card.
 // Shows the work-gate hint when relevant.
+function capFirst(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
 function perksGateLabel(player, drawsLeft) {
   if (drawsLeft === 0) return "Perks maxed";
   const GATES = [5, 10];
