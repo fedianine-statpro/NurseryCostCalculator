@@ -1,5 +1,5 @@
 import { getCategory } from "../data/categories.js";
-import { canMove, canDrawPerk, worksNeededForNextPerk } from "../engine/rules.js";
+import { canMove, canDrawPerk, worksNeededForNextPerk, canRetrain, getRetrainCost, getRetrainableJobs } from "../engine/rules.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -18,6 +18,23 @@ export function renderHud(state) {
     const drawsLeft = Math.max(0, 2 - player.perkDrawAttempts);
     const gateLabel = perksGateLabel(player, drawsLeft);
     $(`perks-remaining-${player.id}`).textContent = gateLabel;
+
+    // Current-job line (only shown once assigned)
+    let jobEl = $(`job-${player.id}`);
+    if (!jobEl) {
+      const metaEl = $(`position-${player.id}`).parentElement;
+      jobEl = document.createElement("div");
+      jobEl.id = `job-${player.id}`;
+      jobEl.className = "score__job";
+      metaEl.parentElement.insertBefore(jobEl, metaEl.nextSibling);
+    }
+    if (player.currentJob) {
+      jobEl.innerHTML = `<span class="score__job-icon">👷</span> <strong>${player.currentJob.title}</strong> <span class="score__job-salary">$${player.currentJob.income}/work</span>`;
+      jobEl.hidden = false;
+    } else {
+      jobEl.innerHTML = `<span class="score__job-icon">❔</span> <em>No job yet</em>`;
+      jobEl.hidden = false;
+    }
 
     // perks list
     const list = $(`perks-${player.id}`);
@@ -74,8 +91,44 @@ export function updateControls(state) {
   $("btn-move").disabled = state.phase !== "awaiting-action" || !canMove(state);
   $("btn-perk").disabled = !canDrawPerk(state);
 
-  // Perk button hint: show draws-left when unlocked, else a lock gate.
+  // Dynamic Work-button hint shows the current job + salary when set
   const activePlayer = state.players.find((p) => p.id === state.activePlayerId);
+  const workHint = $("btn-work-hint");
+  if (workHint) {
+    if (activePlayer?.currentJob) {
+      workHint.textContent = `${activePlayer.currentJob.title} · $${activePlayer.currentJob.income}`;
+    } else {
+      workHint.textContent = "+1 day · first paycheck picks your job";
+    }
+  }
+
+  // Retrain button: enabled only when a viable switch is available
+  const retrainBtn = $("btn-retrain");
+  const retrainHint = $("btn-retrain-hint");
+  if (retrainBtn && retrainHint) {
+    if (!activePlayer?.currentJob) {
+      retrainBtn.disabled = true;
+      retrainHint.textContent = "Work first";
+    } else {
+      const options = getRetrainableJobs(activePlayer);
+      const cost = getRetrainCost(activePlayer);
+      if (options.length === 0) {
+        retrainBtn.disabled = true;
+        retrainHint.textContent = "Top salary reached";
+      } else if (activePlayer.balance < cost) {
+        retrainBtn.disabled = true;
+        retrainHint.textContent = `Need $${cost}`;
+      } else if (!canRetrain(state)) {
+        retrainBtn.disabled = true;
+        retrainHint.textContent = "Not now";
+      } else {
+        retrainBtn.disabled = false;
+        retrainHint.textContent = `−$${cost} for a new role`;
+      }
+    }
+  }
+
+  // Perk button hint: show draws-left when unlocked, else a lock gate.
   const drawsLeft = Math.max(0, 2 - (activePlayer?.perkDrawAttempts || 0));
   const label = $("perk-draws-left");
   if (drawsLeft === 0) {

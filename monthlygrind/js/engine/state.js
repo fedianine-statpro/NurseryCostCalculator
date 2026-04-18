@@ -15,6 +15,15 @@ export const COST_OF_LIVING = 105;
 // their first and second perk draws unlock. Rewards work-heavy strategies.
 export const PERK_WORK_GATES = [5, 10];
 
+// Career/retraining economy. Each Work turn either performs the player's
+// current job (steady income) or rolls a random disruption (jury duty, fired,
+// sick day, etc). Players can pay to retrain into a new role within a bounded
+// salary range — a rewarding but non-trivial investment.
+export const DISRUPTION_CHANCE    = 0.12;  // ~1 in 8 work turns is a disruption
+export const RETRAIN_COST_MULT    = 4;     // cost = 4 × current salary
+export const RETRAIN_SALARY_MIN   = 0.9;   // new job ≥ 0.9 × current
+export const RETRAIN_SALARY_MAX   = 1.5;   // new job ≤ 1.5 × current
+
 export function makeInitialState({ seed = pickSeed() } = {}) {
   const rng = makeRng(seed);
   const state = {
@@ -59,7 +68,8 @@ function makePlayer(id, name, isHuman) {
     wentBelowZero: false,       // achievement tracker
     eventCardsDrawn: 0,
     workCardsDrawn: 0,
-    biggestHitAbsorbed: 0
+    biggestHitAbsorbed: 0,
+    currentJob: null            // the career card the player clocks into each Work turn
   };
 }
 

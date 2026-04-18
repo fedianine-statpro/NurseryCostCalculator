@@ -108,7 +108,7 @@
           <button class="action-btn action-btn--work" id="btn-work">
             <span class="action-btn__icon">👷</span>
             <span class="action-btn__label">Work</span>
-            <span class="action-btn__hint">+1 day · steady paycheck</span>
+            <span class="action-btn__hint" id="btn-work-hint">+1 day · steady paycheck</span>
           </button>
           <button class="action-btn action-btn--move" id="btn-move">
             <span class="action-btn__icon">🎲</span>
@@ -119,6 +119,11 @@
             <span class="action-btn__icon">✨</span>
             <span class="action-btn__label">Draw perk</span>
             <span class="action-btn__hint"><span id="perk-draws-left">2</span> left</span>
+          </button>
+          <button class="action-btn action-btn--retrain" id="btn-retrain">
+            <span class="action-btn__icon">🔄</span>
+            <span class="action-btn__label">Retrain</span>
+            <span class="action-btn__hint" id="btn-retrain-hint">No job yet</span>
           </button>
         </div>
       </section>
@@ -168,13 +173,22 @@
           <h3>Each turn, pick one:</h3>
           <ul>
             <li>
-              <strong>Work</strong> — a steady paycheck ($0–$250). Boring, reliable, safe.
+              <strong>Work</strong> — clock in at your current job. Your first Work assigns
+              you a random role; every subsequent Work pays that same salary (with a touch
+              of variance). About 1 in 8 Work turns rolls a disruption — sick day, jury
+              duty, parking fine, occasionally even a firing.
             </li>
             <li>
               <strong>Live it up</strong> — draw a life-event card. Could be a bonus check, a
               windfall inheritance, or a $750 natural disaster. Fortune favors the bold.
             </li>
           </ul>
+          <h3>Retraining</h3>
+          <p>
+            Hate your job? Pay <strong>4× your current salary</strong> to retrain into a
+            random new role paying between 90% and 150% of what you earn now. Worth it
+            early, rarely worth it late — the investment needs weeks to pay back.
+          </p>
           <h3>Perks are earned</h3>
           <p>
             Twice per game you may draw a perk — but only after you've clocked in.

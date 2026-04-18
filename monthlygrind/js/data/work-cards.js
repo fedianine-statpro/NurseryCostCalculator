@@ -4,8 +4,8 @@
 // - `deferredBonus` (present only for Designer) pays out on the NEXT work turn
 
 export const WORK_CARDS = [
-  { id: "w-unemployed", title: "Unemployed", flavor: "Your country is in a tough spot. No job this turn.", income: 0, category: "career" },
-  { id: "w-designer-deferred", title: "Designer — Deferred Payment", flavor: "Big creative project, but the invoice pays later.", income: 0, deferredBonus: 200, category: "career" },
+  { id: "w-unemployed", title: "Job Hunt Dry Spell", flavor: "Between gigs with no leads this week.", income: 0, category: "career", disruption: true },
+  { id: "w-designer-deferred", title: "Deferred Payment Gig", flavor: "A creative side-job that pays next week, not this one.", income: 0, deferredBonus: 200, category: "career", disruption: true },
   { id: "w-architect", title: "Architect", flavor: "Designing a skyscraper; the city is talking.", income: 250, category: "career" },
   { id: "w-gardener", title: "Gardener", flavor: "Pruning and planting in the sunshine.", income: 120, category: "nature" },
   { id: "w-bartender", title: "Bartender", flavor: "Mixing cocktails at the hottest club in town.", income: 140, category: "food" },
@@ -71,12 +71,17 @@ export const WORK_CARDS = [
   // ~9% of the deck has zero-or-negative outcomes: three layoff-style $0 cards,
   // one reduced-shift card, a mild fine, and the rare $180 "hacked" hit.
   // Keeps Work from being a guaranteed paycheck without making it unplayable.
-  { id: "w-laid-off",      title: "Laid Off",              flavor: "Economic downturn — your role was cut. No pay this week.",             income: 0,    category: "career" },
-  { id: "w-fired",         title: "Fired",                 flavor: "The boss said it just isn't working out. No severance.",               income: 0,    category: "career" },
-  { id: "w-sick-day",      title: "Sick Day",              flavor: "Down with a nasty flu. You rest at home and clock zero hours.",        income: 0,    category: "health" },
-  { id: "w-short-shift",   title: "Short Shift",           flavor: "Slow day — the manager sent you home early.",                          income: 60,   category: "career" },
-  { id: "w-parking-fine",  title: "Parking Fine at Work",  flavor: "You parked in the wrong spot — the fine ate most of your shift.",     income: -30,  category: "car" },
-  { id: "w-hacked",        title: "Company Hacked",        flavor: "A phishing link you clicked exposed the whole team. You're billed for incident response.", income: -180, category: "career" }
+  { id: "w-laid-off",      title: "Laid Off",              flavor: "Economic downturn — your role was cut. No pay this week.",             income: 0,    category: "career", disruption: true, clearsJob: true },
+  { id: "w-fired",         title: "Fired",                 flavor: "The boss said it just isn't working out. No severance.",               income: 0,    category: "career", disruption: true, clearsJob: true },
+  { id: "w-sick-day",      title: "Sick Day",              flavor: "Down with a nasty flu. You rest at home and clock zero hours.",        income: 0,    category: "health", disruption: true },
+  { id: "w-jury-duty",     title: "Jury Duty",             flavor: "Civic obligation calls. The court stipend barely covers lunch.",       income: 25,   category: "legal",  disruption: true },
+  { id: "w-short-shift",   title: "Short Shift",           flavor: "Slow day — the manager sent you home early.",                          income: 60,   category: "career", disruption: true },
+  { id: "w-parking-fine",  title: "Parking Fine at Work",  flavor: "You parked in the wrong spot — the fine ate most of your shift.",     income: -30,  category: "car",    disruption: true },
+  { id: "w-hacked",        title: "Company Hacked",        flavor: "A phishing link you clicked exposed the whole team. You're billed for incident response.", income: -180, category: "career", disruption: true }
 ];
+
+// Convenience accessors so callers don't need to know the shape.
+export const CAREER_CARDS    = WORK_CARDS.filter((c) => !c.disruption);
+export const DISRUPTION_CARDS = WORK_CARDS.filter((c) =>  c.disruption);
 
 // Quick sanity check exposed in dev tools: `console.log(WORK_CARDS.length)` should be 62.

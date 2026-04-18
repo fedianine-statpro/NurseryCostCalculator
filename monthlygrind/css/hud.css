@@ -113,6 +113,29 @@
   opacity: 0.6;
 }
 
+.score__job {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.score__job-icon { font-size: 14px; line-height: 1; }
+.score__job-salary {
+  font-variant-numeric: tabular-nums;
+  color: var(--money);
+  font-weight: 700;
+}
+
 .score__perks {
   list-style: none;
   margin: 10px 0 0;
@@ -179,7 +202,7 @@
 }
 .controls__buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 .action-btn {
@@ -222,9 +245,10 @@
   color: var(--muted);
   font-weight: 600;
 }
-.action-btn--work { background: #effbf2; }
-.action-btn--move { background: #edf2ff; }
-.action-btn--perk { background: #fff3dc; }
+.action-btn--work    { background: #effbf2; }
+.action-btn--move    { background: #edf2ff; }
+.action-btn--perk    { background: #fff3dc; }
+.action-btn--retrain { background: #f1ebff; }
 
 /* Log */
 .log-wrap {

@@ -1,5 +1,5 @@
 import { activePlayer, MAX_PERK_DRAW_ATTEMPTS, MAX_PERKS_HELD, STARTING_BALANCE } from "./state.js";
-import { canMove, canDrawPerk } from "./rules.js";
+import { canMove, canDrawPerk, canRetrain, getRetrainCost, getRetrainableJobs } from "./rules.js";
 
 // The AI makes three decisions each turn:
 //   1. Should I draw a perk? (optional, max 2x/game)
@@ -145,6 +145,25 @@ export function aiChooseEventOption(state, card) {
     if (ev > bestEv) { bestEv = ev; bestIdx = i; }
   }
   return bestIdx;
+}
+
+// Decide whether to retrain this turn. Retraining costs 4× current salary so
+// only makes sense early when there's time to earn the investment back, and
+// when the *expected* salary bump actually covers the cost.
+export function aiDecideRetrain(state) {
+  if (!canRetrain(state)) return false;
+  const p = activePlayer(state);
+  const daysLeft = state.totalDays - p.position;
+  if (daysLeft < 12) return false; // too late to recoup
+  const cost = getRetrainCost(p);
+  const options = getRetrainableJobs(p);
+  if (!options.length) return false;
+  const avgNewSalary = options.reduce((s, c) => s + (c.income || 0), 0) / options.length;
+  const curSalary = p.currentJob?.income || 0;
+  const expectedBump = avgNewSalary - curSalary;
+  // Assume ~0.7 × daysLeft future Work turns (AI also moves), require net +$200
+  const expectedGain = expectedBump * daysLeft * 0.7 - cost;
+  return expectedGain > 200;
 }
 
 // Latency helpers so the AI feels like it's thinking.

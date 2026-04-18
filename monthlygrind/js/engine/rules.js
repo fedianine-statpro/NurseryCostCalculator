@@ -9,8 +9,13 @@ import {
   MAX_PERK_DRAW_ATTEMPTS,
   STARTING_BALANCE,
   COST_OF_LIVING,
-  PERK_WORK_GATES
+  PERK_WORK_GATES,
+  DISRUPTION_CHANCE,
+  RETRAIN_COST_MULT,
+  RETRAIN_SALARY_MIN,
+  RETRAIN_SALARY_MAX
 } from "./state.js";
+import { CAREER_CARDS, DISRUPTION_CARDS } from "../data/work-cards.js";
 
 // How many work actions the active player still needs before their next
 // perk draw unlocks. Returns 0 if already unlocked, or Infinity if they
@@ -155,6 +160,19 @@ function advanceOneDay(state, player) {
   return { type: "advance", playerId: player.id, from, to };
 }
 
+// Pick a random career card (no disruptions) — used for first-work assignment
+// and as a fallback after being fired.
+function drawRandomCareer(state) {
+  const pool = CAREER_CARDS.filter((c) => (c.income || 0) > 0);
+  const i = Math.floor(state.rng() * pool.length);
+  return pool[i];
+}
+
+function drawRandomDisruption(state) {
+  const i = Math.floor(state.rng() * DISRUPTION_CARDS.length);
+  return DISRUPTION_CARDS[i];
+}
+
 export function doWork(state) {
   const events = [];
   const player = activePlayer(state);
@@ -163,9 +181,30 @@ export function doWork(state) {
   // Advance first so the player moves onto the day as they work it.
   events.push(advanceOneDay(state, player));
 
-  const card = drawFrom(state, "work");
+  // Decide what "happens" at work this turn:
+  //   - No job yet? First day on the job — assign a random career.
+  //   - Otherwise, most turns are their regular job, but some roll a disruption
+  //     (sick, fired, fined, etc.). Disruptions don't consume the job unless
+  //     the card has clearsJob (Fired / Laid Off).
+  let card;
+  if (!player.currentJob) {
+    card = drawRandomCareer(state);
+    player.currentJob = card;
+    logEvent(state, {
+      actor: player.id,
+      text: `${player.name} starts working as ${card.title}.`,
+      kind: player.id
+    });
+  } else if (state.rng() < DISRUPTION_CHANCE) {
+    card = drawRandomDisruption(state);
+    if (card.clearsJob) {
+      player.currentJob = null;
+    }
+  } else {
+    card = player.currentJob;
+  }
+
   const { earned } = applyWorkEffect(state, player, card, state.rng);
-  discardTo(state, "work", card);
   player.workCardsDrawn = (player.workCardsDrawn || 0) + 1;
 
   // Work streak bonus: three consecutive Work turns pays a +$100 kicker.
@@ -174,7 +213,7 @@ export function doWork(state) {
   if (player.consecutiveWorkTurns >= 3) {
     streakBonus = 100;
     player.balance += streakBonus;
-    player.consecutiveWorkTurns = 0; // reset after paying out
+    player.consecutiveWorkTurns = 0;
     logEvent(state, { actor: player.id, text: `${player.name} hit a work streak! +$100`, kind: player.id, delta: streakBonus });
   }
 
@@ -190,12 +229,14 @@ export function doWork(state) {
   }
 
   events.push({ type: "work-drawn", playerId: player.id, card, earned, streakBonus });
-  logEvent(state, {
-    actor: player.id,
-    text: `${player.name} worked as ${card.title}.`,
-    kind: player.id,
-    delta: earned
-  });
+  const workDesc = card.disruption
+    ? `${player.name} — ${card.title}.`
+    : `${player.name} worked as ${card.title}.`;
+  logEvent(state, { actor: player.id, text: workDesc, kind: player.id, delta: earned });
+
+  if (card.clearsJob) {
+    logEvent(state, { actor: player.id, text: `${player.name} lost their job.`, kind: player.id });
+  }
 
   if (player.position >= state.totalDays) {
     events.push({ type: "finish", playerId: player.id });
@@ -203,6 +244,64 @@ export function doWork(state) {
   }
 
   events.push(...endPlayerTurn(state));
+  return events;
+}
+
+// ─── Retraining ────────────────────────────────────────────────────────
+// Cost: RETRAIN_COST_MULT × current salary. The new job is a random pick
+// from career cards whose income is within [0.9×, 1.5×] of current salary.
+// If no cards qualify, retraining is disabled (top salary already reached).
+
+export function getRetrainCost(player) {
+  if (!player?.currentJob) return 0;
+  return Math.floor((player.currentJob.income || 0) * RETRAIN_COST_MULT);
+}
+
+export function getRetrainableJobs(player) {
+  if (!player?.currentJob) return [];
+  const cur = player.currentJob.income || 0;
+  if (cur <= 0) {
+    // If currentJob is (somehow) $0, allow retraining to any career.
+    return CAREER_CARDS.filter((c) => (c.income || 0) > 0);
+  }
+  const min = cur * RETRAIN_SALARY_MIN;
+  const max = cur * RETRAIN_SALARY_MAX;
+  return CAREER_CARDS.filter((c) => {
+    if (c.id === player.currentJob.id) return false;
+    const inc = c.income || 0;
+    return inc >= min && inc <= max;
+  });
+}
+
+export function canRetrain(state) {
+  const player = activePlayer(state);
+  if (!player) return false;
+  if (state.phase !== "awaiting-action") return false;
+  if (!player.currentJob) return false;
+  if (getRetrainableJobs(player).length === 0) return false;
+  if (player.balance < getRetrainCost(player)) return false;
+  return true;
+}
+
+export function doRetrain(state) {
+  const events = [];
+  const player = activePlayer(state);
+  if (!canRetrain(state)) return events;
+  const cost = getRetrainCost(player);
+  const options = getRetrainableJobs(player);
+  const newJob = options[Math.floor(state.rng() * options.length)];
+
+  player.balance -= cost;
+  const oldJob = player.currentJob;
+  player.currentJob = newJob;
+
+  events.push({ type: "retrained", playerId: player.id, from: oldJob, to: newJob, cost });
+  logEvent(state, {
+    actor: player.id,
+    text: `${player.name} retrained from ${oldJob.title} into ${newJob.title} (−$${cost}, new salary $${newJob.income}).`,
+    kind: player.id,
+    delta: -cost
+  });
   return events;
 }
 

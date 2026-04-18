@@ -3,13 +3,15 @@ import {
   beginPlayerTurn,
   doWork,
   doMove,
+  doRetrain,
   drawPerk,
   resolvePerkOffer,
   resolveEventChoice,
   resolveWeekendChoice,
   WEEKEND_OPTIONS,
   canMove,
-  canDrawPerk
+  canDrawPerk,
+  canRetrain
 } from "./engine/rules.js";
 import {
   aiDecideAction,
@@ -17,6 +19,7 @@ import {
   aiChoosePerk,
   aiChooseEventOption,
   aiChooseWeekend,
+  aiDecideRetrain,
   aiThinkingDelay
 } from "./engine/ai.js";
 import { initBoard, placeAllPawns, placePawn, hopPawn, highlightTile, relayoutOnResize } from "./ui/board-view.js";
@@ -84,6 +87,15 @@ async function runTurn() {
 async function aiTakeTurn() {
   await aiThinkingDelay();
 
+  // Optionally retrain (only meaningful if a better-paid job is affordable)
+  if (aiDecideRetrain(state)) {
+    const events = doRetrain(state);
+    await replayEvents(events);
+    renderHud(state);
+    renderLog(state);
+    await aiThinkingDelay(250, 450);
+  }
+
   // Optionally draw a perk first
   if (aiDecideDrawPerk(state)) {
     const offerEvents = drawPerk(state);
@@ -134,6 +146,18 @@ async function humanMove() {
   running = false;
   if (state.phase === "game-over") handleGameOver();
   else await runTurn();
+}
+
+async function humanRetrain() {
+  if (running) return;
+  if (!canRetrain(state)) return;
+  running = true;
+  const events = doRetrain(state);
+  await replayEvents(events);
+  renderHud(state);
+  renderLog(state);
+  running = false;
+  // Retrain doesn't end the turn — player still needs to pick Work or Move.
 }
 
 async function humanPerk() {
@@ -329,6 +353,7 @@ function wireControls() {
   document.getElementById("btn-work").addEventListener("click", humanWork);
   document.getElementById("btn-move").addEventListener("click", humanMove);
   document.getElementById("btn-perk").addEventListener("click", humanPerk);
+  document.getElementById("btn-retrain").addEventListener("click", humanRetrain);
 
   document.getElementById("new-game-btn").addEventListener("click", () => {
     closeModal("end-modal");
