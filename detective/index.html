@@ -12,12 +12,16 @@
 
     <header class="hud">
       <div class="hud-left">
-        <span class="logo">GLOBE DETECTIVE BUREAU</span>
+        <span class="logo"></span>
       </div>
       <div class="hud-right">
         <span id="hud-case"></span>
         <span id="hud-city"></span>
         <span id="hud-clock"></span>
+        <span class="lang-toggle">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </span>
       </div>
     </header>
 
@@ -25,24 +29,26 @@
 
       <section id="screen-title" class="screen active">
         <div class="title-block">
-          <h1>GLOBE<br/>DETECTIVE</h1>
-          <p class="tagline">An international caper. A ticking clock. One detective.</p>
-          <button class="btn-primary" id="btn-start">BEGIN BRIEFING</button>
-          <p class="hint">// keyboard: <kbd>Space</kbd> skip text · <kbd>Esc</kbd> dossier</p>
+          <h1><span id="title1"></span><br/><span id="title2"></span></h1>
+          <p class="tagline" id="tagline"></p>
+          <button class="btn-primary" id="btn-start"></button>
+          <p class="hint" id="keyboard-hint"></p>
         </div>
       </section>
 
       <section id="screen-case-select" class="screen">
-        <h2>CHOOSE YOUR CASE</h2>
+        <h2 id="case-select-title"></h2>
         <div id="case-list" class="case-list"></div>
       </section>
 
       <section id="screen-briefing" class="screen">
         <div class="briefing-box">
-          <div class="briefing-header">CHIEF'S BRIEFING — CASE FILE <span id="briefing-id"></span></div>
+          <div class="briefing-header">
+            <span id="briefing-label"></span> <span id="briefing-id"></span>
+          </div>
           <div id="briefing-text" class="narrator-text"></div>
           <div class="briefing-actions">
-            <button class="btn-primary" id="btn-briefing-go">TAKE THE CASE</button>
+            <button class="btn-primary" id="btn-briefing-go"></button>
           </div>
         </div>
       </section>
@@ -52,15 +58,15 @@
           <div id="map-container"></div>
           <div class="map-side">
             <div class="panel">
-              <div class="panel-title">CURRENT LOCATION</div>
+              <div class="panel-title" id="map-loc-title"></div>
               <div id="map-current-city" class="big-text"></div>
               <div id="map-current-flavor" class="flavor"></div>
             </div>
             <div class="panel">
-              <div class="panel-title">ACTIONS</div>
-              <button class="btn-primary full" id="btn-investigate">INVESTIGATE THIS CITY</button>
-              <button class="btn-secondary full" id="btn-open-dossier">OPEN DOSSIER</button>
-              <p class="hint">click a marker on the map to fly there</p>
+              <div class="panel-title" id="map-actions-title"></div>
+              <button class="btn-primary full" id="btn-investigate"></button>
+              <button class="btn-secondary full" id="btn-open-dossier"></button>
+              <p class="hint" id="map-marker-hint"></p>
             </div>
           </div>
         </div>
@@ -75,20 +81,20 @@
         <div id="city-result" class="result hidden">
           <div class="result-text narrator-text" id="city-result-text"></div>
           <div class="result-actions">
-            <button class="btn-primary" id="btn-result-continue">CONTINUE</button>
+            <button class="btn-primary" id="btn-result-continue"></button>
           </div>
         </div>
         <div class="city-footer">
-          <button class="btn-secondary" id="btn-back-map">← BACK TO MAP</button>
-          <button class="btn-secondary" id="btn-city-dossier">DOSSIER</button>
+          <button class="btn-secondary" id="btn-back-map"></button>
+          <button class="btn-secondary" id="btn-city-dossier"></button>
         </div>
       </section>
 
       <section id="screen-dossier" class="screen">
-        <h2>SUSPECT DOSSIER</h2>
+        <h2 id="dossier-title"></h2>
         <div class="dossier-layout">
           <div class="traits-panel panel">
-            <div class="panel-title">TRAITS COLLECTED</div>
+            <div class="panel-title" id="traits-title"></div>
             <ul id="traits-list" class="traits-list"></ul>
             <p class="hint" id="traits-hint"></p>
           </div>
@@ -97,22 +103,22 @@
           </div>
         </div>
         <div class="dossier-actions">
-          <button class="btn-secondary" id="btn-dossier-back">← RETURN TO MAP</button>
-          <button class="btn-primary" id="btn-issue-warrant" disabled>ISSUE WARRANT</button>
+          <button class="btn-secondary" id="btn-dossier-back"></button>
+          <button class="btn-primary" id="btn-issue-warrant" disabled></button>
         </div>
       </section>
 
       <section id="screen-epilogue" class="screen">
         <div class="epilogue-box">
-          <div id="epilogue-stamp" class="stamp hidden">CASE CLOSED</div>
+          <div id="epilogue-stamp" class="stamp hidden"></div>
           <h2 id="epilogue-title"></h2>
           <div id="epilogue-text" class="narrator-text"></div>
           <div class="rank-block">
-            <div class="rank-label">YOUR RANK</div>
+            <div class="rank-label" id="rank-label"></div>
             <div id="rank-value" class="rank-value"></div>
           </div>
           <div class="epilogue-actions">
-            <button class="btn-primary" id="btn-epilogue-again">NEW CASE</button>
+            <button class="btn-primary" id="btn-epilogue-again"></button>
           </div>
         </div>
       </section>
@@ -120,15 +126,15 @@
     </main>
 
     <div id="stamp-overlay" class="stamp-overlay hidden">
-      <div class="stamp big">WARRANT ISSUED</div>
+      <div class="stamp big"></div>
     </div>
 
     <div id="confirm-modal" class="modal hidden">
       <div class="modal-box">
         <div id="confirm-text" class="narrator-text"></div>
         <div class="modal-actions">
-          <button class="btn-primary" id="btn-confirm-yes">YES</button>
-          <button class="btn-secondary" id="btn-confirm-no">NO</button>
+          <button class="btn-primary" id="btn-confirm-yes"></button>
+          <button class="btn-secondary" id="btn-confirm-no"></button>
         </div>
       </div>
     </div>

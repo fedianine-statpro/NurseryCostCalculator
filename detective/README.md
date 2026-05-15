@@ -20,6 +20,12 @@ Open `index.html` directly in a browser, or host the folder on GitHub Pages.
    - Wrong warrant = 12-hour penalty.
 5. **Arrest** — fly to the final city of the trail *with the correct warrant* before the clock runs out.
 
+## Languages
+
+The game supports English and Russian. Toggle with the `EN | RU` buttons in the top-right HUD. Your choice is remembered between sessions (localStorage).
+
+To add another language: create `js/i18n/<code>.js` mirroring the structure of `en.js`, then register it in `js/i18n/i18n.js` and add a button in `index.html`.
+
 ## Keyboard
 
 - `Space` / `Enter` — skip typewriter text

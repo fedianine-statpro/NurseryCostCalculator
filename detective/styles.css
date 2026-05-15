@@ -71,7 +71,31 @@ html, body {
   font-size: 13px;
   letter-spacing: 0.05em;
 }
-.hud-right { display: flex; gap: 20px; }
+.hud-right { display: flex; gap: 20px; align-items: center; }
+
+.lang-toggle {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--amber-dim);
+  margin-left: 8px;
+}
+.lang-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--amber-dim);
+  cursor: pointer;
+}
+.lang-btn:hover { color: var(--amber); background: rgba(255,179,71,0.08); box-shadow: none; }
+.lang-btn.active {
+  color: var(--bg);
+  background: var(--amber);
+  font-weight: bold;
+}
 .hud-right span { opacity: 0.9; }
 .logo {
   color: var(--amber-bright);

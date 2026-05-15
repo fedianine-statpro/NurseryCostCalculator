@@ -1,8 +1,7 @@
-// Entry: wires up screens and runs the game state machine.
+// Entry: wires up screens, runs the state machine, and handles locale switching.
 
 import { CASES, CASE_BY_ID } from "./data/cases.js";
 import { CITIES } from "./data/cities.js";
-import { SUSPECT_BY_ID } from "./data/suspects.js";
 import {
   createGameState, getCurrentCase, getTrailEntryForCity, getTrailIndexOfCity,
   getFinalCityId, isLocationDone, markLocationDone, spendHours, formatTime
@@ -12,31 +11,84 @@ import {
   generateDestinationClue, generateTraitClue, generateJunkClue, generateDeadEndClue
 } from "./engine/clues.js";
 import { canIssueWarrant } from "./engine/warrant.js";
-import { mountMap, refreshMap } from "./ui/map.js";
+import { mountMap, refreshMap, relocaleMap } from "./ui/map.js";
 import { renderDossier, getSelectedSuspect, clearSelection } from "./ui/dossier.js";
 import { typewrite } from "./ui/narrator.js";
 import {
   sfxBeep, sfxConfirm, sfxDeny, sfxPlane, sfxStamp, sfxWin, sfxLose
 } from "./ui/effects.js";
+import {
+  getLocale, getLocaleCode, setLocale, onLocaleChange, availableLocales
+} from "./i18n/i18n.js";
 
 const $ = (sel) => document.querySelector(sel);
 
 let state = null;
-let pendingResult = null; // for city-result continue handling
+let activeScreen = "title";
 
 // ---------- Screen routing ----------
 const SCREENS = ["title", "case-select", "briefing", "map", "city", "dossier", "epilogue"];
 
 function showScreen(name) {
+  activeScreen = name;
   for (const s of SCREENS) {
     document.getElementById("screen-" + s).classList.toggle("active", s === name);
   }
-  // hide modals/overlays
   $("#confirm-modal").classList.add("hidden");
+}
+
+// ---------- Locale application ----------
+// Sets all the static UI strings (button labels, panel titles) for the current locale.
+// Called once on boot and again whenever the locale changes.
+function applyStaticLocale() {
+  const L = getLocale();
+  // HUD
+  $(".logo").textContent = L.ui.bureau;
+  // Title screen
+  $("#title1").innerHTML = L.ui.title1;
+  $("#title2").innerHTML = L.ui.title2;
+  $("#tagline").textContent = L.ui.tagline;
+  $("#btn-start").textContent = L.ui.beginBriefing;
+  $("#keyboard-hint").innerHTML = L.ui.keyboardHint;
+  // Case select
+  $("#case-select-title").textContent = L.ui.chooseCase;
+  // Briefing
+  $("#briefing-label").textContent = L.ui.chiefsBriefingLabel;
+  $("#btn-briefing-go").textContent = L.ui.takeCase;
+  // Map screen
+  $("#map-loc-title").textContent = L.ui.currentLocation;
+  $("#map-actions-title").textContent = L.ui.actions;
+  $("#btn-investigate").textContent = L.ui.investigate;
+  $("#btn-open-dossier").textContent = L.ui.openDossier;
+  $("#map-marker-hint").textContent = L.ui.clickMarkerHint;
+  // City screen
+  $("#btn-back-map").textContent = L.ui.backMap;
+  $("#btn-city-dossier").textContent = L.ui.dossier;
+  $("#btn-result-continue").textContent = L.ui.cont;
+  // Dossier
+  $("#dossier-title").textContent = L.ui.suspectDossier;
+  $("#traits-title").textContent = L.ui.traitsCollected;
+  $("#btn-dossier-back").textContent = L.ui.returnMap;
+  $("#btn-issue-warrant").textContent = L.ui.issueWarrant;
+  // Epilogue
+  $("#btn-epilogue-again").textContent = L.ui.newCase;
+  $("#rank-label").textContent = L.ui.yourRank;
+  // Stamp
+  $("#stamp-overlay .stamp").textContent = L.ui.warrantIssued;
+  // Language toggle buttons reflect active code
+  updateLangButtons();
+}
+
+function updateLangButtons() {
+  const code = getLocaleCode();
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === code);
+  });
 }
 
 // ---------- HUD ----------
 function updateHud() {
+  const L = getLocale();
   if (!state) {
     $("#hud-case").textContent = "";
     $("#hud-city").textContent = "";
@@ -44,11 +96,11 @@ function updateHud() {
     return;
   }
   const c = getCurrentCase(state);
-  const city = CITIES[state.currentCityId];
-  $("#hud-case").textContent = `Case ${c.id} · ${c.title}`;
-  $("#hud-city").textContent = `📍 ${city.name}, ${city.country}`;
-  $("#hud-clock").textContent = `⏱ ${formatTime(state.hoursLeft)}`;
-  // warn color near end
+  const cityLoc = L.cities[state.currentCityId];
+  const caseLoc = L.cases[c.id];
+  $("#hud-case").textContent = L.ui.caseLine(c.id, caseLoc.title);
+  $("#hud-city").textContent = L.ui.locationLine(cityLoc.name, cityLoc.country);
+  $("#hud-clock").textContent = L.ui.clockLine(formatTime(state.hoursLeft));
   if (state.hoursLeft < 24) $("#hud-clock").style.color = "var(--red)";
   else $("#hud-clock").style.color = "";
 }
@@ -62,15 +114,17 @@ $("#btn-start").addEventListener("click", () => {
 
 // ---------- Case select ----------
 function renderCaseList() {
+  const L = getLocale();
   const host = $("#case-list");
   host.innerHTML = "";
   for (const c of CASES) {
+    const caseLoc = L.cases[c.id];
     const card = document.createElement("div");
     card.className = "case-card";
     card.innerHTML = `
       <div class="case-card-id">${c.id}</div>
-      <div class="case-card-title">${c.title}</div>
-      <div class="case-card-sub">Stolen: ${c.loot}</div>
+      <div class="case-card-title">${caseLoc.title}</div>
+      <div class="case-card-sub">${L.ui.stolen(caseLoc.lootLong)}</div>
     `;
     card.addEventListener("click", () => {
       sfxConfirm();
@@ -85,10 +139,10 @@ function startCase(caseId) {
   state = createGameState(caseId);
   clearSelection();
   updateHud();
-  const c = getCurrentCase(state);
-  $("#briefing-id").textContent = c.id;
+  const L = getLocale();
+  $("#briefing-id").textContent = caseId;
   showScreen("briefing");
-  typewrite($("#briefing-text"), c.briefing, { speed: 18 });
+  typewrite($("#briefing-text"), L.cases[caseId].briefing, { speed: 18 });
 }
 
 $("#btn-briefing-go").addEventListener("click", () => {
@@ -104,9 +158,10 @@ function enterMap() {
     mapMounted = true;
   }
   refreshMap(state.currentCityId);
-  const city = CITIES[state.currentCityId];
-  $("#map-current-city").textContent = `${city.name}, ${city.country}`;
-  $("#map-current-flavor").textContent = `A city of ${city.climate}. ${capitalize(city.fact)}.`;
+  const L = getLocale();
+  const cityLoc = L.cities[state.currentCityId];
+  $("#map-current-city").textContent = `${cityLoc.name}, ${cityLoc.country}`;
+  $("#map-current-flavor").textContent = L.ui.cityFlavor(cityLoc.climate, cityLoc.fact);
   updateHud();
   showScreen("map");
 }
@@ -117,10 +172,11 @@ function handleCityClickFromMap(cityId) {
     enterCity();
     return;
   }
+  const L = getLocale();
   const hours = travelHours(state.currentCityId, cityId);
-  const targetCity = CITIES[cityId];
+  const targetCity = L.cities[cityId];
   askConfirm(
-    `Fly to ${targetCity.name}, ${targetCity.country}?\n\nFlight time: ${hours} hours.\n\nYou have ${formatTime(state.hoursLeft)}.`,
+    L.ui.flyTo(targetCity.name, targetCity.country, hours, formatTime(state.hoursLeft)),
     () => doTravel(cityId, hours),
     null
   );
@@ -137,7 +193,6 @@ function doTravel(cityId, hours) {
     return;
   }
 
-  // If arrived at the final city, check arrest condition
   const finalId = getFinalCityId(state);
   if (cityId === finalId) {
     handleArrival();
@@ -158,21 +213,24 @@ $("#btn-open-dossier").addEventListener("click", () => {
 
 // ---------- City ----------
 function enterCity() {
-  const city = CITIES[state.currentCityId];
-  $("#city-name").textContent = `${city.name}, ${city.country}`;
-  $("#city-sub").textContent = `Native tongue: ${city.language}. Local currency: ${city.currency}. Known for ${city.landmark}.`;
+  const L = getLocale();
+  const cityData = CITIES[state.currentCityId];
+  const cityLoc = L.cities[cityData.id];
+  $("#city-name").textContent = L.ui.cityHeader(cityLoc.name, cityLoc.country);
+  $("#city-sub").textContent = L.ui.citySub(cityLoc.language, cityLoc.currency, cityLoc.landmark);
 
   const host = $("#city-locations");
   host.innerHTML = "";
-  for (const loc of city.locations) {
+  for (const loc of cityData.locations) {
+    const locLoc = cityLoc.locations[loc.id];
     const card = document.createElement("div");
     card.className = "location-card";
-    const done = isLocationDone(state, city.id, loc.id);
+    const done = isLocationDone(state, cityData.id, loc.id);
     if (done) card.classList.add("disabled");
     card.innerHTML = `
-      <div class="location-name">${loc.name}</div>
-      <div class="location-cost">${loc.cost}h · ${done ? "ALREADY SEARCHED" : "CLICK TO INVESTIGATE"}</div>
-      <div class="location-flavor">${loc.flavor}</div>
+      <div class="location-name">${locLoc.name}</div>
+      <div class="location-cost">${L.ui.locationCost(loc.cost, done)}</div>
+      <div class="location-flavor">${locLoc.flavor}</div>
     `;
     if (!done) {
       card.addEventListener("click", () => investigateLocation(loc));
@@ -197,7 +255,6 @@ function investigateLocation(loc) {
   const isFinal = (cityId === getFinalCityId(state));
 
   if (!trailEntry || isFinal) {
-    // Off-trail city OR at final city via investigation (already handled separately on arrival)
     text = generateDeadEndClue(cityId, loc.id);
   } else {
     const yields = trailEntry.locations?.[loc.id];
@@ -208,7 +265,8 @@ function investigateLocation(loc) {
       text = generateDestinationClue(nextCityId, yields.angle, cityId, loc.id);
     } else if (yields.yields === "trait") {
       const tc = generateTraitClue(c.culpritId, yields.trait, cityId, loc.id);
-      state.traitsLearned[tc.traitKey] = tc.value;
+      // Store the language-neutral value id so language switches are safe.
+      state.traitsLearned[tc.traitKey] = tc.valueId;
       text = tc.text;
     } else {
       text = generateJunkClue(cityId, loc.id);
@@ -217,13 +275,11 @@ function investigateLocation(loc) {
 
   state.cluesSeen.push({ cityId, locationId: loc.id, text });
 
-  // Disable the card visually
   $("#city-locations").querySelectorAll(".location-card").forEach((card, i) => {
     const locId = CITIES[cityId].locations[i].id;
     if (isLocationDone(state, cityId, locId)) card.classList.add("disabled");
   });
 
-  // Show result
   $("#city-result").classList.remove("hidden");
   typewrite($("#city-result-text"), text);
   updateHud();
@@ -236,7 +292,6 @@ function investigateLocation(loc) {
 $("#btn-result-continue").addEventListener("click", () => {
   sfxBeep();
   $("#city-result").classList.add("hidden");
-  // If all locations done, kick back to map
   const city = CITIES[state.currentCityId];
   const allDone = city.locations.every(l => isLocationDone(state, city.id, l.id));
   if (allDone) enterMap();
@@ -257,6 +312,7 @@ function enterDossier() {
 $("#btn-dossier-back").addEventListener("click", () => { sfxBeep(); enterMap(); });
 
 $("#btn-issue-warrant").addEventListener("click", () => {
+  const L = getLocale();
   const id = getSelectedSuspect();
   if (!id || !canIssueWarrant(state)) return;
   const c = getCurrentCase(state);
@@ -264,7 +320,6 @@ $("#btn-issue-warrant").addEventListener("click", () => {
     state.warrantSuspectId = id;
     sfxStamp();
     showWarrantStamp(() => {
-      // If we already arrived at the final city before getting the warrant, arrest now.
       if (state.currentCityId === getFinalCityId(state)) {
         state.status = "won";
         finishCase();
@@ -278,12 +333,7 @@ $("#btn-issue-warrant").addEventListener("click", () => {
     state.wrongWarrants++;
     clearSelection();
     if (state.status === "lost") { finishCase(); return; }
-    askConfirm(
-      `The description on the warrant didn't match. The judge tore it up.\n\n— 12 hours penalty.`,
-      () => enterDossier(),
-      null,
-      "OK", null
-    );
+    askConfirm(L.ui.wrongWarrant, () => enterDossier(), null, L.ui.ok, null);
   }
 });
 
@@ -298,60 +348,54 @@ function showWarrantStamp(then) {
 
 // ---------- Arrival at final city ----------
 function handleArrival() {
-  // Player just arrived at the final city.
+  const L = getLocale();
   const c = getCurrentCase(state);
-  const finalCity = CITIES[getFinalCityId(state)];
+  const finalCity = L.cities[getFinalCityId(state)];
 
   if (state.warrantSuspectId === c.culpritId) {
-    // ARREST
     state.status = "won";
     sfxWin();
     finishCase();
     return;
   }
   if (state.warrantSuspectId && state.warrantSuspectId !== c.culpritId) {
-    // Shouldn't happen — issueWarrant only allows correct culprit. But if it did:
     state.status = "lost";
     state.losReason = "wrong-warrant";
     finishCase();
     return;
   }
-  // No warrant yet
-  askConfirm(
-    `You arrived in ${finalCity.name} on instinct. You see them in the distance — but you have no warrant. Without one, they walk free.\n\nReturn to your dossier and identify them, then come back.`,
-    () => enterMap(),
-    null,
-    "OK", null
-  );
+  askConfirm(L.ui.noWarrantArrival(finalCity.name), () => enterMap(), null, L.ui.ok, null);
 }
 
 // ---------- Win / Lose ----------
 function finishCase() {
+  const L = getLocale();
   const c = getCurrentCase(state);
-  const culprit = SUSPECT_BY_ID[c.culpritId];
+  const culpritLoc = L.suspects[c.culpritId];
+  const caseLoc = L.cases[c.id];
   const isWin = state.status === "won";
 
   const stampEl = $("#epilogue-stamp");
-  stampEl.classList.toggle("hidden", false);
-  stampEl.textContent = isWin ? "CASE CLOSED" : "TRAIL LOST";
+  stampEl.classList.remove("hidden");
+  stampEl.textContent = isWin ? L.ui.caseClosed : L.ui.trailLost;
   stampEl.style.color = isWin ? "var(--red)" : "#777";
   stampEl.style.borderColor = isWin ? "var(--red)" : "#777";
 
   let title, body, rank;
   if (isWin) {
-    title = `You caught ${culprit.name}.`;
-    body = `${culprit.name} surrendered in ${CITIES[getFinalCityId(state)].name} with ${c.loot.split(",")[0]} still in their case.\n\nThe chief sends a single word over the wire: "Excellent."`;
+    title = L.ui.winTitle(culpritLoc.name);
+    body = L.ui.winBody(culpritLoc.name, L.cities[getFinalCityId(state)].name, caseLoc.loot);
     rank = computeRank(state.hoursLeft, state.wrongWarrants);
     sfxWin();
   } else {
     if (state.losReason === "clock") {
-      title = "The trail's gone cold.";
-      body = `The week ran out. ${culprit.name} is already on a private plane, and ${c.loot.split(",")[0]} is going with them.\n\nThe chief sighs, and pours another coffee.`;
+      title = L.ui.loseClockTitle;
+      body = L.ui.loseClockBody(culpritLoc.name, caseLoc.loot);
     } else {
-      title = "You were chasing the wrong shadow.";
-      body = `Your warrant named the wrong person, and the real thief — ${culprit.name} — walked past you and out the door.`;
+      title = L.ui.loseWrongTitle;
+      body = L.ui.loseWrongBody(culpritLoc.name);
     }
-    rank = "ROOKIE";
+    rank = L.ranks.rookie;
     sfxLose();
   }
 
@@ -362,11 +406,12 @@ function finishCase() {
 }
 
 function computeRank(hoursLeft, wrongs) {
+  const L = getLocale();
   const adjusted = hoursLeft - wrongs * 18;
-  if (adjusted >= 96) return "ACE DETECTIVE";
-  if (adjusted >= 48) return "INSPECTOR";
-  if (adjusted >= 16) return "DETECTIVE";
-  return "ROOKIE";
+  if (adjusted >= 96) return L.ranks.ace;
+  if (adjusted >= 48) return L.ranks.inspector;
+  if (adjusted >= 16) return L.ranks.detective;
+  return L.ranks.rookie;
 }
 
 $("#btn-epilogue-again").addEventListener("click", () => {
@@ -378,26 +423,20 @@ $("#btn-epilogue-again").addEventListener("click", () => {
 });
 
 // ---------- Confirm modal ----------
-function askConfirm(text, onYes, onNo, yesLabel = "YES", noLabel = "NO") {
+function askConfirm(text, onYes, onNo, yesLabel, noLabel) {
+  const L = getLocale();
+  yesLabel = yesLabel ?? L.ui.yes;
   $("#confirm-text").textContent = text;
   $("#btn-confirm-yes").textContent = yesLabel;
   if (noLabel === null) {
     $("#btn-confirm-no").style.display = "none";
   } else {
     $("#btn-confirm-no").style.display = "";
-    $("#btn-confirm-no").textContent = noLabel;
+    $("#btn-confirm-no").textContent = noLabel ?? L.ui.no;
   }
   $("#confirm-modal").classList.remove("hidden");
-  const yes = () => {
-    cleanup();
-    sfxConfirm();
-    if (onYes) onYes();
-  };
-  const no = () => {
-    cleanup();
-    sfxBeep();
-    if (onNo) onNo();
-  };
+  const yes = () => { cleanup(); sfxConfirm(); if (onYes) onYes(); };
+  const no = () => { cleanup(); sfxBeep(); if (onNo) onNo(); };
   function cleanup() {
     $("#confirm-modal").classList.add("hidden");
     $("#btn-confirm-yes").removeEventListener("click", yes);
@@ -407,6 +446,38 @@ function askConfirm(text, onYes, onNo, yesLabel = "YES", noLabel = "NO") {
   $("#btn-confirm-no").addEventListener("click", no, { once: true });
 }
 
+// ---------- Language switcher ----------
+function setupLangButtons() {
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      sfxBeep();
+      setLocale(btn.dataset.lang);
+    });
+  });
+}
+
+// When the locale changes, re-render everything currently visible.
+onLocaleChange(() => {
+  applyStaticLocale();
+  relocaleMap();
+  updateHud();
+  // Re-render whichever dynamic screen is active.
+  if (activeScreen === "case-select") {
+    renderCaseList();
+  } else if (activeScreen === "briefing" && state) {
+    const L = getLocale();
+    typewrite($("#briefing-text"), L.cases[state.caseId].briefing, { speed: 6 });
+  } else if (activeScreen === "map" && state) {
+    enterMap();
+  } else if (activeScreen === "city" && state) {
+    enterCity();
+  } else if (activeScreen === "dossier" && state) {
+    enterDossier();
+  } else if (activeScreen === "epilogue" && state) {
+    finishCase();
+  }
+});
+
 // ---------- Keyboard ----------
 window.addEventListener("keydown", (e) => {
   if (e.code === "Escape" && state && state.status === "investigating") {
@@ -415,8 +486,7 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-// ---------- Utils ----------
-function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-
 // ---------- Boot ----------
+setupLangButtons();
+applyStaticLocale();
 showScreen("title");

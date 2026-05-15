@@ -2,6 +2,7 @@
 
 import { WORLD_MAP_SVG } from "../world-map.svg.js";
 import { CITIES } from "../data/cities.js";
+import { getLocale } from "../i18n/i18n.js";
 
 let mapHost = null;
 let onCityClick = null;
@@ -12,8 +13,14 @@ export function mountMap(hostEl, clickHandler) {
   hostEl.innerHTML = WORLD_MAP_SVG;
   const svg = hostEl.querySelector("svg");
   const layer = svg.querySelector("#city-layer");
+  rebuildLayer(layer);
+}
 
+function rebuildLayer(layer) {
+  layer.innerHTML = "";
+  const L = getLocale();
   for (const c of Object.values(CITIES)) {
+    const localeCity = L.cities[c.id];
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.dataset.city = c.id;
 
@@ -28,7 +35,7 @@ export function mountMap(hostEl, clickHandler) {
     label.setAttribute("x", c.x + 6);
     label.setAttribute("y", c.y + 2);
     label.setAttribute("class", "city-label");
-    label.textContent = c.name;
+    label.textContent = localeCity.name;
     g.appendChild(label);
 
     g.style.cursor = "pointer";
@@ -39,6 +46,13 @@ export function mountMap(hostEl, clickHandler) {
 
     layer.appendChild(g);
   }
+}
+
+// Called when the locale changes — re-render city labels.
+export function relocaleMap() {
+  if (!mapHost) return;
+  const layer = mapHost.querySelector("#city-layer");
+  if (layer) rebuildLayer(layer);
 }
 
 export function refreshMap(currentCityId) {

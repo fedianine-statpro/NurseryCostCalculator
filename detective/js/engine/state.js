@@ -1,21 +1,24 @@
 // Single game state object. All mutations go through reducers here.
 
 import { CASE_BY_ID } from "../data/cases.js";
+import { getLocale } from "../i18n/i18n.js";
 
 export function createGameState(caseId) {
   const c = CASE_BY_ID[caseId];
   return {
     caseId,
     hoursLeft: c.hours,
-    trailIndex: 0,                  // index into c.trail; the city the player is currently AT
+    trailIndex: 0,
     currentCityId: c.trail[0].cityId,
     visitedCityIds: [c.trail[0].cityId],
-    investigatedLocations: {},      // { cityId: Set<locationId> } — to prevent farming a city
-    cluesSeen: [],                  // [{cityId, locationId, text, type}]
-    traitsLearned: {},              // { category: value }
+    investigatedLocations: {},
+    cluesSeen: [],
+    // traitsLearned: { category: suspectId } — locale-agnostic.
+    // A learned trait points at the suspect whose value matches the culprit's.
+    traitsLearned: {},
     warrantSuspectId: null,
     wrongWarrants: 0,
-    status: "investigating",        // 'investigating' | 'won' | 'lost'
+    status: "investigating",
     losReason: null,
   };
 }
@@ -39,7 +42,6 @@ export function getFinalCityId(state) {
   return c.trail[c.trail.length - 1].cityId;
 }
 
-// True if the player has already investigated this location at this city in this case.
 export function isLocationDone(state, cityId, locationId) {
   return state.investigatedLocations[cityId]?.has(locationId);
 }
@@ -61,8 +63,9 @@ export function spendHours(state, hours) {
 }
 
 export function formatTime(hours) {
+  const L = getLocale();
   const days = Math.floor(hours / 24);
   const rem = hours % 24;
-  if (days <= 0) return `${rem}h left`;
-  return `${days}d ${rem}h left`;
+  if (days <= 0) return L.ui.timeHours(rem);
+  return L.ui.timeDaysHours(days, rem);
 }
