@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Globe Detective</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="crt">
+    <div class="scanlines"></div>
+
+    <header class="hud">
+      <div class="hud-left">
+        <span class="logo">GLOBE DETECTIVE BUREAU</span>
+      </div>
+      <div class="hud-right">
+        <span id="hud-case"></span>
+        <span id="hud-city"></span>
+        <span id="hud-clock"></span>
+      </div>
+    </header>
+
+    <main id="screens">
+
+      <section id="screen-title" class="screen active">
+        <div class="title-block">
+          <h1>GLOBE<br/>DETECTIVE</h1>
+          <p class="tagline">An international caper. A ticking clock. One detective.</p>
+          <button class="btn-primary" id="btn-start">BEGIN BRIEFING</button>
+          <p class="hint">// keyboard: <kbd>Space</kbd> skip text · <kbd>Esc</kbd> dossier</p>
+        </div>
+      </section>
+
+      <section id="screen-case-select" class="screen">
+        <h2>CHOOSE YOUR CASE</h2>
+        <div id="case-list" class="case-list"></div>
+      </section>
+
+      <section id="screen-briefing" class="screen">
+        <div class="briefing-box">
+          <div class="briefing-header">CHIEF'S BRIEFING — CASE FILE <span id="briefing-id"></span></div>
+          <div id="briefing-text" class="narrator-text"></div>
+          <div class="briefing-actions">
+            <button class="btn-primary" id="btn-briefing-go">TAKE THE CASE</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-map" class="screen">
+        <div class="map-wrap">
+          <div id="map-container"></div>
+          <div class="map-side">
+            <div class="panel">
+              <div class="panel-title">CURRENT LOCATION</div>
+              <div id="map-current-city" class="big-text"></div>
+              <div id="map-current-flavor" class="flavor"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-title">ACTIONS</div>
+              <button class="btn-primary full" id="btn-investigate">INVESTIGATE THIS CITY</button>
+              <button class="btn-secondary full" id="btn-open-dossier">OPEN DOSSIER</button>
+              <p class="hint">click a marker on the map to fly there</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-city" class="screen">
+        <div class="city-header">
+          <h2 id="city-name"></h2>
+          <div class="city-sub" id="city-sub"></div>
+        </div>
+        <div id="city-locations" class="locations"></div>
+        <div id="city-result" class="result hidden">
+          <div class="result-text narrator-text" id="city-result-text"></div>
+          <div class="result-actions">
+            <button class="btn-primary" id="btn-result-continue">CONTINUE</button>
+          </div>
+        </div>
+        <div class="city-footer">
+          <button class="btn-secondary" id="btn-back-map">← BACK TO MAP</button>
+          <button class="btn-secondary" id="btn-city-dossier">DOSSIER</button>
+        </div>
+      </section>
+
+      <section id="screen-dossier" class="screen">
+        <h2>SUSPECT DOSSIER</h2>
+        <div class="dossier-layout">
+          <div class="traits-panel panel">
+            <div class="panel-title">TRAITS COLLECTED</div>
+            <ul id="traits-list" class="traits-list"></ul>
+            <p class="hint" id="traits-hint"></p>
+          </div>
+          <div class="suspects-panel">
+            <div id="suspect-grid" class="suspect-grid"></div>
+          </div>
+        </div>
+        <div class="dossier-actions">
+          <button class="btn-secondary" id="btn-dossier-back">← RETURN TO MAP</button>
+          <button class="btn-primary" id="btn-issue-warrant" disabled>ISSUE WARRANT</button>
+        </div>
+      </section>
+
+      <section id="screen-epilogue" class="screen">
+        <div class="epilogue-box">
+          <div id="epilogue-stamp" class="stamp hidden">CASE CLOSED</div>
+          <h2 id="epilogue-title"></h2>
+          <div id="epilogue-text" class="narrator-text"></div>
+          <div class="rank-block">
+            <div class="rank-label">YOUR RANK</div>
+            <div id="rank-value" class="rank-value"></div>
+          </div>
+          <div class="epilogue-actions">
+            <button class="btn-primary" id="btn-epilogue-again">NEW CASE</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="stamp-overlay" class="stamp-overlay hidden">
+      <div class="stamp big">WARRANT ISSUED</div>
+    </div>
+
+    <div id="confirm-modal" class="modal hidden">
+      <div class="modal-box">
+        <div id="confirm-text" class="narrator-text"></div>
+        <div class="modal-actions">
+          <button class="btn-primary" id="btn-confirm-yes">YES</button>
+          <button class="btn-secondary" id="btn-confirm-no">NO</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
