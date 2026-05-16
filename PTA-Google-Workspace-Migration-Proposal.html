@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moving Our PTA from a Shared Gmail Account to Google for Nonprofits</title>
+<style>
+  :root {
+    --text: #1f2328;
+    --muted: #57606a;
+    --accent: #0969da;
+    --border: #d0d7de;
+    --bg: #ffffff;
+    --bg-soft: #f6f8fa;
+    --warn-bg: #fff8c5;
+    --warn-border: #d4a72c;
+    --good-bg: #dafbe1;
+    --good-border: #1a7f37;
+    --bad-bg: #ffebe9;
+    --bad-border: #cf222e;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 6rem;
+    font-size: 16.5px;
+  }
+  h1 {
+    font-size: 2rem;
+    line-height: 1.25;
+    margin: 0 0 0.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin-top: 1.75rem;
+    color: var(--text);
+  }
+  p { margin: 0.75rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin: 0.35rem 0; }
+  li > ul, li > ol { margin-top: 0.35rem; }
+  strong { color: #000; }
+  em { color: var(--muted); }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  code {
+    background: var(--bg-soft);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+  blockquote {
+    border-left: 4px solid var(--accent);
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--bg-soft);
+    color: var(--muted);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.96em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-soft);
+    font-weight: 600;
+  }
+  .callout {
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    border-left: 4px solid;
+  }
+  .callout.warn { background: var(--warn-bg); border-color: var(--warn-border); }
+  .callout.good { background: var(--good-bg); border-color: var(--good-border); }
+  .callout.bad  { background: var(--bad-bg);  border-color: var(--bad-border); }
+  .callout p:first-child { margin-top: 0; }
+  .callout p:last-child  { margin-bottom: 0; }
+  .toc {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .toc h2 {
+    margin-top: 0;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    padding-bottom: 0;
+  }
+  .toc ol { margin: 0; }
+  .toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .toc a:hover { text-decoration: underline; }
+  .lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .qa-question {
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.1rem;
+  }
+  .qa-answer {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+  @media print {
+    body { font-size: 11pt; max-width: 100%; padding: 0; }
+    h1, h2, h3 { page-break-after: avoid; }
+    .callout, table, blockquote { page-break-inside: avoid; }
+    .toc { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Moving Our PTA from a Shared Gmail Account to Google for Nonprofits</h1>
+<p class="lead">A plain-language proposal for the whole PTA team. Please read through &mdash; even the boring bits &mdash; because the trade-offs matter.</p>
+
+<nav class="toc" aria-label="Table of contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#sec-1">Why we are even thinking about this</a></li>
+    <li><a href="#sec-2">What we have today, in plain terms</a></li>
+    <li><a href="#sec-3">What &ldquo;Google for Nonprofits&rdquo; actually is</a></li>
+    <li><a href="#sec-4">Can we actually get it? (Eligibility)</a></li>
+    <li><a href="#sec-5">The domain name &mdash; the part most people forget</a></li>
+    <li><a href="#sec-6">What it will cost</a></li>
+    <li><a href="#sec-7">What the new email setup will look like in practice</a></li>
+    <li><a href="#sec-8">The big migration &mdash; what actually moves and how</a></li>
+    <li><a href="#sec-9">Keeping the old mailbox working during and after the move</a></li>
+    <li><a href="#sec-10">What will be different in daily life for the team</a></li>
+    <li><a href="#sec-11">Downsides and trade-offs &mdash; the honest list</a></li>
+    <li><a href="#sec-12">What we cannot achieve, even with the best plan</a></li>
+    <li><a href="#sec-13">Risks we should name out loud</a></li>
+    <li><a href="#sec-14">Proposed step-by-step plan</a></li>
+    <li><a href="#sec-15">A realistic budget</a></li>
+    <li><a href="#sec-16">Frequently asked questions</a></li>
+    <li><a href="#sec-17">Recommended next decisions for the committee</a></li>
+    <li><a href="#sec-18">One last sanity check</a></li>
+  </ol>
+</nav>
+
+<h2 id="sec-1">1. Why we are even thinking about this</h2>
+<p>Today, all of us share one Gmail account. We all log in with the same password, see the same inbox, and send every email from the same address. That has worked, but it has real downsides:</p>
+<ul>
+  <li><strong>It is not secure.</strong> A shared password means we can never really know who sent which email, who logged in last, or whether the password has leaked. If one volunteer&rsquo;s laptop is compromised, everyone&rsquo;s access is compromised. We also can&rsquo;t turn on two-factor login properly, because there is no single phone to send a code to.</li>
+  <li><strong>It is noisy.</strong> Every reminder from the school office, every receipt, every &ldquo;thank you&rdquo; reply, every personal back-and-forth between one volunteer and a vendor &mdash; all of it lands in the same inbox that all of us have to wade through.</li>
+  <li><strong>It is not professional.</strong> Emails from <code>oursharedaccount@gmail.com</code> look like a personal address. When we contact sponsors, the school district, or other organisations, an address like <code>treasurer@poplarprimarypta.com</code> reads as a real organisation.</li>
+  <li><strong>We cannot tell who did what.</strong> If two volunteers reply to the same parent in the same hour, neither knows the other replied. Drafts get overwritten. Read/unread status is a constant fight.</li>
+  <li><strong>Handovers are messy.</strong> When someone leaves the PTA, we change the shared password and hope nobody forgot to copy what they needed. There is no clean &ldquo;deactivate this person&rsquo;s account.&rdquo;</li>
+</ul>
+
+<p>What we want instead:</p>
+<ul>
+  <li><strong>Group addresses</strong> (e.g. <code>contact@poplarprimarypta.com</code>) for things the whole team should see &mdash; like a public inbox.</li>
+  <li><strong>Individual addresses</strong> (e.g. <code>jane.smith@poplarprimarypta.com</code>) for one-to-one conversations.</li>
+  <li><strong>One identity per person</strong>, with their own password and their own login.</li>
+  <li><strong>The ability to &ldquo;send as&rdquo; the group address</strong> from a personal account when appropriate &mdash; so a reply to <code>contact@</code> still comes back to <code>contact@</code>, not to one volunteer.</li>
+  <li><strong>Keep our existing organised email history</strong> &mdash; labels, folders, attachments &mdash; accessible to whoever needs it.</li>
+  <li><strong>Keep the old Gmail working</strong> for a long handover period, with mail automatically forwarded to the new system, so nothing gets lost while people slowly update our address everywhere.</li>
+</ul>
+
+<p>Google for Nonprofits (specifically, <strong>Google Workspace for Nonprofits</strong>) is Google&rsquo;s program that gives qualifying nonprofits free or heavily discounted access to a &ldquo;real&rdquo; business version of Gmail, Drive, Calendar, Docs, and so on. That is what we are proposing to move to.</p>
+
+<h2 id="sec-2">2. What we have today, in plain terms</h2>
+<ul>
+  <li><strong>One Gmail mailbox</strong>, ending in <code>@gmail.com</code>. Years of mail, all neatly labelled and filed.</li>
+  <li><strong>One Google Drive</strong>, attached to that account, containing meeting minutes, financial spreadsheets, photos, flyers, templates, scans of receipts.</li>
+  <li><strong>One Google Calendar</strong>, with our recurring meetings, school events, and deadlines.</li>
+  <li>Possibly <strong>Google Photos</strong>, <strong>Google Contacts</strong>, <strong>Google Forms</strong>, <strong>Google Sites</strong> linked to the same account.</li>
+  <li><strong>One password</strong>, shared by however many of us currently have it.</li>
+</ul>
+<p>Everything that lives in this account is owned by the account. If we ever lose access to it (forgotten password, locked out by Google, hacked), we lose it all in one stroke. That is its own quiet risk.</p>
+
+<h2 id="sec-3">3. What &ldquo;Google for Nonprofits&rdquo; actually is &mdash; without the jargon</h2>
+<p>Think of it this way:</p>
+<ul>
+  <li><strong>Personal Gmail</strong> is like renting a single PO box at the post office. One box, one key, one name on it.</li>
+  <li><strong>Google Workspace</strong> is like renting an entire mailroom for an organisation: each staff member gets their own box, the organisation gets shared boxes for &ldquo;Reception&rdquo; and &ldquo;Accounts&rdquo;, there&rsquo;s a master key the office manager holds, and the whole thing is under the organisation&rsquo;s name on the building.</li>
+  <li><strong>Google Workspace for Nonprofits</strong> is Google saying: &ldquo;If you can prove you are a real nonprofit, we will give you the mailroom &mdash; free, or at a steep discount, depending on how fancy a mailroom you want.&rdquo;</li>
+</ul>
+<p>It is not a different product from Workspace; it is the same product with nonprofit pricing. Big organisations and small organisations use the same tool &mdash; we&rsquo;d just be using a small slice of it.</p>
+<p>The key things it gives us that personal Gmail does not:</p>
+<ol>
+  <li><strong>Email on our own domain name</strong> (e.g. <code>@poplarprimarypta.com</code>) &mdash; not <code>@gmail.com</code>.</li>
+  <li><strong>Multiple users</strong>, each with their own account, password, and inbox.</li>
+  <li><strong>An admin console</strong> &mdash; one designated person (or two) can add new members, remove people who leave, reset passwords, and set rules.</li>
+  <li><strong>Group addresses</strong> that fan out to several people automatically.</li>
+  <li><strong>Shared Drives</strong> &mdash; folders that belong to the organisation, not to a person, so they don&rsquo;t disappear when a person leaves.</li>
+  <li><strong>Audit logs</strong> &mdash; we can see who logged in, who sent what, who deleted what. Important for treasurer-related things especially.</li>
+</ol>
+
+<h2 id="sec-4">4. Can we actually get it? (Eligibility)</h2>
+<div class="callout warn">
+  <p>This is the <strong>first thing we need to confirm</strong>, because the whole plan hinges on it.</p>
+</div>
+<div class="callout good">
+  <p><strong>Status update:</strong> we are <strong>currently in the process of requesting a Google for Nonprofits account</strong>. Approval is not yet confirmed, so the rest of this proposal assumes our application succeeds &mdash; if it doesn&rsquo;t, we will need to revisit our charity status (see below) before any of the rest can happen.</p>
+</div>
+<p>Google for Nonprofits in the UK requires our PTA to be a <strong>recognised charity</strong>. In practice that means one of the following:</p>
+<ul>
+  <li><strong>Registered with the Charity Commission for England and Wales</strong> (or with OSCR in Scotland, or the Charity Commission for Northern Ireland) &mdash; in which case we will have a charity registration number.</li>
+  <li><strong>Recognised by HMRC as a charity for tax purposes</strong>, with an HMRC charity reference number &mdash; this is the route many small PTAs take when their annual income is below the registration threshold (currently &pound;5,000 for England &amp; Wales) and they are not separately registered with the Charity Commission. These are sometimes called &ldquo;excepted&rdquo; charities.</li>
+</ul>
+<p>Most primary school PTAs in the UK fall into one of three buckets: a registered small charity, an HMRC-recognised excepted charity, or a CIO (Charitable Incorporated Organisation). A few are simply unincorporated associations with no formal status at all &mdash; <strong>and those do not qualify</strong> for Google for Nonprofits until they sort out their charity recognition first, which is a process in its own right.</p>
+<p>Other things to know:</p>
+<ul>
+  <li>Once we apply, we must be validated by a partner organisation that Google uses to verify nonprofits. In the UK this has historically been handled through partners such as <strong>TT-Exchange / TechSoup</strong> or <strong>Percent</strong> &mdash; the current partner is shown during the application. Validation typically takes a few days to a couple of weeks.</li>
+  <li>Some types of organisations are excluded even if they are charities &mdash; for example, schools themselves are usually handled through <strong>Google for Education</strong>, not Google for Nonprofits. We are a <strong>PTA</strong>, which is normally fine, but we need to apply as the PTA and not as the school.</li>
+  <li>The UK is a supported country, so no problem there.</li>
+</ul>
+<div class="callout good">
+  <p><strong>Action item alongside the in-flight application:</strong> someone (probably the Treasurer, since they will have our paperwork) needs to confirm what our charity status is, in writing, and gather:</p>
+  <ul>
+    <li>Our Charity Commission registration number, or our HMRC charity reference number if we&rsquo;re an HMRC-only/excepted charity.</li>
+    <li>A copy of our registration certificate (Charity Commission) or our HMRC charity recognition letter.</li>
+    <li>The legal name of the PTA exactly as registered.</li>
+  </ul>
+  <p>Without this, the rest of this proposal is on hold.</p>
+</div>
+
+<h2 id="sec-5">5. The domain name &mdash; the part most people forget</h2>
+<p>Right now we are at <code>someaddress@gmail.com</code>. The new system requires us to have <strong>our own domain name</strong> &mdash; the bit after the <code>@</code>. The committee has agreed on <code>poplarprimarypta.com</code>.</p>
+<p>That gives us addresses in the form <code>jane.smith@poplarprimarypta.com</code> and <code>contact@poplarprimarypta.com</code>. It&rsquo;s clear, professional, ties us to the school, and is easy to spell over the phone.</p>
+<p>We will need to <strong>register and own</strong> that domain. A few things to know:</p>
+<ul>
+  <li>A <code>.com</code> domain costs roughly <strong>&pound;8&ndash;&pound;15 per year</strong> through a typical UK registrar.</li>
+  <li>We need to pay this <strong>forever</strong>, every year, or we lose the domain &mdash; and if we lose it, anyone could buy it and start receiving our email. So the renewal must be on auto-pay with a card that doesn&rsquo;t expire when one volunteer leaves. The Treasurer&rsquo;s role traditionally takes care of this kind of thing.</li>
+  <li>The domain needs an <strong>owner of record</strong>. That should be the PTA as an organisation, not an individual volunteer. Be careful here &mdash; many domains get accidentally registered in one person&rsquo;s name and become hard to recover when they leave.</li>
+  <li>Once we own the domain, we don&rsquo;t have to use it only for email. We could put up a small website at the same domain later if we wanted &mdash; we don&rsquo;t have to, but the option is there.</li>
+  <li>Before paying, it&rsquo;s worth checking whether <code>poplarprimarypta.co.uk</code> and <code>poplarprimarypta.org.uk</code> are also free. If they are, grabbing them too (a few pounds a year each) stops anyone else registering a confusingly similar address &mdash; we can just point them at the same place.</li>
+</ul>
+<div class="callout warn">
+  <p><strong>Practical note:</strong> the committee should formally minute the decision on <code>poplarprimarypta.com</code> before it&rsquo;s registered. Changing it later is painful, because everyone we ever email will have the old address in their contacts.</p>
+</div>
+
+<h2 id="sec-6">6. What it will cost</h2>
+<p>Honest answer: <strong>probably free for email, but with caveats, and there are unavoidable small costs.</strong></p>
+<p>Google currently offers nonprofits several Workspace tiers. The cheapest is <strong>Workspace for Nonprofits</strong>, which is <strong>free</strong> and includes Gmail, Calendar, Drive, Docs, Meet, and the admin console. It has some limits &mdash; most importantly, <strong>a limited amount of storage per user</strong> (which has been a moving target over the past few years, so we will need to check the current limit when we apply). For a PTA&rsquo;s volume of email and Drive files, the free tier is usually plenty, but <strong>the Treasurer&rsquo;s scanned receipts and the years of photos in Drive may push us over</strong>, and we need to look at this honestly before assuming &ldquo;free&rdquo; is the final answer.</p>
+<p>If we outgrow the free tier, the next step up is <strong>Business Standard for Nonprofits</strong>, which is heavily discounted compared to the commercial price &mdash; in the UK this typically works out to a few pounds per user per month. With, say, 8 active committee members, that&rsquo;s a real but small annual cost.</p>
+<p>Unavoidable costs no matter which tier:</p>
+<ul>
+  <li><strong>Domain registration</strong>: roughly &pound;8&ndash;&pound;15/year, forever.</li>
+  <li><strong>Time</strong>: the migration and setup will take a real number of hours from whoever does it. This is the biggest hidden cost. Plan on it taking weeks of part-time effort spread across the team, not a weekend.</li>
+</ul>
+<p>Costs we should not forget:</p>
+<ul>
+  <li>If we currently pay for <strong>extra Google storage</strong> on the personal account (Google One, e.g. 100 GB or 200 GB plan), we may or may not be able to cancel it once we move. We should not cancel it until the migration is fully done and we have verified the new account has everything.</li>
+</ul>
+
+<h2 id="sec-7">7. What the new email setup will look like, in practice</h2>
+<p>This is the part that will be most different day-to-day for the team. Read it carefully.</p>
+
+<h3>Personal addresses</h3>
+<p>Each active committee member will have their own address, like:</p>
+<ul>
+  <li><code>jane.smith@poplarprimarypta.com</code></li>
+  <li><code>mark.jones@poplarprimarypta.com</code></li>
+  <li><code>treasurer@poplarprimarypta.com</code> &mdash; for whoever currently holds the Treasurer role</li>
+</ul>
+<p>A choice we need to make: <strong>role-based addresses or name-based?</strong></p>
+<ul>
+  <li><strong>Name-based</strong> (e.g. <code>jane.smith@&hellip;</code>) is more personal and good for normal back-and-forth.</li>
+  <li><strong>Role-based</strong> (e.g. <code>treasurer@&hellip;</code>, <code>secretary@&hellip;</code>) is more durable &mdash; when the Treasurer changes next year, we just point that address at the new person, and all the historic counterparties (the bank, vendors) still email the same place.</li>
+</ul>
+<p>A typical setup is <strong>both</strong>: each person has their name address, and the role-based addresses are aliases or groups that forward to whoever currently holds the role.</p>
+
+<h3>Group addresses (the &ldquo;everyone sees it&rdquo; replacement)</h3>
+<p>This is the replacement for our current &ldquo;everyone sees everything&rdquo; setup, but more controlled:</p>
+<ul>
+  <li><code>contact@poplarprimarypta.com</code> &mdash; public contact address. Goes to a <strong>Google Group</strong> that includes everyone on the committee. When a parent emails <code>contact@&hellip;</code>, every member of that group gets a copy in their own inbox.</li>
+  <li><code>committee@poplarprimarypta.com</code> &mdash; internal address for committee-only matters, again backed by a Google Group.</li>
+  <li>We can have as many of these as we want, e.g. <code>fundraising@&hellip;</code>, <code>events@&hellip;</code>, that go only to the relevant sub-team.</li>
+</ul>
+<p>A <strong>Google Group</strong> acting as an email address is like a magic forwarding rule: one address in, multiple personal inboxes out. We can configure them in different modes:</p>
+<ul>
+  <li><strong>Plain forwarding mode</strong>: every member gets a copy in their personal inbox, and they reply from their own address. Simple. Downside: nobody else knows when someone has replied &mdash; same problem we have now, just for one address rather than all of them.</li>
+  <li><strong>Collaborative Inbox mode</strong>: the group itself has a shared inbox view, where members can mark messages as &ldquo;taken by me&rdquo;, &ldquo;resolved&rdquo;, etc. This is much closer to the shared experience we have today, but it requires people to actually use it &mdash; visit a separate web view, not just look at their own inbox. In practice, teams find this clunky and end up not using it. <strong>Be cautious before assuming this will solve the &ldquo;everyone sees the reply&rdquo; problem.</strong></li>
+</ul>
+<div class="callout warn">
+  <p>We should pick one approach per group address consciously, not just leave the default. My honest take: <strong>plain forwarding mode plus a clear rule of &ldquo;reply-all so the group sees it&rdquo; is usually what works best in practice</strong>, even though it sounds less clever than collaborative inbox.</p>
+</div>
+
+<h3>&ldquo;Sending as&rdquo; the group address</h3>
+<p>When Jane replies to a message that came in via <code>contact@poplarprimarypta.com</code>, the reply should usually go out <strong>from</strong> <code>contact@poplarprimarypta.com</code>, not from <code>jane.smith@poplarprimarypta.com</code> &mdash; so the parent on the other end keeps emailing the group rather than starting a private thread with Jane.</p>
+<p>This is a setting we configure per person: each committee member is granted the ability to &ldquo;send as&rdquo; the group addresses they belong to. Their email client (Gmail web, phone) gets a dropdown to pick the &ldquo;from&rdquo; address. It works, but <strong>people need to be trained to actually pick the right one</strong> when replying. This is the single most common confusion in this kind of setup.</p>
+
+<h2 id="sec-8">8. The big migration &mdash; what actually moves and how</h2>
+<p>This is the longest section, and deliberately so.</p>
+
+<h3>8.1 Email history (the years of organised mail)</h3>
+<p>What we want: every email currently in the shared Gmail, with its labels, attachments, and dates intact, to be available in the new system to whoever needs it.</p>
+<div class="callout good">
+  <p><strong>Good news:</strong> Google has an official <strong>Data Migration Service</strong> built into the admin console specifically for moving email between Google accounts. When migrating Gmail to Workspace, it can preserve:</p>
+  <ul>
+    <li>Sent/received dates</li>
+    <li>Labels</li>
+    <li>Attachments</li>
+    <li>Starred status</li>
+  </ul>
+</div>
+<p><strong>Less good news</strong>, and we need to be realistic about it:</p>
+<ul>
+  <li>Migrating into the new system means picking a <strong>destination account</strong> for the old mail. We essentially have three choices, each with a downside:
+    <ol>
+      <li><strong>Migrate everything into one &ldquo;archive&rdquo; user account</strong> (e.g. <code>archive@poplarprimarypta.com</code>) that all committee members can log into. This is closest to what we have today, but it recreates the same security problem we are trying to leave &mdash; multiple people sharing one password.</li>
+      <li><strong>Migrate everything into one designated person&rsquo;s account</strong> (e.g. the secretary). They become the keeper of history. Other people request emails as needed. Cleanest from a security view, but creates a single point of failure and an awkward dependency on one person.</li>
+      <li><strong>Migrate everything into a Shared Drive folder as an export</strong>, rather than into a live mailbox. The old emails live as searchable files rather than as live email. Loses the ability to reply to old threads directly. Gains the ability to share access flexibly without anyone having &ldquo;the keys.&rdquo;</li>
+    </ol>
+    <p>My honest recommendation is <strong>option 1, but treated correctly</strong> &mdash; create the archive account, migrate to it, then turn it into a read-only account that nobody actively sends from. Give the password only to two senior committee members (e.g. President + Secretary), and turn on two-factor authentication. This balances &ldquo;everyone has access in principle&rdquo; with &ldquo;we are not back to a shared address.&rdquo;</p>
+  </li>
+  <li><strong>Labels</strong> are mostly preserved, <strong>but</strong> if labels were applied by individual users to the shared account, they all just come through as labels on the archive account &mdash; there is no way to recover &ldquo;Jane organised these, Mark organised these&rdquo; because in the current system everyone is the same user.</li>
+  <li><strong>Filters and rules</strong> (the automatic &ldquo;if subject contains X, label it Y&rdquo; rules) do <strong>not</strong> migrate automatically with the Data Migration Service. They need to be exported (using the Gmail export-filters feature) and re-imported into the new account. This is doable but easy to forget.</li>
+  <li><strong>Chat history</strong> inside Gmail does not migrate.</li>
+  <li>The migration can be <strong>slow</strong> &mdash; for years of mail it can run for many days. We need to plan for that and not panic when it seems stuck.</li>
+</ul>
+
+<h3>8.2 Google Drive</h3>
+<p>This is where it gets a bit awkward.</p>
+<ul>
+  <li>A regular Gmail account&rsquo;s Drive is owned <strong>by that account</strong>. The files inside are owned by that account.</li>
+  <li>Workspace has the concept of <strong>Shared Drives</strong> (sometimes called &ldquo;team drives&rdquo;), where the <strong>organisation</strong> owns the files, not any individual. This is what we want long-term.</li>
+  <li>Files <strong>cannot be directly moved</strong> from a personal Drive into a Shared Drive while preserving everything in one click. They need to be either copied (which can lose comments, version history, and the original &ldquo;created on&rdquo; date) or transferred via a slightly fiddly process.</li>
+</ul>
+<p>The realistic approach:</p>
+<ol>
+  <li>Create a Shared Drive for the PTA in the new Workspace.</li>
+  <li>From the old shared Gmail account, <strong>share</strong> the existing Drive contents with the new archive account (give it Editor access).</li>
+  <li>Use Google&rsquo;s <strong>Drive transfer tool</strong> (in the admin console) to transfer ownership of the files in bulk to the archive account.</li>
+  <li>Then move the files from that user&rsquo;s &ldquo;My Drive&rdquo; into the Shared Drive. This step does preserve comments and version history when done within Workspace.</li>
+</ol>
+<p>Caveats:</p>
+<ul>
+  <li><strong>Folders shared externally</strong> (e.g. with the school principal, with sponsors): the share links may change. We will need to re-share or notify those people.</li>
+  <li><strong>Files we don&rsquo;t own</strong>, but that were shared with us, won&rsquo;t transfer &mdash; they stay with the original owner, just as today.</li>
+  <li><strong>Photos in Google Photos</strong> (if we used it) are a separate animal. Google Photos does not have a clean nonprofit-friendly migration. We may need to download and re-upload, which loses some metadata. We need to decide if our Photos library is worth preserving or whether the important photos are already in Drive.</li>
+</ul>
+
+<h3>8.3 Calendar</h3>
+<p>Calendars are the easiest piece:</p>
+<ul>
+  <li>Export the calendar from the old account (it produces an <code>.ics</code> file).</li>
+  <li>Import it into the new shared calendar in the workspace.</li>
+  <li>Recurring events, reminders, and attendees come through.</li>
+</ul>
+<p>What does <strong>not</strong> come through cleanly:</p>
+<ul>
+  <li><strong>Per-person responses</strong> (&ldquo;Yes I&rsquo;m coming&rdquo;) for old events &mdash; they may show as unresponded.</li>
+  <li><strong>External calendar subscriptions</strong> (e.g. if we subscribed to the school district calendar) &mdash; those need to be re-subscribed in the new calendar.</li>
+</ul>
+
+<h3>8.4 Contacts</h3>
+<p>Export contacts from old account &rarr; import into new account. Simple, but easy to forget. The address book is small but valuable &mdash; board members, school office, vendors, sponsors.</p>
+
+<h3>8.5 Google Forms, Sites, etc.</h3>
+<p>If we have any <strong>Forms</strong> (e.g. event sign-ups, volunteer signup forms) created on the old account, the responses are tied to the form, and the form is owned by the old account. Forms can be transferred to a new owner in the same way as Drive files.</p>
+<div class="callout warn">
+  <p><strong>Important:</strong> any <strong>published form links</strong> we have shared publicly will keep working only as long as the old account exists. If we eventually shut the old account down, those links die. We should re-create forms on the new account and update where they are linked from (the school newsletter, our flyers, etc.).</p>
+</div>
+
+<h3>8.6 Things we should not assume will move</h3>
+<ul>
+  <li><strong>Passwords saved in the old account&rsquo;s Chrome</strong> (if any volunteer was logged into the shared account in Chrome and let it save passwords for vendor sites &mdash; those don&rsquo;t transfer cleanly, and frankly should never have been saved in a shared account).</li>
+  <li><strong>YouTube channel</strong> (if the PTA has one) &mdash; YouTube channels can be moved between accounts, but it is its own process.</li>
+  <li><strong>Third-party services logged in with &ldquo;Sign in with Google&rdquo;</strong> using the old account (e.g. Zoom, Eventbrite, Mailchimp, school district portals). Every single one of these needs to be reviewed and re-pointed to a new account, ideally a group address. <strong>This is the most easily forgotten part of any migration.</strong> Make a list before starting.</li>
+</ul>
+
+<h2 id="sec-9">9. Keeping the old mailbox working during and after the move</h2>
+<p>The user (rightly) wants to keep the old Gmail running and forward incoming mail to the new system. Here is how that works:</p>
+<ul>
+  <li>The old <code>@gmail.com</code> mailbox stays alive. We log into it once, set up <strong>automatic forwarding</strong> to a new group address like <code>legacy@poplarprimarypta.com</code>, and from that point on every new email that arrives at the old address shows up in our new system.</li>
+  <li>We can do this <strong>immediately on switching</strong>, and leave it running for <strong>months or even years</strong>. There is no rush to shut down the old account.</li>
+  <li>For things like vendor invoices, school district mailing lists, and the parent-body list that has our old address recorded &mdash; they keep working unchanged.</li>
+</ul>
+<p>Caveats people don&rsquo;t think about:</p>
+<ul>
+  <li><strong>Forwarding does not &ldquo;claim&rdquo; the email</strong> &mdash; replies from the new system, by default, go out from the new address, not from the old <code>@gmail.com</code>. So the person on the other side sees the change in address and may eventually update their records. That is the gentle migration we want.</li>
+  <li><strong>Some senders will be confused</strong> (&ldquo;Why is Jane emailing me from a different address now?&rdquo;). A short note in our signature for the first few months explaining the change helps.</li>
+  <li><strong>Spam filters sometimes treat forwarded mail as suspicious.</strong> A small percentage of forwarded messages may end up in spam in the new mailbox. We should set up a forwarding-specific filter that whitelists mail coming from the old address.</li>
+  <li><strong>Two-factor authentication needs to be turned on for the old account</strong> if it isn&rsquo;t already. Once we depend on the forwarding rule, that account becoming compromised would silently redirect all our incoming mail. That is dangerous. Lock the old account down with strong 2FA tied to a phone number a senior member controls.</li>
+  <li><strong>Eventually, we should plan to retire the old account</strong>, but only after we are confident every important sender has been notified and updated their records.</li>
+</ul>
+
+<h2 id="sec-10">10. What will be different in daily life for the team</h2>
+<p>This section is for people who aren&rsquo;t planning the migration but will live with the result. Read this if you&rsquo;re worried about disruption.</p>
+<ul>
+  <li><strong>Logging in.</strong> Each of us will have our own login. No more shared password. The first time, this will feel like extra effort; after a week, nobody will miss the shared login.</li>
+  <li><strong>Two-factor authentication.</strong> Each person will need to set up two-factor login (a code sent to their phone, or via an app). This is non-negotiable for an organisation account and is the single biggest security win.</li>
+  <li><strong>Where to look for emails.</strong> Most emails will arrive in each person&rsquo;s individual inbox. Some will arrive at the group address (e.g. <code>contact@&hellip;</code>) and get fanned out to everyone. People will need a moment to learn which is which.</li>
+  <li><strong>Sending emails.</strong> When replying to something that came in to a group address, you have to remember to pick the right &ldquo;From&rdquo; address. Gmail will offer a dropdown. This is the most common mistake during transition.</li>
+  <li><strong>Old emails.</strong> Older mail (from before the switch) lives in the archive account. Anyone who needs to dig into history asks for access. It is not gone &mdash; it is just not in your daily inbox.</li>
+  <li><strong>Shared documents.</strong> Documents will mostly live in the <strong>Shared Drive</strong>, owned by the PTA, not by any one person. If someone leaves the committee, the documents stay where they are. This is a real improvement.</li>
+  <li><strong>Calendars.</strong> A shared PTA calendar will be visible to all members. You can overlay it on your personal calendar.</li>
+  <li><strong>On phones.</strong> Each person adds their new account to the Gmail app on their phone alongside their personal Gmail. It works fine, just an extra account in the list.</li>
+  <li><strong>No more &ldquo;wait, did you reply to this?&rdquo;</strong> for personal messages. Each person owns their own outbox.</li>
+  <li><strong>Yes, more &ldquo;wait, did anyone reply to the contact@ message?&rdquo;</strong> for shared messages. This is the new failure mode and we need a team norm to handle it (e.g. always reply-all, or use a label).</li>
+</ul>
+
+<h2 id="sec-11">11. Downsides and trade-offs &mdash; the honest list</h2>
+<p>This is the part most proposals skip. Read it.</p>
+<ol>
+  <li><strong>Loss of the &ldquo;everyone sees everything&rdquo; comfort.</strong> Today, if Jane is away, anyone else can log in and see what&rsquo;s happening with her conversations. After the move, Jane&rsquo;s personal address (<code>jane.smith@&hellip;</code>) is hers. If she&rsquo;s hit by a bus, getting at her sent mail requires the admin to reset her password or use admin recovery &mdash; which is doable, but no longer casual. <strong>For most things this is a feature, not a bug. But it is a real change in the team&rsquo;s working style and some people will dislike it.</strong></li>
+  <li><strong>Group addresses do not perfectly replicate the shared inbox.</strong> If we want everyone to see all <code>contact@&hellip;</code> mail and all the replies, we either rely on &ldquo;reply-all&rdquo; discipline (which slips) or use Collaborative Inbox mode (which is clunky). Neither is as smooth as one shared mailbox we all stare at today. There is no perfect technical solution for this &mdash; it is a trade-off.</li>
+  <li><strong>Migrating years of mail is not 100% lossless.</strong> Labels mostly come through. Dates come through. Attachments come through. But filters don&rsquo;t auto-migrate, chat history is lost, and there are always edge-case messages that arrive looking slightly different (formatting, inline images) in the new system. We should expect a small percentage of &ldquo;this thread looks weird&rdquo; and accept it.</li>
+  <li><strong>Drive migration is fiddly.</strong> Comments on documents can be lost in certain copy operations. Files shared externally may need to be re-shared. Folder structures may need cleanup along the way.</li>
+  <li><strong>Some external services tied to the old account will need attention</strong> &mdash; every &ldquo;Sign in with Google&rdquo; we ever used. This is the most underestimated part of any migration. Plan to spend an evening listing them out.</li>
+  <li><strong>Onboarding new committee members becomes a small admin task.</strong> Someone (the designated admin) has to create their account, assign their permissions, and add them to the right groups. Today, you just give them the password &mdash; which is exactly why we are leaving that system.</li>
+  <li><strong>Offboarding becomes a small admin task too.</strong> When someone leaves, the admin disables their account, transfers ownership of any documents they owned, and removes them from groups. This is more work than today &mdash; but today, when someone leaves, we don&rsquo;t actually do anything to revoke their access, which is the underlying problem.</li>
+  <li><strong>One person (or two) becomes the admin.</strong> They hold the master keys. If both of them get hit by a bus on the same day, the PTA has a real problem. We should appoint <strong>at least two admins</strong> and document the recovery process (phone numbers, backup emails) somewhere physical.</li>
+  <li><strong>Storage limits exist.</strong> The free nonprofit tier has a cap per user. Years of email and a Drive full of photos may push us close to it. If it does, we either delete old stuff, upgrade to a paid tier, or move some content to other storage.</li>
+  <li><strong>Cost, even if small, is now ongoing.</strong> Domain renewal yearly, possibly Workspace upgrade if we outgrow the free tier. The PTA budget needs a line item for it.</li>
+  <li><strong>It takes time.</strong> Realistically, a careful migration takes <strong>4&ndash;8 weeks</strong> of part-time effort, with the actual cutover day being just one part of it. Most of the work is preparation and cleanup. Going faster usually means losing things.</li>
+  <li><strong>A learning curve for non-technical members.</strong> Some PTA members have been using the shared Gmail for years and have routines built around it. New addresses, new logins, new &ldquo;from&rdquo; dropdowns &mdash; there will be friction for a few weeks.</li>
+</ol>
+
+<h2 id="sec-12">12. What we cannot achieve, even with the best plan</h2>
+<p>It is important to be upfront about the things this migration <strong>will not</strong> give us:</p>
+<ul>
+  <li><strong>A perfectly shared inbox experience identical to today.</strong> As mentioned, there is no exact replacement. Either we accept everyone-gets-a-copy-in-their-inbox (slight noise), or we accept the collaborative-inbox dashboard (clunky), or we accept a single &ldquo;monitored&rdquo; address that one or two people watch (a single point of failure).</li>
+  <li><strong>Renaming our current Gmail address.</strong> The old <code>@gmail.com</code> address can be <strong>forwarded</strong> but never <strong>renamed</strong>. It will exist with that name as long as we keep it.</li>
+  <li><strong>Migrating the old Gmail account itself into Workspace.</strong> Personal Gmail accounts and Workspace accounts are technically different things. We are not &ldquo;upgrading&rdquo; the old account; we are setting up a new system alongside it and moving the contents across.</li>
+  <li><strong>Perfectly preserving everything in the migration.</strong> As covered above, there are always small losses &mdash; filters, some metadata, Photos. We should not promise the team a flawless migration; we should promise a careful one with a known list of things we know will not move.</li>
+  <li><strong>Recovering individually-authored history.</strong> Because today everyone uses one account, we cannot reconstruct &ldquo;this email was sent by Jane in 2022, this one by Mark in 2023.&rdquo; All of the history is the shared account&rsquo;s. From the migration onwards, individual attribution starts. The past is anonymous and stays that way.</li>
+  <li><strong>Avoiding all admin work going forward.</strong> A Workspace needs occasional admin attention: adding new members, removing leavers, dealing with the very rare &ldquo;I&rsquo;m locked out&rdquo; call. It is light, but non-zero.</li>
+  <li><strong>Total control over Google.</strong> Google can still change pricing, change the nonprofit program, change feature availability. They have done all three in the last few years. A future move off Workspace is possible (export tools exist) but is its own project.</li>
+</ul>
+
+<h2 id="sec-13">13. Risks we should name out loud</h2>
+<ul>
+  <li><strong>The admin leaves the PTA and we lose the keys.</strong> Mitigation: at least two admins, and a written-down recovery process in the PTA&rsquo;s physical records.</li>
+  <li><strong>The domain registration lapses.</strong> Mitigation: auto-renew on a card the Treasurer controls, with a reminder a month before. Losing the domain would be catastrophic &mdash; someone could buy it and impersonate us.</li>
+  <li><strong>Forwarding from the old account silently breaks.</strong> Mitigation: send a test email through the old address once a month for the first year. Put it on a checklist.</li>
+  <li><strong>A volunteer&rsquo;s personal device is compromised.</strong> Now that they have individual access, the admin can disable their account immediately without affecting anyone else. This is a real improvement over today, but only if we <strong>actually disable accounts of people who leave</strong>.</li>
+  <li><strong>We over-build.</strong> Easy to spend weeks setting up filters, groups, and rules nobody will use. Start with the simplest viable setup and grow it. &ldquo;Two group addresses and individual accounts&rdquo; is enough for month one.</li>
+  <li><strong>Lost mail during the migration window.</strong> During the cutover, there is a short period where some messages might land in the old inbox after forwarding is set up but before everyone is checking the new one. Mitigation: announce the cutover date, have one person watch the old inbox for the first two weeks.</li>
+</ul>
+
+<h2 id="sec-14">14. Proposed step-by-step plan</h2>
+<p>This is the order to actually do things. Don&rsquo;t reorder it &mdash; earlier steps unlock later ones.</p>
+
+<h3>Phase 1 &mdash; Preparation (1&ndash;2 weeks)</h3>
+<ol>
+  <li>Confirm our charity status (Charity Commission or HMRC) and gather the registration paperwork.</li>
+  <li>Agree on the domain name as a committee. <em>(Done: <code>poplarprimarypta.com</code>.)</em></li>
+  <li>Register the domain in the PTA&rsquo;s name with auto-renew enabled.</li>
+  <li><strong>Apply to Google for Nonprofits</strong> &mdash; this requires documentation and can take days to weeks to be approved. <em>(In progress: the application has been submitted and we are awaiting approval.)</em></li>
+  <li>Make a list of every external service that currently uses our shared Gmail to log in (Zoom, Mailchimp, Eventbrite, ParentPay, school portals, bank, etc.). This list will be needed later.</li>
+  <li>Decide who will be the <strong>two admins</strong>. Get their commitment in writing.</li>
+</ol>
+
+<h3>Phase 2 &mdash; Setup (1 week, after approval)</h3>
+<ol start="7">
+  <li>Set up the Workspace with our new domain.</li>
+  <li>Create individual accounts for each current committee member.</li>
+  <li>Create the archive account.</li>
+  <li>Create the group addresses (<code>contact@</code>, <code>committee@</code>, role-based ones).</li>
+  <li>Set up two-factor authentication for the two admin accounts first, then ask everyone else to enable theirs.</li>
+  <li>Create the Shared Drive.</li>
+</ol>
+
+<h3>Phase 3 &mdash; Migration (2&ndash;4 weeks, can overlap with Phase 4)</h3>
+<ol start="13">
+  <li>Run the Data Migration Service to copy all email from old Gmail to the archive account.</li>
+  <li>Use the Drive transfer tool to bring Drive contents into the new world; move them into the Shared Drive.</li>
+  <li>Export and re-import Calendar.</li>
+  <li>Export and re-import Contacts.</li>
+  <li>Re-create or transfer Forms and Sites we care about.</li>
+  <li>Run Gmail filter export from old account and re-import into new accounts that need them.</li>
+</ol>
+
+<h3>Phase 4 &mdash; Cutover (1 week)</h3>
+<ol start="19">
+  <li>Set up forwarding from the old Gmail to a group address in the new world.</li>
+  <li>Each committee member configures &ldquo;Send as&rdquo; for the group addresses they belong to.</li>
+  <li>Update our published contact info (website, school newsletter, business cards, social media, signage at school events).</li>
+  <li>Notify regular correspondents &mdash; sponsors, school district, vendors, parents &mdash; with a friendly &ldquo;we&rsquo;ve moved to a new email&rdquo; note.</li>
+  <li>Re-link every external service from the list in step 5 to a new group address (not a personal one &mdash; group addresses are durable across people leaving the team).</li>
+</ol>
+
+<h3>Phase 5 &mdash; Stabilise (ongoing for 2&ndash;3 months)</h3>
+<ol start="24">
+  <li>Watch the old inbox daily for the first two weeks, weekly for the next month or two.</li>
+  <li>Watch for spam-filter misclassifications on forwarded mail; whitelist as needed.</li>
+  <li>Document the setup for the next committee. Where is the admin login? Who has it? How is a new member added? How is a leaver removed?</li>
+  <li>Set a calendar reminder for one year out: review whether to keep the old Gmail forwarding running, or finally retire it.</li>
+</ol>
+
+<h2 id="sec-15">15. A realistic budget</h2>
+<table>
+  <thead>
+    <tr><th>Item</th><th>Cost</th><th>Frequency</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Domain registration (<code>poplarprimarypta.com</code>)</td><td>~&pound;8&ndash;&pound;15</td><td>Per year</td></tr>
+    <tr><td>Google Workspace for Nonprofits (basic tier)</td><td>&pound;0</td><td>Per year, while eligibility holds</td></tr>
+    <tr><td>Possible upgrade to Business Standard for Nonprofits</td><td>A few &pound; per user per month</td><td>If needed</td></tr>
+    <tr><td>Time investment for setup</td><td>30&ndash;60 hours of volunteer time</td><td>One-off</td></tr>
+    <tr><td>Time investment for ongoing admin</td><td>1&ndash;2 hours per month</td><td>Ongoing</td></tr>
+  </tbody>
+</table>
+<p>The cash cost is small. The time investment is real and should be acknowledged.</p>
+
+<h2 id="sec-16">16. Frequently asked questions</h2>
+
+<p class="qa-question">Q: Can we just rename the Gmail account?</p>
+<p class="qa-answer">No. Gmail addresses cannot be renamed. The only way to change our email address is to move to a new system, which is what this proposal is about.</p>
+
+<p class="qa-question">Q: Will I lose access to my old emails?</p>
+<p class="qa-answer">No. The old emails will be available in the archive account, accessible to those who need it. Nothing is deleted.</p>
+
+<p class="qa-question">Q: Can I still log into the old Gmail?</p>
+<p class="qa-answer">Yes, for as long as we keep it alive. We are keeping it as a &ldquo;mail forwarder&rdquo; so external senders don&rsquo;t have to update overnight.</p>
+
+<p class="qa-question">Q: Will my personal Gmail and the new PTA account get mixed up?</p>
+<p class="qa-answer">No. They are separate logins. On a phone or in a browser, you have both accounts available and switch between them.</p>
+
+<p class="qa-question">Q: What happens if I forget my password?</p>
+<p class="qa-answer">The admin can reset it for you, the same way an IT helpdesk would.</p>
+
+<p class="qa-question">Q: What if the admin forgets their password?</p>
+<p class="qa-answer">There is a recovery process using a backup phone number and a backup email address. The two admins help each other; if both are stuck, Google&rsquo;s support process can be invoked (slow but real).</p>
+
+<p class="qa-question">Q: Will sponsors / vendors / parents know about the change?</p>
+<p class="qa-answer">Only those we tell. Anyone who sends to the old address will still reach us (via forwarding) &mdash; they may not even notice the change. We will gradually transition the most important counterparties.</p>
+
+<p class="qa-question">Q: Why not just use a different shared Gmail with a stronger password?</p>
+<p class="qa-answer">Because the shared password is the root of every issue listed at the top. A stronger password fixes one of those issues (it being guessable). It does not fix the lack of audit trail, the lack of individual identity, the inability to revoke access cleanly, or the unprofessional <code>@gmail.com</code> ending.</p>
+
+<p class="qa-question">Q: Can we change our mind and go back?</p>
+<p class="qa-answer">Yes, but it gets harder over time. In the first month, we could just go back to the old Gmail and abandon the new one. After a year, sponsors and parents will have updated our address in their records, and going back would mean another transition. So: easy to reverse early, painful to reverse late.</p>
+
+<p class="qa-question">Q: Will this affect our charity status, accounts, or Gift Aid?</p>
+<p class="qa-answer">No, it is purely an email and document hosting change. Our Charity Commission registration (or HMRC charity recognition), annual accounts, and Gift Aid claims are all unaffected.</p>
+
+<p class="qa-question">Q: Is our data safe at Google? What if Google decides to close our account?</p>
+<p class="qa-answer">Workspace data is exportable. Google can technically close any account, but they rarely do so without cause, and even less so for nonprofits in good standing. The genuine risk is more mundane: misconfiguration on our side (a deleted file, a typoed forwarding rule). Mitigation: regular Drive backups, two admins, written-down recovery process.</p>
+
+<h2 id="sec-17">17. Recommended next decisions for the committee</h2>
+<p>If we agree to proceed, we should &mdash; at the next committee meeting &mdash; make three concrete decisions:</p>
+<ol>
+  <li><strong>The domain name.</strong> Aim for something short, durable, professional, and not tied to a specific school year or campaign.</li>
+  <li><strong>The two admins.</strong> Probably the current Secretary and the current Treasurer, or whoever has the temperament to handle small admin tasks reliably. Both must be willing to accept the responsibility for at least one full year.</li>
+  <li><strong>The migration timeline.</strong> Don&rsquo;t try to do this during a busy school event period. Pick a quiet stretch &mdash; early summer is usually best for school PTAs.</li>
+</ol>
+<p>Once those three are decided, the rest of the plan can proceed in the order described in section 14.</p>
+
+<h2 id="sec-18">18. One last sanity check</h2>
+<p>Before we commit, the committee should sit with one uncomfortable question:</p>
+<blockquote><strong>&ldquo;Are we really going to maintain the discipline that this new setup requires?&rdquo;</strong></blockquote>
+<p>It will only deliver its benefits if we:</p>
+<ul>
+  <li>Actually use individual accounts instead of leaving everyone logged into one.</li>
+  <li>Actually disable accounts when people leave.</li>
+  <li>Actually remember &ldquo;reply-all&rdquo; or to send-as the group address when replying to shared mail.</li>
+  <li>Actually pay the domain renewal every year.</li>
+  <li>Actually have two admins who stay in touch.</li>
+</ul>
+<p>If we expect to slip on any of those, that&rsquo;s worth knowing now, because some of those slips would put us in a <strong>worse</strong> position than today (e.g. a domain lapse). The plan only pays off if we follow through on the boring parts.</p>
+<div class="callout good">
+  <p>If we are honest that we will, this move is worth doing.<br>
+  If we are honest that we won&rsquo;t, we should hold off until we can.</p>
+</div>
+
+<hr>
+<p style="text-align:center; color: var(--muted); font-style: italic;">End of proposal. Questions, concerns, and &ldquo;but what about&hellip;&rdquo; notes are welcome &mdash; that is exactly what this document is for.</p>
+
+</body>
+</html>
