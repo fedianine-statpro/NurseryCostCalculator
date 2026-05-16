@@ -75,6 +75,7 @@ export const locale = {
     // Crimnet briefing header (typewriter banner above the chief's words).
     crimnetHeader: (id) => `// CRIMNET BRIEFING — CASE ${id} — 06:42 GMT //`,
     crimnetClassified: `// CLASSIFIED · ACME DETECTIVE AGENCY · EYES ONLY //`,
+    arrivedIn: "ARRIVED IN",
 
     // Map-side panel hooks.
     openNotebook: "DETECTIVE'S NOTEBOOK",
@@ -85,6 +86,8 @@ export const locale = {
     notebookNoFacts: "Nothing recorded for this city yet.",
     notebookVisited: "VISITED CITIES",
     notebookHinted: "TRAIL OF BREADCRUMBS",
+    notebookLeadHeader: "AN UNNAMED LEAD",
+    notebookLeadHint: "Each lead below is a destination a witness gave you, but you haven't been there yet. Take the facts to the Crime Lab Almanac — search by currency, language, flag, food, or landmark — and the city will give itself up.",
     closeNotebook: "← CLOSE NOTEBOOK",
     closeAlmanac: "← CLOSE ALMANAC",
     almanacCost: (h) => `Querying the Crime Lab costs ${h}h. Continue?`,

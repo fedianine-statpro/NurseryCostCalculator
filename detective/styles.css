@@ -638,7 +638,20 @@ button:disabled {
   background: var(--bg-panel);
   padding: 12px 14px;
 }
-.notebook-card.hinted-only { border-style: dashed; opacity: 0.85; }
+.notebook-card.hinted-only {
+  border-style: dashed;
+  background: var(--bg-panel-2);
+}
+.notebook-lead {
+  color: var(--green) !important;
+  letter-spacing: 0.15em;
+  font-size: 13px !important;
+}
+.notebook-lead-hint {
+  font-size: 12px;
+  opacity: 0.75;
+  margin: 0 0 12px;
+}
 .notebook-city {
   color: var(--amber-bright);
   font-size: 15px;
@@ -712,6 +725,60 @@ button:disabled {
   margin: 0;
   border-top: 1px solid var(--amber-dim);
   background: var(--bg-panel);
+}
+
+/* ── Postcard (arrival card) ── */
+.postcard-box {
+  max-width: 720px;
+  margin: 40px auto;
+  border: 1px solid var(--amber);
+  background: var(--bg-panel);
+  padding: 32px 36px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255,179,71,0.18);
+}
+.postcard-arrived {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--amber-dim);
+  margin-bottom: 6px;
+}
+.postcard-city {
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  margin: 0 0 18px;
+}
+.postcard-art {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.15;
+  color: var(--amber-bright);
+  text-shadow: 0 0 4px rgba(255,179,71,0.6);
+  background: var(--bg-panel-2);
+  border: 1px dashed var(--amber-dim);
+  padding: 18px 12px;
+  margin: 0 auto 18px;
+  display: inline-block;
+  text-align: left;
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+}
+.postcard-greeting {
+  font-size: 18px;
+  color: var(--amber-bright);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+.postcard-meta {
+  font-size: 13px;
+  color: var(--amber);
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+.postcard-actions {
+  margin-top: 22px;
 }
 
 /* ── Trivia ── */

@@ -20,6 +20,7 @@ import { mountMap, refreshMap, relocaleMap } from "./ui/map.js";
 import { renderDossier, getSelectedSuspect, clearSelection } from "./ui/dossier.js";
 import { renderNotebook } from "./ui/notebook.js";
 import { renderAlmanac, resetAlmanacFilter } from "./ui/almanac.js";
+import { renderPostcard } from "./ui/postcard.js";
 import { typewrite } from "./ui/narrator.js";
 import {
   sfxBeep, sfxConfirm, sfxDeny, sfxPlane, sfxStamp, sfxWin, sfxLose
@@ -35,7 +36,7 @@ let activeScreen = "title";
 
 const ALMANAC_COST_HOURS = 2;     // each almanac open costs the player 2h
 
-const SCREENS = ["title", "case-select", "briefing", "map", "city", "dossier", "notebook", "almanac", "trivia", "epilogue"];
+const SCREENS = ["title", "case-select", "briefing", "postcard", "map", "city", "dossier", "notebook", "almanac", "trivia", "epilogue"];
 
 function showScreen(name) {
   activeScreen = name;
@@ -78,6 +79,7 @@ function applyStaticLocale() {
   $("#btn-almanac-back").textContent = L.ui.closeAlmanac;
   $("#trivia-title-label").textContent = L.ui.triviaTitle;
   $("#btn-trivia-continue").textContent = L.ui.triviaContinue;
+  $("#btn-postcard-continue").textContent = L.ui.cont;
   $("#btn-epilogue-again").textContent = L.ui.newCase;
   $("#rank-label").textContent = L.ui.yourRank;
   $("#stamp-overlay .stamp").textContent = L.ui.warrantIssued;
@@ -202,7 +204,9 @@ function startCase(caseId) {
 
 $("#btn-briefing-go").addEventListener("click", () => {
   sfxConfirm();
-  enterMap();
+  // First moment after briefing: arrive in the starting city. Show postcard
+  // before the map so the player feels they've landed somewhere.
+  showPostcard(state.currentCityId, enterMap);
 });
 
 // ---------- Map ----------
@@ -241,7 +245,8 @@ function doTravel(cityId, hours) {
   sfxPlane();
   spendHours(state, hours);
   state.currentCityId = cityId;
-  if (!state.visitedCityIds.includes(cityId)) state.visitedCityIds.push(cityId);
+  const isFirstVisit = !state.visitedCityIds.includes(cityId);
+  if (isFirstVisit) state.visitedCityIds.push(cityId);
   // Arriving in a city auto-records its facts into the Notebook.
   recordCityFacts(state, cityId);
 
@@ -253,6 +258,8 @@ function doTravel(cityId, hours) {
   const finalId = getFinalCityId(state);
   if (cityId === finalId) {
     handleArrival();
+  } else if (isFirstVisit) {
+    showPostcard(cityId, enterMap);
   } else {
     enterMap();
   }
@@ -461,6 +468,29 @@ function enterAlmanac() {
 }
 $("#btn-almanac-back").addEventListener("click", () => { sfxBeep(); enterMap(); });
 
+// ---------- Postcard ----------
+// Shown the first time the player arrives at a city in a given case. The
+// `then` callback fires when the player dismisses the card.
+let pendingPostcardThen = null;
+
+function showPostcard(cityId, then) {
+  if (!state || state.postcardsShown.has(cityId)) {
+    if (then) then();
+    return;
+  }
+  state.postcardsShown.add(cityId);
+  renderPostcard(cityId, $("#postcard-content"));
+  pendingPostcardThen = then ?? null;
+  showScreen("postcard");
+}
+
+$("#btn-postcard-continue").addEventListener("click", () => {
+  sfxBeep();
+  const then = pendingPostcardThen;
+  pendingPostcardThen = null;
+  if (then) then();
+});
+
 // ---------- Arrival at final city ----------
 function handleArrival() {
   const L = getLocale();
@@ -654,6 +684,7 @@ onLocaleChange(() => {
   else if (activeScreen === "dossier" && state) enterDossier();
   else if (activeScreen === "notebook" && state) enterNotebook();
   else if (activeScreen === "almanac" && state) enterAlmanac();
+  else if (activeScreen === "postcard" && state) renderPostcard(state.currentCityId, $("#postcard-content"));
   else if (activeScreen === "trivia" && pendingTrivia) enterTrivia(pendingTrivia);
   else if (activeScreen === "epilogue" && state) finishCase();
 });

@@ -34,6 +34,10 @@ export function createGameState(caseId) {
     warrantSuspectId: null,
     wrongWarrants: 0,
     almanacQueries: 0,    // how many times the Crime Lab almanac was opened
+    // Cities whose arrival postcard has already been shown this case. We only
+    // show each postcard once per case to keep arrivals fresh and not annoy
+    // the player on revisits.
+    postcardsShown: new Set(),
     status: "investigating",
     losReason: null,
   };
