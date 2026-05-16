@@ -76,7 +76,11 @@ function redrawTable() {
   for (const cityId of Object.keys(CITIES)) {
     if (_filter.continent !== "all" && CONTINENT_OF[cityId] !== _filter.continent) continue;
     const cd = L.cities[cityId];
-    const haystack = [cd.name, cd.country, ...COLUMNS.map(c => cd[c])].join(" | ").toLowerCase();
+    // Search the iconic-name fields AND the descriptive *Clue variants AND
+    // the city's notable fact — so the player can search for either "Tokyo
+    // Tower" or "Eiffel" or "yen" or "Michelin" and land on Tokyo.
+    const extras = [cd.landmarkClue, cd.factClue, cd.fact].filter(Boolean);
+    const haystack = [cd.name, cd.country, ...COLUMNS.map(c => cd[c]), ...extras].join(" | ").toLowerCase();
     if (_filter.q && !haystack.includes(_filter.q)) continue;
 
     const row = document.createElement("tr");

@@ -211,7 +211,8 @@ export const locale = {
       language: "Arabic", currency: "dirhams", landmark: "Jemaa el-Fnaa square",
       food: "tagine and mint tea", flagColors: "red with a green star",
       climate: "dry heat, with the smell of orange blossoms",
-      fact: "a red-walled city whose dye lent its name to a color",
+      fact: "the city the dye 'morocco red' is named after",
+      factClue: "a red-walled city whose terracotta dye lent the world a colour name",
       locations: {
         souk:  { name: "Tanneries Souk", flavor: "Pools of dye the color of a bruise. Your eyes water; the workers smile." },
         riad:  { name: "Hidden Riad", flavor: "A door in a wall opens onto a courtyard of citrus trees. The proprietor watches a fountain." },
@@ -244,7 +245,9 @@ export const locale = {
     },
     mumbai: {
       name: "Mumbai", country: "India",
-      language: "Hindi and Marathi", currency: "rupees", landmark: "a great basalt arch on the harbour",
+      language: "Hindi and Marathi", currency: "rupees",
+      landmark: "the Gateway of India",
+      landmarkClue: "a great basalt triumphal arch on the Apollo Bunder waterfront, facing the Arabian Sea",
       food: "vada pav and bombay duck", flagColors: "saffron, white, and green",
       climate: "humid monsoon air, thick with the smell of the sea",
       fact: "the largest film industry in the world by output",
@@ -268,7 +271,9 @@ export const locale = {
     },
     tokyo: {
       name: "Tokyo", country: "Japan",
-      language: "Japanese", currency: "yen", landmark: "a red-and-white steel tower over the skyline",
+      language: "Japanese", currency: "yen",
+      landmark: "Tokyo Tower",
+      landmarkClue: "a 333-metre Eiffel-style steel tower painted red and white",
       food: "sushi and ramen", flagColors: "white with a red disc",
       climate: "crisp autumn air with the smell of grilled eel",
       fact: "home to more Michelin-starred restaurants than any other city",
@@ -328,7 +333,9 @@ export const locale = {
     },
     helsinki: {
       name: "Helsinki", country: "Finland",
-      language: "Finnish", currency: "euros", landmark: "the white cathedral on Senate Square",
+      language: "Finnish", currency: "euros",
+      landmark: "Helsinki Cathedral",
+      landmarkClue: "a white neoclassical cathedral with five green domes above Senate Square",
       food: "salmon soup and rye bread", flagColors: "white with a blue cross",
       climate: "cold Baltic air that turns your breath silver",
       fact: "the country that invented the sauna and the Moomins",
@@ -364,7 +371,9 @@ export const locale = {
     },
     edinburgh: {
       name: "Edinburgh", country: "Scotland",
-      language: "English (with Scots flavor)", currency: "pounds sterling", landmark: "a castle perched on a volcanic crag",
+      language: "English (with Scots flavor)", currency: "pounds sterling",
+      landmark: "Edinburgh Castle",
+      landmarkClue: "a medieval royal castle on a volcanic crag above the Old Town",
       food: "haggis and shortbread", flagColors: "blue with a white saltire",
       climate: "wet wind off the North Sea, smelling of coal and gorse",
       fact: "a medieval old town piled on a volcanic crag",
@@ -412,10 +421,12 @@ export const locale = {
     },
     nairobi: {
       name: "Nairobi", country: "Kenya",
-      language: "Swahili and English", currency: "Kenyan shillings", landmark: "the savannah on the city's edge",
+      language: "Swahili and English", currency: "Kenyan shillings",
+      landmark: "Nairobi National Park",
+      landmarkClue: "a wild savannah park where giraffes and rhinos roam in sight of city skyscrapers",
       food: "nyama choma and ugali", flagColors: "black, red, and green with white stripes",
       climate: "cool highland air at over 1,700 meters",
-      fact: "the only major capital with wild giraffes and rhinos inside the city limits",
+      fact: "the only major capital with a wild national park inside its boundary",
       locations: {
         market: { name: "Maasai Market", flavor: "Beadwork in rows like a paint chart. A trader compares your watch to the sun and smiles." },
         park:   { name: "National Park Gate", flavor: "Acacias on a horizon. A ranger checks a license; somewhere, a giraffe is unbothered." },
@@ -609,9 +620,9 @@ export const locale = {
         (c) => `They were practicing ${c.language} on the bus, the conductor says.`,
       ],
       landmark: [
-        (c) => `The witness saw them buying a postcard of ${c.landmark}. Smiling, like they were going home.`,
-        (c) => `A travel guide tucked under their arm was open to the page on ${c.landmark}.`,
-        (c) => `They asked the cabbie how far to ${c.landmark}. Twice.`,
+        (c) => `The witness saw them buying a postcard of ${c.landmarkClue ?? c.landmark}. Smiling, like they were going home.`,
+        (c) => `A travel guide tucked under their arm was open to a page about ${c.landmarkClue ?? c.landmark}.`,
+        (c) => `They asked the cabbie how far to ${c.landmarkClue ?? c.landmark}. Twice.`,
       ],
       food: [
         (c) => `The chef remembered them ordering ${c.food} like a regular. "Knew exactly how to eat it, too."`,
@@ -629,9 +640,9 @@ export const locale = {
         (c) => `Their bag was packed for ${c.climate}. The porter peeked.`,
       ],
       fact: [
-        (c) => `The bookshop clerk says they bought a single book — a history of ${c.fact}.`,
-        (c) => `They were boasting at the bar about a city that is ${c.fact}.`,
-        (c) => `A diary page abandoned on the train: a single underlined note about ${c.fact}.`,
+        (c) => `The bookshop clerk says they bought a single book — a history of ${c.factClue ?? c.fact}.`,
+        (c) => `They were boasting at the bar about a city that is ${c.factClue ?? c.fact}.`,
+        (c) => `A diary page abandoned on the train: a single underlined note about ${c.factClue ?? c.fact}.`,
       ],
     },
     trait: {

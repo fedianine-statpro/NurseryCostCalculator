@@ -84,6 +84,9 @@ function renderVisitedCard(state, cityId) {
 // A hinted lead — the player has heard one or more facts about a destination
 // but hasn't gone there yet. We deliberately HIDE the city name so the
 // destination remains a puzzle. The almanac is the player's decoder ring.
+// For categories that have a *Clue variant (landmark/fact when the iconic
+// value would name the city), we render the descriptive clue text instead
+// of the iconic name — i.e. what the witness actually described.
 function renderLeadCard(state, cityId) {
   const L = getLocale();
   const cityLoc = L.cities[cityId];
@@ -96,7 +99,7 @@ function renderLeadCard(state, cityId) {
   for (const k of FACT_ORDER) {
     if (!hi.has(k)) continue;
     const label = L.ui.factLabel[k];
-    const value = cityLoc[k];
+    const value = cityLoc[k + "Clue"] ?? cityLoc[k];
     rows += `<div class="nb-row highlighted"><span class="hi-marker">▸</span><em>${label}</em><span>${value}</span></div>`;
   }
 
