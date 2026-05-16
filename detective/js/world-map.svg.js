@@ -11,23 +11,23 @@ export const WORLD_MAP_SVG = `
   </defs>
   <rect width="1000" height="500" fill="url(#grid)" />
 
-  <!-- North America -->
+  <!-- North America (with Mexico tail extended south) -->
   <path class="continent" d="
-    M 80 110 L 140 80 L 220 90 L 270 140 L 260 200 L 240 250 L 200 280 L 180 270
-    L 160 250 L 140 230 L 120 200 L 100 180 Z" />
+    M 80 110 L 140 80 L 220 90 L 270 140 L 260 200 L 245 250 L 220 285 L 200 290
+    L 185 275 L 165 255 L 145 235 L 125 205 L 100 180 Z" />
   <!-- Central America / Caribbean strip -->
   <path class="continent" d="
-    M 200 270 L 230 290 L 250 280 L 260 260 L 240 250 Z" />
+    M 215 285 L 250 295 L 265 280 L 260 260 L 240 250 Z" />
 
-  <!-- South America -->
+  <!-- South America (with Brazilian bulge eastward to include Rio) -->
   <path class="continent" d="
-    M 270 310 L 320 300 L 350 330 L 360 380 L 340 430 L 310 470 L 290 460
-    L 280 420 L 275 370 Z" />
+    M 270 310 L 320 300 L 360 320 L 395 360 L 390 400 L 365 430 L 330 465
+    L 305 470 L 285 450 L 280 420 L 275 370 Z" />
 
-  <!-- Europe -->
+  <!-- Europe (southern boundary lowered, with Greek/Italian peninsula bulge) -->
   <path class="continent" d="
-    M 440 130 L 500 100 L 560 105 L 600 130 L 595 175 L 560 195 L 520 205
-    L 480 215 L 460 200 L 445 175 Z" />
+    M 440 130 L 500 100 L 560 105 L 600 130 L 605 165 L 595 200 L 575 225 L 555 230
+    L 525 220 L 485 220 L 460 205 L 445 180 Z" />
   <!-- Iceland blob -->
   <path class="continent" d="M 470 80 L 510 75 L 510 105 L 470 110 Z" />
   <!-- British Isles -->
@@ -35,10 +35,10 @@ export const WORLD_MAP_SVG = `
   <!-- Scandinavia -->
   <path class="continent" d="M 545 70 L 580 70 L 595 130 L 555 130 Z" />
 
-  <!-- Africa -->
+  <!-- Africa (top moved down to make room for new southern Europe; east edge bumped) -->
   <path class="continent" d="
-    M 460 220 L 540 220 L 610 240 L 620 290 L 605 350 L 580 410 L 560 430
-    L 540 410 L 510 360 L 480 300 L 465 260 Z" />
+    M 470 240 L 540 240 L 615 250 L 628 300 L 615 355 L 585 410 L 560 432 L 540 412
+    L 510 360 L 480 305 L 465 270 Z" />
 
   <!-- Middle East / Asia Minor -->
   <path class="continent" d="
@@ -49,11 +49,15 @@ export const WORLD_MAP_SVG = `
     M 660 130 L 760 110 L 850 120 L 920 140 L 940 180 L 920 220 L 870 230
     L 800 240 L 740 245 L 690 235 L 670 200 Z" />
 
-  <!-- India / SE Asia -->
+  <!-- India / South Asia -->
   <path class="continent" d="
     M 700 240 L 740 245 L 760 280 L 740 310 L 710 300 L 700 270 Z" />
+  <!-- SE Asia mainland (extended north for Vietnam) -->
   <path class="continent" d="
-    M 790 250 L 850 260 L 840 295 L 810 305 L 795 285 Z" />
+    M 790 250 L 845 240 L 858 270 L 840 305 L 810 310 L 795 285 Z" />
+  <!-- Indonesian/Malay arc -->
+  <path class="continent" d="
+    M 815 320 L 870 320 L 870 345 L 820 350 Z" />
 
   <!-- Japan / Korea -->
   <path class="continent" d="M 860 170 L 885 165 L 895 195 L 875 215 L 860 200 Z" />
@@ -62,6 +66,9 @@ export const WORLD_MAP_SVG = `
   <!-- Australia -->
   <path class="continent" d="
     M 850 380 L 920 370 L 945 405 L 920 430 L 870 425 L 855 405 Z" />
+  <!-- New Zealand (two-island blob) -->
+  <path class="continent" d="M 955 405 L 985 410 L 985 425 L 970 435 Z" />
+  <path class="continent" d="M 960 440 L 985 442 L 980 460 L 962 458 Z" />
 
   <!-- Decorative compass rose -->
   <g transform="translate(60, 460)" opacity="0.5">

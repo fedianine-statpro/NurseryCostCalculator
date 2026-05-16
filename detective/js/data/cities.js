@@ -74,12 +74,12 @@ export const CITIES = {
     { id: "mercado",  cost: 2, specialty: "food"    },
     { id: "barranco", cost: 4, specialty: "culture" },
   ]},
-  mexicocity: { id: "mexicocity", x: 215, y: 270, locations: [
+  mexicocity: { id: "mexicocity", x: 205, y: 265, locations: [
     { id: "zocalo",     cost: 3, specialty: "history" },
     { id: "xochimilco", cost: 4, specialty: "transit" },
     { id: "lucha",      cost: 3, specialty: "culture" },
   ]},
-  havana: { id: "havana", x: 235, y: 240, locations: [
+  havana: { id: "havana", x: 235, y: 270, locations: [
     { id: "malecon",    cost: 2, specialty: "climate" },
     { id: "cigar",      cost: 3, specialty: "money"   },
     { id: "buenavista", cost: 4, specialty: "culture" },
@@ -111,27 +111,27 @@ export const CITIES = {
   ]},
 
   // ── Five additions ─────────────────────────────────────────────────────
-  rio: { id: "rio", x: 380, y: 390, locations: [
+  rio: { id: "rio", x: 370, y: 380, locations: [
     { id: "copacabana", cost: 3, specialty: "climate" },
     { id: "escadaria",  cost: 3, specialty: "history" },
     { id: "samba",      cost: 4, specialty: "culture" },
   ]},
-  athens: { id: "athens", x: 558, y: 215, locations: [
+  athens: { id: "athens", x: 568, y: 218, locations: [
     { id: "acropolis", cost: 4, specialty: "history" },
     { id: "plaka",     cost: 2, specialty: "food"    },
     { id: "piraeus",   cost: 3, specialty: "transit" },
   ]},
-  nairobi: { id: "nairobi", x: 620, y: 358, locations: [
+  nairobi: { id: "nairobi", x: 608, y: 332, locations: [
     { id: "market", cost: 2, specialty: "food"    },
     { id: "park",   cost: 4, specialty: "climate" },
     { id: "karen",  cost: 3, specialty: "history" },
   ]},
-  hanoi: { id: "hanoi", x: 840, y: 240, locations: [
+  hanoi: { id: "hanoi", x: 842, y: 250, locations: [
     { id: "quarter", cost: 3, specialty: "food"    },
     { id: "lake",    cost: 3, specialty: "history" },
     { id: "bridge",  cost: 2, specialty: "transit" },
   ]},
-  auckland: { id: "auckland", x: 965, y: 420, locations: [
+  auckland: { id: "auckland", x: 970, y: 418, locations: [
     { id: "viaduct", cost: 2, specialty: "transit" },
     { id: "mteden",  cost: 4, specialty: "climate" },
     { id: "kroad",   cost: 3, specialty: "culture" },
