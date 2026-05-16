@@ -1,5 +1,14 @@
 // Renders the suspect dossier grid and trait list, plus a live count of how
 // many suspects still match the collected evidence.
+//
+// Two-layer display:
+//   • The collected-traits list (left panel) shows the BUCKET-LEVEL description
+//     of what the witness said ("a tattoo on a visible spot"), with a source
+//     line ("from Bazaar, Istanbul") so the player can trace each trait back.
+//   • The suspect cards (right) show the VIVID per-suspect description from
+//     L.suspectTraits, so two suspects in the same trait bucket still read as
+//     distinct individuals (Kestrel's falcon tattoo vs. Tomo's koi vs.
+//     Mariana's flame).
 
 import { SUSPECTS, SUSPECT_TRAITS } from "../data/suspects.js";
 import { suspectMatchesTraits, matchingSuspectIds } from "../engine/warrant.js";
@@ -21,15 +30,23 @@ export function renderDossier(state, hostGrid, traitsListEl, traitsHintEl, onSel
   } else {
     for (const k of learnedKeys) {
       const valueId = learned[k];
-      const display = L.traitValues[k][valueId];
+      const display = L.traitValues[k]?.[valueId] ?? valueId;
+      const src = state.traitSources?.[k];
+      let sourceText = "";
+      if (src) {
+        const srcCity = L.cities[src.cityId];
+        const srcLoc = srcCity?.locations?.[src.locationId];
+        if (srcCity && srcLoc) {
+          sourceText = ` <span class="trait-source">— ${L.ui.traitFrom(srcLoc.name, srcCity.name)}</span>`;
+        }
+      }
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${L.traitCategories[k]}:</strong> ${display}`;
+      li.innerHTML = `<strong>${L.traitCategories[k]}:</strong> ${display}${sourceText}`;
       traitsListEl.appendChild(li);
     }
   }
 
-  // Live match counter. Zero = contradictory evidence; one = case essentially
-  // closed (player can issue a warrant); else show how many remain.
+  // Live match counter.
   const matching = matchingSuspectIds(learned);
   const matchEl = document.createElement("p");
   matchEl.className = "match-counter";
@@ -63,16 +80,17 @@ export function renderDossier(state, hostGrid, traitsListEl, traitsHintEl, onSel
 
     const suspectLoc = L.suspects[s.id];
     const suspectTraits = SUSPECT_TRAITS[s.id];
+    const vivid = L.suspectTraits?.[s.id] ?? {};
     let traitsHtml = "";
     for (const [cat, valueId] of Object.entries(suspectTraits)) {
-      const display = L.traitValues[cat][valueId];
+      // Prefer the vivid per-suspect description; fall back to bucket text.
+      const display = vivid[cat] ?? L.traitValues[cat][valueId];
       const known = learned[cat];
       let cls = "";
       if (known) cls = (known === valueId) ? "trait-match" : "trait-conflict";
       traitsHtml += `<div class="${cls}"><em>${L.traitCategories[cat]}:</em> ${display}</div>`;
     }
-    // Signature MO line, e.g. "MO: always leaves a black feather"
-    const sigText = L.suspects[s.id]?.signature ?? "";
+    const sigText = suspectLoc?.signature ?? "";
     const sigHtml = sigText ? `<div class="suspect-mo">${L.ui.moLabel} ${sigText}</div>` : "";
 
     card.innerHTML = `

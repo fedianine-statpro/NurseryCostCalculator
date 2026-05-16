@@ -109,16 +109,43 @@ export const CITIES = {
     { id: "palace",     cost: 4, specialty: "history" },
     { id: "noraebang",  cost: 2, specialty: "culture" },
   ]},
+
+  // ── Five additions ─────────────────────────────────────────────────────
+  rio: { id: "rio", x: 380, y: 390, locations: [
+    { id: "copacabana", cost: 3, specialty: "climate" },
+    { id: "escadaria",  cost: 3, specialty: "history" },
+    { id: "samba",      cost: 4, specialty: "culture" },
+  ]},
+  athens: { id: "athens", x: 558, y: 215, locations: [
+    { id: "acropolis", cost: 4, specialty: "history" },
+    { id: "plaka",     cost: 2, specialty: "food"    },
+    { id: "piraeus",   cost: 3, specialty: "transit" },
+  ]},
+  nairobi: { id: "nairobi", x: 620, y: 358, locations: [
+    { id: "market", cost: 2, specialty: "food"    },
+    { id: "park",   cost: 4, specialty: "climate" },
+    { id: "karen",  cost: 3, specialty: "history" },
+  ]},
+  hanoi: { id: "hanoi", x: 840, y: 240, locations: [
+    { id: "quarter", cost: 3, specialty: "food"    },
+    { id: "lake",    cost: 3, specialty: "history" },
+    { id: "bridge",  cost: 2, specialty: "transit" },
+  ]},
+  auckland: { id: "auckland", x: 965, y: 420, locations: [
+    { id: "viaduct", cost: 2, specialty: "transit" },
+    { id: "mteden",  cost: 4, specialty: "climate" },
+    { id: "kroad",   cost: 3, specialty: "culture" },
+  ]},
 };
 
 export const CITY_LIST = Object.values(CITIES);
 
 // Continent grouping for the Crime Lab almanac filter.
 export const CONTINENT_OF = {
-  lisbon: "europe", reykjavik: "europe", helsinki: "europe", edinburgh: "europe",
-  cairo: "africa", marrakech: "africa", capetown: "africa",
-  istanbul: "asia", mumbai: "asia", bangkok: "asia", tokyo: "asia", seoul: "asia",
-  sydney: "oceania",
-  lima: "samerica", buenosaires: "samerica",
+  lisbon: "europe", reykjavik: "europe", helsinki: "europe", edinburgh: "europe", athens: "europe",
+  cairo: "africa", marrakech: "africa", capetown: "africa", nairobi: "africa",
+  istanbul: "asia", mumbai: "asia", bangkok: "asia", tokyo: "asia", seoul: "asia", hanoi: "asia",
+  sydney: "oceania", auckland: "oceania",
+  lima: "samerica", buenosaires: "samerica", rio: "samerica",
   mexicocity: "namerica", havana: "namerica", vancouver: "namerica",
 };

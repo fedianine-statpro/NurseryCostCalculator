@@ -110,11 +110,42 @@ export const CASES = [
     hours: 192,           // a little more time — the trail is longer
     requiresWins: 4,
     trail: [
-      { cityId: "helsinki",    locations: { market:   { yields: "destination", angle: "currency" },   sauna:    { yields: "trait", trait: "build" },      ferry:    { yields: "junk" } } },
+      { cityId: "helsinki",    locations: { market:   { yields: "destination", angle: "currency" },   sauna:    { yields: "trait", trait: "hair" },       ferry:    { yields: "junk" } } },
       { cityId: "edinburgh",   locations: { royal:    { yields: "destination", angle: "fact" },       vaults:   { yields: "trait", trait: "mark" },       arthur:   { yields: "junk" } } },
       { cityId: "mumbai",      locations: { dabbawalas:{ yields: "junk" },                            studio:   { yields: "trait", trait: "accessory" },  promenade:{ yields: "destination", angle: "climate" } } },
       { cityId: "bangkok",     locations: { klong:    { yields: "destination", angle: "landmark" },   market:   { yields: "junk" },                       temple:   { yields: "trait", trait: "hobby" } } },
       { cityId: "sydney" }
+    ]
+  },
+
+  // C-009: Mariana Cordeiro — a samba performer who lifts during the encore.
+  // Trail goes east from Rio across four continents, ending in Tokyo.
+  {
+    id: "C-009",
+    culpritId: "mariana",
+    hours: 168,
+    trail: [
+      { cityId: "rio",       locations: { copacabana:{ yields: "destination", angle: "currency" },  escadaria:{ yields: "trait", trait: "hair" },       samba:    { yields: "junk" } } },
+      { cityId: "lisbon",    locations: { docks:    { yields: "junk" },                              trampark: { yields: "trait", trait: "mark" },       fado:     { yields: "destination", angle: "landmark" } } },
+      { cityId: "marrakech", locations: { souk:    { yields: "trait", trait: "accessory" },          riad:     { yields: "destination", angle: "food" }, snake:    { yields: "junk" } } },
+      { cityId: "mumbai",    locations: { dabbawalas:{ yields: "destination", angle: "fact" },       studio:   { yields: "trait", trait: "hobby" },      promenade:{ yields: "junk" } } },
+      { cityId: "tokyo" }
+    ]
+  },
+
+  // C-010: Konstantin "Eclipse" Volkov — the cold operator. The Frozen Window.
+  // A grand-tour trail across all five NEW cities the bureau just added to its
+  // beat. Long-distance swimmer with a winter-window calling card.
+  {
+    id: "C-010",
+    culpritId: "konstantin",
+    hours: 168,
+    trail: [
+      { cityId: "helsinki", locations: { market:    { yields: "trait", trait: "accessory" },        sauna:     { yields: "destination", angle: "climate" },  ferry:    { yields: "junk" } } },
+      { cityId: "athens",   locations: { acropolis: { yields: "trait", trait: "hair" },             plaka:     { yields: "junk" },                            piraeus:  { yields: "destination", angle: "landmark" } } },
+      { cityId: "nairobi",  locations: { market:    { yields: "junk" },                              park:      { yields: "trait", trait: "mark" },            karen:    { yields: "destination", angle: "fact" } } },
+      { cityId: "hanoi",    locations: { quarter:   { yields: "destination", angle: "food" },       lake:      { yields: "junk" },                            bridge:   { yields: "trait", trait: "hobby" } } },
+      { cityId: "auckland" }
     ]
   },
 ];

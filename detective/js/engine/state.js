@@ -15,8 +15,12 @@ export function createGameState(caseId) {
     visitedCityIds: [startCityId],
     investigatedLocations: {},
     cluesSeen: [],
-    // traitsLearned: { category: valueId } — locale-neutral.
+    // traitsLearned: { category: valueId } — locale-neutral bucket tag.
     traitsLearned: {},
+    // traitSources: { category: { cityId, locationId } } — where the player
+    // first heard the bucket-level trait. Shown in the dossier so the player
+    // can trace each trait back to the witness who gave it.
+    traitSources: {},
     // factsByCity: { cityId: Set<factKey> } — every fact category the player
     // has been *exposed* to. Filled by (a) arriving in a city (city facts
     // become known by being there), and (b) seeing a destination clue whose

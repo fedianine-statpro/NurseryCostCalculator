@@ -390,6 +390,13 @@ button:disabled {
   border-bottom: 1px dashed var(--amber-dim);
   font-size: 13px;
 }
+.trait-source {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--amber-dim);
+  font-style: italic;
+}
 .traits-list li::before {
   content: "▸ ";
   color: var(--amber-bright);

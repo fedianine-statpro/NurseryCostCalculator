@@ -70,6 +70,7 @@ export const locale = {
     matchOne: `Only one suspect fits — close them down.`,
     matchZero: `No suspect fits your evidence. A witness gave you a bum steer somewhere.`,
     moLabel: `MO:`,
+    traitFrom: (locName, cityName) => `from ${locName}, ${cityName}`,
 
     // Crimnet briefing header (typewriter banner above the chief's words).
     crimnetHeader: (id) => `// CRIMNET BRIEFING — CASE ${id} — 06:42 GMT //`,
@@ -382,79 +383,141 @@ export const locale = {
         noraebang:  { name: "Noraebang Booth", flavor: "A neon door, a tambourine. Down the hall, somebody is murdering a ballad." },
       }
     },
+    rio: {
+      name: "Rio de Janeiro", country: "Brazil",
+      language: "Portuguese", currency: "reais", landmark: "Christ the Redeemer atop Corcovado",
+      food: "feijoada and pão de queijo", flagColors: "green and yellow with a blue celestial sphere",
+      climate: "humid tropical heat with salt off the Atlantic",
+      fact: "the city that hosts the largest carnival on Earth",
+      locations: {
+        copacabana: { name: "Copacabana Promenade", flavor: "The Portuguese pavement curls like a wave. Bronze tourists, lifeguards, and a vendor selling caipirinhas." },
+        escadaria:  { name: "Escadaria Selarón", flavor: "Two hundred-odd steps of tile from every country anyone ever sent. A painter pretends not to listen." },
+        samba:      { name: "Samba School Rehearsal", flavor: "A drum line shakes the corrugated roof. A dancer in feathers ties her shoe and watches you." },
+      }
+    },
+    athens: {
+      name: "Athens", country: "Greece",
+      language: "Greek", currency: "euros", landmark: "the Acropolis",
+      food: "souvlaki and moussaka", flagColors: "blue and white with a cross",
+      climate: "dry Mediterranean heat and Aegean wind",
+      fact: "the city often called the birthplace of democracy",
+      locations: {
+        acropolis: { name: "Acropolis Slope", flavor: "Marble blocks the size of bathtubs. A guard mutters into a radio and watches the cats." },
+        plaka:     { name: "Plaka Tavernas", flavor: "Grape leaves and grilled lemon. A bouzouki plays in the next courtyard. Someone slaps a backgammon piece." },
+        piraeus:   { name: "Port of Piraeus", flavor: "Ferries pile up against the dock like dominoes. A purser checks a manifest twice and frowns." },
+      }
+    },
+    nairobi: {
+      name: "Nairobi", country: "Kenya",
+      language: "Swahili and English", currency: "Kenyan shillings", landmark: "Nairobi National Park",
+      food: "nyama choma and ugali", flagColors: "black, red, and green with white stripes",
+      climate: "cool highland air at over 1,700 meters",
+      fact: "the only major capital with a wild national park inside its boundary",
+      locations: {
+        market: { name: "Maasai Market", flavor: "Beadwork in rows like a paint chart. A trader compares your watch to the sun and smiles." },
+        park:   { name: "National Park Gate", flavor: "Acacias on a horizon. A ranger checks a license; somewhere, a giraffe is unbothered." },
+        karen:  { name: "Karen Blixen House", flavor: "Wooden floors and old books. The curator dusts a clock that hasn't moved since 1931." },
+      }
+    },
+    hanoi: {
+      name: "Hanoi", country: "Vietnam",
+      language: "Vietnamese", currency: "đồng", landmark: "Hoàn Kiếm Lake and the Old Quarter",
+      food: "phở and bánh mì", flagColors: "red with a yellow star",
+      climate: "hot and humid monsoon air thick with motorbike smoke",
+      fact: "a thousand-year-old capital built around a lake said to hide a golden turtle",
+      locations: {
+        quarter: { name: "Old Quarter Streets", flavor: "Thirty-six guild streets, one for each thing a city ever needed. A pho vendor stirs and watches you." },
+        lake:    { name: "Hoàn Kiếm Lake", flavor: "Red bridge, green water. A retiree practices tai chi as if alone. The fishermen know better." },
+        bridge:  { name: "Long Biên Bridge", flavor: "Iron held together by century-old rivets. Trains rattle past. The river runs the color of strong tea." },
+      }
+    },
+    auckland: {
+      name: "Auckland", country: "New Zealand",
+      language: "English and Māori", currency: "New Zealand dollars", landmark: "the Sky Tower",
+      food: "pavlova and green-lipped mussels", flagColors: "blue with the Union Jack and the Southern Cross",
+      climate: "mild Pacific breeze with sudden showers",
+      fact: "a city of sails built on top of 48 dormant volcanic cones",
+      locations: {
+        viaduct: { name: "Viaduct Harbour", flavor: "Yachts in tidy rows. A skipper is coiling rope with the precision of a watchmaker." },
+        mteden:  { name: "Mount Eden Crater", flavor: "A grass-bowl crater the size of a stadium, in the middle of the city. The wind never stops." },
+        kroad:   { name: "Karangahape Road", flavor: "Vintage neon and a bakery that's been here longer than the country. Someone is busking with a ukulele." },
+      }
+    },
   },
 
   suspects: {
-    vex:     { name: "Vesper 'Vex' Marlowe",     signature: "leaves a single playing card — always the Jack of Spades." },
-    kestrel: { name: "Kestrel Onuoha",            signature: "drops one black feather where the alarm should be." },
-    moss:    { name: "Dr. Moss Kallio",           signature: "ink-blot left on the glass — like a thumbprint, but read it sideways." },
-    duarte:  { name: "Aurelio Duarte",            signature: "hums the same eight bars all the way to the airport." },
-    selene:  { name: "Selene Voss",               signature: "exits clean — not a hair, not a print, just a quiet vault." },
-    ravi:    { name: "Ravi 'The Magpie' Singh",   signature: "swaps the prize for a coin worth a fraction of it." },
-    ines:    { name: "Inés Calatrava",            signature: "scatters rose petals on the floor. She wants you to know." },
-    tomo:    { name: "Tomo 'Whisper' Hayashi",    signature: "no trace at all — until the next city, where they were already seen." },
-    magnus:  { name: "Magnus Bjornsson",          signature: "bends the bars or breaks the lock; never picks it." },
-    petra:   { name: "Petra Wolfe",               signature: "tears off one corner of an old map and pins it to the door." },
+    vex:        { name: "Vesper 'Vex' Marlowe",       signature: "leaves a single playing card — always the Jack of Spades." },
+    kestrel:    { name: "Kestrel Onuoha",              signature: "drops one black feather where the alarm should be." },
+    moss:       { name: "Dr. Moss Kallio",             signature: "ink-blot left on the glass — like a thumbprint, but read it sideways." },
+    duarte:     { name: "Aurelio Duarte",              signature: "hums the same eight bars all the way to the airport." },
+    selene:     { name: "Selene Voss",                 signature: "exits clean — not a hair, not a print, just a quiet vault." },
+    ravi:       { name: "Ravi 'The Magpie' Singh",     signature: "swaps the prize for a coin worth a fraction of it." },
+    ines:       { name: "Inés Calatrava",              signature: "scatters rose petals on the floor. She wants you to know." },
+    tomo:       { name: "Tomo 'Whisper' Hayashi",      signature: "no trace at all — until the next city, where they were already seen." },
+    magnus:     { name: "Magnus Bjornsson",            signature: "bends the bars or breaks the lock; never picks it." },
+    petra:      { name: "Petra Wolfe",                 signature: "tears off one corner of an old map and pins it to the door." },
+    carmela:    { name: "Carmela 'La Serpiente' Reyes",signature: "leaves a curl of dried snakeskin tucked into the lock." },
+    stavros:    { name: "Stavros Helios",              signature: "leaves a single dried olive leaf where the prize sat." },
+    mariana:    { name: "Mariana Cordeiro",            signature: "the guards spend the rest of the night humming a samba they cannot place." },
+    amara:      { name: "Amara 'Tigress' Okeke",       signature: "three parallel scratches across the case glass — a claw mark." },
+    konstantin: { name: "Konstantin 'Eclipse' Volkov", signature: "one window left fogged with winter breath, even on a summer night." },
   },
 
+  // Bucket-level descriptions — what a witness can describe. Multiple
+  // suspects share each bucket so a single trait clue narrows the dossier
+  // from 15 to ~3-5, never to 1.
   traitValues: {
     hair: {
-      "silver":      "silver hair",
-      "black-braid": "a black braid",
-      "ash-blond":   "ash-blond hair",
-      "slick-jet":   "slick-back jet hair",
-      "auburn-bob":  "an auburn bob",
-      "salt-pepper": "salt-and-pepper hair",
-      "platinum":    "platinum blonde hair",
-      "shaved":      "a shaved head",
-      "red-beard":   "a red beard",
-      "white-pixie": "a white pixie cut",
+      "silver": "silver or salt-and-pepper hair",
+      "dark":   "dark hair",
+      "light":  "very fair, almost platinum hair",
+      "red":    "red or auburn hair",
     },
     build: {
-      "tall":     "tall",
-      "athletic": "athletic",
-      "wiry":     "wiry",
-      "stocky":   "stocky",
-      "petite":   "petite",
-      "lean":     "lean",
-      "huge":     "huge",
+      "tall":     "a tall build",
+      "athletic": "an athletic build",
+      "compact":  "a small, compact build",
     },
     mark: {
-      "scar-left-cheek":     "a scar on the left cheek",
-      "falcon-tattoo-wrist": "a tattoo of a falcon on the wrist",
-      "round-glasses":       "small round glasses",
-      "gold-tooth":          "a gold tooth",
-      "freckles-nose":       "freckles across the nose",
-      "right-leg-limp":      "a limp in the right leg",
-      "beauty-mark-lip":     "a beauty mark above the lip",
-      "koi-tattoo-forearm":  "a tattoo of a koi on the forearm",
-      "broken-nose":         "a broken nose",
-      "heterochromia":       "heterochromia (one blue eye, one brown)",
+      "scar":    "a visible scar",
+      "tattoo":  "a tattoo on a visible spot",
+      "eyewear": "glasses, or something unusual about the eyes",
+      "facial":  "a striking detail on the face",
+      "injury":  "an old injury — a limp, a broken nose, or a bad mend",
     },
     accessory: {
-      "platinum-pocket-watch": "a platinum pocket watch",
-      "leather-gloves":        "leather gloves",
-      "fountain-pen":          "an antique fountain pen",
-      "panama-hat":            "a panama hat",
-      "jade-ring":             "a jade ring",
-      "silk-scarf":            "a silk scarf",
-      "ruby-earrings":         "ruby earrings",
-      "black-wristband":       "a black wristband",
-      "iron-signet":           "an iron signet ring",
-      "silver-locket":         "a silver locket",
+      "trinket":  "an old metal trinket — a watch, signet, pen, or locket",
+      "jewelry":  "showy jewelry — rings, earrings, or chains",
+      "clothing": "a distinctive piece of clothing — a hat, gloves, or a scarf",
     },
     hobby: {
-      "fencing":          "fencing",
-      "falconry":         "falconry",
-      "ornithology":      "ornithology",
-      "jazz-piano":       "jazz piano",
-      "rare-books":       "the rare-book trade",
-      "sleight-of-hand":  "sleight of hand",
-      "flamenco":         "flamenco dancing",
-      "parkour":          "parkour",
-      "open-water-swim":  "open-water swimming",
-      "antique-maps":     "collecting antique maps",
+      "stunts":      "athletic stunts — fencing, parkour, or stage daring",
+      "birds":       "an obsession with birds",
+      "performance": "performing arts — music, dance, or stagecraft",
+      "collecting":  "collecting old books, maps, or coins",
+      "water":       "long-distance open-water swimming",
     },
+  },
+
+  // Per-suspect vivid descriptions — what the FILE on each suspect says.
+  // Shown in the dossier so two suspects in the same trait bucket still
+  // read as distinct individuals.
+  suspectTraits: {
+    vex:        { hair: "silver hair, swept straight back", build: "tall and angular", mark: "a scar across the left cheek", accessory: "a platinum pocket watch on a long chain", hobby: "competitive fencing" },
+    kestrel:    { hair: "a long, sleek black braid",        build: "an athlete's build", mark: "a tattoo of a falcon on the wrist", accessory: "soft leather gloves, always", hobby: "falconry" },
+    moss:       { hair: "thin ash-blond hair",              build: "wiry and small", mark: "small round wire-rim glasses", accessory: "an antique fountain pen clipped inside the jacket", hobby: "ornithology" },
+    duarte:     { hair: "slick-back jet-black hair",        build: "athletic but stocky", mark: "one gold tooth that catches the light", accessory: "a cream panama hat", hobby: "jazz piano" },
+    selene:     { hair: "an auburn bob",                    build: "petite, almost dancer-small", mark: "freckles scattered across the bridge of the nose", accessory: "a heavy jade ring", hobby: "the rare-book trade" },
+    ravi:       { hair: "salt-and-pepper hair tied back",   build: "lean and quick", mark: "a slight limp in the right leg", accessory: "a violet silk scarf", hobby: "sleight of hand at the card table" },
+    ines:       { hair: "platinum blonde, almost white",    build: "tall and statuesque", mark: "a beauty mark above the upper lip", accessory: "deep ruby earrings", hobby: "flamenco dancing" },
+    tomo:       { hair: "a shaved head, dark stubble",      build: "compact and wiry", mark: "a tattoo of a koi on the forearm", accessory: "a black canvas wristband", hobby: "parkour" },
+    magnus:     { hair: "a thick red beard going grey",     build: "huge — built like a barrel", mark: "a broken nose, badly reset", accessory: "an iron signet ring", hobby: "open-water swimming" },
+    petra:      { hair: "a white pixie cut",                build: "petite, light on the feet", mark: "heterochromia — one eye blue, one brown", accessory: "a small silver locket", hobby: "collecting antique maps" },
+    carmela:    { hair: "long dark hair, raven-glossy",     build: "small and quick", mark: "a faint snakebite-scar beside the lip", accessory: "a pair of curved gold hoops", hobby: "knife throwing as a stage act" },
+    stavros:    { hair: "silver hair worn very long",       build: "athletic and squared at the shoulders", mark: "thick reading glasses on a chain", accessory: "a worn olivewood smoking pipe", hobby: "collecting Byzantine coins" },
+    mariana:    { hair: "a tumble of red-auburn curls",     build: "athletic and rhythmic", mark: "a flame tattoo curling up the collarbone", accessory: "a thin gold ankle chain", hobby: "samba and stage performance" },
+    amara:      { hair: "dark braids piled into a crown",   build: "tall, with a hunter's posture", mark: "a long thin scar running down the forearm", accessory: "stacked amber bracelets at one wrist", hobby: "tracking and falconry" },
+    konstantin: { hair: "pale ash-blond, cut short",        build: "tall and lean", mark: "a small straight scar at the temple", accessory: "a tailored charcoal overcoat", hobby: "long-distance open-water swimming" },
   },
 
   cases: {
@@ -513,6 +576,20 @@ export const locale = {
       lootLong: "the Hanseatic Circlet — eight thin bands of silver, gold, and iron braided together by a Baltic prince who governed eight ports and trusted none of them",
       briefing:
         "This one we've been chasing for years.\n\nThe Hanseatic Circlet vanished from a Helsinki vault overnight. Nothing was forced — but a bar of the inner gate was bent like a stalk of wheat, and that bar is two inches of cold-rolled steel. There is exactly one person in our files who could do that.\n\nThis is the final V.I.L.E. operative still in the wind. The trail is long, the loot is heavy, and the suspect is bigger than the door. Bring it home.",
+    },
+    "C-009": {
+      title: "The Cariocan Caper",
+      loot: "the Emerald of Tijuca",
+      lootLong: "the Emerald of Tijuca — a cabochon the size of a hen's egg, cut in the seventeenth century and reset for a Brazilian empress's tiara",
+      briefing:
+        "Detective. The Emerald of Tijuca was on display for one night at the Carnival gala in Rio. Half the city was dancing in the street and the other half was at the gala — until the lights cut, the samba kept going, and the case was empty when the lights came back on.\n\nThe only thing on the empty velvet was the smell of jasmine perfume and the rhythm of a tune the witnesses can't stop humming. She danced her way out. Catch her before she dances her way to a buyer.",
+    },
+    "C-010": {
+      title: "The Frozen Window",
+      loot: "the Iron Cross of the Hansards",
+      lootLong: "the Iron Cross of the Hansards — a small iron-and-amber pendant carried by a Baltic merchant who, legend says, never lost a ship",
+      briefing:
+        "Helsinki. A locked vault, second sub-basement, no signs of forced entry. The only thing wrong: a window in the corridor outside, fogged over with the breath of someone exhaling in a hot room. Outside, it was 24°C and the window was on the inside of the wall.\n\nWe have a name. We've had it for years. He moves slow, he plans long, and his trail runs eastward through some places this bureau has never had to file before. Pack a heavier coat than you'd think.",
     },
   },
 

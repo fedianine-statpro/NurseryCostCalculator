@@ -348,6 +348,11 @@ function investigateLocation(loc) {
       highlightFact(state, nextCityId, dc.factKey);
     } else if (yields.yields === "trait") {
       const tc = generateTraitClue(c.culpritId, yields.trait, cityId, loc.id);
+      // Don't overwrite an earlier source — keep the FIRST time we learned
+      // this trait so the dossier source line is stable across revisits.
+      if (state.traitsLearned[tc.traitKey] === undefined) {
+        state.traitSources[tc.traitKey] = { cityId, locationId: loc.id };
+      }
       state.traitsLearned[tc.traitKey] = tc.valueId;
       text = tc.text;
     } else {
