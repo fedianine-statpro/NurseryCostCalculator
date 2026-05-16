@@ -60,8 +60,8 @@ function renderCard(state, cityId, hintedOnly) {
     if (!set.has(k)) continue;
     const label = L.ui.factLabel[k];
     const value = cityLoc[k];
-    const marker = hi.has(k) ? `<span class="hi-marker">▸</span>` : "";
-    rows += `<div class="nb-row ${hi.has(k) ? "highlighted" : ""}">${marker}<em>${label}</em> <span>${value}</span></div>`;
+    const marker = `<span class="hi-marker">${hi.has(k) ? "▸" : ""}</span>`;
+    rows += `<div class="nb-row ${hi.has(k) ? "highlighted" : ""}">${marker}<em>${label}</em><span>${value}</span></div>`;
   }
 
   card.innerHTML = `

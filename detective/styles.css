@@ -639,8 +639,9 @@ button:disabled {
   letter-spacing: 0.05em;
 }
 .notebook-facts { font-size: 12px; }
-.nb-row { padding: 2px 0; display: grid; grid-template-columns: 14px 110px 1fr; gap: 2px; }
+.nb-row { padding: 2px 0; display: grid; grid-template-columns: 14px 130px 1fr; gap: 6px; align-items: baseline; }
 .nb-row em { color: var(--amber-dim); font-style: normal; }
+.nb-row .hi-marker { text-align: center; min-width: 14px; }
 .nb-row.highlighted span { color: var(--amber-bright); }
 .hi-marker { color: var(--green); font-weight: bold; }
 
