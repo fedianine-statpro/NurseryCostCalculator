@@ -211,7 +211,7 @@ export const locale = {
       language: "Arabic", currency: "dirhams", landmark: "Jemaa el-Fnaa square",
       food: "tagine and mint tea", flagColors: "red with a green star",
       climate: "dry heat, with the smell of orange blossoms",
-      fact: "the city the dye 'morocco red' is named after",
+      fact: "a red-walled city whose dye lent its name to a color",
       locations: {
         souk:  { name: "Tanneries Souk", flavor: "Pools of dye the color of a bruise. Your eyes water; the workers smile." },
         riad:  { name: "Hidden Riad", flavor: "A door in a wall opens onto a courtyard of citrus trees. The proprietor watches a fountain." },
@@ -244,7 +244,7 @@ export const locale = {
     },
     mumbai: {
       name: "Mumbai", country: "India",
-      language: "Hindi and Marathi", currency: "rupees", landmark: "the Gateway of India",
+      language: "Hindi and Marathi", currency: "rupees", landmark: "a great basalt arch on the harbour",
       food: "vada pav and bombay duck", flagColors: "saffron, white, and green",
       climate: "humid monsoon air, thick with the smell of the sea",
       fact: "the largest film industry in the world by output",
@@ -268,7 +268,7 @@ export const locale = {
     },
     tokyo: {
       name: "Tokyo", country: "Japan",
-      language: "Japanese", currency: "yen", landmark: "Tokyo Tower",
+      language: "Japanese", currency: "yen", landmark: "a red-and-white steel tower over the skyline",
       food: "sushi and ramen", flagColors: "white with a red disc",
       climate: "crisp autumn air with the smell of grilled eel",
       fact: "home to more Michelin-starred restaurants than any other city",
@@ -328,7 +328,7 @@ export const locale = {
     },
     helsinki: {
       name: "Helsinki", country: "Finland",
-      language: "Finnish", currency: "euros", landmark: "Helsinki Cathedral",
+      language: "Finnish", currency: "euros", landmark: "the white cathedral on Senate Square",
       food: "salmon soup and rye bread", flagColors: "white with a blue cross",
       climate: "cold Baltic air that turns your breath silver",
       fact: "the country that invented the sauna and the Moomins",
@@ -364,7 +364,7 @@ export const locale = {
     },
     edinburgh: {
       name: "Edinburgh", country: "Scotland",
-      language: "English (with Scots flavor)", currency: "pounds sterling", landmark: "Edinburgh Castle",
+      language: "English (with Scots flavor)", currency: "pounds sterling", landmark: "a castle perched on a volcanic crag",
       food: "haggis and shortbread", flagColors: "blue with a white saltire",
       climate: "wet wind off the North Sea, smelling of coal and gorse",
       fact: "a medieval old town piled on a volcanic crag",
@@ -412,10 +412,10 @@ export const locale = {
     },
     nairobi: {
       name: "Nairobi", country: "Kenya",
-      language: "Swahili and English", currency: "Kenyan shillings", landmark: "Nairobi National Park",
+      language: "Swahili and English", currency: "Kenyan shillings", landmark: "the savannah on the city's edge",
       food: "nyama choma and ugali", flagColors: "black, red, and green with white stripes",
       climate: "cool highland air at over 1,700 meters",
-      fact: "the only major capital with a wild national park inside its boundary",
+      fact: "the only major capital with wild giraffes and rhinos inside the city limits",
       locations: {
         market: { name: "Maasai Market", flavor: "Beadwork in rows like a paint chart. A trader compares your watch to the sun and smiles." },
         park:   { name: "National Park Gate", flavor: "Acacias on a horizon. A ranger checks a license; somewhere, a giraffe is unbothered." },
