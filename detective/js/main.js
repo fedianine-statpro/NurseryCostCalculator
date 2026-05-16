@@ -4,21 +4,28 @@ import { CASES, CASE_BY_ID } from "./data/cases.js";
 import { CITIES } from "./data/cities.js";
 import {
   createGameState, getCurrentCase, getTrailEntryForCity, getTrailIndexOfCity,
-  getFinalCityId, isLocationDone, markLocationDone, spendHours, formatTime
+  getFinalCityId, isLocationDone, markLocationDone, spendHours, formatTime,
+  recordCityFacts, highlightFact,
 } from "./engine/state.js";
 import { travelHours } from "./engine/clock.js";
 import {
   generateDestinationClue, generateTraitClue, generateJunkClue, generateDeadEndClue
 } from "./engine/clues.js";
-import { canIssueWarrant } from "./engine/warrant.js";
+import { canIssueWarrant, matchingSuspectIds } from "./engine/warrant.js";
+import {
+  loadProgress, markCaseWon, promoteRank, resetProgress, caseUnlocked,
+  buildTriviaQuestion, RANK_KEYS,
+} from "./engine/progress.js";
 import { mountMap, refreshMap, relocaleMap } from "./ui/map.js";
 import { renderDossier, getSelectedSuspect, clearSelection } from "./ui/dossier.js";
+import { renderNotebook } from "./ui/notebook.js";
+import { renderAlmanac, resetAlmanacFilter } from "./ui/almanac.js";
 import { typewrite } from "./ui/narrator.js";
 import {
   sfxBeep, sfxConfirm, sfxDeny, sfxPlane, sfxStamp, sfxWin, sfxLose
 } from "./ui/effects.js";
 import {
-  getLocale, getLocaleCode, setLocale, onLocaleChange, availableLocales
+  getLocale, getLocaleCode, setLocale, onLocaleChange,
 } from "./i18n/i18n.js";
 
 const $ = (sel) => document.querySelector(sel);
@@ -26,56 +33,54 @@ const $ = (sel) => document.querySelector(sel);
 let state = null;
 let activeScreen = "title";
 
-// ---------- Screen routing ----------
-const SCREENS = ["title", "case-select", "briefing", "map", "city", "dossier", "epilogue"];
+const ALMANAC_COST_HOURS = 2;     // each almanac open costs the player 2h
+
+const SCREENS = ["title", "case-select", "briefing", "map", "city", "dossier", "notebook", "almanac", "trivia", "epilogue"];
 
 function showScreen(name) {
   activeScreen = name;
   for (const s of SCREENS) {
-    document.getElementById("screen-" + s).classList.toggle("active", s === name);
+    const el = document.getElementById("screen-" + s);
+    if (el) el.classList.toggle("active", s === name);
   }
   $("#confirm-modal").classList.add("hidden");
 }
 
 // ---------- Locale application ----------
-// Sets all the static UI strings (button labels, panel titles) for the current locale.
-// Called once on boot and again whenever the locale changes.
 function applyStaticLocale() {
   const L = getLocale();
-  // HUD
   $(".logo").textContent = L.ui.bureau;
-  // Title screen
   $("#title1").innerHTML = L.ui.title1;
   $("#title2").innerHTML = L.ui.title2;
   $("#tagline").textContent = L.ui.tagline;
   $("#btn-start").textContent = L.ui.beginBriefing;
   $("#keyboard-hint").innerHTML = L.ui.keyboardHint;
-  // Case select
   $("#case-select-title").textContent = L.ui.chooseCase;
-  // Briefing
   $("#briefing-label").textContent = L.ui.chiefsBriefingLabel;
   $("#btn-briefing-go").textContent = L.ui.takeCase;
-  // Map screen
   $("#map-loc-title").textContent = L.ui.currentLocation;
   $("#map-actions-title").textContent = L.ui.actions;
   $("#btn-investigate").textContent = L.ui.investigate;
   $("#btn-open-dossier").textContent = L.ui.openDossier;
+  $("#btn-open-notebook").textContent = L.ui.openNotebook;
+  $("#btn-open-almanac").textContent = L.ui.openAlmanac;
   $("#map-marker-hint").textContent = L.ui.clickMarkerHint;
-  // City screen
   $("#btn-back-map").textContent = L.ui.backMap;
   $("#btn-city-dossier").textContent = L.ui.dossier;
   $("#btn-result-continue").textContent = L.ui.cont;
-  // Dossier
   $("#dossier-title").textContent = L.ui.suspectDossier;
   $("#traits-title").textContent = L.ui.traitsCollected;
   $("#btn-dossier-back").textContent = L.ui.returnMap;
   $("#btn-issue-warrant").textContent = L.ui.issueWarrant;
-  // Epilogue
+  $("#notebook-title").textContent = L.ui.notebookTitle;
+  $("#btn-notebook-back").textContent = L.ui.closeNotebook;
+  $("#almanac-title").textContent = L.ui.almanacTitle;
+  $("#btn-almanac-back").textContent = L.ui.closeAlmanac;
+  $("#trivia-title-label").textContent = L.ui.triviaTitle;
+  $("#btn-trivia-continue").textContent = L.ui.triviaContinue;
   $("#btn-epilogue-again").textContent = L.ui.newCase;
   $("#rank-label").textContent = L.ui.yourRank;
-  // Stamp
   $("#stamp-overlay .stamp").textContent = L.ui.warrantIssued;
-  // Language toggle buttons reflect active code
   updateLangButtons();
 }
 
@@ -112,24 +117,71 @@ $("#btn-start").addEventListener("click", () => {
   showScreen("case-select");
 });
 
-// ---------- Case select ----------
+// ---------- Case select + career banner ----------
 function renderCaseList() {
   const L = getLocale();
+  const p = loadProgress();
+
+  // Career banner: shows rank + cases closed + reset button.
+  const banner = $("#career-banner");
+  banner.innerHTML = "";
+  const rankKey = RANK_KEYS[p.rank];
+  const left = document.createElement("div");
+  left.innerHTML = `
+    <div class="career-line"><span class="career-label">${L.ui.careerHeader}</span></div>
+    <div class="career-line"><strong>${L.ui.careerRank}:</strong> ${L.ranks[rankKey]}</div>
+    <div class="career-line">${L.ui.careerCasesClosed(p.closed.length)}</div>
+  `;
+  const right = document.createElement("div");
+  const resetBtn = document.createElement("button");
+  resetBtn.className = "btn-secondary";
+  resetBtn.textContent = L.ui.btnResetCareer;
+  resetBtn.addEventListener("click", () => {
+    askConfirm(L.ui.confirmResetCareer, () => {
+      resetProgress();
+      renderCaseList();
+    });
+  });
+  right.appendChild(resetBtn);
+  banner.appendChild(left);
+  banner.appendChild(right);
+
   const host = $("#case-list");
   host.innerHTML = "";
   for (const c of CASES) {
     const caseLoc = L.cases[c.id];
     const card = document.createElement("div");
     card.className = "case-card";
+    const isDone = p.closed.includes(c.id);
+    const isUnlocked = caseUnlocked(c);
+    if (isDone) card.classList.add("case-done");
+    if (!isUnlocked) card.classList.add("case-locked");
+
+    const stateTag = !isUnlocked
+      ? `<div class="case-state locked">${L.ui.caseLocked}</div>`
+      : isDone
+        ? `<div class="case-state done">${L.ui.caseDone}</div>`
+        : `<div class="case-state open">${L.ui.caseFresh}</div>`;
+
+    const lockedWhy = !isUnlocked
+      ? `<div class="case-card-sub locked-why">${L.ui.caseLockedWhy(c.requiresWins)}</div>`
+      : "";
+
     card.innerHTML = `
+      ${stateTag}
       <div class="case-card-id">${c.id}</div>
       <div class="case-card-title">${caseLoc.title}</div>
       <div class="case-card-sub">${L.ui.stolen(caseLoc.lootLong)}</div>
+      ${lockedWhy}
     `;
-    card.addEventListener("click", () => {
-      sfxConfirm();
-      startCase(c.id);
-    });
+    if (isUnlocked) {
+      card.addEventListener("click", () => {
+        sfxConfirm();
+        startCase(c.id);
+      });
+    } else {
+      card.style.cursor = "not-allowed";
+    }
     host.appendChild(card);
   }
 }
@@ -138,9 +190,12 @@ function renderCaseList() {
 function startCase(caseId) {
   state = createGameState(caseId);
   clearSelection();
+  resetAlmanacFilter();
   updateHud();
   const L = getLocale();
   $("#briefing-id").textContent = caseId;
+  $("#briefing-crimnet").innerHTML =
+    `<div>${L.ui.crimnetHeader(caseId)}</div><div>${L.ui.crimnetClassified}</div>`;
   showScreen("briefing");
   typewrite($("#briefing-text"), L.cases[caseId].briefing, { speed: 18 });
 }
@@ -187,6 +242,8 @@ function doTravel(cityId, hours) {
   spendHours(state, hours);
   state.currentCityId = cityId;
   if (!state.visitedCityIds.includes(cityId)) state.visitedCityIds.push(cityId);
+  // Arriving in a city auto-records its facts into the Notebook.
+  recordCityFacts(state, cityId);
 
   if (state.status === "lost") {
     finishCase();
@@ -211,6 +268,23 @@ $("#btn-open-dossier").addEventListener("click", () => {
   enterDossier();
 });
 
+$("#btn-open-notebook").addEventListener("click", () => {
+  sfxBeep();
+  enterNotebook();
+});
+
+$("#btn-open-almanac").addEventListener("click", () => {
+  if (state.status !== "investigating") return;
+  const L = getLocale();
+  askConfirm(L.ui.almanacCost(ALMANAC_COST_HOURS), () => {
+    spendHours(state, ALMANAC_COST_HOURS);
+    state.almanacQueries++;
+    updateHud();
+    if (state.status === "lost") { finishCase(); return; }
+    enterAlmanac();
+  });
+});
+
 // ---------- City ----------
 function enterCity() {
   const L = getLocale();
@@ -227,9 +301,14 @@ function enterCity() {
     card.className = "location-card";
     const done = isLocationDone(state, cityData.id, loc.id);
     if (done) card.classList.add("disabled");
+    const specialty = loc.specialty ? L.ui.specialty[loc.specialty] : "";
+    const specialtyHtml = specialty
+      ? `<div class="location-specialty">${L.ui.specialtyLabel} <strong>${specialty}</strong></div>`
+      : "";
     card.innerHTML = `
       <div class="location-name">${locLoc.name}</div>
       <div class="location-cost">${L.ui.locationCost(loc.cost, done)}</div>
+      ${specialtyHtml}
       <div class="location-flavor">${locLoc.flavor}</div>
     `;
     if (!done) {
@@ -262,10 +341,13 @@ function investigateLocation(loc) {
       text = generateDeadEndClue(cityId, loc.id);
     } else if (yields.yields === "destination") {
       const nextCityId = c.trail[trailIndex + 1].cityId;
-      text = generateDestinationClue(nextCityId, yields.angle, cityId, loc.id);
+      const dc = generateDestinationClue(nextCityId, yields.angle, cityId, loc.id);
+      text = dc.text;
+      // Record the puzzle hook: this specific fact about the next city
+      // is what the player needs to decode.
+      highlightFact(state, nextCityId, dc.factKey);
     } else if (yields.yields === "trait") {
       const tc = generateTraitClue(c.culpritId, yields.trait, cityId, loc.id);
-      // Store the language-neutral value id so language switches are safe.
       state.traitsLearned[tc.traitKey] = tc.valueId;
       text = tc.text;
     } else {
@@ -315,6 +397,21 @@ $("#btn-issue-warrant").addEventListener("click", () => {
   const L = getLocale();
   const id = getSelectedSuspect();
   if (!id || !canIssueWarrant(state)) return;
+
+  // Soft check: if the suspect chosen is one already eliminated by traits,
+  // refuse the warrant and explain — no time penalty for this UI footgun.
+  const matching = matchingSuspectIds(state.traitsLearned);
+  if (matching.length === 0) {
+    askConfirm(L.ui.noMatchWarrant, () => enterDossier(), null, L.ui.ok, null);
+    return;
+  }
+  if (!matching.includes(id)) {
+    // The player ignored the dossier's "eliminated" greying. We don't
+    // penalise this — instead, gently snap them back to the dossier.
+    askConfirm(L.ui.noMatchWarrant, () => enterDossier(), null, L.ui.ok, null);
+    return;
+  }
+
   const c = getCurrentCase(state);
   if (id === c.culpritId) {
     state.warrantSuspectId = id;
@@ -345,6 +442,19 @@ function showWarrantStamp(then) {
     then();
   }, 1400);
 }
+
+// ---------- Notebook / Almanac ----------
+function enterNotebook() {
+  renderNotebook(state, $("#notebook-content"));
+  showScreen("notebook");
+}
+$("#btn-notebook-back").addEventListener("click", () => { sfxBeep(); enterMap(); });
+
+function enterAlmanac() {
+  renderAlmanac($("#almanac-content"));
+  showScreen("almanac");
+}
+$("#btn-almanac-back").addEventListener("click", () => { sfxBeep(); enterMap(); });
 
 // ---------- Arrival at final city ----------
 function handleArrival() {
@@ -386,6 +496,7 @@ function finishCase() {
     title = L.ui.winTitle(culpritLoc.name);
     body = L.ui.winBody(culpritLoc.name, L.cities[getFinalCityId(state)].name, caseLoc.loot);
     rank = computeRank(state.hoursLeft, state.wrongWarrants);
+    markCaseWon(c.id);
     sfxWin();
   } else {
     if (state.losReason === "clock") {
@@ -416,6 +527,72 @@ function computeRank(hoursLeft, wrongs) {
 
 $("#btn-epilogue-again").addEventListener("click", () => {
   sfxBeep();
+  const wasWin = state && state.status === "won";
+  if (wasWin) {
+    // Doc-check trivia gate between case and case-select.
+    const q = buildTriviaQuestion(state);
+    if (q) {
+      enterTrivia(q);
+      return;
+    }
+  }
+  state = null;
+  updateHud();
+  renderCaseList();
+  showScreen("case-select");
+});
+
+// ---------- Doc-check trivia gate ----------
+let pendingTrivia = null;
+
+function enterTrivia(q) {
+  const L = getLocale();
+  pendingTrivia = q;
+  const promptFn = L.ui.triviaPrompt[q.factKey] || L.ui.triviaPrompt.landmark;
+  $("#trivia-intro").textContent = "";
+  $("#trivia-question").textContent = promptFn(q.factValue);
+  const host = $("#trivia-options");
+  host.innerHTML = "";
+  for (const cityId of q.options) {
+    const cd = L.cities[cityId];
+    const b = document.createElement("button");
+    b.className = "btn-secondary trivia-option";
+    b.textContent = `${cd.name}, ${cd.country}`;
+    b.addEventListener("click", () => answerTrivia(cityId));
+    host.appendChild(b);
+  }
+  $("#trivia-result").classList.add("hidden");
+  $("#btn-trivia-continue").classList.add("hidden");
+  showScreen("trivia");
+  typewrite($("#trivia-intro"), L.ui.triviaIntro, { speed: 16 });
+}
+
+function answerTrivia(cityId) {
+  const L = getLocale();
+  if (!pendingTrivia) return;
+  const correct = (cityId === pendingTrivia.correctCityId);
+  if (correct) {
+    promoteRank();
+    sfxConfirm();
+  } else {
+    sfxDeny();
+  }
+  // Lock further answer clicks.
+  $("#trivia-options").querySelectorAll("button").forEach(b => {
+    b.disabled = true;
+    if (b.textContent.startsWith(L.cities[pendingTrivia.correctCityId].name)) b.classList.add("trivia-correct");
+  });
+  const msg = correct
+    ? L.ui.triviaCorrect
+    : L.ui.triviaWrong(`${L.cities[pendingTrivia.correctCityId].name}, ${L.cities[pendingTrivia.correctCityId].country}`);
+  $("#trivia-result").classList.remove("hidden");
+  typewrite($("#trivia-result-text"), msg, { speed: 16 });
+  $("#btn-trivia-continue").classList.remove("hidden");
+}
+
+$("#btn-trivia-continue").addEventListener("click", () => {
+  sfxBeep();
+  pendingTrivia = null;
   state = null;
   updateHud();
   renderCaseList();
@@ -456,33 +633,36 @@ function setupLangButtons() {
   });
 }
 
-// When the locale changes, re-render everything currently visible.
 onLocaleChange(() => {
   applyStaticLocale();
   relocaleMap();
   updateHud();
-  // Re-render whichever dynamic screen is active.
-  if (activeScreen === "case-select") {
-    renderCaseList();
-  } else if (activeScreen === "briefing" && state) {
+  if (activeScreen === "case-select") renderCaseList();
+  else if (activeScreen === "briefing" && state) {
     const L = getLocale();
+    $("#briefing-crimnet").innerHTML =
+      `<div>${L.ui.crimnetHeader(state.caseId)}</div><div>${L.ui.crimnetClassified}</div>`;
     typewrite($("#briefing-text"), L.cases[state.caseId].briefing, { speed: 6 });
-  } else if (activeScreen === "map" && state) {
-    enterMap();
-  } else if (activeScreen === "city" && state) {
-    enterCity();
-  } else if (activeScreen === "dossier" && state) {
-    enterDossier();
-  } else if (activeScreen === "epilogue" && state) {
-    finishCase();
   }
+  else if (activeScreen === "map" && state) enterMap();
+  else if (activeScreen === "city" && state) enterCity();
+  else if (activeScreen === "dossier" && state) enterDossier();
+  else if (activeScreen === "notebook" && state) enterNotebook();
+  else if (activeScreen === "almanac" && state) enterAlmanac();
+  else if (activeScreen === "trivia" && pendingTrivia) enterTrivia(pendingTrivia);
+  else if (activeScreen === "epilogue" && state) finishCase();
 });
 
 // ---------- Keyboard ----------
 window.addEventListener("keydown", (e) => {
   if (e.code === "Escape" && state && state.status === "investigating") {
-    if ($("#screen-dossier").classList.contains("active")) enterMap();
-    else enterDossier();
+    // Esc toggles dossier from map/city; from dossier/notebook/almanac, returns
+    // to the map.
+    if (activeScreen === "dossier" || activeScreen === "notebook" || activeScreen === "almanac") {
+      enterMap();
+    } else {
+      enterDossier();
+    }
   }
 });
 

@@ -63,13 +63,101 @@ export const locale = {
 
     timeDaysHours: (d, h) => `${d}d ${h}h left`,
     timeHours: (h) => `${h}h left`,
+
+    // Suspect-match counter shown in the dossier.
+    matchAll: (n) => `${n} suspects on file. Collect traits to narrow it down.`,
+    matchN: (n, total) => `${n} of ${total} suspects still match the evidence.`,
+    matchOne: `Only one suspect fits — close them down.`,
+    matchZero: `No suspect fits your evidence. A witness gave you a bum steer somewhere.`,
+    moLabel: `MO:`,
+
+    // Crimnet briefing header (typewriter banner above the chief's words).
+    crimnetHeader: (id) => `// CRIMNET BRIEFING — CASE ${id} — 06:42 GMT //`,
+    crimnetClassified: `// CLASSIFIED · ACME DETECTIVE AGENCY · EYES ONLY //`,
+
+    // Map-side panel hooks.
+    openNotebook: "DETECTIVE'S NOTEBOOK",
+    openAlmanac: "CRIME LAB ALMANAC",
+    notebookTitle: "DETECTIVE'S NOTEBOOK",
+    almanacTitle: "CRIME LAB ALMANAC",
+    notebookEmpty: "Your notebook is blank. Visit a city — the local language, currency, and customs will write themselves in.",
+    notebookNoFacts: "Nothing recorded for this city yet.",
+    notebookVisited: "VISITED CITIES",
+    notebookHinted: "TRAIL OF BREADCRUMBS",
+    closeNotebook: "← CLOSE NOTEBOOK",
+    closeAlmanac: "← CLOSE ALMANAC",
+    almanacCost: (h) => `Querying the Crime Lab costs ${h}h. Continue?`,
+    almanacSearchPlaceholder: "search currency, language, flag, food, landmark…",
+    almanacTally: (n) => `${n} cities match.`,
+
+    factLabel: {
+      language: "Language",
+      currency: "Currency",
+      flagColors: "Flag",
+      landmark: "Landmark",
+      food: "Local dish",
+      climate: "Climate",
+      fact: "Notable",
+    },
+    continentLabel: {
+      all: "ALL", europe: "EUROPE", africa: "AFRICA", asia: "ASIA",
+      oceania: "OCEANIA", namerica: "N. AMERICA", samerica: "S. AMERICA",
+    },
+    almanacCol: {
+      city: "City", currency: "Currency", language: "Language",
+      flagColors: "Flag", landmark: "Landmark", food: "Local dish",
+    },
+
+    // Location specialty hint label, shown on each location card.
+    specialtyLabel: "Tends to know:",
+    specialty: {
+      money:    "currency & flag",
+      language: "language & flag",
+      food:     "food & language",
+      history:  "landmark & history",
+      climate:  "climate & weather",
+      culture:  "hobbies & accessories",
+      people:   "appearance & marks",
+      transit:  "where they were headed",
+    },
+
+    // V.I.L.E. ladder on the case-select screen.
+    careerHeader: "CAREER FILE",
+    careerCasesClosed: (n) => `${n} case${n === 1 ? "" : "s"} closed`,
+    careerRank: "Rank",
+    caseLocked: "LOCKED",
+    caseLockedWhy: (n) => `Close ${n} other case${n === 1 ? "" : "s"} to unlock.`,
+    caseDone: "✓ CLOSED",
+    caseFresh: "OPEN",
+    btnResetCareer: "RESET CAREER",
+    confirmResetCareer: "Wipe your career file and start over from Rookie?",
+
+    // Doc-check trivia gate (after a win, before promotion).
+    triviaTitle: "DOC CHECK",
+    triviaIntro: "The chief drops a manila folder on your desk. \"Before I promote you — one question. You've been there, you should know this.\"",
+    triviaPrompt: {
+      currency:   (v) => `Which city uses ${v} as its currency?`,
+      language:   (v) => `In which city would you hear ${v} on the street?`,
+      flagColors: (v) => `Which city flies a flag of ${v}?`,
+      landmark:   (v) => `Which city is famous for ${v}?`,
+      food:       (v) => `Where would a chef set down a plate of ${v}?`,
+    },
+    triviaCorrect: "Correct. Step up, detective — promoted.",
+    triviaWrong: (c) => `Close. The answer was ${c}. The promotion can wait — finish another case and we'll talk.`,
+    triviaContinue: "CONTINUE",
+
+    // Soft warrant deny when 0 suspects match (player kept clicking the
+    // dossier and somehow chose an eliminated face — should not normally
+    // happen, but covered).
+    noMatchWarrant: "Your evidence is contradictory — no suspect on file matches all of your traits. Check your Detective's Notebook and the witnesses you have.",
   },
 
   ranks: {
-    ace: "ACE DETECTIVE",
-    inspector: "INSPECTOR",
-    detective: "DETECTIVE",
-    rookie: "ROOKIE",
+    rookie:       "ROOKIE",
+    detective:    "DETECTIVE",
+    inspector:    "INSPECTOR",
+    superSleuth:  "SUPER SLEUTH",
+    ace:          "ACE DETECTIVE",
   },
 
   traitCategories: {
@@ -297,16 +385,16 @@ export const locale = {
   },
 
   suspects: {
-    vex:     { name: "Vesper 'Vex' Marlowe" },
-    kestrel: { name: "Kestrel Onuoha" },
-    moss:    { name: "Dr. Moss Kallio" },
-    duarte:  { name: "Aurelio Duarte" },
-    selene:  { name: "Selene Voss" },
-    ravi:    { name: "Ravi 'The Magpie' Singh" },
-    ines:    { name: "Inés Calatrava" },
-    tomo:    { name: "Tomo 'Whisper' Hayashi" },
-    magnus:  { name: "Magnus Bjornsson" },
-    petra:   { name: "Petra Wolfe" },
+    vex:     { name: "Vesper 'Vex' Marlowe",     signature: "leaves a single playing card — always the Jack of Spades." },
+    kestrel: { name: "Kestrel Onuoha",            signature: "drops one black feather where the alarm should be." },
+    moss:    { name: "Dr. Moss Kallio",           signature: "ink-blot left on the glass — like a thumbprint, but read it sideways." },
+    duarte:  { name: "Aurelio Duarte",            signature: "hums the same eight bars all the way to the airport." },
+    selene:  { name: "Selene Voss",               signature: "exits clean — not a hair, not a print, just a quiet vault." },
+    ravi:    { name: "Ravi 'The Magpie' Singh",   signature: "swaps the prize for a coin worth a fraction of it." },
+    ines:    { name: "Inés Calatrava",            signature: "scatters rose petals on the floor. She wants you to know." },
+    tomo:    { name: "Tomo 'Whisper' Hayashi",    signature: "no trace at all — until the next city, where they were already seen." },
+    magnus:  { name: "Magnus Bjornsson",          signature: "bends the bars or breaks the lock; never picks it." },
+    petra:   { name: "Petra Wolfe",               signature: "tears off one corner of an old map and pins it to the door." },
   },
 
   traitValues: {
@@ -404,6 +492,27 @@ export const locale = {
       lootLong: "a Mughal tiara of seven saffron-colored sapphires, last worn in 1707",
       briefing:
         "The Saffron Tiara was stolen from a hotel safe in Mumbai during a private viewing. The cameras caught nothing but a woman laughing in a doorway, and then the lights went out.\n\nShe likes attention. She'll perform somewhere along the trail. Don't let her get to the buyer.",
+    },
+    "C-006": {
+      title: "The Pearl of the Andes",
+      loot: "the Tupac Inca Pearl",
+      lootLong: "the Tupac Inca Pearl — a fist-sized black pearl pulled from a sunken Spanish galleon and locked in Lima for four centuries",
+      briefing:
+        "Detective. The Tupac Inca Pearl was on temporary display in Lima for the feast of San Pedro. Half the city was in the street and the other half was in the cathedral. Nobody was in the gallery — except for one person, and now the case is empty.\n\nThe glass is intact. The alarm logged nothing. On the marble floor of the gallery, somebody left a single playing card face-up. Bring the chief the pearl. And the card-player too.",
+    },
+    "C-007": {
+      title: "The Last Train Robbery",
+      loot: "the Conductor's Brass Watch",
+      lootLong: "the Conductor's Brass Watch from the original Orient Express — engraved by a vanished Genevan house and worth more than the carriage it once rode in",
+      briefing:
+        "An hour before the museum opened in Istanbul, someone walked into a sealed wagon-lit that has not moved in sixty years, and walked out with a brass pocket watch the size of an apple. Whoever it was knew exactly which sleeper compartment, and exactly which loose panel.\n\nThey left a copper coin where the watch sat. Wrong weight. Wrong era. A magpie's joke.",
+    },
+    "C-008": {
+      title: "Crown of Eight Empires",
+      loot: "the Hanseatic Circlet",
+      lootLong: "the Hanseatic Circlet — eight thin bands of silver, gold, and iron braided together by a Baltic prince who governed eight ports and trusted none of them",
+      briefing:
+        "This one we've been chasing for years.\n\nThe Hanseatic Circlet vanished from a Helsinki vault overnight. Nothing was forced — but a bar of the inner gate was bent like a stalk of wheat, and that bar is two inches of cold-rolled steel. There is exactly one person in our files who could do that.\n\nThis is the final V.I.L.E. operative still in the wind. The trail is long, the loot is heavy, and the suspect is bigger than the door. Bring it home.",
     },
   },
 

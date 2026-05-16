@@ -38,6 +38,7 @@
 
       <section id="screen-case-select" class="screen">
         <h2 id="case-select-title"></h2>
+        <div id="career-banner" class="career-banner"></div>
         <div id="case-list" class="case-list"></div>
       </section>
 
@@ -46,6 +47,7 @@
           <div class="briefing-header">
             <span id="briefing-label"></span> <span id="briefing-id"></span>
           </div>
+          <div id="briefing-crimnet" class="briefing-crimnet"></div>
           <div id="briefing-text" class="narrator-text"></div>
           <div class="briefing-actions">
             <button class="btn-primary" id="btn-briefing-go"></button>
@@ -66,6 +68,8 @@
               <div class="panel-title" id="map-actions-title"></div>
               <button class="btn-primary full" id="btn-investigate"></button>
               <button class="btn-secondary full" id="btn-open-dossier"></button>
+              <button class="btn-secondary full" id="btn-open-notebook"></button>
+              <button class="btn-secondary full" id="btn-open-almanac"></button>
               <p class="hint" id="map-marker-hint"></p>
             </div>
           </div>
@@ -105,6 +109,39 @@
         <div class="dossier-actions">
           <button class="btn-secondary" id="btn-dossier-back"></button>
           <button class="btn-primary" id="btn-issue-warrant" disabled></button>
+        </div>
+      </section>
+
+      <section id="screen-notebook" class="screen">
+        <h2 id="notebook-title"></h2>
+        <div id="notebook-content" class="notebook-grid"></div>
+        <div class="dossier-actions">
+          <button class="btn-secondary" id="btn-notebook-back"></button>
+        </div>
+      </section>
+
+      <section id="screen-almanac" class="screen">
+        <h2 id="almanac-title"></h2>
+        <div id="almanac-content"></div>
+        <div class="dossier-actions">
+          <button class="btn-secondary" id="btn-almanac-back"></button>
+        </div>
+      </section>
+
+      <section id="screen-trivia" class="screen">
+        <div class="briefing-box">
+          <div class="briefing-header">
+            <span id="trivia-title-label"></span>
+          </div>
+          <div id="trivia-intro" class="narrator-text"></div>
+          <p id="trivia-question" class="big-text"></p>
+          <div id="trivia-options" class="trivia-options"></div>
+          <div id="trivia-result" class="result hidden">
+            <div id="trivia-result-text" class="narrator-text"></div>
+          </div>
+          <div class="briefing-actions">
+            <button class="btn-primary hidden" id="btn-trivia-continue"></button>
+          </div>
         </div>
       </section>
 

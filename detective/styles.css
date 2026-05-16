@@ -527,5 +527,203 @@ button:disabled {
   text-align: right;
 }
 
+/* ── Career banner on case-select ── */
+.career-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--amber-dim);
+  background: var(--bg-panel);
+  padding: 12px 18px;
+  margin-bottom: 16px;
+}
+.career-banner .career-line { font-size: 13px; opacity: 0.9; }
+.career-banner .career-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--amber-dim);
+}
+
+.case-state {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  margin-bottom: 6px;
+}
+.case-state.done { color: var(--green); }
+.case-state.locked { color: #888; }
+.case-state.open { color: var(--amber-dim); }
+
+.case-card.case-done { border-style: solid; border-color: rgba(139,255,139,0.4); }
+.case-card.case-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+.case-card.case-locked:hover { box-shadow: none; }
+.case-card.case-locked .case-card-title { color: var(--amber-dim); }
+.locked-why { color: #888; font-style: italic; }
+
+/* ── Crimnet briefing header ── */
+.briefing-crimnet {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--amber-dim);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--amber-dim);
+  line-height: 1.6;
+}
+
+/* ── Location specialty hint ── */
+.location-specialty {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--amber-dim);
+  margin-top: 6px;
+}
+.location-specialty strong { color: var(--amber); font-weight: normal; }
+
+/* ── Suspect MO line in dossier ── */
+.suspect-mo {
+  font-size: 11px;
+  color: var(--amber-dim);
+  font-style: italic;
+  margin-bottom: 6px;
+  padding: 4px 0;
+  border-top: 1px dashed var(--amber-dim);
+  border-bottom: 1px dashed var(--amber-dim);
+}
+
+/* ── Match counter ── */
+.match-counter {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--amber-dim);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--amber);
+}
+.match-counter.match-one { color: var(--green); font-weight: bold; }
+.match-counter.match-zero { color: var(--red); }
+
+/* ── Detective's Notebook ── */
+.notebook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.notebook-section-title {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--amber-dim);
+  margin: 8px 0 0;
+  border-bottom: 1px dashed var(--amber-dim);
+  padding-bottom: 4px;
+}
+.notebook-card {
+  border: 1px solid var(--amber-dim);
+  background: var(--bg-panel);
+  padding: 12px 14px;
+}
+.notebook-card.hinted-only { border-style: dashed; opacity: 0.85; }
+.notebook-city {
+  color: var(--amber-bright);
+  font-size: 15px;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.notebook-facts { font-size: 12px; }
+.nb-row { padding: 2px 0; display: grid; grid-template-columns: 14px 110px 1fr; gap: 2px; }
+.nb-row em { color: var(--amber-dim); font-style: normal; }
+.nb-row.highlighted span { color: var(--amber-bright); }
+.hi-marker { color: var(--green); font-weight: bold; }
+
+/* ── Crime Lab Almanac ── */
+.almanac-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.almanac-search {
+  font-family: var(--mono);
+  background: var(--bg-panel-2);
+  border: 1px solid var(--amber-dim);
+  color: var(--amber-bright);
+  padding: 8px 12px;
+  font-size: 13px;
+  flex: 1;
+  min-width: 240px;
+}
+.almanac-search::placeholder { color: var(--amber-dim); }
+.almanac-pill {
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+.almanac-pill.active {
+  background: var(--amber);
+  color: var(--bg);
+}
+.almanac-table-wrap {
+  border: 1px solid var(--amber-dim);
+  max-height: calc(100vh - 240px);
+  overflow: auto;
+}
+.almanac-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.almanac-table th, .almanac-table td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px dashed var(--amber-dim);
+}
+.almanac-table th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-panel-2);
+  color: var(--amber-dim);
+  letter-spacing: 0.15em;
+  font-size: 10px;
+  font-weight: normal;
+  z-index: 1;
+}
+.almanac-table tbody tr:hover { background: rgba(255,179,71,0.08); }
+.almanac-tally {
+  padding: 8px 12px;
+  margin: 0;
+  border-top: 1px solid var(--amber-dim);
+  background: var(--bg-panel);
+}
+
+/* ── Trivia ── */
+.trivia-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.trivia-option {
+  padding: 14px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+.trivia-option.trivia-correct {
+  background: rgba(139,255,139,0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
 /* misc */
 .hidden { display: none !important; }

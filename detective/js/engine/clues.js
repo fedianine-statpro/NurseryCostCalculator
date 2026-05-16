@@ -19,7 +19,9 @@ export function generateDestinationClue(nextCityId, angle, fromCityId, locationI
   const city = L.cities[nextCityId];
   const arr = L.clues.dest[angle] || L.clues.dest.landmark;
   const tpl = pickTemplate(arr, seedFor(fromCityId, locationId));
-  return tpl(city);
+  // Map the destination clue's *angle* to the fact-category key the Notebook
+  // tracks. Most are 1:1; "fact" maps to itself.
+  return { text: tpl(city), nextCityId, factKey: angle };
 }
 
 export function generateTraitClue(culpritId, traitKey, fromCityId, locationId) {

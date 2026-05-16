@@ -1,7 +1,8 @@
-// Renders the suspect dossier grid and trait list.
+// Renders the suspect dossier grid and trait list, plus a live count of how
+// many suspects still match the collected evidence.
 
 import { SUSPECTS, SUSPECT_TRAITS } from "../data/suspects.js";
-import { suspectMatchesTraits } from "../engine/warrant.js";
+import { suspectMatchesTraits, matchingSuspectIds } from "../engine/warrant.js";
 import { getLocale } from "../i18n/i18n.js";
 
 let selectedSuspectId = null;
@@ -26,8 +27,31 @@ export function renderDossier(state, hostGrid, traitsListEl, traitsHintEl, onSel
       traitsListEl.appendChild(li);
     }
   }
+
+  // Live match counter. Zero = contradictory evidence; one = case essentially
+  // closed (player can issue a warrant); else show how many remain.
+  const matching = matchingSuspectIds(learned);
+  const matchEl = document.createElement("p");
+  matchEl.className = "match-counter";
+  if (learnedKeys.length === 0) {
+    matchEl.textContent = L.ui.matchAll(SUSPECTS.length);
+  } else if (matching.length === 0) {
+    matchEl.textContent = L.ui.matchZero;
+    matchEl.classList.add("match-zero");
+  } else if (matching.length === 1) {
+    matchEl.textContent = L.ui.matchOne;
+    matchEl.classList.add("match-one");
+  } else {
+    matchEl.textContent = L.ui.matchN(matching.length, SUSPECTS.length);
+  }
+  traitsListEl.appendChild(matchEl);
+
   const need = Math.max(0, 3 - learnedKeys.length);
-  traitsHintEl.textContent = need > 0 ? L.ui.needMoreTraits(need) : L.ui.pickSuspect;
+  if (matching.length === 1) {
+    traitsHintEl.textContent = L.ui.pickSuspect;
+  } else {
+    traitsHintEl.textContent = need > 0 ? L.ui.needMoreTraits(need) : L.ui.pickSuspect;
+  }
 
   hostGrid.innerHTML = "";
   for (const s of SUSPECTS) {
@@ -47,10 +71,14 @@ export function renderDossier(state, hostGrid, traitsListEl, traitsHintEl, onSel
       if (known) cls = (known === valueId) ? "trait-match" : "trait-conflict";
       traitsHtml += `<div class="${cls}"><em>${L.traitCategories[cat]}:</em> ${display}</div>`;
     }
+    // Signature MO line, e.g. "MO: always leaves a black feather"
+    const sigText = L.suspects[s.id]?.signature ?? "";
+    const sigHtml = sigText ? `<div class="suspect-mo">${L.ui.moLabel} ${sigText}</div>` : "";
 
     card.innerHTML = `
       <div class="suspect-avatar">${s.avatar}</div>
       <div class="suspect-name">${suspectLoc.name}</div>
+      ${sigHtml}
       <div class="suspect-traits">${traitsHtml}</div>
     `;
     card.addEventListener("click", () => {

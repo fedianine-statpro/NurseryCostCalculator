@@ -1,6 +1,5 @@
-// Suspect structural data — IDs, avatars, and the language-neutral trait
-// value IDs for each suspect. The locale files map (category, valueId) to a
-// display string.
+// Suspect structural data — IDs, avatars, signature MO, and trait values.
+// All display strings (names, aliases, MO text) live in the locale files.
 //
 // Trait categories: hair / build / mark / accessory / hobby.
 // Multiple suspects MAY share a value id within a category (e.g. two "tall"
@@ -8,16 +7,16 @@
 // one trait clue to narrow down.
 
 export const SUSPECTS = [
-  { id: "vex",     avatar: "🎩" },
-  { id: "kestrel", avatar: "🦅" },
-  { id: "moss",    avatar: "🦉" },
-  { id: "duarte",  avatar: "🎷" },
-  { id: "selene",  avatar: "🦊" },
-  { id: "ravi",    avatar: "🪶" },
-  { id: "ines",    avatar: "💄" },
-  { id: "tomo",    avatar: "🥷" },
-  { id: "magnus",  avatar: "🪓" },
-  { id: "petra",   avatar: "🐺" },
+  { id: "vex",     avatar: "🎩", signature: "leaves-a-card"    },
+  { id: "kestrel", avatar: "🦅", signature: "feathers"         },
+  { id: "moss",    avatar: "🦉", signature: "ink-blot"         },
+  { id: "duarte",  avatar: "🎷", signature: "hums-a-tune"      },
+  { id: "selene",  avatar: "🦊", signature: "vanishes-clean"   },
+  { id: "ravi",    avatar: "🪶", signature: "switches-coins"   },
+  { id: "ines",    avatar: "💄", signature: "rose-petals"      },
+  { id: "tomo",    avatar: "🥷", signature: "no-trace"         },
+  { id: "magnus",  avatar: "🪓", signature: "bent-iron"        },
+  { id: "petra",   avatar: "🐺", signature: "old-map-corner"   },
 ];
 
 export const SUSPECT_BY_ID = Object.fromEntries(SUSPECTS.map(s => [s.id, s]));
