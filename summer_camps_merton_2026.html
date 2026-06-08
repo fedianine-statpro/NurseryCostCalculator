@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Camps — Merton &amp; Wimbledon 2026</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #eff6ff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --orange: #ea580c;
+    --orange-bg: #fff7ed;
+    --purple: #7c3aed;
+    --purple-bg: #f5f3ff;
+    --blue: #0284c7;
+    --blue-bg: #f0f9ff;
+    --pink: #db2777;
+    --pink-bg: #fdf2f8;
+    --teal: #0d9488;
+    --teal-bg: #f0fdfa;
+    --gray: #475569;
+    --gray-bg: #f1f5f9;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  .site-header { background: var(--primary); color: white; padding: 28px 24px 24px; }
+  .site-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .site-header p { opacity: .85; font-size: 13px; }
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .hbadge { background: rgba(255,255,255,.18); border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
+
+  /* Controls */
+  .controls { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  .search-wrap { position: relative; flex: 1; min-width: 180px; }
+  .search-wrap input { width: 100%; padding: 7px 10px 7px 32px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; outline: none; background: var(--bg); }
+  .search-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+  .search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; }
+  select { padding: 7px 28px 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: var(--bg); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; cursor: pointer; outline: none; }
+  select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+  .count-badge { margin-left: auto; background: var(--primary-light); color: var(--primary); border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+  /* Table wrapper */
+  .table-wrap { overflow-x: auto; padding: 16px 24px; }
+  table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  thead { background: #1e293b; color: white; }
+  th { padding: 11px 12px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; cursor: pointer; user-select: none; }
+  th:hover { background: #334155; }
+  th.sorted-asc::after { content: ' ↑'; opacity: .8; }
+  th.sorted-desc::after { content: ' ↓'; opacity: .8; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; cursor: pointer; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--primary-light); }
+  tbody tr.expanded { background: var(--primary-light); }
+  td { padding: 10px 12px; vertical-align: top; }
+  .rank { font-weight: 700; color: var(--muted); font-size: 13px; min-width: 32px; }
+  .camp-name { font-weight: 600; font-size: 13.5px; color: var(--text); }
+  .camp-venue { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .loc { white-space: nowrap; }
+  .loc-post { font-weight: 600; font-size: 12px; }
+  .loc-area { font-size: 11px; color: var(--muted); }
+  .hours-val { font-weight: 700; font-size: 14px; }
+  .hours-ext { font-size: 11px; color: var(--muted); }
+  .hours-8plus { color: var(--green); }
+  .hours-6plus { color: var(--orange); }
+  .cost-val { font-weight: 600; font-size: 13px; white-space: nowrap; }
+  .cost-week { font-size: 11px; color: var(--muted); }
+
+  /* Focus tags */
+  .tag { display: inline-block; padding: 2px 7px; border-radius: 12px; font-size: 11px; font-weight: 600; margin: 1px 1px; white-space: nowrap; }
+  .tag-creative { background: var(--purple-bg); color: var(--purple); }
+  .tag-sports { background: var(--green-bg); color: var(--green); }
+  .tag-science { background: var(--blue-bg); color: var(--blue); }
+  .tag-nature { background: var(--teal-bg); color: var(--teal); }
+  .tag-drama { background: var(--orange-bg); color: var(--orange); }
+  .tag-music { background: var(--pink-bg); color: var(--pink); }
+  .tag-mixed { background: var(--gray-bg); color: var(--gray); }
+  .tag-language { background: #fef3c7; color: #92400e; }
+  .tag-gymnastics { background: #fce7f3; color: #9d174d; }
+
+  /* Reviews */
+  .stars { color: #f59e0b; font-size: 13px; letter-spacing: -1px; }
+  .review-count { font-size: 11px; color: var(--muted); }
+  .review-platform { font-size: 11px; color: var(--muted); display: block; }
+  .no-reviews { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  /* Pool / feature icons */
+  .features { display: flex; gap: 4px; flex-wrap: wrap; }
+  .feat { font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--muted); white-space: nowrap; }
+  .feat-pool { background: #e0f2fe; border-color: #7dd3fc; color: #0369a1; }
+  .feat-lunch { background: #fef9c3; border-color: #fde047; color: #713f12; }
+  .feat-ofsted { background: #dcfce7; border-color: #86efac; color: #15803d; }
+
+  /* Expandable detail row */
+  .detail-row { display: none; }
+  .detail-row.open { display: table-row; }
+  .detail-cell { background: #f8faff; border-bottom: 2px solid var(--primary); padding: 16px 20px; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .detail-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
+  .detail-section h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 5px; }
+  .detail-section p, .detail-section li { font-size: 12.5px; color: var(--text); }
+  .detail-section ul { padding-left: 14px; }
+  .detail-section li { margin-bottom: 2px; }
+  .detail-link { font-size: 12px; }
+  .review-quote { font-style: italic; color: var(--muted); font-size: 12px; border-left: 3px solid var(--primary); padding-left: 8px; margin-top: 4px; }
+  .expand-arrow { float: right; color: var(--muted); font-size: 11px; margin-top: 2px; transition: transform .2s; }
+  tr.expanded .expand-arrow { transform: rotate(180deg); }
+
+  /* Near misses section */
+  .section-header { padding: 20px 24px 8px; }
+  .section-header h2 { font-size: 16px; font-weight: 700; color: var(--text); border-left: 4px solid var(--orange); padding-left: 10px; }
+  .nearmiss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding: 0 24px 24px; }
+  .nearmiss-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px; box-shadow: var(--shadow); }
+  .nearmiss-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .nearmiss-card .reason { font-size: 11.5px; color: var(--orange); font-weight: 600; margin-bottom: 4px; }
+  .nearmiss-card p { font-size: 11.5px; color: var(--muted); }
+
+  /* Footer */
+  footer { text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 8px; }
+
+  /* Tier separator */
+  .tier-row td { background: #f1f5f9; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 5px 12px; }
+
+  /* Responsive hide */
+  @media (max-width: 768px) {
+    .hide-mobile { display: none; }
+    .table-wrap { padding: 8px; }
+    .controls { padding: 10px 12px; }
+    .section-header, .nearmiss-grid { padding-left: 12px; padding-right: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>🏕️ Summer Camps — Merton &amp; Wimbledon 2026</h1>
+  <p>Age 5 / Reception. All camps listed offer 6+ hours per day and accept children aged 5.</p>
+  <div class="badge-row">
+    <span class="hbadge">🕐 6+ hours/day required</span>
+    <span class="hbadge">👧 Age 5 accepted</span>
+    <span class="hbadge">📍 Merton &amp; surrounds</span>
+    <span class="hbadge">⭐ Sorted best to worst</span>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search camps, activities, locations…" oninput="applyFilters()">
+  </div>
+  <select id="focusFilter" onchange="applyFilters()">
+    <option value="">All types</option>
+    <option value="creative">🎨 Creative</option>
+    <option value="drama">🎭 Drama / Performing Arts</option>
+    <option value="music">🎵 Music</option>
+    <option value="science">🔬 Science / STEM</option>
+    <option value="nature">🌳 Nature / Outdoor</option>
+    <option value="sports">🏃 Sports</option>
+    <option value="mixed">⚡ Mixed</option>
+    <option value="language">🌏 Language</option>
+    <option value="gymnastics">🤸 Gymnastics</option>
+  </select>
+  <select id="hoursFilter" onchange="applyFilters()">
+    <option value="">All hours</option>
+    <option value="8">8+ hours/day preferred</option>
+    <option value="6">6–8 hours/day</option>
+  </select>
+  <select id="costFilter" onchange="applyFilters()">
+    <option value="">All prices</option>
+    <option value="35">Under £35/day</option>
+    <option value="55">£35–£55/day</option>
+    <option value="80">£55–£80/day</option>
+    <option value="999">£80+/day</option>
+  </select>
+  <span class="count-badge" id="countBadge">50 camps</span>
+</div>
+
+<div class="table-wrap">
+<table id="campsTable">
+<thead>
+<tr>
+  <th data-col="rank" class="sorted-asc">#</th>
+  <th data-col="name">Camp Name</th>
+  <th data-col="location" class="hide-mobile">Location</th>
+  <th data-col="hours">Hours/Day</th>
+  <th data-col="ages" class="hide-mobile">Ages</th>
+  <th data-col="cost">Cost/Day</th>
+  <th data-col="focus">Focus</th>
+  <th data-col="reviews" class="hide-mobile">Reviews</th>
+  <th data-col="features" class="hide-mobile">Features</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+</tbody>
+</table>
+</div>
+
+<div class="section-header">
+  <h2>Near-Misses (fails one criterion)</h2>
+</div>
+<div class="nearmiss-grid" id="nearmissGrid"></div>
+
+<footer>Research conducted June 2026. Verify all details directly with providers before booking — dates, prices and availability change. For personal use and sharing with other parents.</footer>
+
+<script>
+const camps = [
+  {
+    rank: 1,
+    name: "Camp Beaumont at King's College School",
+    venue: "King's College School",
+    address: "Southside, Wimbledon Common, London SW19 4TT",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "up to 10 hrs with extensions",
+    agesMin: 3, agesMax: 14,
+    agesLabel: "3–14",
+    ageGroup: "5–7 Magic group",
+    costNum: 111,
+    costLabel: "£111–123",
+    costWeek: "weekly rates available",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Arts & Crafts"}],
+    reviewStars: 4,
+    reviewCount: "1,200+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Broadly positive; 5–7 group particularly well-reviewed. Some complaints relate to other venues.",
+    reviewQuote: "\"really enjoyed it\" — Mumsnet Wimbledon thread",
+    features: ["pool","ofsted"],
+    website: "https://www.campbeaumont.co.uk/our-camps/kings-college-school",
+    activities: "Swimming (indoor heated pool, age 5+), tennis, sports hall games, art studios, crafts, drama workshops, nature trails, talent shows. 50+ activities. Age-grouped timetables.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "17-acre KCS estate. Dedicated Magic group for 5–7-year-olds. Indoor pool is rare at this price point for the age group.",
+    ofsted: "Registered and compliant",
+    contact: "01603 851 000 / kings@campbeaumont.co.uk"
+  },
+  {
+    rank: 2,
+    name: "Activ Camps at Wimbledon College",
+    venue: "Wimbledon College",
+    address: "Edge Hill, London SW19 4NS",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 8.5,
+    hoursLabel: "8.5 hrs",
+    hoursExt: "Late Club to 6pm (+£6.50)",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–5 group",
+    costNum: 47,
+    costLabel: "£47–56",
+    costWeek: "£47/day Mon–Fri booking",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 5,
+    reviewCount: "Ofsted Outstanding",
+    reviewPlatform: "Ofsted",
+    reviewNote: "Outstanding Ofsted inspection. Parent (2024): 'My four-year-old had a blast…she came home beaming and exhausted every day.'",
+    reviewQuote: "\"Thoughtfully planned and resourced\" — Ofsted report",
+    features: ["pool","ofsted"],
+    website: "https://www.activcamps.com/wimbledoncollege/",
+    activities: "60+ activities — The Slide, Archery Tag, Pedal Karts, heated indoor swimming pool, Giant Inflatables, Dodgeball, Handball, Orienteering. Swimming confirmed for summer.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "Indoor pool at a price well below Camp Beaumont. The 4–5 age group provides genuine age-appropriate structure.",
+    ofsted: "Registered — Outstanding inspection at Burntwood; Wimbledon also positively inspected",
+    contact: "info@activcamps.com / 07896 546 067"
+  },
+  {
+    rank: 3,
+    name: "Little Forest Folk Holiday Camps",
+    venue: "Wimbledon Common",
+    address: "Wimbledon Common SW19 (drop-off near main nursery site)",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 10,
+    hoursLabel: "10 hrs",
+    hoursExt: "8am–6pm — longest in this list",
+    agesMin: 3, agesMax: 7,
+    agesLabel: "3–7",
+    ageGroup: "Designed exclusively for this age",
+    costNum: 121,
+    costLabel: "£111–121",
+    costWeek: "Lunch included. Non-refundable.",
+    focus: ["nature","creative"],
+    focusTags: [{cls:"tag-nature",label:"Nature/Outdoor"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 5,
+    reviewCount: "Excellent local reputation",
+    reviewPlatform: "Local/social",
+    reviewNote: "Award-winning nursery brand with loyal following. No Trustpilot profile but consistently praised by Wimbledon families.",
+    reviewQuote: "\"With mud from nose to fingertips, bounding out with huge smiles\" — parent testimonial",
+    features: ["lunch","ofsted"],
+    website: "https://www.littleforestfolk.com/holiday-camps",
+    activities: "Den building, mud kitchen, obstacle courses, adventure walks on Wimbledon Common, wild cooking, tool use (supervised), bug hunts, pond dipping, kite flying, treasure hunts, giant canvas painting. All sessions outdoors.",
+    lunch: "Homemade lunch included in price",
+    notes: "Bookings typically open only 5 weeks before camp starts — set a reminder. Only camp designed exclusively for 3–7-year-olds. Extraordinary natural setting.",
+    ofsted: "Registered and compliant",
+    contact: "littleforestfolk.com/holiday-camps"
+  },
+  {
+    rank: 4,
+    name: "Barracudas — Twickenham (St Catherine's)",
+    venue: "St Catherine's School",
+    address: "Cross Deep, Twickenham TW1 4QJ",
+    postcode: "TW1",
+    area: "Twickenham (~7 mi)",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Extended to 8am–6pm available",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–6 group (new 2026)",
+    costNum: 43,
+    costLabel: "£43–52",
+    costWeek: "Check site for 2026 pricing",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "1,800+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Largest review base of any camp in this list. Nationally Outstanding Ofsted at multiple venues. Small minority of complaints about queuing at peak weeks.",
+    reviewQuote: "",
+    features: ["pool","ofsted"],
+    website: "https://www.barracudas.co.uk/camps/twickenham-st-catherines/",
+    activities: "80+ activities — indoor swimming pool, fencing, motorsports track, archery, drama, arts & crafts, inflatables, sports, dance. Age-specific Skills Builder courses included.",
+    lunch: "Check with provider",
+    notes: "Indoor pool confirmed. Largest activity menu in this list. New 2026 age groupings include dedicated 4–6 group. ~7 miles from Wimbledon.",
+    ofsted: "Registered; rated 'Met' (highest rating for holiday clubs)",
+    contact: "01480 467567 / barracudas.co.uk"
+  },
+  {
+    rank: 5,
+    name: "Barracudas — Twickenham (Waldegrave)",
+    venue: "Waldegrave School",
+    address: "Fifth Cross Road, Twickenham TW2 5LH",
+    postcode: "TW2",
+    area: "Twickenham (~7 mi)",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Extended care available",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–6 group (2026)",
+    costNum: 43,
+    costLabel: "£43–52",
+    costWeek: "Check site for 2026 pricing",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "1,800+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Same brand as St Catherine's. Aqua slide/water park in summer is popular with younger children.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.barracudas.co.uk/camps/twickenham-waldegrave/",
+    activities: "80+ activities — water park/aqua slide (summer), sports, drama, arts, age-specific activities.",
+    lunch: "Check with provider",
+    notes: "Aqua slide a big hit with young children in summer. Good backup if St Catherine's is full.",
+    ofsted: "Registered",
+    contact: "01480 467567 / barracudas.co.uk"
+  },
+  {
+    rank: 6,
+    name: "Barracudas — Streatham & Clapham High School",
+    venue: "Streatham and Clapham High School",
+    address: "42 Abbotswood Road, London SW16 1AW",
+    postcode: "SW16",
+    area: "Streatham (~3 mi)",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Extended to 8am–6pm",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–6 group (2026)",
+    costNum: 43,
+    costLabel: "£43–52",
+    costWeek: "Check site for 2026 pricing",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "1,800+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Same Barracudas brand. Closest Barracudas venue to Wimbledon (~3 miles via A24).",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.barracudas.co.uk/camps/streatham-clapham/",
+    activities: "80+ activities — sports halls, tennis courts, drama studios, motorsports track, water activities (summer), arts & crafts.",
+    lunch: "Check with provider",
+    notes: "Closest Barracudas to SW19. GDST school with excellent facilities.",
+    ofsted: "Registered",
+    contact: "01480 467567 / barracudas.co.uk"
+  },
+  {
+    rank: 7,
+    name: "SuperCamps — Wimbledon High School",
+    venue: "Wimbledon High School (GDST)",
+    address: "Mansel Road, London SW19 4AB",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 8,
+    hoursLabel: "8 hrs",
+    hoursExt: "Extended 8am–6pm (10 hrs)",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Early Years 4–5 programme",
+    costNum: 54,
+    costLabel: "£54",
+    costWeek: "£250–315/week",
+    focus: ["mixed","creative","science"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"},{cls:"tag-science",label:"Science"}],
+    reviewStars: 4,
+    reviewCount: "43",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Mostly positive: 'staff are amazing,' children attend multiple years. Some concerns about young staff. 2026 dates already published — rare.",
+    reviewQuote: "\"fantastic experience\" — Feefo",
+    features: ["pool","ofsted"],
+    website: "https://www.supercamps.co.uk/venue/wimbledon-high-school",
+    activities: "Multi-activity: swimming (Tue–Fri), ball games, athletics, racket sports, arts & crafts. Specialist themed weeks: Chelsea FC Football, Mad Science®, LEGO® Play, Dance/Drama, Rock Band, Cookery (RISE). Early Years sensory play for 4–5s.",
+    lunch: "Packed lunch required",
+    notes: "Rare: 2026 dates already published and confirmed. GDST school quality. Mad Science and LEGO weeks suit 5-year-olds particularly well.",
+    ofsted: "Registered",
+    contact: "supercamps.co.uk"
+  },
+  {
+    rank: 8,
+    name: "SuperCamps — Ark Putney Academy",
+    venue: "Ark Putney Academy",
+    address: "Pullman Gardens, Putney SW15 3DG",
+    postcode: "SW15",
+    area: "Putney (~3.5 mi)",
+    hoursNum: 8,
+    hoursLabel: "8 hrs",
+    hoursExt: "Extended 8am–6pm",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Early Years 4–5 programme",
+    costNum: 43,
+    costLabel: "£43–48",
+    costWeek: "£215–280/week",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Brand reviews",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "SuperCamps brand. Full summer confirmed. Good creative specialist add-on weeks.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.supercamps.co.uk/venue/ark-putney-academy",
+    activities: "Athletics, ball games, racket sports, arts, crafts, LEGO play, design challenges. Specialist: football, cookery, science, drama.",
+    lunch: "Packed lunch required",
+    notes: "All six summer weeks confirmed. Early Years dedicated programme with sensory play and outdoor exploration for 4–5s.",
+    ofsted: "Registered",
+    contact: "supercamps.co.uk"
+  },
+  {
+    rank: 9,
+    name: "SuperCamps — Dunraven School, Streatham",
+    venue: "Dunraven School",
+    address: "Mount Nod Road, Streatham SW16 2LG",
+    postcode: "SW16",
+    area: "Streatham (~3 mi)",
+    hoursNum: 8,
+    hoursLabel: "8 hrs",
+    hoursExt: "Extended 8am–6pm",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Early Years 4–5 programme",
+    costNum: 50,
+    costLabel: "£50–54",
+    costWeek: "£250–320/week",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Brand reviews",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "SuperCamps brand. All six summer weeks confirmed. Cookery specialist available from age 8; LEGO Play from age 6.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.supercamps.co.uk/venue/dunraven-school",
+    activities: "Collaging, racket sports, athletics, LEGO play, group challenges. Specialist: LEGO Play (6+), Rise Cookery (8+). Fully equipped kitchen on site, MUGA pitch.",
+    lunch: "Packed lunch required",
+    notes: "~3 miles from Wimbledon. All six summer weeks confirmed. For a 5-year-old, the base multi-activity programme is fully available.",
+    ofsted: "Registered",
+    contact: "supercamps.co.uk"
+  },
+  {
+    rank: 10,
+    name: "Fun Fest — Wimbledon South (Raynes Park)",
+    venue: "Joseph Hood Primary School",
+    address: "Whatley Avenue, Raynes Park SW20 9NS",
+    postcode: "SW20",
+    area: "Raynes Park (Merton)",
+    hoursNum: 9.75,
+    hoursLabel: "9.75 hrs",
+    hoursExt: "8:15am–6pm; AM/PM half-days available",
+    agesMin: 3, agesMax: 12,
+    agesLabel: "3–12",
+    ageGroup: "Age 3 accepted",
+    costNum: 42,
+    costLabel: "£42",
+    costWeek: "£190/week; sibling £39",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Brand reviews",
+    reviewPlatform: "ClubHubUK",
+    reviewNote: "Fun Fest franchise has strong national reputation. Teacher/early years-qualified staff model. In Merton borough (SW20).",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://fun-fest.co.uk/wimbledonsouth/",
+    activities: "50+ activities — Nerf Challenge, Beauty School, Creative Cooks, Great Outdoors, Sports Action, Jewellery Making, and more. Children choose activities each session.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "In Merton borough. Excellent value at £42/day. Teacher-qualified staff. Among longest hours in this list. Tax-Free Childcare accepted.",
+    ofsted: "Registered (no. 2893787)",
+    contact: "fun-fest.co.uk/wimbledonsouth"
+  },
+  {
+    rank: 11,
+    name: "Fun Fest — Kingston",
+    venue: "St Paul's CofE Primary School",
+    address: "Kingston Hill, Kingston upon Thames KT2 6AZ",
+    postcode: "KT2",
+    area: "Kingston (~4 mi)",
+    hoursNum: 9.8,
+    hoursLabel: "9.8 hrs",
+    hoursExt: "8:10am–6pm; AM/PM half-days",
+    agesMin: 3, agesMax: 11,
+    agesLabel: "3–11",
+    ageGroup: "Age 3 accepted",
+    costNum: 42,
+    costLabel: "£42",
+    costWeek: "£190/week; sibling £39",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Brand reviews",
+    reviewPlatform: "ClubHubUK",
+    reviewNote: "Same Fun Fest programme. Creative menu includes Lego Creations, Pottery, Harry Potter Experience.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://fun-fest.co.uk/kingston/",
+    activities: "40+ activities — Mission Impossible, Sports Action, Lego Creations, Pottery, Beauty School, Crafty Creations, Harry Potter Experience, Football.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "~4 miles from Wimbledon. Same programme as Wimbledon South. Good backup if SW20 venue is full.",
+    ofsted: "Registered",
+    contact: "fun-fest.co.uk/kingston"
+  },
+  {
+    rank: 12,
+    name: "Fun Fest — Worcester Park",
+    venue: "Malden Parochial CofE Primary School",
+    address: "The Manor Drive, Worcester Park KT4 7LW",
+    postcode: "KT4",
+    area: "Worcester Park (Merton border)",
+    hoursNum: 9.75,
+    hoursLabel: "9.75 hrs",
+    hoursExt: "8:15am–6pm; AM/PM half-days",
+    agesMin: 3, agesMax: 12,
+    agesLabel: "3–12",
+    ageGroup: "Age 3 accepted",
+    costNum: 42,
+    costLabel: "£42",
+    costWeek: "£190/week; sibling £39",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Brand reviews",
+    reviewPlatform: "ClubHubUK",
+    reviewNote: "Worcester Park is SM4/KT4 — very close to Merton border. Starts one day earlier than other Fun Fest venues.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://fun-fest.co.uk/worcesterpark/",
+    activities: "Sports, crafts, beauty school, Nerf challenges, circus school, themed sessions.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "Very close to Merton border. Starts 21 Jul — earliest of the three Fun Fest venues.",
+    ofsted: "Registered",
+    contact: "fun-fest.co.uk/worcesterpark"
+  },
+  {
+    rank: 13,
+    name: "KOOSA Kids — King Athelstan Primary, Kingston",
+    venue: "King Athelstan Primary School",
+    address: "Villiers Road, Kingston upon Thames KT1 3AR",
+    postcode: "KT1",
+    area: "Kingston (~4 mi)",
+    hoursNum: 9.75,
+    hoursLabel: "up to 9.75 hrs",
+    hoursExt: "Core 10am–4pm; AM ext from 8:15, PM ext to 6pm",
+    agesMin: 4, agesMax: 13,
+    agesLabel: "4–13",
+    ageGroup: "Krazy K's for EYFS/Reception",
+    costNum: 31.50,
+    costLabel: "£31.50",
+    costWeek: "£144.90/week (8% off); 3rd sibling free",
+    focus: ["mixed","creative","drama"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"},{cls:"tag-drama",label:"Drama"}],
+    reviewStars: 5,
+    reviewCount: "Outstanding",
+    reviewPlatform: "Ofsted",
+    reviewNote: "Ofsted 'Outstanding' provider. Themed weeks and Fantastic Fridays praised by local families. Exceptional value.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.koosakids.co.uk/greater-london/kingston-upon-thames/king-athelstan-primary-school-kingston-upon-thames/holiday-club",
+    activities: "Extension Zone (puzzles, arts, crafts, role play); Endeavour Zone (sports, relays); Discovery Zone (arts, dance, drama, nature). Special Wednesdays (Art Attack, Olympics, water). Fantastic Fridays with themed fancy dress.",
+    lunch: "Packed lunch required",
+    notes: "Outstanding Ofsted. Age 5 in dedicated EYFS group. Weekly themes (Pirates, Dinosaurs, Fairytales) keep it fresh. Third sibling free.",
+    ofsted: "Registered — Outstanding",
+    contact: "koosakids.co.uk"
+  },
+  {
+    rank: 14,
+    name: "Camp Beaumont — Donhead Preparatory School",
+    venue: "Donhead Preparatory School",
+    address: "33 Edge Hill, Wimbledon SW19 4NP",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Early 8am / Late 6pm (+£7.50 each)",
+    agesMin: 3, agesMax: 14,
+    agesLabel: "3–14",
+    ageGroup: "Magic group 5–7",
+    costNum: 111,
+    costLabel: "£111–123",
+    costWeek: "Weekly rates available",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "1,200+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Same Camp Beaumont brand. Donhead-specific: parent noted son (3) and daughter (6) had 'the best first camp experience.'",
+    reviewQuote: "\"The best first camp experience\" — Donhead parent",
+    features: ["ofsted"],
+    website: "https://www.campbeaumont.co.uk/our-camps/donhead-preparatory-school",
+    activities: "50+ activities — sports, crafts, drama, outdoor adventure. Astroturf, sports hall, art studios, playground, nature trail. No indoor pool (key difference from KCS).",
+    lunch: "Packed lunch required",
+    notes: "Intimate prep school setting. Good backup if KCS venue is full. Same quality brand. No pool.",
+    ofsted: "Registered",
+    contact: "01603 851 000"
+  },
+  {
+    rank: 15,
+    name: "Camp Beaumont — Hollyfield School, Surbiton",
+    venue: "Hollyfield School",
+    address: "Surbiton Hill Road, Surbiton KT6 4TU",
+    postcode: "KT6",
+    area: "Surbiton (~5 mi)",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Early 8am / Late 6pm (+£7.50 each)",
+    agesMin: 3, agesMax: 14,
+    agesLabel: "3–14",
+    ageGroup: "Magic group 5–7",
+    costNum: 111,
+    costLabel: "£111+",
+    costWeek: "Weekly discounts",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "1,200+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Camp Beaumont brand. Art studios and nature trail on site. Good for Surrey-side families.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.campbeaumont.co.uk/our-camps/hollyfield-school",
+    activities: "Sports, arts, crafts, performances, skill-building, role play, story time, nature trail. 5–7 group has age-specific timetable. No pool.",
+    lunch: "Packed lunch required",
+    notes: "~5 miles from Wimbledon. Third Camp Beaumont option in the cluster. Useful if SW19 venues fill up.",
+    ofsted: "Registered",
+    contact: "01603 851 000"
+  },
+  {
+    rank: 16,
+    name: "The Strings Club — Wimbledon High School",
+    venue: "Wimbledon High School",
+    address: "Mansel Road, London SW19 4AB",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 8.5,
+    hoursLabel: "8.5 hrs",
+    hoursExt: "9:30am–4pm option also available",
+    agesMin: 4, agesMax: 11,
+    agesLabel: "4–11",
+    ageGroup: "All ages; small groups (max 40)",
+    costNum: 61.50,
+    costLabel: "£61.50",
+    costWeek: "10% off with CLUBHUB10",
+    focus: ["music","creative","drama"],
+    focusTags: [{cls:"tag-music",label:"Music"},{cls:"tag-creative",label:"Creative"},{cls:"tag-drama",label:"Drama"}],
+    reviewStars: 5,
+    reviewCount: "5-star nationally",
+    reviewPlatform: "Multiple",
+    reviewNote: "Nationally consistently 5-star. NEW Wimbledon venue for 2026 — no venue-specific reviews yet, but the brand is excellent. Screen-free environment praised.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.thestringsclub.org",
+    activities: "Morning: professional musician-led guitar, violin or ukulele instruction. Free instrument hire for 2+ day bookings. Afternoon: drama, dance, art, sports workshops. Weekly themes. Grand Concert at end of each week. Screen-free.",
+    lunch: "Check with provider",
+    notes: "NEW for 2026 at this venue. Music + arts + drama in one camp is extremely rare. Free instrument hire. Grand Concert gives a performance goal each week. 1:8 staff ratio. Max 40 campers.",
+    ofsted: "To be confirmed for new venue",
+    contact: "thestringsclub.org / CLUBHUB10 for 10% off"
+  },
+  {
+    rank: 17,
+    name: "The Strings Club — Balham",
+    venue: "Trinity St Mary's CE Primary School",
+    address: "6 Balham Park Road, Balham SW12 8DR",
+    postcode: "SW12",
+    area: "Balham (~4 mi)",
+    hoursNum: 9.5,
+    hoursLabel: "9.5 hrs",
+    hoursExt: "8am–5:30pm; shorter 9:30am–4pm also available",
+    agesMin: 4, agesMax: 11,
+    agesLabel: "4–11",
+    ageGroup: "All ages; small groups",
+    costNum: 61.50,
+    costLabel: "£61.50–71.50",
+    costWeek: "10% off with CLUBHUB10",
+    focus: ["music","creative","drama"],
+    focusTags: [{cls:"tag-music",label:"Music"},{cls:"tag-creative",label:"Creative"},{cls:"tag-drama",label:"Drama"}],
+    reviewStars: 5,
+    reviewCount: "5-star nationally",
+    reviewPlatform: "Multiple",
+    reviewNote: "Same outstanding brand as Wimbledon venue. Good backup if Wimbledon fills up.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.thestringsclub.org",
+    activities: "Same as Wimbledon venue — morning music, afternoon drama/dance/art/sports. Grand Concert. Screen-free. Free instrument hire.",
+    lunch: "Check with provider",
+    notes: "~4 miles from Wimbledon. Backup if Wimbledon Strings Club venue is full. Longest hours of the two Strings Club venues.",
+    ofsted: "Not confirmed",
+    contact: "thestringsclub.org"
+  },
+  {
+    rank: 18,
+    name: "B.O.S.S. Acting School — Wimbledon",
+    venue: "Elim Pentecostal Church / Kingston Road",
+    address: "76 Kingston Road, Wimbledon SW19 1LA",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6,
+    hoursLabel: "6 hrs",
+    hoursExt: "9:30am–3:30pm; half-day 9:30am–12:30pm",
+    agesMin: 3, agesMax: 16,
+    agesLabel: "3–16",
+    ageGroup: "West End Summer School for 4–7 specifically",
+    costNum: 50,
+    costLabel: "~£50",
+    costWeek: "Full week only: £250 (full day) / £150 (half day)",
+    focus: ["drama","creative"],
+    focusTags: [{cls:"tag-drama",label:"Drama"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Recommended",
+    reviewPlatform: "NappyValleyNet",
+    reviewNote: "NappyValleyNet recommends with 10% discount. No negative reviews found. Limited volume but very positive.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.bossactingschool.co.uk/camps/",
+    activities: "Acting, singing, dancing. Children assigned parts in a script. Final-day professional stage performance with live streaming. For ages 3–5: afternoon creative activities (crafts, musical workshops, drama games, sports). Maximum 14 actors per cast.",
+    lunch: "Check with provider",
+    notes: "Very small groups (14 max) — excellent individual attention. Live-streamed final performance. West End Summer School (one additional week) designed specifically for 3–5 year olds. Full-week bookings only.",
+    ofsted: "Not confirmed",
+    contact: "bossactingschool.co.uk"
+  },
+  {
+    rank: 19,
+    name: "Ultimate Activity Camps — Shrewsbury House, Surbiton",
+    venue: "Shrewsbury House Prep School",
+    address: "107 Ditton Road, Surbiton KT6 6RL",
+    postcode: "KT6",
+    area: "Surbiton (~4 mi)",
+    hoursNum: 8.75,
+    hoursLabel: "8.75 hrs",
+    hoursExt: "Extended Day Pass 8am–6pm (+£9.30/day)",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Tailored 4–5 programme",
+    costNum: 54,
+    costLabel: "£54",
+    costWeek: "£270/week; EDP +£9.30",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "159",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "UAC overall 4.2 stars, 159 reviews. Positives: kind staff, good SEND support. Some complaints (water policy, cancellation terms) not venue-specific.",
+    reviewQuote: "",
+    features: ["pool","ofsted"],
+    website: "https://www.ultimateactivity.co.uk/locations/surbiton-shrewsbury-house",
+    activities: "40+ activities — fencing, swimming (at least twice weekly), zorbing, archery, arts, drama, sports, crafts. Age-specific timetables for 4–5 group.",
+    lunch: "Packed lunch required",
+    notes: "Swimming confirmed. Dedicated 4–5 group. 4 miles from Wimbledon. Confirmed running full summer.",
+    ofsted: "Registered (URN 2785913)",
+    contact: "ultimateactivity.co.uk"
+  },
+  {
+    rank: 20,
+    name: "Ultimate Activity Camps — Sutton High School",
+    venue: "Sutton High School",
+    address: "55 Cheam Road, Sutton SM1 2AX",
+    postcode: "SM1",
+    area: "Sutton (~5 mi)",
+    hoursNum: 8.75,
+    hoursLabel: "8.75 hrs",
+    hoursExt: "Extended Day Pass 8am–6pm (+£9.30/day)",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Tailored 4–5 group",
+    costNum: 54,
+    costLabel: "£54",
+    costWeek: "£270/week; EDP +£9.30",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "159",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "UAC brand. Swimming on-site. Specialist Cookery and Performance camps alongside multi-activity. Read recent reviews before booking.",
+    reviewQuote: "",
+    features: ["pool","ofsted"],
+    website: "https://www.ultimateactivity.co.uk/locations/sutton-high-school-london",
+    activities: "40+ activities; swimming pool on-site; tennis; dance studio. Specialist tracks: Performance camp, Cookery camp (check age minimums), Tech camp.",
+    lunch: "Packed lunch required",
+    notes: "Pool on-site. Cookery and Performance specialist tracks available. ~5 miles from Wimbledon.",
+    ofsted: "Registered",
+    contact: "ultimateactivity.co.uk"
+  },
+  {
+    rank: 21,
+    name: "Activ Camps — Burntwood School, Earlsfield",
+    venue: "Burntwood School",
+    address: "Burntwood Lane, London SW17 0AQ",
+    postcode: "SW17",
+    area: "Earlsfield (~3 mi)",
+    hoursNum: 8.5,
+    hoursLabel: "8.5 hrs",
+    hoursExt: "Late Club to 6pm (+£6.50)",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–5 group",
+    costNum: 47,
+    costLabel: "£47–56",
+    costWeek: "£47/day Mon–Fri booking",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 5,
+    reviewCount: "Outstanding Ofsted",
+    reviewPlatform: "Ofsted",
+    reviewNote: "Outstanding Ofsted inspection specifically at this venue. Same programme as Wimbledon College but with the highest Ofsted rating.",
+    reviewQuote: "",
+    features: ["pool","ofsted"],
+    website: "https://www.activcamps.com/burntwoodschool/",
+    activities: "60+ activities; GIANT inflatables; large sports hall; outdoor fields; dance studio; swimming pool (summer confirmed).",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "Outstanding Ofsted is for this venue specifically. ~3 miles from Wimbledon. Swimming confirmed for summer.",
+    ofsted: "Outstanding",
+    contact: "info@activcamps.com"
+  },
+  {
+    rank: 22,
+    name: "Hillcross Primary School Holiday Club",
+    venue: "Hillcross Primary School",
+    address: "Hillcross Avenue, Morden SM4 4BY",
+    postcode: "SM4",
+    area: "Morden (Merton)",
+    hoursNum: 8,
+    hoursLabel: "8 hrs",
+    hoursExt: "8:30am–4:30pm",
+    agesMin: 3, agesMax: 11,
+    agesLabel: "Nursery–Year 6",
+    ageGroup: "Age 5 / Reception explicitly accepted",
+    costNum: 45,
+    costLabel: "£45–50",
+    costWeek: "£45/day early bird (4 wks ahead); £50 standard",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Local reputation",
+    reviewPlatform: "Local",
+    reviewNote: "Run by the school itself — high trust factor. Long-running local provision. No negative reviews found.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.hillcross.merton.sch.uk/about-us/breakfast-and-after-school-club-the-copse/holiday-club",
+    activities: "Indoor/outdoor activities, games, puzzles, arts and crafts, sports, cooking sessions. Themed weeks and special activity days (dress-up, park trips, picnics).",
+    lunch: "Packed lunch, drinks and snacks required",
+    notes: "In Merton borough (Morden). School-run — high reliability. Book via MCAS. Early bird saves £5/day.",
+    ofsted: "School-run; school Ofsted registered",
+    contact: "holidayclub@hillcross.merton.sch.uk"
+  },
+  {
+    rank: 23,
+    name: "Sacred Heart Kidz Club — Wimbledon",
+    venue: "Sacred Heart RC Primary School",
+    address: "Edge Hill, Wimbledon SW19 4LU",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 9.5,
+    hoursLabel: "9.5 hrs",
+    hoursExt: "8am–5:30pm",
+    agesMin: 3, agesMax: 10,
+    agesLabel: "3–10",
+    ageGroup: "Age 5 accepted",
+    costNum: 36,
+    costLabel: "£36",
+    costWeek: "Good value",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Limited online reviews. Long-running local provision. May be open primarily to Sacred Heart families — call ahead to confirm open enrolment.",
+    reviewQuote: "",
+    features: [],
+    website: "https://directories.merton.gov.uk",
+    activities: "Fun games, sports (indoors and outdoors), arts and crafts; all-inclusive environment.",
+    lunch: "Check with provider",
+    notes: "Excellent value at £36/day. In SW19. Very good hours. Call ahead to confirm open enrolment for non-school families.",
+    ofsted: "Merton directory listed; confirm Ofsted directly",
+    contact: "Via school directly"
+  },
+  {
+    rank: 24,
+    name: "Young Stars Holiday Camp — The Priory CofE",
+    venue: "The Priory CofE Primary School",
+    address: "Queens Road, Wimbledon SW19 8LX",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "8:15am–5:15pm; AM/PM half-days available",
+    agesMin: 4, agesMax: 11,
+    agesLabel: "4–11",
+    ageGroup: "Age 4 accepted",
+    costNum: 44,
+    costLabel: "£44",
+    costWeek: "Sibling 10% off; refer-a-friend 20% off",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "Established",
+    reviewPlatform: "Merton Directories",
+    reviewNote: "One of the longest-established Wimbledon playschemes. Ofsted registered. Long operational history is a quality indicator.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.young-stars.co.uk/holiday-camps/wimbledon-venues/",
+    activities: "Fun games, sports (indoor and outdoor), arts and crafts, free-flow activities.",
+    lunch: "Packed lunch required (nut-free)",
+    notes: "Note: based on 2025 pattern runs Mon–Thu only (not Fridays). Confirm for 2026. Central Wimbledon. Among most affordable 9-hour options.",
+    ofsted: "Registered (EY 2819635 — active)",
+    contact: "young-stars.co.uk"
+  },
+  {
+    rank: 25,
+    name: "Mother Nature Science Camps — Bishop Gilpin, Wimbledon",
+    venue: "Bishop Gilpin Primary School",
+    address: "Lake Road, Wimbledon SW19 7EP",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 7.5,
+    hoursLabel: "7.5 hrs",
+    hoursExt: "8:30am–4pm (standard); +£10/day for extended",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "5–11",
+    ageGroup: "Age 5 strictly minimum",
+    costNum: 59,
+    costLabel: "£59–69",
+    costWeek: "£295–345/week; Tax-Free Childcare accepted",
+    focus: ["science"],
+    focusTags: [{cls:"tag-science",label:"Science/STEM"}],
+    reviewStars: 5,
+    reviewCount: "Excellent",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Trustpilot 'Excellent' rating. Well-regarded in South London parent communities. Featured on NappyValleyNet.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.mnature.co.uk/product/july-august-summer-science-activity-camp-swlondon/",
+    activities: "40+ STEAM hands-on activities per week: chemistry, biology, physics. Four indoor sessions + three outdoor breaks per day. No reading or writing — all practical. Alternating Science Academy / Science Forces programmes. Max 20 per class.",
+    lunch: "Packed lunch required (mineral water provided)",
+    notes: "Only dedicated STEM/science camp in SW19. Max 20 children. SEND inclusive. Alternating programmes mean children can return multiple years with fresh content.",
+    ofsted: "Not confirmed",
+    contact: "mnature.co.uk"
+  },
+  {
+    rank: 26,
+    name: "Mother Nature Science Camps — Swaffield Primary, Wandsworth",
+    venue: "Swaffield Primary School",
+    address: "Swaffield Road, London SW18 2SA",
+    postcode: "SW18",
+    area: "Wandsworth (~3 mi)",
+    hoursNum: 7.5,
+    hoursLabel: "7.5 hrs",
+    hoursExt: "8:30am–4pm",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "5–11",
+    ageGroup: "Age 5 strictly minimum",
+    costNum: 59,
+    costLabel: "~£59",
+    costWeek: "£295/week",
+    focus: ["science"],
+    focusTags: [{cls:"tag-science",label:"Science/STEM"}],
+    reviewStars: 5,
+    reviewCount: "Excellent",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Mother Nature brand — Trustpilot Excellent. Longer run (8 weeks) than Bishop Gilpin. Good backup venue.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.mnature.co.uk",
+    activities: "Same programme as Bishop Gilpin — 40+ science activities, max 20 per class, Chemistry/Biology/Physics hands-on.",
+    lunch: "Packed lunch required",
+    notes: "~3 miles from Wimbledon. 8 weeks of camp. Good backup if Bishop Gilpin fills up.",
+    ofsted: "Not confirmed",
+    contact: "mnature.co.uk"
+  },
+  {
+    rank: 27,
+    name: "Mother Nature Science Camps — Shrewsbury House, Surbiton",
+    venue: "Shrewsbury House School",
+    address: "107 Ditton Road, Surbiton KT6 6RL",
+    postcode: "KT6",
+    area: "Surbiton (~4 mi)",
+    hoursNum: 7.5,
+    hoursLabel: "7.5 hrs",
+    hoursExt: "8:30am–4pm",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "5–11",
+    ageGroup: "Age 5 strictly minimum",
+    costNum: 59,
+    costLabel: "~£59",
+    costWeek: "£295/week",
+    focus: ["science"],
+    focusTags: [{cls:"tag-science",label:"Science/STEM"}],
+    reviewStars: 5,
+    reviewCount: "Excellent",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Mother Nature brand. Shared venue with Ultimate Activity — can alternate both programmes on different weeks.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.mnature.co.uk",
+    activities: "Same programme as other venues — 40+ science activities, max 20 per class.",
+    lunch: "Packed lunch required",
+    notes: "Shared venue with UAC Shrewsbury House (#19). Can do Mother Nature science one week, Ultimate Activity the next.",
+    ofsted: "Not confirmed",
+    contact: "mnature.co.uk"
+  },
+  {
+    rank: 28,
+    name: "Sparks Film School Animation Camps — Wimbledon",
+    venue: "Donhead Preparatory School",
+    address: "33 Edge Hill, Wimbledon SW19 4NP",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6,
+    hoursLabel: "6 hrs",
+    hoursExt: "9am–5pm with wraparound care (+£70/week)",
+    agesMin: 5, agesMax: 15,
+    agesLabel: "5–15",
+    ageGroup: "Studio 1 group: 5–7 specifically",
+    costNum: 79,
+    costLabel: "~£79",
+    costWeek: "£395/week; extended care extra",
+    focus: ["creative"],
+    focusTags: [{cls:"tag-creative",label:"Film/Animation"}],
+    reviewStars: 5,
+    reviewCount: "Almost all 5-star",
+    reviewPlatform: "Trustist",
+    reviewNote: "Trustist independent aggregator: 'almost exclusively 5 stars.' Parents describe 'best camp ever' and improved confidence. NappyValleyNet features it positively. No significant negatives found.",
+    reviewQuote: "\"Best camp ever\" — Trustist review",
+    features: ["ofsted"],
+    website: "https://sparksarts.co.uk/product/animation-summer-camps-at-sparks-film-school-wimbledon/",
+    activities: "Stop-motion animation, claymation, character design, storytelling, film production, editing. Children take home their finished animated film. Max 12–15 per age group.",
+    lunch: "Packed lunch required",
+    notes: "Only film/animation camp in Wimbledon. Studio 1 group (5–7) specifically designed for this age. Very small groups. Wraparound care available for £70/week extra.",
+    ofsted: "Registered",
+    contact: "sparksarts.co.uk"
+  },
+  {
+    rank: 29,
+    name: "Jigsaw Performing Arts — Wimbledon",
+    venue: "Ricards Lodge High School",
+    address: "Lake Road, Wimbledon SW19 7HB",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6.5,
+    hoursLabel: "6.5–7 hrs",
+    hoursExt: "Free wrap-around care 8:30–9am and 3:30–4pm",
+    agesMin: 5, agesMax: 16,
+    agesLabel: "5–16",
+    ageGroup: "Separate 3–5 and 5–16 groups",
+    costNum: 35,
+    costLabel: "~£35–39",
+    costWeek: "~£175–195/week",
+    focus: ["drama","creative"],
+    focusTags: [{cls:"tag-drama",label:"Drama"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Positive",
+    reviewPlatform: "NappyValleyNet",
+    reviewNote: "Brand well-regarded in performing arts circles. NappyValleyNet mentions. New larger venue (Ricards Lodge). No negative reviews found.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.jigsaw-arts.co.uk/franchise/wimbledon",
+    activities: "Singing, dancing, drama, crafting, games. Children create and rehearse a show during the week, culminating in a performance. Specialist Wimbledon-based teachers.",
+    lunch: "Packed lunch required",
+    notes: "Excellent value for performing arts (~£35/day). New bigger venue. Weekly performance gives children a real goal. Free wrap-around care included.",
+    ofsted: "Not confirmed",
+    contact: "jigsaw-arts.co.uk/franchise/wimbledon"
+  },
+  {
+    rank: 30,
+    name: "Play Mandarin Holiday Camps — Wimbledon",
+    venue: "Pelham Primary School",
+    address: "Southey Road, London SW19 1NU",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6,
+    hoursLabel: "6–7.5 hrs",
+    hoursExt: "9:30am–3:30pm standard; to 5pm +£9/day",
+    agesMin: 3, agesMax: 99,
+    agesLabel: "3+",
+    ageGroup: "Age 3 accepted; no prior Mandarin needed",
+    costNum: 65,
+    costLabel: "£65",
+    costWeek: "Weekly £10 off; half-day £38",
+    focus: ["creative","language"],
+    focusTags: [{cls:"tag-language",label:"Language"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Novel offering; growing provider in SW London. No negative reviews found. Limited review volume.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.playmandarin.co.uk/holidaycamps",
+    activities: "Chinese culture & games, STEM, AI, entrepreneurship, chess, drama, music, sports — all through Mandarin language immersion through play. No prior Mandarin needed.",
+    lunch: "Check with provider",
+    notes: "Only Mandarin-immersion holiday camp in SW19. Excellent for naturally picking up a language. Note: check start date as previous year began 27 July.",
+    ofsted: "Not confirmed",
+    contact: "playmandarin.co.uk"
+  },
+  {
+    rank: 31,
+    name: "AM Sports Academy — Wimbledon Park Primary",
+    venue: "Wimbledon Park Primary School",
+    address: "Havana Road, Wimbledon SW19 8EJ",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 7,
+    hoursLabel: "7 hrs",
+    hoursExt: "Core 9:30am–4:30pm; early 8:30 (+£8.50), late 5:30 (+£8.50)",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Crocodiles (4–5) dedicated group",
+    costNum: 48.50,
+    costLabel: "£48.50",
+    costWeek: "20% off with EARLYBIRD (before 5 Jul 2026)",
+    focus: ["sports"],
+    focusTags: [{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 4,
+    reviewCount: "Ofsted registered",
+    reviewPlatform: "Local",
+    reviewNote: "Ofsted registered (ref: 2622925). Raring2go listed positively. School noticeboard feedback positive. No Trustpilot profile.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://www.amsportsacademy.co.uk/camps/",
+    activities: "Age-grouped multi-sports: football, cricket, basketball, tennis, dodgeball, multi-skill games. Crocodiles programme (4–5) tailored for reception-age children.",
+    lunch: "Check with provider",
+    notes: "Dedicated Crocodiles group for 4–5. Early-bird 20% discount available. Inside a Merton primary school. Covers late August period — check site for current dates.",
+    ofsted: "Registered (ref: 2622925)",
+    contact: "amsportsacademy.co.uk"
+  },
+  {
+    rank: 32,
+    name: "Wimbledon School Holiday Club — St Mary's RC",
+    venue: "St Mary's RC Primary School",
+    address: "Russell Road, Wimbledon SW19 1QL",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 7.5,
+    hoursLabel: "7.5–8 hrs",
+    hoursExt: "9am–4:30pm; early drop-off from 8:30 (+£5)",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "5–11",
+    ageGroup: "Reception / age 5 confirmed",
+    costNum: 45,
+    costLabel: "£45",
+    costWeek: "£200/week; early drop-off £5/day",
+    focus: ["mixed","sports"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "ClassForKids",
+    reviewNote: "Limited independent reviews. Local reputation positive. Central Wimbledon location.",
+    reviewQuote: "",
+    features: [],
+    website: "https://wimbledon-school-holiday-club.classforkids.io/camp/11",
+    activities: "Choice each week: Sports Camp (4+ hrs sport: NFL flag, football) OR Multi-activity Camp (sport + art & design + team games).",
+    lunch: "Packed lunch required",
+    notes: "Flexible dual-track (sports or multi-activity per week). Central Wimbledon. Good value.",
+    ofsted: "Not confirmed",
+    contact: "ClassForKids listing"
+  },
+  {
+    rank: 33,
+    name: "Sport4Kids — St Matthews CofE, West Wimbledon",
+    venue: "St Matthew's CE Primary School",
+    address: "Cottenham Park Road, London SW20 0SX",
+    postcode: "SW20",
+    area: "West Wimbledon (Merton)",
+    hoursNum: 8,
+    hoursLabel: "8 hrs",
+    hoursExt: "9am–5pm",
+    agesMin: 5, agesMax: 14,
+    agesLabel: "5–14",
+    ageGroup: "Confirm age 5 directly",
+    costNum: 45,
+    costLabel: "~£45–55",
+    costWeek: "Contact for 2026 pricing",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "No significant independent reviews found. Ofsted registered. SW20 Merton location.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://sport4kids.biz/camp-venues/st-matthews-wimbledon/",
+    activities: "Basketball, dance, football, tennis, archery, comedy club, Nerf. Multi-activity including creative elements.",
+    lunch: "Check with provider",
+    notes: "SW20 — in Merton. Long hours (8 hrs). Good multi-activity mix including dance and comedy.",
+    ofsted: "Registered",
+    contact: "sport4kids.biz"
+  },
+  {
+    rank: 34,
+    name: "Après School Holiday Camp — Willington Prep, Wimbledon",
+    venue: "Willington Independent Preparatory School",
+    address: "Worcester Road, Wimbledon SW19 7QQ",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 8.5,
+    hoursLabel: "8.5 hrs",
+    hoursExt: "8:30am–5pm",
+    agesMin: 3, agesMax: 8,
+    agesLabel: "Nursery–Year 3",
+    ageGroup: "Age 5 / Reception confirmed",
+    costNum: 58.50,
+    costLabel: "£58.50–65",
+    costWeek: "Sibling 10% off (code SIBLING)",
+    focus: ["mixed","creative"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "School-endorsed",
+    reviewPlatform: "Local",
+    reviewNote: "School-endorsed, Ofsted-registered provider. Long-running. Call ahead to confirm open enrolment (may primarily serve Willington families).",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://apres-school.co.uk",
+    activities: "Themed activities; enrichment-focused; structured holiday provision by the school's Ofsted-registered provider.",
+    lunch: "Check with provider",
+    notes: "Call ahead to confirm open enrolment — may be restricted to Willington families. Good hours and value if available.",
+    ofsted: "Registered (Après School provider)",
+    contact: "apres-school.co.uk"
+  },
+  {
+    rank: 35,
+    name: "Après School Holiday Camp — The Rowans School",
+    venue: "The Rowans School",
+    address: "19 Drax Avenue, Wimbledon SW20 0EG",
+    postcode: "SW20",
+    area: "Raynes Park (Merton)",
+    hoursNum: 8,
+    hoursLabel: "~8 hrs",
+    hoursExt: "Confirm exact hours with provider",
+    agesMin: 3, agesMax: 8,
+    agesLabel: "3–8",
+    ageGroup: "Open to children from all schools",
+    costNum: 58.50,
+    costLabel: "£58.50–65",
+    costWeek: "Sibling 10% off (code SIBLING)",
+    focus: ["mixed","creative","nature"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"},{cls:"tag-creative",label:"Creative"},{cls:"tag-nature",label:"Nature"}],
+    reviewStars: 4,
+    reviewCount: "Local",
+    reviewPlatform: "Local",
+    reviewNote: "Limited reviews but locally recommended. Explicitly open to children from all schools (not just Rowans).",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://activities.bookpebble.co.uk",
+    activities: "Sports and games, creative arts and crafts, themed adventures, outdoor exploration and nature walks. Morning/afternoon snacks provided.",
+    lunch: "Snacks provided; check if lunch needed",
+    notes: "SW20 — Raynes Park border. Open to all schools. Age 3–8 — great fit for 5-year-olds. Nature/outdoor element. Book via Pebble platform.",
+    ofsted: "Registered",
+    contact: "bookpebble.co.uk — search 'Rowans Après School'"
+  },
+  {
+    rank: 36,
+    name: "BMMSportsCoaching — Wimbledon Chase Primary",
+    venue: "Wimbledon Chase Primary School",
+    address: "Merton Hall Road, London SW19 3QB",
+    postcode: "SW19",
+    area: "Wimbledon Chase",
+    hoursNum: 7,
+    hoursLabel: "7 hrs",
+    hoursExt: "9am–4pm",
+    agesMin: 5, agesMax: 12,
+    agesLabel: "5–12",
+    ageGroup: "Age 5 (full day); age 4 (half-day)",
+    costNum: 35,
+    costLabel: "£35",
+    costWeek: "£140/week",
+    focus: ["sports"],
+    focusTags: [{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Local coaching company. Merton Directories listed. Limited external review data.",
+    reviewQuote: "",
+    features: [],
+    website: "https://bmmsportscoaching.classforkids.io/camp/30",
+    activities: "Football, cricket, handball, rounders, athletics, basketball, netball, dodgeball, multi-skill games.",
+    lunch: "Check with provider",
+    notes: "Excellent value at £35/day. Central Wimbledon Chase. Good for an active sports-focused child.",
+    ofsted: "Not confirmed",
+    contact: "ClassForKids listing"
+  },
+  {
+    rank: 37,
+    name: "Bizzy Buddies Multisport — Dundonald Primary",
+    venue: "Dundonald Primary School",
+    address: "Dundonald Road, Wimbledon SW19 3QH",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 7,
+    hoursLabel: "7 hrs",
+    hoursExt: "9am–4pm; early 8:30, late 4:30 (+£2.50 each)",
+    agesMin: 5, agesMax: 12,
+    agesLabel: "5–12",
+    ageGroup: "Age 5 accepted",
+    costNum: 35,
+    costLabel: "~£35",
+    costWeek: "~£140/week; extensions £2.50",
+    focus: ["sports"],
+    focusTags: [{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Positively mentioned in local parent groups. Run by primary school teachers and sports coaches — strong quality indicator for reception age.",
+    reviewQuote: "",
+    features: [],
+    website: "https://bizzy-buddies.classforkids.io/camps",
+    activities: "Dodgeball, football, athletics, tennis, rounders, cricket, sports day games. Run by primary school teachers and sports coaches.",
+    lunch: "Check with provider",
+    notes: "Teacher-led by a primary school team. Central Wimbledon. Very affordable.",
+    ofsted: "Not confirmed",
+    contact: "ClassForKids listing"
+  },
+  {
+    rank: 38,
+    name: "Mini Sports Stars — Merton Park Primary",
+    venue: "Merton Park Primary School",
+    address: "Church Lane, Wimbledon SW19 3HG",
+    postcode: "SW19",
+    area: "Merton Park",
+    hoursNum: 6.25,
+    hoursLabel: "6.25 hrs",
+    hoursExt: "8:45am–3pm",
+    agesMin: 4, agesMax: 11,
+    agesLabel: "4–11",
+    ageGroup: "Age 4 accepted",
+    costNum: 25,
+    costLabel: "~£25",
+    costWeek: "£100/week — best value in list",
+    focus: ["sports","creative"],
+    focusTags: [{cls:"tag-sports",label:"Sports"},{cls:"tag-creative",label:"Arts & Crafts"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "ClassForKids",
+    reviewNote: "Limited independent reviews. Local provider in SW19.",
+    reviewQuote: "",
+    features: [],
+    website: "https://mini-sports-stars.classforkids.io/camp/12",
+    activities: "Football, arts & crafts, multi-sports — fun and inclusive.",
+    lunch: "Check with provider",
+    notes: "£100/week is the best value in this list. SW19. Arts & crafts alongside sport. Note: check if week starts Monday or Tuesday.",
+    ofsted: "Not confirmed",
+    contact: "ClassForKids listing"
+  },
+  {
+    rank: 39,
+    name: "Hakinakina Multi-Sports with Arts — All Saints Wimbledon",
+    venue: "All Saints Wimbledon",
+    address: "72–74 Haydons Road, Wimbledon SW19 1HL",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6,
+    hoursLabel: "6 hrs",
+    hoursExt: "9am–3pm",
+    agesMin: 4, agesMax: 11,
+    agesLabel: "4–11",
+    ageGroup: "Age 4 accepted",
+    costNum: 31.50,
+    costLabel: "£31.50",
+    costWeek: "£145/week; half-day £21.50",
+    focus: ["sports","creative"],
+    focusTags: [{cls:"tag-sports",label:"Sports"},{cls:"tag-creative",label:"Arts & Crafts"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "No independent profile found. Merton Directories listed. Limited external review data.",
+    reviewQuote: "",
+    features: [],
+    website: "https://hakinakina.classforkids.io/camp/37",
+    activities: "Multi-sports (football, tennis, hockey, cricket, archery, dodgeball) combined with arts and crafts sessions.",
+    lunch: "Check with provider",
+    notes: "Cheapest full-day option in this list. Sports AND arts & crafts together. 6 hours exactly meets the minimum.",
+    ofsted: "Not confirmed",
+    contact: "ClassForKids listing"
+  },
+  {
+    rank: 40,
+    name: "Wild Learning Holiday Club — Wimbledon Common",
+    venue: "Wimbledon Common",
+    address: "Drop-off: Windmill car park, Windmill Road SW19 5NR",
+    postcode: "SW19",
+    area: "Wimbledon Common",
+    hoursNum: 6,
+    hoursLabel: "6 hrs",
+    hoursExt: "10am–4pm",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "Year 1+ (age 5–6)",
+    ageGroup: "Starting Year 1 Sept 2026 — confirm eligibility",
+    costNum: 0,
+    costLabel: "TBC",
+    costWeek: "10% off 5+ days (SAVE10); Tax-Free Childcare accepted",
+    focus: ["nature","creative"],
+    focusTags: [{cls:"tag-nature",label:"Nature/Outdoor"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 5,
+    reviewCount: "Positive",
+    reviewPlatform: "TripAdvisor",
+    reviewNote: "TripAdvisor: 'Kids LOVED the camp and keep asking to go back.' Highly positive independent sentiment. Parking at Windmill car park noted as occasionally difficult.",
+    reviewQuote: "\"Kids LOVED the camp and keep asking to go back\" — TripAdvisor",
+    features: [],
+    website: "https://wild-learning.net/holiday-clubs/",
+    activities: "Den building, raft-making, stealth games, arts, crafts, obstacle courses, rope bridges, tree climbing, wild art, tracking, storytelling — all on Wimbledon Common. Forest School qualified leaders.",
+    lunch: "Check with provider",
+    notes: "Extraordinary setting — sessions take place on Wimbledon Common itself. 10am–4pm less convenient for working parents. Parking can be difficult. Confirm child qualifies (Year 1+) before booking. Book via wild-learning.pembee.app.",
+    ofsted: "Not confirmed",
+    contact: "wild-learning.pembee.app (booking)"
+  },
+  {
+    rank: 41,
+    name: "Sports Focus UK — Singlegate Primary, Colliers Wood",
+    venue: "Singlegate Primary School",
+    address: "Morden Road, Colliers Wood SW19 2LG",
+    postcode: "SW19",
+    area: "Colliers Wood (Merton border)",
+    hoursNum: 6,
+    hoursLabel: "6 hrs",
+    hoursExt: "9am–3pm",
+    agesMin: 5, agesMax: 11,
+    agesLabel: "5–11",
+    ageGroup: "Reception+ confirmed",
+    costNum: 33,
+    costLabel: "~£33",
+    costWeek: "Good value",
+    focus: ["sports","creative"],
+    focusTags: [{cls:"tag-sports",label:"Sports"},{cls:"tag-creative",label:"Arts & Crafts"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Local provider. Limited external review data.",
+    reviewQuote: "",
+    features: [],
+    website: "https://sportsfocusuk.co.uk/holiday-camps/singlegate-primary-school-camp/",
+    activities: "Multi-sports, baking, arts & crafts — mix of sports and creative.",
+    lunch: "Check with provider",
+    notes: "CR4/SW19 border — good for Colliers Wood and Morden families. Baking and arts alongside sport.",
+    ofsted: "Not confirmed",
+    contact: "sportsfocusuk.co.uk"
+  },
+  {
+    rank: 42,
+    name: "The Little Gym — Wimbledon",
+    venue: "Wimbledon Quarter",
+    address: "4 Queens Road, Wimbledon SW19 8ND",
+    postcode: "SW19",
+    area: "Wimbledon",
+    hoursNum: 6,
+    hoursLabel: "6–7 hrs",
+    hoursExt: "Combine morning (10–1) + lunch club + afternoon (2–5); early drop-off 9–10am",
+    agesMin: 3, agesMax: 12,
+    agesLabel: "3+",
+    ageGroup: "Age 3 accepted",
+    costNum: 99,
+    costLabel: "~£99 (non-member)",
+    costWeek: "Members get up to 50% off — worth joining for multiple weeks",
+    focus: ["gymnastics","creative"],
+    focusTags: [{cls:"tag-gymnastics",label:"Gymnastics"},{cls:"tag-creative",label:"Creative"}],
+    reviewStars: 4,
+    reviewCount: "Positive",
+    reviewPlatform: "Ofsted",
+    reviewNote: "Ofsted-regulated. Praised for structure and age-appropriate activities.",
+    reviewQuote: "",
+    features: ["ofsted"],
+    website: "https://wimbledon.thelittlegym.co.uk/day-camps",
+    activities: "Gymnastics-based themed activities, games, creative challenges, skill-building. Sessions booked as half-day blocks combined into a full day.",
+    lunch: "Not provided; Lunch Club (£15) is supervised but bring own food",
+    notes: "Members get up to 50% discount — worth joining if planning multiple weeks. Non-member full-day is £99. Sessions are half-day blocks you combine.",
+    ofsted: "Registered — 'Ofsted-regulated' confirmed",
+    contact: "wimbledon.thelittlegym.co.uk"
+  },
+  {
+    rank: 43,
+    name: "AM Sports Academy — Floreat Wandsworth Primary",
+    venue: "Floreat Wandsworth Primary School",
+    address: "305 Garratt Lane, Wandsworth SW18 4EQ",
+    postcode: "SW18",
+    area: "Wandsworth (~4 mi)",
+    hoursNum: 7,
+    hoursLabel: "7 hrs",
+    hoursExt: "Core 9:30am–4:30pm; early 8:30, late 5:30",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Crocodiles 4–5 group",
+    costNum: 48.50,
+    costLabel: "£48.50",
+    costWeek: "Early-bird discount available",
+    focus: ["sports"],
+    focusTags: [{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Same provider as WPPS. Note: runs Mon–Wed only each week at this location.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.amsportsacademy.co.uk/camps/",
+    activities: "Same multi-sport programme as Wimbledon Park venue.",
+    lunch: "Check with provider",
+    notes: "Runs Mon–Wed only each week — less convenient than full-week camps. Useful backup if WPPS is full.",
+    ofsted: "Not confirmed",
+    contact: "amsportsacademy.co.uk"
+  },
+  {
+    rank: 44,
+    name: "AM Sports Academy — The Rowans School",
+    venue: "The Rowans School",
+    address: "Drax Avenue, Wimbledon SW20 0EG",
+    postcode: "SW20",
+    area: "Raynes Park (Merton)",
+    hoursNum: 7,
+    hoursLabel: "7 hrs",
+    hoursExt: "Core 9:30am–4:30pm",
+    agesMin: 4, agesMax: 12,
+    agesLabel: "4–12",
+    ageGroup: "Crocodiles 4–5 group",
+    costNum: 48.50,
+    costLabel: "£48.50",
+    costWeek: "Early-bird discount available",
+    focus: ["sports"],
+    focusTags: [{cls:"tag-sports",label:"Sports"}],
+    reviewStars: 3,
+    reviewCount: "Limited",
+    reviewPlatform: "Local",
+    reviewNote: "Same AM Sports Academy provider. SW20 location.",
+    reviewQuote: "",
+    features: [],
+    website: "https://www.amsportsacademy.co.uk/camps/",
+    activities: "Same multi-sports as other AM Sports Academy venues.",
+    lunch: "Check with provider",
+    notes: "SW20 — Raynes Park. Third AM Sports Academy venue in the cluster. Useful if others are full.",
+    ofsted: "Not confirmed",
+    contact: "amsportsacademy.co.uk"
+  },
+  {
+    rank: 45,
+    name: "Barracudas — Cobham, Surrey",
+    venue: "Notre Dame School",
+    address: "Convent Lane, Cobham KT11 1HA",
+    postcode: "KT11",
+    area: "Cobham (~14 mi)",
+    hoursNum: 9,
+    hoursLabel: "9 hrs",
+    hoursExt: "Extended to 6pm available",
+    agesMin: 4, agesMax: 14,
+    agesLabel: "4–14",
+    ageGroup: "Dedicated 4–6 group (2026)",
+    costNum: 43,
+    costLabel: "£43–52",
+    costWeek: "Check site for 2026 pricing",
+    focus: ["mixed"],
+    focusTags: [{cls:"tag-mixed",label:"Mixed"}],
+    reviewStars: 4,
+    reviewCount: "1,800+",
+    reviewPlatform: "Trustpilot",
+    reviewNote: "Same Barracudas brand. ~14 miles from Wimbledon — significantly further than other options.",
+    reviewQuote: "",
+    features: ["pool","ofsted"],
+    website: "https://www.barracudas.co.uk/camps/cobham/",
+    activities: "80+ activities; indoor swimming pool; fencing; woodland walks; Skills Builder courses; motorsports.",
+    lunch: "Check with provider",
+    notes: "~14 miles from Wimbledon — best as a backup or if you're travelling from the Surrey side. Indoor pool and 80+ activities remain the draw.",
+    ofsted: "Registered",
+    contact: "01480 467567"
+  }
+];
+
+const nearMisses = [
+  { name: "Wimbledon Gymnastics Centre — Blue Camp", reason: "Only 4.1 hrs/day", detail: "Age 4–7; 3–14 Aug only; 10am–2:10pm (4.1 hrs). Hot lunch included. If your child loves gymnastics, worth considering with supplementary care.", website: "https://www.wimbledongymnastics.com/holidaycamps" },
+  { name: "We Make Footballers — Wimbledon", reason: "Only 5 hrs/day", detail: "Age 4–12; 10am–3pm (5 hrs). Max 10 children per coach. Check if extended sessions available.", website: "https://www.wemakefootballers.com/wimbledon/holiday-camps" },
+  { name: "Perform — Wimbledon (Peter Pan course)", reason: "Only 5 hrs/day", detail: "Age 4–10; 10am–3pm (5 hrs). Drama, dance, singing, costumes, final performance. Excellent creative content — worth considering if hours threshold is flexible.", website: "https://www.perform.org.uk/drama-classes/wimbledon/mansel-road-centre" },
+  { name: "AFC Wimbledon Foundation Girls Course", reason: "5.25 hrs/day; girls only", detail: "Age 4–16 (girls only); 9:45am–3pm. Football skills. Great for football-loving girls if hours are flexible.", website: "https://afcwimbledonfoundation.com/girls-holiday-courses" },
+  { name: "AFC Wimbledon Foundation Mixed Course", reason: "Age minimum 6", detail: "Age 6–16. Football; HAF free for FSM families. Excellent provider but just above the age minimum for a 5-year-old.", website: "https://afcwimbledonfoundation.com/holiday-courses" },
+  { name: "Limitless Tennis — Cranleigh LTC", reason: "Half-day only for age 5–7", detail: "Age 3–14; age 5 sessions are 3 hrs only (full day from age 7). Good add-on for mornings or afternoons alongside another camp.", website: "https://www.limitlesstennis.co.uk/holiday-camps/" },
+  { name: "Wimbledon Park Tennis Mini Camp", reason: "Only 3 hrs/day", detail: "Age 4–7; 10am–1pm (3 hrs). Good half-day supplement. July dates confirmed.", website: "https://www.wimbledonparktennis.com/holiday-camps" },
+  { name: "FunTech Technology Camps — KCS Wimbledon", reason: "Age minimum 7", detail: "Excellent tech/coding camp at KCS SW19. Age 7+. Check in future years.", website: "https://funtech.co.uk/locations/wimbledon" },
+  { name: "Polka Theatre — Puppet & Musical Theatre Schools", reason: "1–2 hrs only", detail: "Age 5–8; great creative content for short workshops. Not full-day format.", website: "https://polkatheatre.com/take-part/holiday-workshops-summer-schools/" },
+  { name: "Gymfinity Kids — Wandsworth", reason: "2026 dates unconfirmed", detail: "Age 5–14; 8:30am–3:30pm (7 hrs) — would qualify on hours and age. Contact to confirm summer 2026 availability. If confirmed, should be moved to main list.", website: "https://www.gymfinitykids.com/clubs/holiday-camps/wandsworth-holiday-camps/" },
+  { name: "Move It Sports Coaching — Kingston", reason: "Hours unconfirmed", detail: "Age 4–11; has confirmed late-August / early September dates — useful for the end of summer. Hours not confirmed online. If full-day, should be in main list.", website: "https://move-it-sports-coaching.classforkids.io/camps" },
+  { name: "Junior Adventures Group — Morden", reason: "Venue unconfirmed", detail: "Age 3–12; 8:30am–5:30pm (9 hrs) — excellent hours. Morden location not confirmed. Contact junioradventuresgroup.co.uk for Morden-specific details. If confirmed, should be in main list.", website: "https://www.junioradventuresgroup.co.uk/" },
+];
+
+// Render functions
+function starsHtml(n) {
+  return '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
+}
+
+function featureHtml(f) {
+  if (f === 'pool') return '<span class="feat feat-pool">🏊 Pool</span>';
+  if (f === 'lunch') return '<span class="feat feat-lunch">🥗 Lunch incl.</span>';
+  if (f === 'ofsted') return '<span class="feat feat-ofsted">✓ Ofsted</span>';
+  return '';
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  data.forEach(c => {
+    const tagsHtml = c.focusTags.map(t => `<span class="tag ${t.cls}">${t.label}</span>`).join('');
+    const featHtml = c.features.map(featureHtml).join('');
+    const hoursClass = c.hoursNum >= 8 ? 'hours-8plus' : 'hours-6plus';
+    const costDisplay = c.costNum === 0 ? 'TBC' : c.costLabel + '/day';
+
+    const row = document.createElement('tr');
+    row.dataset.id = c.rank;
+    row.innerHTML = `
+      <td class="rank">${c.rank}<span class="expand-arrow">▾</span></td>
+      <td><div class="camp-name">${c.name}</div><div class="camp-venue">${c.venue}</div></td>
+      <td class="loc hide-mobile"><div class="loc-post">${c.postcode}</div><div class="loc-area">${c.area}</div></td>
+      <td><span class="hours-val ${hoursClass}">${c.hoursLabel}</span><br><span class="hours-ext">${c.hoursExt}</span></td>
+      <td class="hide-mobile">${c.agesLabel}<br><small style="color:var(--muted)">${c.ageGroup}</small></td>
+      <td><span class="cost-val">${costDisplay}</span><br><span class="cost-week">${c.costWeek}</span></td>
+      <td>${tagsHtml}</td>
+      <td class="hide-mobile">
+        <div class="stars">${starsHtml(c.reviewStars)}</div>
+        <div class="review-count">${c.reviewCount}</div>
+        <span class="review-platform">${c.reviewPlatform}</span>
+      </td>
+      <td class="hide-mobile"><div class="features">${featHtml}</div></td>
+    `;
+
+    const detailRow = document.createElement('tr');
+    detailRow.className = 'detail-row';
+    detailRow.dataset.id = c.rank;
+    detailRow.innerHTML = `<td colspan="9" class="detail-cell">
+      <div class="detail-grid">
+        <div class="detail-section">
+          <h4>📍 Address &amp; Contact</h4>
+          <p>${c.address}</p>
+          <p style="margin-top:4px"><a href="${c.website}" target="_blank" class="detail-link">${c.website.replace('https://','')}</a></p>
+          <p style="margin-top:4px;color:var(--muted);font-size:12px">${c.contact}</p>
+        </div>
+        <div class="detail-section">
+          <h4>🎯 Activities</h4>
+          <p>${c.activities}</p>
+        </div>
+        <div class="detail-section">
+          <h4>⭐ Reviews</h4>
+          <div class="stars" style="font-size:16px">${starsHtml(c.reviewStars)}</div>
+          <p style="margin-top:4px">${c.reviewNote}</p>
+          ${c.reviewQuote ? `<div class="review-quote">${c.reviewQuote}</div>` : ''}
+        </div>
+        <div class="detail-section">
+          <h4>🍱 Lunch &amp; Ofsted</h4>
+          <p><strong>Lunch:</strong> ${c.lunch}</p>
+          <p style="margin-top:4px"><strong>Ofsted:</strong> ${c.ofsted}</p>
+        </div>
+        <div class="detail-section" style="grid-column: span 2">
+          <h4>📝 Notes</h4>
+          <p>${c.notes}</p>
+        </div>
+      </div>
+    </td>`;
+
+    row.addEventListener('click', () => {
+      const open = detailRow.classList.contains('open');
+      document.querySelectorAll('.detail-row.open').forEach(r => r.classList.remove('open'));
+      document.querySelectorAll('tbody tr.expanded').forEach(r => r.classList.remove('expanded'));
+      if (!open) {
+        detailRow.classList.add('open');
+        row.classList.add('expanded');
+      }
+    });
+
+    tbody.appendChild(row);
+    tbody.appendChild(detailRow);
+  });
+
+  document.getElementById('countBadge').textContent = `${data.length} camps`;
+}
+
+function renderNearMisses() {
+  const grid = document.getElementById('nearmissGrid');
+  nearMisses.forEach(n => {
+    const card = document.createElement('div');
+    card.className = 'nearmiss-card';
+    card.innerHTML = `<h3><a href="${n.website}" target="_blank">${n.name}</a></h3>
+      <div class="reason">⚠️ ${n.reason}</div>
+      <p>${n.detail}</p>`;
+    grid.appendChild(card);
+  });
+}
+
+// Sort state
+let sortCol = 'rank';
+let sortDir = 1;
+
+function sortData(data) {
+  return [...data].sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol];
+    if (sortCol === 'name') { av = a.name.toLowerCase(); bv = b.name.toLowerCase(); }
+    if (sortCol === 'location') { av = a.postcode; bv = b.postcode; }
+    if (sortCol === 'hours') { av = a.hoursNum; bv = b.hoursNum; }
+    if (sortCol === 'ages') { av = a.agesMin; bv = b.agesMin; }
+    if (sortCol === 'cost') { av = a.costNum; bv = b.costNum; }
+    if (sortCol === 'reviews') { av = a.reviewStars; bv = b.reviewStars; }
+    if (sortCol === 'focus') { av = a.focus[0]; bv = b.focus[0]; }
+    if (typeof av === 'string') return av.localeCompare(bv) * sortDir;
+    return (av - bv) * sortDir;
+  });
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const focus = document.getElementById('focusFilter').value;
+  const hours = document.getElementById('hoursFilter').value;
+  const cost = document.getElementById('costFilter').value;
+
+  let filtered = camps.filter(c => {
+    if (q && !`${c.name} ${c.venue} ${c.area} ${c.postcode} ${c.activities} ${c.focus.join(' ')}`.toLowerCase().includes(q)) return false;
+    if (focus && !c.focus.includes(focus)) return false;
+    if (hours === '8' && c.hoursNum < 8) return false;
+    if (hours === '6' && (c.hoursNum >= 8 || c.hoursNum < 6)) return false;
+    if (cost === '35' && c.costNum >= 35) return false;
+    if (cost === '55' && (c.costNum < 35 || c.costNum >= 55)) return false;
+    if (cost === '80' && (c.costNum < 55 || c.costNum >= 80)) return false;
+    if (cost === '999' && c.costNum < 80) return false;
+    return true;
+  });
+
+  renderTable(sortData(filtered));
+}
+
+// Column sort
+document.querySelectorAll('th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) { sortDir *= -1; }
+    else { sortCol = col; sortDir = 1; }
+    document.querySelectorAll('th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+    th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    applyFilters();
+  });
+});
+
+// Init
+renderTable(sortData(camps));
+renderNearMisses();
+</script>
+</body>
+</html>
