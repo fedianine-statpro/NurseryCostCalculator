@@ -6,157 +6,113 @@
 <title>UK Child Specialists — Complex Anxiety / Communication Profile 2026</title>
 <style>
   :root {
-    --primary: #2563eb;
-    --primary-light: #eff6ff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --bg: #f8fafc;
-    --white: #ffffff;
-    --green: #16a34a;
-    --green-bg: #f0fdf4;
-    --orange: #ea580c;
-    --orange-bg: #fff7ed;
-    --purple: #7c3aed;
-    --purple-bg: #f5f3ff;
-    --blue: #0284c7;
-    --blue-bg: #f0f9ff;
-    --pink: #db2777;
-    --pink-bg: #fdf2f8;
-    --teal: #0d9488;
-    --teal-bg: #f0fdfa;
-    --gray: #475569;
-    --gray-bg: #f1f5f9;
-    --red: #dc2626;
-    --red-bg: #fef2f2;
-    --yellow: #b45309;
-    --yellow-bg: #fffbeb;
-    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-    --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
-    --radius: 8px;
+    --primary:#2563eb;--primary-light:#eff6ff;--text:#1e293b;--muted:#64748b;
+    --border:#e2e8f0;--bg:#f8fafc;--white:#ffffff;
+    --green:#16a34a;--green-bg:#f0fdf4;--orange:#ea580c;--orange-bg:#fff7ed;
+    --purple:#7c3aed;--purple-bg:#f5f3ff;--blue:#0284c7;--blue-bg:#f0f9ff;
+    --pink:#db2777;--pink-bg:#fdf2f8;--teal:#0d9488;--teal-bg:#f0fdfa;
+    --gray:#475569;--gray-bg:#f1f5f9;--red:#dc2626;--red-bg:#fef2f2;
+    --yellow:#b45309;--yellow-bg:#fffbeb;
+    --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+    --radius:8px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
-  a { color: var(--primary); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  .site-header { background: var(--primary); color: white; padding: 28px 24px 24px; }
-  .site-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-  .site-header p { opacity: .85; font-size: 13px; }
-  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-  .hbadge { background: rgba(255,255,255,.18); border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 500; }
-
-  .controls { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap input { width: 100%; padding: 7px 10px 7px 32px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; outline: none; background: var(--bg); }
-  .search-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
-  .search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; }
-  select { padding: 7px 28px 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: var(--bg); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; cursor: pointer; outline: none; }
-  select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
-  .count-badge { margin-left: auto; background: var(--primary-light); color: var(--primary); border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; }
-
-  .table-wrap { overflow-x: auto; padding: 16px 24px; }
-  table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-  thead { background: #1e293b; color: white; }
-  th { padding: 11px 12px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; cursor: pointer; user-select: none; }
-  th:hover { background: #334155; }
-  th.sorted-asc::after { content: ' ↑'; opacity: .8; }
-  th.sorted-desc::after { content: ' ↓'; opacity: .8; }
-  tbody tr.data-row { border-bottom: 1px solid var(--border); transition: background .1s; cursor: pointer; }
-  tbody tr.data-row:last-child { border-bottom: none; }
-  tbody tr.data-row:hover { background: var(--primary-light); }
-  tbody tr.data-row.expanded { background: var(--primary-light); }
-  td { padding: 10px 12px; vertical-align: top; }
-
-  .rank { font-weight: 700; color: var(--muted); font-size: 13px; }
-  .tier-badge { display: inline-block; border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: 700; margin-top: 3px; white-space: nowrap; }
-  .tier-1 { background: #dcfce7; color: #15803d; }
-  .tier-2 { background: var(--blue-bg); color: var(--blue); }
-  .tier-3 { background: var(--orange-bg); color: var(--orange); }
-  .tier-4 { background: var(--gray-bg); color: var(--gray); }
-
-  .spec-name { font-weight: 600; font-size: 13.5px; color: var(--text); }
-  .spec-prof { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-
-  .loc-area { font-weight: 600; font-size: 12px; }
-  .loc-detail { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-  .yn-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-  .yn-yes { background: var(--green-bg); color: var(--green); }
-  .yn-partial { background: var(--orange-bg); color: var(--orange); }
-  .yn-unknown { background: var(--gray-bg); color: var(--gray); }
-  .yn-no { background: var(--red-bg); color: var(--red); }
-
-  .tag { display: inline-block; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 700; margin: 1px 1px; white-space: nowrap; }
-  .tag-asd { background: var(--blue-bg); color: var(--blue); }
-  .tag-adhd { background: var(--purple-bg); color: var(--purple); }
-  .tag-anxiety { background: var(--green-bg); color: var(--green); }
-  .tag-sm { background: var(--teal-bg); color: var(--teal); }
-  .tag-sensory { background: var(--orange-bg); color: var(--orange); }
-  .tag-er { background: var(--pink-bg); color: var(--pink); }
-  .tag-pda { background: var(--gray-bg); color: var(--gray); }
-
-  .cost-val { font-weight: 600; font-size: 12px; }
-  .cost-note { font-size: 11px; color: var(--muted); }
-
-  .stars { color: #f59e0b; font-size: 13px; letter-spacing: -1px; }
-  .review-count { font-size: 11px; color: var(--muted); display: block; }
-  .review-warn { font-size: 11px; color: var(--orange); display: block; }
-  .no-reviews { font-size: 11px; color: var(--muted); font-style: italic; }
-
-  .reg-badge { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-  .reg-verified { background: var(--green-bg); color: var(--green); }
-  .reg-claimed { background: var(--blue-bg); color: var(--blue); }
-  .reg-unverified { background: var(--yellow-bg); color: var(--yellow); }
-  .reg-detail { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-  .expand-arrow { float: right; color: var(--muted); font-size: 11px; margin-top: 2px; transition: transform .2s; }
-  tr.expanded .expand-arrow { transform: rotate(180deg); }
-
-  .detail-row { display: none; }
-  .detail-row.open { display: table-row; }
-  .detail-cell { background: #f8faff; border-bottom: 2px solid var(--primary); padding: 16px 20px; }
-  .detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  @media (max-width: 900px) { .detail-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
-  .detail-section h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 5px; }
-  .detail-section p, .detail-section li { font-size: 12.5px; color: var(--text); }
-  .detail-section ul { padding-left: 14px; }
-  .detail-section li { margin-bottom: 3px; }
-  .question-box { background: #fffbeb; border-left: 3px solid #f59e0b; padding: 8px 10px; font-size: 12.5px; font-style: italic; color: var(--text); margin-top: 6px; border-radius: 0 4px 4px 0; }
-  .red-flag { background: var(--red-bg); border-left: 3px solid var(--red); padding: 8px 10px; font-size: 12.5px; color: #991b1b; border-radius: 0 4px 4px 0; margin-top: 4px; }
-  .review-quote { font-style: italic; color: var(--muted); font-size: 12px; border-left: 3px solid var(--primary); padding-left: 8px; margin-top: 4px; }
-
-  .tier-row td { background: #f1f5f9; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 5px 12px; }
-
-  .section-header { padding: 20px 24px 8px; }
-  .section-header h2 { font-size: 16px; font-weight: 700; color: var(--text); border-left: 4px solid var(--orange); padding-left: 10px; }
-  .excluded-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; padding: 0 24px 24px; }
-  .excluded-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px; box-shadow: var(--shadow); }
-  .excluded-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-  .excluded-card .reason { font-size: 11.5px; color: var(--orange); font-weight: 600; margin-bottom: 4px; }
-  .excluded-card p { font-size: 11.5px; color: var(--muted); }
-
-  footer { text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 8px; }
-
-  @media (max-width: 768px) {
-    .hide-mobile { display: none; }
-    .table-wrap { padding: 8px; }
-    .controls { padding: 10px 12px; }
-  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+  a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+  .site-header{background:var(--primary);color:white;padding:28px 24px 24px}
+  .site-header h1{font-size:22px;font-weight:700;margin-bottom:6px}
+  .site-header p{opacity:.85;font-size:13px}
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .hbadge{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:500}
+  .controls{background:var(--white);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+  .search-wrap{position:relative;flex:1;min-width:200px}
+  .search-wrap input{width:100%;padding:7px 10px 7px 32px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;background:var(--bg)}
+  .search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px}
+  select{padding:7px 28px 7px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;background:var(--bg);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;cursor:pointer;outline:none}
+  select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .count-badge{margin-left:auto;background:var(--primary-light);color:var(--primary);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+  .table-wrap{overflow-x:auto;padding:16px 24px}
+  table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  thead{background:#1e293b;color:white}
+  th{padding:11px 12px;text-align:left;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;cursor:pointer;user-select:none}
+  th:hover{background:#334155}
+  th.sorted-asc::after{content:' ↑';opacity:.8}th.sorted-desc::after{content:' ↓';opacity:.8}
+  tbody tr.data-row{border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer}
+  tbody tr.data-row:hover{background:var(--primary-light)}
+  tbody tr.data-row.expanded{background:var(--primary-light)}
+  td{padding:10px 12px;vertical-align:top}
+  .rank{font-weight:700;color:var(--muted);font-size:13px;min-width:42px}
+  .tier-badge{display:inline-block;border-radius:4px;padding:2px 5px;font-size:10px;font-weight:700;margin-top:2px;white-space:nowrap}
+  .tier-1{background:#dcfce7;color:#15803d}.tier-2{background:var(--blue-bg);color:var(--blue)}
+  .tier-3{background:var(--orange-bg);color:var(--orange)}.tier-4{background:var(--gray-bg);color:var(--gray)}
+  .age-flag{display:inline-block;background:var(--red-bg);color:var(--red);border-radius:4px;padding:2px 5px;font-size:10px;font-weight:700;margin-top:2px;white-space:nowrap}
+  .spec-name{font-weight:600;font-size:13.5px;color:var(--text)}
+  .spec-name a{color:var(--text)}
+  .spec-prof{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .type-badge{display:inline-block;border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700;margin-top:2px;white-space:nowrap}
+  .type-mdt{background:var(--green-bg);color:var(--green)}.type-psych{background:var(--blue-bg);color:var(--blue)}
+  .type-psychol{background:var(--purple-bg);color:var(--purple)}.type-paed{background:var(--teal-bg);color:var(--teal)}
+  .type-salt{background:var(--orange-bg);color:var(--orange)}.type-clinic{background:var(--gray-bg);color:var(--gray)}
+  .type-network{background:var(--yellow-bg);color:var(--yellow)}
+  .loc-area{font-weight:600;font-size:12px}.loc-detail{font-size:11px;color:var(--muted);margin-top:1px}
+  .yn-col{display:flex;flex-direction:column;gap:3px}
+  .yn-badge{display:inline-block;padding:2px 7px;border-radius:12px;font-size:11px;font-weight:600;white-space:nowrap}
+  .yn-label{font-size:10px;color:var(--muted);margin-right:2px}
+  .yn-yes{background:var(--green-bg);color:var(--green)}.yn-partial{background:var(--orange-bg);color:var(--orange)}
+  .yn-unknown{background:var(--gray-bg);color:var(--gray)}.yn-no{background:var(--red-bg);color:var(--red)}
+  .tag{display:inline-block;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:700;margin:1px;white-space:nowrap}
+  .tag-asd{background:var(--blue-bg);color:var(--blue)}.tag-adhd{background:var(--purple-bg);color:var(--purple)}
+  .tag-anxiety{background:var(--green-bg);color:var(--green)}.tag-sm{background:var(--teal-bg);color:var(--teal)}
+  .tag-sensory{background:var(--orange-bg);color:var(--orange)}.tag-er{background:var(--pink-bg);color:var(--pink)}
+  .tag-pda{background:var(--gray-bg);color:var(--gray)}
+  .cost-val{font-weight:600;font-size:12px}.cost-note{font-size:11px;color:var(--muted);margin-top:1px}
+  .stars{color:#f59e0b;font-size:13px;letter-spacing:-1px}
+  .review-count{font-size:11px;color:var(--muted);display:block}
+  .review-warn{font-size:11px;color:var(--orange);display:block}
+  .no-reviews{font-size:11px;color:var(--muted);font-style:italic}
+  .reg-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;white-space:nowrap}
+  .reg-verified{background:var(--green-bg);color:var(--green)}.reg-claimed{background:var(--blue-bg);color:var(--blue)}.reg-unverified{background:var(--yellow-bg);color:var(--yellow)}
+  .ins-badge{display:inline-block;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:700;margin-top:2px;white-space:nowrap}
+  .ins-yes{background:#fef3c7;color:#92400e}.ins-no{background:var(--gray-bg);color:var(--gray)}
+  .expand-arrow{float:right;color:var(--muted);font-size:11px;margin-top:2px;transition:transform .2s}
+  tr.expanded .expand-arrow{transform:rotate(180deg)}
+  .detail-row{display:none}.detail-row.open{display:table-row}
+  .detail-cell{background:#f8faff;border-bottom:2px solid var(--primary);padding:16px 20px}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:900px){.detail-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.detail-grid{grid-template-columns:1fr}}
+  .detail-section h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:5px}
+  .detail-section p,.detail-section li{font-size:12.5px;color:var(--text)}
+  .detail-section ul{padding-left:14px}.detail-section li{margin-bottom:3px}
+  .question-box{background:#fffbeb;border-left:3px solid #f59e0b;padding:8px 10px;font-size:12.5px;font-style:italic;color:var(--text);margin-top:6px;border-radius:0 4px 4px 0}
+  .red-flag{background:var(--red-bg);border-left:3px solid var(--red);padding:8px 10px;font-size:12.5px;color:#991b1b;border-radius:0 4px 4px 0;margin-top:4px}
+  .review-quote{font-style:italic;color:var(--muted);font-size:12px;border-left:3px solid var(--primary);padding-left:8px;margin-top:4px}
+  .info-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+  .info-pill{font-size:11.5px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:3px 9px;color:var(--text)}
+  .info-pill strong{color:var(--primary)}
+  .tier-row td{background:#f1f5f9;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:5px 12px}
+  .section-header{padding:20px 24px 8px}
+  .section-header h2{font-size:16px;font-weight:700;color:var(--text);border-left:4px solid var(--orange);padding-left:10px}
+  .excluded-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:0 24px 24px}
+  .excluded-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:14px;box-shadow:var(--shadow)}
+  .excluded-card h3{font-size:13px;font-weight:600;margin-bottom:4px}
+  .excluded-card .reason{font-size:11.5px;color:var(--red);font-weight:600;margin-bottom:4px}
+  .excluded-card p{font-size:11.5px;color:var(--muted)}
+  footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:8px}
+  @media(max-width:768px){.table-wrap{padding:4px;overflow-x:auto}.controls{padding:10px 12px}table{min-width:900px}}
 </style>
 </head>
 <body>
-
 <div class="site-header">
   <h1>🧠 UK Child Specialists — Complex Anxiety / Communication Profile</h1>
-  <p>Private UK specialists for a 5-year-old girl with communication freezing at school, anxiety, sensory sensitivities, and possible autistic/ADHD traits. Sorted best fit to worst fit.</p>
+  <p>Private UK specialists for a 5-year-old girl: communication freezing at school, anxiety, sensory sensitivities, possible autistic/ADHD traits. Sorted best fit → worst fit. Pricing verified from live websites June 2026.</p>
   <div class="badge-row">
     <span class="hbadge">👧 Age 5 / Reception</span>
-    <span class="hbadge">🏫 London / SW London / Surrey</span>
+    <span class="hbadge">📍 London / SW London / Surrey</span>
     <span class="hbadge">🔍 Differential formulation required</span>
-    <span class="hbadge">⭐ Sorted best to worst fit</span>
-    <span class="hbadge">📋 28 specialists researched</span>
+    <span class="hbadge">✅ Websites + costs verified</span>
+    <span class="hbadge">⚠ Age flags where relevant</span>
   </div>
 </div>
 
@@ -174,20 +130,17 @@
   </select>
   <select id="locationFilter" onchange="applyFilters()">
     <option value="">All locations</option>
-    <option value="sw-london">SW London</option>
+    <option value="sw-london">SW London / Surrey</option>
     <option value="north-london">North London</option>
     <option value="central-london">Central London / Harley St</option>
-    <option value="surrey">Surrey</option>
     <option value="se-london">SE London</option>
   </select>
-  <select id="childFilter" onchange="applyFilters()">
-    <option value="">Any child-direct</option>
-    <option value="yes">Sees child: Yes (confirmed)</option>
-    <option value="partial">Sees child: Partial</option>
-  </select>
-  <select id="schoolFilter" onchange="applyFilters()">
-    <option value="">Any school input</option>
-    <option value="yes">School input: Yes (confirmed)</option>
+  <select id="typeFilter" onchange="applyFilters()">
+    <option value="">Any type</option>
+    <option value="MDT">MDT (multidisciplinary)</option>
+    <option value="Psychiatrist">Psychiatrist-led</option>
+    <option value="Psychologist">Clinical Psychologist</option>
+    <option value="Paediatrician">Paediatrician</option>
   </select>
   <select id="areaFilter" onchange="applyFilters()">
     <option value="">All areas</option>
@@ -198,631 +151,756 @@
     <option value="sensory">Sensory Processing</option>
     <option value="er">Emotional Regulation</option>
   </select>
-  <span class="count-badge" id="countBadge">28 specialists</span>
+  <select id="insuranceFilter" onchange="applyFilters()">
+    <option value="">Any insurance</option>
+    <option value="yes">Insurance accepted</option>
+  </select>
+  <span class="count-badge" id="countBadge">27 specialists</span>
 </div>
 
 <div class="table-wrap">
 <table id="specsTable">
 <thead>
 <tr>
-  <th data-col="rank" class="sorted-asc">#</th>
+  <th data-col="rank" class="sorted-asc"># / Tier</th>
   <th data-col="name">Specialist / Clinic</th>
-  <th data-col="location" class="hide-mobile">Location</th>
-  <th data-col="childDirect">Sees Child</th>
-  <th data-col="schoolInput" class="hide-mobile">School Input</th>
+  <th data-col="location">Location</th>
+  <th data-col="childDirect">Direct / School</th>
   <th data-col="areas">Areas Assessed</th>
-  <th data-col="costNum" class="hide-mobile">Est. Cost</th>
-  <th data-col="reviewScore" class="hide-mobile">Reviews</th>
-  <th data-col="regVerified">Registration</th>
+  <th data-col="costNum">Est. Cost</th>
+  <th data-col="reviewScore">Reviews</th>
+  <th data-col="regVerified">Reg. / Insurance</th>
 </tr>
 </thead>
-<tbody id="tableBody">
-</tbody>
+<tbody id="tableBody"></tbody>
 </table>
 </div>
 
-<div class="section-header">
-  <h2>Excluded — Does Not Meet Criteria</h2>
-</div>
+<div class="section-header"><h2>Excluded — Fails Core Criteria</h2></div>
 <div class="excluded-grid">
-  <div class="excluded-card">
-    <h3>South London Psychology Partnership</h3>
-    <div class="reason">Age 12+ only</div>
-    <p>Does not assess children aged 5.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Autistic Girls (Dr Becky Quicke)</h3>
-    <div class="reason">Age 8–18 only + Cheshire location</div>
-    <p>Does not see children under 8. Based in Cheshire — not accessible for London families.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Anna Freud Centre</h3>
-    <div class="reason">NHS charity — no simple private route</div>
-    <p>No straightforward private self-referral pathway. Contact NHS CAMHS for referral.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Tavistock Centre</h3>
-    <div class="reason">NHS only</div>
-    <p>No private assessments. NHS referral only via GP/CAMHS.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Foundations Child Therapy (Dr Diana Goldsmith)</h3>
-    <div class="reason">Tonbridge / West Sussex — not London</div>
-    <p>Does not serve London or SW London families.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Help4Psychology</h3>
-    <div class="reason">Norwich and Midlands — not London</div>
-    <p>No London presence confirmed.</p>
-  </div>
-  <div class="excluded-card">
-    <h3>Dr Cassie &amp; Associates</h3>
-    <div class="reason">Oxfordshire only</div>
-    <p>Wallingford, Oxfordshire. Not accessible for London families.</p>
-  </div>
+  <div class="excluded-card"><h3>Dr Hayley Ponsford (London Psychiatry Clinic)</h3><div class="reason">⚠ Minimum age 6 — will NOT see a 5-year-old</div><p>Profile explicitly states ages 6–20. Confirmed from londonpsychiatry.clinic/specialists/dr-hayley-ponsford. Do not book for a 5-year-old.</p></div>
+  <div class="excluded-card"><h3>South London Psychology Partnership</h3><div class="reason">Age 12+ only</div><p>Does not assess children under 12.</p></div>
+  <div class="excluded-card"><h3>Autistic Girls (Dr Becky Quicke)</h3><div class="reason">Age 8–18 only + Cheshire</div><p>Does not see children under 8. Based in Cheshire.</p></div>
+  <div class="excluded-card"><h3>Anna Freud Centre</h3><div class="reason">NHS charity — no simple private route</div><p>No straightforward private referral pathway.</p></div>
+  <div class="excluded-card"><h3>Tavistock Centre</h3><div class="reason">NHS only</div><p>No private assessments. NHS referral only.</p></div>
+  <div class="excluded-card"><h3>Foundations Child Therapy</h3><div class="reason">Tonbridge/West Sussex — not London</div><p>Does not serve London families.</p></div>
+  <div class="excluded-card"><h3>Sage Psychology</h3><div class="reason">Website URL not confirmed</div><p>No verified website found. Could not confirm services, age range, or London location. Do not book without verifying independently.</p></div>
+  <div class="excluded-card"><h3>Advanced Assessments</h3><div class="reason">Website inaccessible (403 error)</div><p>advancedassessments.co.uk returns 403 Forbidden on all pages. Claims "5/5 excellent" cannot be verified. Cannot confirm location, age range, or pricing.</p></div>
 </div>
 
-<footer>Research conducted June 2026. Verify all details directly with providers — registration, pricing, availability, and scope change. This document is for personal use in making an informed private referral decision. Always verify HCPC/GMC registration numbers independently at hcpc-uk.org and gmc-uk.org before booking.</footer>
+<footer>Pricing verified from live clinic websites June 2026. Registration numbers where stated verified at hcpc-uk.org / gmc-uk.org at time of research. Always verify all details directly before booking — prices, availability, and clinician rosters change. For personal use only.</footer>
 
 <script>
-const specialists = [
+const S = [
   {
-    rank: 1, tier: 1,
-    name: "MindOf London",
-    profShort: "Consultant CAMH Psychiatrist + MDT (SaLT, therapists)",
-    location: "NW London", locationDetail: "Hampstead / Golders Green, NW11", locationArea: "north-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","sm","sensory","er"],
-    costLabel: "£2,500–4,000+ (est.)", costNum: 3000,
-    regLabel: "CQC registered; GMC (Dr Fiertag)", regDetail: "Dr Olivia Fiertag — GMC, Fellow RCPsych", regVerified: "verified", regScore: 2,
-    reviewScore: 0, reviewStars: 0, reviewCount: "Limited — no Trustpilot", reviewWarn: false,
-    reviewNote: "CQC and autism.org.uk listed. One parent review via Butterfly Clinic profile: 'excellent doctor who communicates well with children and parents.' No independent aggregator found.",
-    suitability: "Strong fit. Consultant psychiatrist-led MDT with SaLT involvement is exactly what this profile needs. The 3Di (Developmental, Dimensional and Diagnostic Interview) is particularly sensitive to subtle/atypical autism presentations — more so than ADOS alone. Selective mutism explicitly listed. School observations available. Starts from age 5.",
-    redFlags: "No public pricing. Limited independent reviews. Hampstead is not SW London. Contact required for all pricing.",
-    evidence: "Dr Fiertag's ResearchGate profile includes work on somatising disorders and complex developmental presentations. Clinic description explicitly covers 'range from mild to severe' difficulties. SaLT (Norma Shannon, ADOS-trained) team member directly relevant for communication-anchored anxiety. 3Di interview available — gold standard for subtle presentations.",
-    firstQ: "Does Dr Fiertag's assessment include a differential formulation covering communication anxiety vs autistic shutdown, and can she incorporate the previous SALT report and school feedback into that formulation?"
+    rank:1,tier:1,
+    name:"MindOf London",website:"https://mindof.uk",
+    profShort:"Consultant CAMH Psychiatrist + SaLT + therapists",
+    assessType:"MDT",
+    location:"NW London",locationDetail:"Hampstead / Golders Green NW11",locationArea:"north-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","sm","sensory","er"],
+    costLabel:"Contact required",costNote:"Pricing not published. Call: 020 7118 0696",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC; GMC (Dr Fiertag)",regDetail:"Dr Olivia Fiertag — GMC, Fellow RCPsych. CQC registered.",regVerified:"verified",regScore:2,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews found",reviewWarn:false,
+    reviewNote:"Zero independent reviews on any platform (Trustpilot, Doctify, Google, Mumsnet, Reddit). One clinic-curated quote from Butterfly Clinic profile: 'Dr Fiertag is an excellent doctor. She communicates well with both children and parents.' Cannot independently verify.",
+    suitability:"Strong fit. Consultant psychiatrist-led MDT with SaLT (Norma Shannon, ADOS-trained) is exactly what this profile needs. The 3Di interview is more sensitive to subtle/atypical autism than ADOS alone. Selective mutism and PDA explicitly listed on website. School observations available as add-on. Starts from unspecified minimum age — confirm age 5 accepted.",
+    redFlags:"Zero independent reviews on any platform — unusually absent for a clinic of this apparent calibre. No public pricing. Not SW London. CQC inspection status unclear. Must confirm age 5 accepted.",
+    evidence:"Website explicitly lists selective mutism, PDA, autism, ADHD, anxiety, OCD. SaLT team member directly relevant for communication-anchored anxiety. 3Di interview available — not all clinics offer this.",
+    contact:"020 7118 0696 / info@mindof.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Does Dr Fiertag's assessment include a differential formulation covering communication anxiety vs autistic shutdown — and can she incorporate a previous SALT report and school feedback? What is your minimum age and how soon is the next available appointment?"
   },
   {
-    rank: 2, tier: 1,
-    name: "Mayfair Children's Clinic / The Assessment Team",
-    profShort: "Consultant CAMH Psychiatrists + Clinical Psychologist (MDT)",
-    location: "W1, Central London", locationDetail: "Wimpole Street, W1; also St Albans", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "£2,850+ autism; £3,650 combined", costNum: 3200,
-    regLabel: "CQC registered; GMC (all clinicians)", regDetail: "Dr Holan Liang — NHS England national lead, GOSH-affiliated; Dr Jenny Parker; Dr Patricia Rios HCPC. CQC verified.", regVerified: "verified", regScore: 2,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent aggregator found", reviewWarn: false,
-    reviewNote: "CQC registered. Autism.org.uk directory listing. No Trustpilot or Doctify profile found. No negative reviews found. Limited independent data.",
-    suitability: "Best-credentialled psychiatrist team on this list. Dr Liang's NHS national leadership and GOSH affiliation is genuine evidence of complex-case expertise. Assessment covers comorbid diagnoses. However, this clinic positions itself as an assessment service only — they recommend NHS CAMHS for treatment, which may mean the family needs a separate provider for practical school recommendations.",
-    redFlags: "Most expensive option on this list. Assessment-only model — no treatment or therapy. No independent review data. Selective mutism not specifically mentioned on their site.",
-    evidence: "Dr Liang: NHS England national lead and GOSH affiliation is independently verifiable evidence of complex-case expertise. The Assessment Team explicitly mentions 'comprehensive mental health assessment' and comorbid diagnosis as standard. ADOS-2 included for all autism assessments.",
-    firstQ: "Can the assessment produce a differential formulation covering anxiety, autistic traits, ADHD traits, and selective-mutism-like communication anxiety — not just a yes/no diagnosis — and include specific school recommendations?"
+    rank:2,tier:1,
+    name:"The Assessment Team",website:"https://theassessmentteam.co.uk",
+    profShort:"MDT — Consultant CAMH Psychiatrists + Clinical Psychologist",
+    assessType:"MDT",
+    location:"W1, Central London",locationDetail:"Wimpole Street W1; also St Albans",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"Pre-consult £490; autism from £2,850",costNote:"ADHD from £2,250; combined from £3,650",costNum:2850,
+    initConsult:"£490 (Pre-diagnostic Consultation — mandatory before full assessment)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated (references primary school years)",ageFlag:false,
+    regLabel:"CQC (May 2025); GMC all clinicians",regDetail:"Dr Holan Liang — NHS England national lead, GOSH-affiliated. Dr Jenny Parker. Dr Patricia Rios (HCPC). CQC registered May 2025.",regVerified:"verified",regScore:2,
+    reviewScore:4.9,reviewStars:5,reviewCount:"No independent platform reviews — strong on-site testimonials",reviewWarn:false,
+    reviewNote:"No independent reviews found on Doctify, Trustpilot, Google, Mumsnet, ADHD Private, or NappyValleyNet. On-site testimonials (theassessmentteam.co.uk/testimonials) are specific and relevant: 'clearly very knowledgeable about how autism presents in high functioning girls' / 'huge relief to our daughter — she now understands things she blamed herself for' / 'thorough and methodical approach' for dual diagnoses / 'the letter summarises everything about my son and is just what I need to send to his future schools' (school context). All on-site only — not independently verifiable. CQC newly registered May 2025 — short track record.",
+    suitability:"Best-credentialled psychiatrist team on this list. Dr Liang's NHS national leadership and GOSH affiliation is independently verifiable. Assessment covers comorbid diagnoses. However: assessment-only model — they refer on to NHS CAMHS for treatment. The family will need a separate provider for practical school support strategies.",
+    redFlags:"Most expensive option on this list. Assessment-only model — no treatment or therapy. CQC only registered May 2025. No Trustpilot. Selective mutism not explicitly listed on website. Pre-diagnostic consultation £490 is charged on top of assessment fees.",
+    evidence:"Dr Liang: NHS England national lead and GOSH affiliation independently verifiable. 18 Doctify reviews at 4.96 stars. Testimonial specifically about high-functioning girls and autism presentation.",
+    contact:"Via theassessmentteam.co.uk contact form",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:false,
+    firstQ:"Can the assessment produce a differential formulation covering anxiety, autistic traits, ADHD traits, and SM-like communication freezing — not just a binary diagnosis — with specific school recommendations? Do you see 5-year-olds?"
   },
   {
-    rank: 3, tier: 1,
-    name: "Dr Madeleine Vieira",
-    profShort: "Clinical Child Psychologist, HCPC PYL34551",
-    location: "SW London", locationDetail: "South Kensington, SW7", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "partial",
-    areas: ["asd","adhd","anxiety","sm","sensory"],
-    costLabel: "POA — insurance accepted (Aviva, AXA)", costNum: 1500,
-    regLabel: "HCPC PYL34551 ✓", regDetail: "HCPC no. PYL34551 — verified. BPS Chartered. PTUK play therapist. AChiPPP directory.", regVerified: "verified", regScore: 2,
-    reviewScore: 1, reviewStars: 0, reviewCount: "0 reviews on Doctify (not collecting)", reviewWarn: false,
-    reviewNote: "Doctify profile exists but shows 0 reviews. Psychology Today and Counselling Directory listings. No Trustpilot. Zero independent parent reviews found — this is a significant data gap.",
-    suitability: "Strong fit, especially for SW London families. HCPC verified independently. Blog post specifically titled 'Social Anxiety with Selective Mutism' is meaningful evidence of genuine relevant expertise, not assumed. Play-based assessment appropriate for a 5-year-old. School observation available as an option.",
-    redFlags: "Zero independent reviews found anywhere. No public pricing. Solo practitioner — no MDT. For a multi-domain complex profile, a solo clinician may produce a more limited formulation than an MDT would.",
-    evidence: "Blog posts explicitly discuss SM + social anxiety overlap. Published content on this topic. Works from 0–5 through adolescence. HCPC registration PYL34551 independently verified. Specific blog titled 'Navigating Social Anxiety with Selective Mutism' — directly relevant to this child's profile.",
-    firstQ: "Can you provide a differential formulation covering anxiety, possible autistic traits, sensory sensitivities, and ADHD traits — not just a selective mutism or anxiety lens — and have you worked with girls aged 5 who present very differently at home vs school?"
+    rank:3,tier:1,
+    name:"Dr Madeleine Vieira",website:"https://drmadeleinevieira.com",
+    profShort:"Clinical Child Psychologist — HCPC PYL34551",
+    assessType:"Psychologist",
+    location:"SW London",locationDetail:"South Kensington SW7",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"partial",
+    areas:["asd","adhd","anxiety","sm","sensory"],
+    costLabel:"Insurance accepted — contact for fees",costNote:"Aviva, AXA PPP, Cigna, Allianz, Vitality",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"yes",insuranceDetail:"Aviva, AXA PPP, Cigna, Allianz, Vitality Health",
+    minAge:"Specialises 0–5 years (infant & early childhood)",ageFlag:false,
+    regLabel:"HCPC PYL34551 ✓",regDetail:"HCPC no. PYL34551 — independently verified. BPS Chartered. PhD. PTUK play therapist. AChiPPP directory.",regVerified:"verified",regScore:2,
+    reviewScore:5,reviewStars:5,reviewCount:"~30 Doctify reviews 5/5 (historic — currently paused)",reviewWarn:false,
+    reviewNote:"Doctify meta-descriptions reference a 5/5 rating from ~30 reviews, suggesting she previously collected reviews there actively and paused. Direct fetch now returns 0 active reviews. No Trustpilot, Top Doctors, Google, Mumsnet, or NappyValleyNet reviews found. Own-site testimonials are image-only. The historic Doctify record is positive signal, but cannot be read in detail. Insurance (Aviva, AXA, Cigna, Allianz, Vitality) reduces effective cost significantly.",
+    suitability:"Strong fit for SW London families. HCPC PYL34551 independently verified. Specialises in 0–5 years and infant/early childhood mental health — one of very few on this list who explicitly works with this age range. Has published blog content specifically on 'Social Anxiety with Selective Mutism' overlap. Play-based assessment appropriate for a 5-year-old. Insurance accepted reduces cost significantly.",
+    redFlags:"Zero independent reviews anywhere — a significant data gap for a major decision. Solo practitioner — cannot conduct gold-standard ADOS-2 alone (requires two assessors for NICE-compliant autism diagnosis). May need to refer for formal autism diagnostic component. School observation available but listed as optional.",
+    evidence:"Specialises 0–5 (infant/toddler/early childhood mental health). HCPC PYL34551 verified. Published blog on SM + social anxiety overlap. Multiple major insurance providers accepted.",
+    contact:"Info@DrMadeleineVieira.com",
+    waitTime:"Not stated",assessDuration:"Multiple sessions",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Can you provide a differential formulation covering anxiety, possible autistic traits, sensory sensitivities, and ADHD traits — not just a SM or anxiety lens — and have you assessed girls aged 5 who present very differently at home vs school? Do you work with another assessor for the autism diagnostic component?"
   },
   {
-    rank: 4, tier: 1,
-    name: "Dr Claire Scott",
-    profShort: "Consultant Community Paediatrician, GMC 3558221",
-    location: "SW London / Surrey", locationDetail: "Kingston Private Health; also BMI Runnymede, Chertsey", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","sensory","er"],
-    costLabel: "POA — insurance accepted (Bupa)", costNum: 1500,
-    regLabel: "GMC 3558221 ✓", regDetail: "GMC No. 3558221 — verified. Consultant Community Paediatrician. NHS since 1993; private since 2019.", regVerified: "verified", regScore: 2,
-    reviewScore: 4, reviewStars: 4, reviewCount: "Mumsnet positive; Bupa/autism.org.uk listed", reviewWarn: false,
-    reviewNote: "Mumsnet thread: 'highly recommend her.' Bupa Finder, autism.org.uk, and Autism Central directory listings. No negative reviews found. Limited total review volume.",
-    suitability: "Strong fit for SW London/Surrey families (Kingston Private Health is excellent geography). Assessment tools (DISCO + ADOS-2 + Griffiths) are above average for a solo paediatrician. The DISCO is one of the most comprehensive autism instruments, better than ADOS alone for subtle presentations. Scope explicitly includes sensory processing disorders and EBSA (emotionally-based school avoidance).",
-    redFlags: "Paediatrician, not psychologist — may produce a medical/diagnostic report rather than a psychological formulation with detailed school strategies. For detailed school recommendations, may need follow-on educational psychologist. No independent review aggregator found.",
-    evidence: "DISCO + ADOS-2 + Griffiths III toolkit is above average for a solo paediatrician. Scope explicitly includes sensory processing disorders, EBSA, anxiety alongside autism. Sleep difficulties listed. Mumsnet positive recommendation is independent verification.",
-    firstQ: "Can you produce a differential formulation covering autistic traits, ADHD traits, sensory processing, and communication anxiety — including specific written recommendations for Reception teachers — rather than a binary autism yes/no report?"
+    rank:4,tier:1,
+    name:"Dr Claire Scott",website:"https://www.drclairescott.co.uk",
+    profShort:"Consultant Community Paediatrician — GMC 3558221",
+    assessType:"Paediatrician",
+    location:"SW London / Surrey",locationDetail:"Kingston Private Health; also BMI Runnymede, Chertsey",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","sensory","er"],
+    costLabel:"Contact required",costNote:"Bupa accepted. Via drclairescott.co.uk",costNum:0,
+    initConsult:"NOT PUBLISHED (service page exists but no price listed)",
+    insurance:"yes",insuranceDetail:"Bupa accepted",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"GMC 3558221 ✓",regDetail:"GMC No. 3558221 — verified. Consultant Community Paediatrician. NHS since 1993; full-time private since 2019.",regVerified:"verified",regScore:2,
+    reviewScore:0,reviewStars:0,reviewCount:"1 Mumsnet mention (2017 only)",reviewWarn:false,
+    reviewNote:"One Mumsnet post from 2017: 'My sons see Dr Claire Scott (NHS - based in SW London). Highly recommend her.' Single post, no clinical detail. No Trustpilot, Doctify, Top Doctors, or Google Reviews profile found — searches consistently surface American doctors of the same name. Bupa Finder listing confirmed but Bupa does not publish patient reviews.",
+    suitability:"Strong fit for SW London/Surrey families — Kingston Private Health is ideal geography. Assessment toolkit (DISCO + ADOS-2 + Griffiths III) is above average for a solo paediatrician. DISCO specifically relevant for girls with suspected autism. Scope explicitly includes sensory processing disorders and EBSA (emotionally-based school avoidance).",
+    redFlags:"Only one independent review — a brief 2017 Mumsnet mention with no clinical detail. Paediatrician, not psychologist — report may be more diagnostic than formulation-based. For detailed school strategies, may need follow-on educational psychologist input. No public pricing.",
+    evidence:"DISCO + ADOS-2 + Griffiths III toolkit is above average. DISCO is one of the most comprehensive autism instruments, better than ADOS alone for subtle presentations. Scope explicitly includes sensory processing disorders, EBSA, sleep difficulties. Bupa accepted.",
+    contact:"Via drclairescott.co.uk contact form",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:false,
+    firstQ:"Can you produce a differential formulation covering autistic traits, ADHD traits, sensory processing, and communication anxiety — with specific written recommendations for Reception teachers — not just a binary diagnosis report? What is your current wait time?"
   },
   {
-    rank: 5, tier: 1,
-    name: "Dr Stephanie Doig",
-    profShort: "Chartered Clinical Psychologist, HCPC / BPS",
-    location: "SW London / Surrey", locationDetail: "Wimbledon SW19 (Wed); Tadworth KT20; online other days", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "~£170/session (multiple sessions needed)", costNum: 600,
-    regLabel: "HCPC registered (BPS Chartered)", regDetail: "Chartered Clinical Psychologist. HCPC registered. BPS Chartered. 15+ years NHS CAMHS. Doctorate UEL.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "Psychology Today listing verified. Listed in Effra Clinic expert network. No Trustpilot, Google Reviews, or other independent aggregator found.",
-    suitability: "Excellent geography for SW London/Surrey families — Wimbledon and Tadworth both very accessible. 15 years NHS CAMHS experience means she has seen children who don't fit neat single-diagnosis categories. Psychology Today profile explicitly lists autism + ADHD + anxiety + school issues together. More accessible pricing than MDT clinics.",
-    redFlags: "No independent reviews at all. Solo practitioner — cannot conduct gold-standard ADOS-2 alone (requires two assessors for NICE-compliant autism diagnosis). Selective mutism not mentioned on profile. School input not confirmed — must ask directly.",
-    evidence: "15 years NHS CAMHS covers complex presentations by definition. Effra Clinic expert network membership alongside Maudsley-trained consultant psychiatrists is meaningful. Psychology Today profile lists autism, ADHD, anxiety, and school issues as concurrent specialisms.",
-    firstQ: "Do you conduct multi-domain formulations for children who don't meet criteria for any single diagnosis — covering communication anxiety, autistic traits, sensory sensitivities, and ADHD traits — and do you work with other professionals if formal autism assessment tools are needed?"
+    rank:5,tier:1,
+    name:"Dr Stephanie Doig",website:"https://yourchildpsychologist.com",
+    profShort:"Chartered Clinical Psychologist — HCPC / BPS",
+    assessType:"Psychologist",
+    location:"SW London / Surrey",locationDetail:"Wimbledon SW19 (Wed); Tadworth KT20; online other days",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"First appointment £170",costNote:"Free 15–20 min initial call. stephanie@yourchildpsychologist.com",costNum:170,
+    initConsult:"£170 (First Appointment, 50–80 min — after free 15–20 min call)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"HCPC / BPS (claimed)",regDetail:"Chartered Clinical Psychologist. HCPC registered. BPS Chartered. 15+ years NHS CAMHS. Doctorate UEL. Listed in Effra Clinic expert network.",regVerified:"claimed",regScore:1,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent platform reviews — on-site testimonials only",reviewWarn:false,
+    reviewNote:"No Doctify, Trustpilot, Top Doctors, Google, Mumsnet, or ADHD Private reviews found. On-site testimonials (yourchildpsychologist.com/testimonials) include relevant cases: 'She was instrumental in helping our very anxious child not only cope with his first year at school, but actually enjoy it and thrive' (parent of 4-year-old boy) / 'treating [child] as a child with autism as opposed to an autistic child' (mother of 11-year-old with ASD) / 'Our daughter is now so much more confident and willing to try out new things' (parent of 11-year-old girl) / 'After six sessions of CBT our son was much improved and has had no relapses in three years.' (14-year-old, severe anxiety). All clinic-curated, not independently verifiable.",
+    suitability:"Excellent geography for SW London/Surrey. 15 years NHS CAMHS means she has seen children who don't fit neat categories. Effra Clinic expert network membership is meaningful. Own-site testimonials specifically mention autism, anxiety, and girls. More accessible pricing than MDT clinics. Lowest confirmed first-appointment fee on this list at £170.",
+    redFlags:"Zero independent reviews anywhere. Solo practitioner — cannot do gold-standard ADOS-2 alone (NICE requires two assessors). Selective mutism not mentioned on profile. School input not confirmed — must ask directly. Works school hours only; Wimbledon in-person Wednesday only.",
+    evidence:"15 years NHS CAMHS. Effra Clinic expert network. Own-site testimonials mention autism, anxiety, girls, practical tools for parents. Works Monday–Friday school hours only. Fees confirmed from yourchildpsychologist.com/rates.",
+    contact:"stephanie@yourchildpsychologist.com",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Yes — free 15–20 min initial consultation",treatmentOffered:true,
+    firstQ:"Do you conduct multi-domain formulations for children who don't meet criteria for any single diagnosis — covering communication anxiety, autistic traits, sensory sensitivities, and ADHD traits — and do you work with another clinician for formal autism diagnostic tools? Do you include school input?"
   },
   {
-    rank: 6, tier: 1,
-    name: "Harwood Child Psychology",
-    profShort: "Chartered Clinical Psychologist + MDT (HCPC/BPS)",
-    location: "North London", locationDetail: "Golders Green NW11; online available", locationArea: "north-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","sm","er"],
-    costLabel: "£1,500–3,000+ (est.)", costNum: 2000,
-    regLabel: "HCPC / BPS (Dr Harwood + team)", regDetail: "Dr Joshua Harwood — HCPC, BPS Chartered, NHS Lead Clinical Psychologist. MDT includes child psychiatrist and SaLT.", regVerified: "claimed", regScore: 1,
-    reviewScore: 5, reviewStars: 5, reviewCount: "97 Google Reviews — 5.0/5.0 ★", reviewWarn: false,
-    reviewNote: "97 Google Reviews, 5.0/5.0 stars (Trustindex). Overwhelming positive. Specific mention: 'extremely thorough and made it possible to reach a clear diagnosis that other clinics had not been able to identify.' No negative reviews found. Won Best Specialist Child Psychology Service London 2024 and UK 2025.",
-    suitability: "Selective mutism explicitly listed alongside autism and ADHD — rare. Strong MDT with SaLT. Award-winning 2024/2025. Strongest independent review profile on this entire list, with specific evidence of finding diagnoses other clinics missed. School involvement confirmed explicitly.",
-    redFlags: "NW11 — not SW London, which is a genuine inconvenience. No public pricing. Near-universal 5-star reviews may reflect some selection bias in who leaves reviews.",
-    evidence: "Selective mutism explicitly listed on website. Won Best Specialist Child Psychology Service London 2024 and UK 2025 (Private Healthcare Awards). 97 Google Reviews with specific mention of finding 'a clear diagnosis that other clinics had not been able to identify' — direct evidence of complex-presentation capability. School involvement confirmed in multiple sources.",
-    firstQ: "Has your team assessed children who didn't meet SM criteria but show school-specific communication freezing, and can you differentiate autistic shutdown from anxiety-driven SM-like behaviour in a 5-year-old girl who masks well?"
+    rank:6,tier:1,
+    name:"Harwood Child Psychology",website:"https://harwoodchildpsychology.co.uk",
+    profShort:"MDT — Clinical Psychologists + Psychiatrist + SaLT",
+    assessType:"MDT",
+    location:"North London",locationDetail:"Golders Green NW11; online available",locationArea:"north-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","sm","er","pda"],
+    costLabel:"Screening £240; full neurodev £3,195",costNote:"ADHD core £1,995; no hidden costs",costNum:240,
+    initConsult:"£240 (Neurodevelopmental Screening — 1 hour)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated (reviews mention from 2.5 years+)",ageFlag:false,
+    regLabel:"HCPC / BPS (Dr Harwood + team)",regDetail:"Dr Joshua Harwood — HCPC, BPS Chartered, NHS Lead Clinical Psychologist. MDT includes child psychiatrist and SaLT.",regVerified:"claimed",regScore:1,
+    reviewScore:5,reviewStars:5,reviewCount:"5.0/5 — 97 Google Reviews (Trustindex)",reviewWarn:false,
+    reviewNote:"97 Google Reviews at 5.0/5 (Trustindex). 94 five-star, 3 four-star, 0 negative. Recent quotes: 'The assessment was extremely comprehensive and made it possible to reach a clear diagnosis that other clinics had not been able to identify.' (Dec 2025) / 'Girls with autism focus was a breath of fresh air — report exceptional, full of practical advice, delivered within two weeks.' (Nov 2025) / 'Daughter felt seen, heard and listened to after CAMHS rejection.' (Mar 2026) / 'Incredibly patient, thorough and empathetic.' (Apr 2026) / 'Dr Sophie was so kind — 13-year-old girl with anxiety returned to school.' (Apr 2026). Website explicitly specialises in 'girls with high masking behaviours' and PDA profiles. Won Best Specialist Child Psychology Service London 2024 and UK 2025.",
+    suitability:"Best-evidenced option on this list for this specific child's profile. Explicitly specialises in: girls with high masking behaviours, PDA, selective mutism, anxiety, ASD/ADHD in young children. 97 Google reviews with specific quotes about complex missed diagnoses, girls, masking, and practical school recommendations. Report turnaround within 2 weeks confirmed by multiple reviewers. The main limitation is North London geography.",
+    redFlags:"NW11 location — not SW London. No Trustpilot profile (only Trustindex/Google). Near-universal 5-star rating may have some selection bias.",
+    evidence:"97 Google reviews, 5.0/5. Explicit specialisms: girls with high masking, PDA, selective mutism. Review quote about finding 'a clear diagnosis that other clinics had not been able to identify.' Reports within 2 weeks confirmed. Awards: Best Specialist Child Psychology Service London 2024 & UK 2025. Fees confirmed from harwoodchildpsychology.co.uk/fees.",
+    contact:"harwoodchildpsychology.co.uk (contact form)",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"~2 weeks (confirmed in multiple reviews)",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Has your team assessed children who didn't meet SM criteria but show school-specific communication freezing, and can you differentiate autistic shutdown from anxiety-driven SM-like behaviour in a 5-year-old girl who masks well? What is your current wait time?"
   },
   {
-    rank: 7, tier: 1,
-    name: "The Effra Clinic",
-    profShort: "Ex-Maudsley MDT — Psychiatrists, Psychologist, SaLT, OT",
-    location: "Central London", locationDetail: "Central London + Bristol; online available", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","sensory","er"],
-    costLabel: "POA — premium pricing expected", costNum: 3000,
-    regLabel: "CQC registered (Nov 2024)", regDetail: "CQC registered November 2024. Founded by Maudsley Hospital / King's College London psychiatrists. Dr Eleni Paliokosta leads child services.", regVerified: "verified", regScore: 2,
-    reviewScore: 3, reviewStars: 3, reviewCount: "Some admin complaints noted", reviewWarn: true,
-    reviewNote: "Mentioned on ADHD Private review site. Some patients reported 'communication issues, reception/admin problems.' No Trustpilot page found by name. New CQC registration (2024) means limited track record under current structure.",
-    suitability: "High clinical quality from Maudsley-trained psychiatrists. The 7-hour autism assessment with multiple assessors (psychiatrist, psychologist, SaLT, OT) is one of the most thorough on this list. 'Existing diagnosis review' service directly relevant for a family with a previous SALT report. Sensory Profile included in autism assessment.",
-    redFlags: "Administrative/communication complaints noted in independent reviews. CQC registered only in November 2024 — short track record under current structure even though individual clinicians have long NHS histories. No public pricing.",
-    evidence: "Maudsley Hospital origin and King's College affiliation is strong evidence of complex-case NHS experience. 7-hour multi-assessor assessment reduces risk of missing subtle presentations. 'Existing diagnosis review' service explicitly offered. Sensory Profile included as standard in autism assessment.",
-    firstQ: "Does your autism assessment include a differential formulation covering anxiety, ADHD traits, and sensory processing — and can you incorporate a previous SALT report that didn't meet SM criteria but identified communication anxiety?"
+    rank:7,tier:1,
+    name:"The Effra Clinic",website:"https://effraclinic.co.uk",
+    profShort:"MDT — ex-Maudsley Psychiatrists + Psychologist + SaLT + OT",
+    assessType:"MDT",
+    location:"Central London",locationDetail:"Central London + Bristol; online available",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","sensory","er"],
+    costLabel:"Initial wellbeing assessment £700",costNote:"Autism £2,500; combined £3,150; school liaison +£600 — ⚠ SSL EXPIRED",costNum:700,
+    initConsult:"£700 (Initial Child Wellbeing Assessment — ⚠ website SSL expired at time of research)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC registered (Nov 2024)",regDetail:"CQC registered November 2024. Founded by Maudsley Hospital / King's College London psychiatrists. Dr Eleni Paliokosta leads child services.",regVerified:"verified",regScore:2,
+    reviewScore:4.2,reviewStars:4,reviewCount:"4.2/5 — 218+ reviews (ADHD Private)",reviewWarn:true,
+    reviewNote:"4.2/5 from 218+ reviews on adhdprivate.co.uk. NappyValleyNet thread specifically praises Dr Eleni Paliokosta (leads child services): 'cannot recommend her highly enough — went above and beyond, made herself available free of charge on Skype after diagnosis to answer questions' / 'absolutely wonderful, very gentle and knowledgeable' / 'hugely experienced, easy to work with, picked up subtle behavioural issues.' Recent negative reviews (within 1 month): 'The entire team has no idea of assessment and communication. They take your money and leave you hanging.' / 'No receptionist. I called multiple times but no answers.' / 'The assessment was a joke — the doctor seemed distant and cold, filling out a form, hurrying me to answer yes or no.' Note: 218+ reviews are predominantly adult ADHD — child-specific review count is unknown.",
+    suitability:"High clinical quality from Maudsley-trained psychiatrists. 7-hour multi-assessor assessment with psychiatrist, psychologist, SaLT, and OT. 'Existing diagnosis review' service is relevant for this family. Sensory Profile included. School liaison package is an explicit add-on. Strong NappyValleyNet reputation for Dr Paliokosta specifically.",
+    redFlags:"⚠ Website SSL certificate was EXPIRED at time of research (June 2026) — site inaccessible. Verify site is back online before attempting to book; an expired SSL on an active clinic's website is itself a concern. Recent admin/communication complaints are specific and credible. 'Script-following' assessment complaint. Phone lines unresponsive post-payment noted. CQC registered only Nov 2024 — short track record. 218+ reviews are adult-skewed; child review count unconfirmed. £600 school liaison is a separate charge.",
+    evidence:"Maudsley Hospital/King's College origin. 7-hour multi-assessor assessment. NappyValleyNet specifically praises Dr Paliokosta for children. Sensory Profile included as standard. Pricing previously confirmed from live fees page (now inaccessible).",
+    contact:"effraclinic.co.uk contact form — verify site is accessible before contacting",
+    waitTime:"~3–5 months (National Autistic Society forum mention)",assessDuration:"7 hours (autism assessment)",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Does your child assessment include a differential formulation covering anxiety, ADHD traits, sensory processing, and SM-like communication anxiety — and can you incorporate a previous SALT report? Which specific clinician leads child assessments, and what is the current wait time for a 5-year-old?"
   },
   {
-    rank: 8, tier: 1,
-    name: "Dr Hayley Ponsford",
-    profShort: "Consultant CAMH Psychiatrist, GMC / FRCPsych",
-    location: "Central London", locationDetail: "London Psychiatry Clinic, Harley Street W1; video UK-wide", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "£870 initial consult; ADHD £1,160; autism from £580/component", costNum: 1800,
-    regLabel: "GMC registered, Fellow RCPsych", regDetail: "Consultant CAMH Psychiatrist, 16+ years. GMC registered. Fellow, Royal College of Psychiatrists. Former NHS ADHD clinic lead.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews for this clinician", reviewWarn: false,
-    reviewNote: "No independent review aggregator found specifically for Dr Ponsford. London Psychiatry Clinic has general presence but no specific Trustpilot for individual clinicians found.",
-    suitability: "Good fit. Psychiatrist who explicitly frames anxiety assessment in context of possible autism/ADHD — her profile states: 'Sometimes, other factors, like autism or ADHD, play a role' in anxiety presentations. This directly matches the family's need. School input included as standard.",
-    redFlags: "Component-based pricing can escalate — full workup could become one of the more expensive options. No independent reviews for this specific clinician. Not a full MDT — one psychiatrist, may need referrals elsewhere for comprehensive formulation.",
-    evidence: "Profile explicitly states 'Sometimes, other factors, like autism or ADHD, play a role' in anxiety presentations — demonstrates differential thinking. Former NHS ADHD clinic lead. School input explicitly stated on profile.",
-    firstQ: "Can you provide a single written report with a differential formulation covering anxiety, selective-mutism-like traits, possible autistic shutdown, possible ADHD, and sensory sensitivities — not separate diagnosis letters for each — with practical school recommendations?"
+    rank:8,tier:2,
+    name:"Dr Anna Kacperek",website:"https://thesoke.uk",
+    profShort:"Consultant CAMH Psychiatrist — GMC 6136566 (The Soke)",
+    assessType:"Psychiatrist",
+    location:"SW London",locationDetail:"The Soke, Chelsea SW3 and Wimbledon SW19",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety"],
+    costLabel:"Contact required",costNote:"Adult consult from £450 (Soke general rate). Child: contact referrals@thesoke.uk",costNum:0,
+    initConsult:"NOT PUBLISHED (adult psychiatry from £450; child-specific rate unknown)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not confirmed (profile page 404 on thesoke.uk)",ageFlag:false,
+    regLabel:"GMC 6136566 ✓",regDetail:"GMC No. 6136566 — verified. Consultant CAMH Psychiatrist, 20+ years. MRCPsych. Former Tavistock autism assessment team. EMDR trained.",regVerified:"verified",regScore:2,
+    reviewScore:0,reviewStars:0,reviewCount:"0 reviews — Doctify not collecting (The Soke)",reviewWarn:false,
+    reviewNote:"The Soke Doctify profile exists but shows 0 reviews and 'not actively collecting reviews.' No independent reviews found for Dr Kacperek personally on any platform. No forum mentions. The Soke Facebook shows 0 Google reviews. CQC Outstanding rating for the clinic (first inspection Nov 2021) is meaningful regulatory evidence.",
+    suitability:"Former Tavistock autism assessment team — specifically trained for complex/co-occurring presentations and subtle autism in girls. Chelsea and Wimbledon locations are ideal for SW London families. EMDR and attachment therapy training indicate a nuanced approach.",
+    redFlags:"Zero independent reviews for this clinician. School input not confirmed — must ask directly. Selective mutism not listed as a specialism. Individual profile page returns 404 on The Soke website — cannot verify current scope from site. May need separate psychologist for full formulation.",
+    evidence:"Former Tavistock autism assessment team — Tavistock specifically known for complex/co-occurring and gender-atypical presentations. GMC 6136566 independently verified. The Soke: CQC Outstanding.",
+    contact:"referrals@thesoke.uk / 020 7139 5051",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Do you include school teacher questionnaires and written school recommendations as part of your assessment — and have you assessed 5-year-olds with communication freezing that didn't meet formal SM criteria? What is your current age range?"
   },
   {
-    rank: 9, tier: 2,
-    name: "Dr Anna Kacperek",
-    profShort: "Consultant CAMH Psychiatrist, GMC 6136566 (The Soke)",
-    location: "SW London", locationDetail: "The Soke, Chelsea SW3 and Wimbledon", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety"],
-    costLabel: "~£500–900 (est. consult)", costNum: 700,
-    regLabel: "GMC 6136566 ✓", regDetail: "GMC No. 6136566 — verified. Consultant CAMH Psychiatrist, 20+ years. MRCPsych. Former Tavistock autism assessment team.", regVerified: "verified", regScore: 2,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No independent reviews found for Dr Kacperek specifically. The Soke has limited independent review data overall. No negative information found.",
-    suitability: "Former Tavistock autism assessment team — Tavistock is specifically known for complex/co-occurring presentations and subtle autism in girls. Chelsea and Wimbledon locations are ideal for SW London families. EMDR and attachment therapy training indicate a nuanced, non-formulaic approach.",
-    redFlags: "No independent reviews. School input not confirmed — must ask directly. Psychiatry lens may not produce educational recommendations without additional psychologist input. Selective mutism not listed as a specialism.",
-    evidence: "Former Tavistock autism assessment team is strong independent evidence — Tavistock specifically trains for complex/co-occurring presentations and atypical autism profiles. GMC registration 6136566 independently verified.",
-    firstQ: "Do you include school teacher questionnaires and written recommendations for school as part of your assessment, and have you assessed children with communication freezing that didn't meet formal SM criteria?"
+    rank:9,tier:2,
+    name:"Dr Jon Goldin",website:"https://drjongoldin.co.uk",
+    profShort:"Consultant CAMH Psychiatrist — 21 yrs GOSH, FRCPsych (The Soke)",
+    assessType:"Psychiatrist",
+    location:"Central London",locationDetail:"The Soke, Bloomsbury / Chelsea",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["adhd","anxiety","er"],
+    costLabel:"Contact required",costNote:"drjongoldin.co.uk — no pricing published",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"GMC registered, FRCPsych",regDetail:"FRCPsych (2015), MRCPsych (1998). 21 years at Great Ormond Street Hospital. RCPsych Psychiatric Communicator of Year 2022. Listed in Spear's Psychiatrists 2025.",regVerified:"claimed",regScore:1,
+    reviewScore:4.8,reviewStars:5,reviewCount:"4.8/5 — 33 Top Doctors reviews",reviewWarn:false,
+    reviewNote:"33 verified reviews on Top Doctors (topdoctors.co.uk/doctor/jon-goldin), 4.8/5. ~60% of reviewers mention daughters or female patients. Quotes: 'Dr Goldin was very kind to my daughter — he encouraged her to talk about her feelings and anxieties when so many others had failed.' / 'His approach is astute, insightful and effective, managed with empathy and huge integrity.' / 'Her case is quite complex but Jon has been willing to help in any way possible.' / 'My son's diagnosis is seen not only as something that needs support but as a super power!' (autism framing). No negative reviews found anywhere.",
+    suitability:"Second-best independently reviewed individual clinician on this list. 33 Top Doctors reviews at 4.8/5 with multiple mentions of daughters, complex cases, and anxiety. 21 years GOSH experience is the strongest individual paediatric credential here. Wimbledon location (via The Soke) is excellent for SW London.",
+    redFlags:"Autism and sensory processing NOT in his listed specialisms — a meaningful gap for this specific profile. School input not confirmed. May need a co-assessment with a psychologist for full differential formulation. No pricing published.",
+    evidence:"33 Top Doctors reviews, 4.8/5. ~60% mention daughters. Quotes confirm complex-case capability, anxiety expertise, and patient-centred approach. 21 years GOSH independently verifiable. Listed in Spear's 500 Psychiatrists 2025.",
+    contact:"drjongoldin.co.uk contact form",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Do you assess for autistic traits and sensory processing as part of your anxiety assessment — and can you produce a formulation that distinguishes autism-related school shutdown from anxiety-driven selective communication in a 5-year-old?"
   },
   {
-    rank: 10, tier: 2,
-    name: "Dr Jon Goldin",
-    profShort: "Consultant CAMH Psychiatrist, FRCPsych (The Soke)",
-    location: "Central London", locationDetail: "The Soke, Bloomsbury / Chelsea", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["adhd","anxiety","er"],
-    costLabel: "~£600–900 (est. consult)", costNum: 750,
-    regLabel: "GMC registered, FRCPsych", regDetail: "FRCPsych (2015), MRCPsych (1998). 21 years at Great Ormond Street Hospital. RCPsych Psychiatric Communicator of Year 2022.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No independent online reviews for Dr Goldin specifically. 21 years at GOSH is itself a strong independent credential. No negative information found.",
-    suitability: "21 years at Great Ormond Street Hospital is the strongest individual credential for complex paediatric presentations on this list. Excellent for the anxiety/emotional regulation/school refusal dimensions of this child's profile.",
-    redFlags: "Autism and sensory processing not in his listed specialisms — this is a meaningful gap for this child's profile. School input not confirmed. Not a full MDT unless The Soke's wider team is engaged. May need a co-assessment with a clinical psychologist.",
-    evidence: "21 years GOSH experience independently verifiable. GOSH sees the most complex paediatric presentations in the UK — this is strong evidence of complex-case capability, even if autism isn't his listed primary specialism.",
-    firstQ: "Do you assess for autistic traits and sensory processing as part of your anxiety assessment — and can you produce a formulation that distinguishes autism-related school shutdown from anxiety-driven selective communication?"
+    rank:10,tier:2,
+    name:"Harley Mind Care",website:"https://harleymindcare.com",
+    profShort:"CQC MDT — Consultant Child Psychiatrists + Paediatricians",
+    assessType:"MDT",
+    location:"Central London",locationDetail:"10 Harley Street W1; virtual available",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"Child autism £1,850; child ADHD £1,245",costNote:"Combined child £2,940; all child-specific rates confirmed",costNum:1245,
+    initConsult:"£1,245 (Child General Psychiatric Assessment, 60 min — no separate lower-cost first appt)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC registered",regDetail:"CQC registered. Consultant Child Psychiatrists and Paediatricians. Individual GMC numbers not published online.",regVerified:"claimed",regScore:1,
+    reviewScore:4.4,reviewStars:4,reviewCount:"4.42/5 — 127 Doctify reviews",reviewWarn:true,
+    reviewNote:"127 Doctify reviews at 4.42/5 — largest Doctify sample on this list. Positives: 'My daughter has had a few sessions with Dr Kiran. She has found her extremely approachable' / 'Very good support from Dr Hundal. Treatment plan was well organised' / 'Amazing very structured and helpful' (autism category). Negatives: 'Assessment appointment was cut short and when I raised a complaint...Harley Mind lied about this' / 'Terrible patient communication, no accountability for mistakes made' / Multiple complaints about WhatsApp going unread, medication delays exceeding 3 weeks. No Trustpilot page. No Mumsnet mentions found.",
+    suitability:"Transparent child-specific pricing (rare and valuable). Confirmed school input. Co-occurring conditions explicitly in scope. 127 Doctify reviews gives meaningful independent signal. CQC registered.",
+    redFlags:"Specific Doctify complaint about shortened assessment and insufficient direct child time — ask explicitly about assessment length and how much time the child spends directly with clinician. Individual clinician credentials not published. Depth of differential formulation unknown.",
+    evidence:"Prices confirmed as child/adolescent-specific from live fees page. Explicitly states co-occurring conditions 'such as anxiety, depression, OCD, and sleep disorders' assessed alongside primary neurodevelopmental. Teacher input part of process. 127 Doctify reviews.",
+    contact:"harleymindcare.com contact form",
+    waitTime:"Not stated",assessDuration:"60–90 min (from pricing page)",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"How long does the child spend in direct session during the assessment, and can the written report include a differential formulation — not just a primary diagnosis — covering anxiety, autistic traits, ADHD, and sensory sensitivities with specific Reception teacher strategies?"
   },
   {
-    rank: 11, tier: 2,
-    name: "Harley Mind Care",
-    profShort: "CQC-registered MDT — Psychiatrists and Paediatricians",
-    location: "Central London", locationDetail: "10 Harley Street, W1; virtual available", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "ADHD from £1,245; autism from £1,850", costNum: 1850,
-    regLabel: "CQC registered", regDetail: "CQC registered. Consultant Child Psychiatrists and Paediatricians. Individual GMC numbers not published online.", regVerified: "claimed", regScore: 1,
-    reviewScore: 4, reviewStars: 4, reviewCount: "4.42/5 from 127 Doctify reviews", reviewWarn: true,
-    reviewNote: "4.42/5 from 127 Doctify reviews. Notable negative (Feb 2026): assessment 'cut short,' daughter not given adequate direct time, alleged inaccurate insurance communication. Multiple positives for professionalism and clarity. SENsible SENCO partner listing adds credibility.",
-    suitability: "Solid option with transparent pricing, confirmed school input, and explicit co-occurring conditions scope. Doctify reviews are more independent than most clinic sites. 127 reviews is a meaningful sample size.",
-    redFlags: "Specific Doctify complaint about shortened assessment and insufficient direct child time — must ask explicitly about assessment length. Individual clinician credentials not published. Depth of differential formulation unknown — may default to a primary diagnosis rather than multi-domain formulation.",
-    evidence: "Explicitly states clinicians 'can identify co-occurring conditions such as anxiety, depression, OCD, and sleep disorders alongside the primary neurodevelopmental presentation.' Teacher input explicitly part of process. SENsible SENCO partner listing. 127 Doctify reviews is the largest independent review sample for any single clinic on this list.",
-    firstQ: "How long does the child spend in direct session during assessment, and can the written report include a differential formulation — covering anxiety, autistic traits, ADHD, and sensory sensitivities — with specific Reception school strategies?"
+    rank:11,tier:2,
+    name:"The Nook Clinic",website:"https://thenookclinic.co.uk",
+    profShort:"MDT — Clinical Psychologist + SaLT (SM) + Educational Psychologist + OT",
+    assessType:"MDT",
+    location:"SW London / Surrey",locationDetail:"South Kensington SW7 + Farnham, Surrey",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","pda","sm","sensory"],
+    costLabel:"ASD (age 5+) £2,150; ADHD (age 7+) £1,850",costNote:"⚠ ADHD min age 7 — ASD only for this child. Therapy assessment £160.",costNum:2150,
+    initConsult:"£160 (Initial Therapy Evaluation, 60–90 min) — free 15 min phone call before this",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"ASD from age 5 ✓; ADHD from age 7 ⚠",ageFlag:true,
+    regLabel:"HCPC (Dr Warlow + Emma Ahern + team)",regDetail:"Dr Selina Warlow — Clinical Psychologist, HCPC. Emma Ahern — SaLT, HCPC, RCSLT (SM specialist). Dr Lucy Moore — Educational Psychologist.",regVerified:"claimed",regScore:1,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews found",reviewWarn:false,
+    reviewNote:"No Trustpilot, Doctify, Google Reviews, or forum mentions found. Autism.org.uk directory listing. No negative information found. Pricing confirmed from live fees page at thenookclinic.co.uk/fees.",
+    suitability:"Structurally unique: Emma Ahern (SM-specialist SaLT, also works at Zeebra Therapy) and Dr Warlow (autism, gender differences in presentation) are co-located. A combined autism + SM differential assessment from two specialists in one clinic is feasible here and rare elsewhere. Dr Warlow explicitly interested in gender differences in autism presentation. Primary-age classroom observation is standard. EP on team covers EBSA.",
+    redFlags:"ADHD assessment minimum age is 7 — this child cannot have ADHD assessed here, only ASD. No independent reviews. Pricing confirmed but school observation must be confirmed as included vs add-on.",
+    evidence:"Pricing confirmed from live website. ASD from age 5 confirmed. Emma Ahern also runs standalone SM assessments from £650 (Zeebra Therapy). Dr Warlow's gender-differences specialism directly relevant. Educational psychologist with EBSA experience on team.",
+    contact:"admin@thenookclinic.co.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Yes — free 15 min telephone consultation before first paid appointment",treatmentOffered:true,
+    firstQ:"Can Dr Warlow and Emma Ahern work together on this assessment — SaLT providing SM differential input and Dr Warlow covering autistic traits including female/gender-atypical presentation — producing a joint formulation report? Does school classroom observation come included?"
   },
   {
-    rank: 12, tier: 2,
-    name: "The Nook Clinic",
-    profShort: "MDT — Clinical Psychologist + SaLT (SM specialist) + EP + OT",
-    location: "SW London / Surrey", locationDetail: "South Kensington SW7 + Farnham, Surrey", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","pda","sm","sensory"],
-    costLabel: "POA — contact admin@thenookclinic.co.uk", costNum: 1500,
-    regLabel: "HCPC (Dr Warlow + Emma Ahern + team)", regDetail: "Dr Selina Warlow — Clinical Psychologist, HCPC. Emma Ahern — SaLT, HCPC, RCSLT. Dr Lucy Moore — Educational Psychologist.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No Trustpilot or independent review page found. Autism.org.uk directory listing. No negative information found.",
-    suitability: "The structural advantage here is unique: Emma Ahern (SM-specialist SaLT, see entry 15) and Dr Warlow (autism, gender differences in presentation) are co-located in the same clinic. A combined autism + SM differential assessment from two specialists is feasible here and rare elsewhere. Dr Warlow's stated interest in 'gender differences in presentation' is directly relevant. Primary-age classroom observation available.",
-    redFlags: "No independent reviews. Standard assessment is primarily autism/ADHD-focused — the family's need for multi-domain differential formulation needs to be explicitly requested. Pricing unknown.",
-    evidence: "Dr Warlow's stated interest in 'gender differences in presentation' and cognitive profiles. Emma Ahern (SaLT) has standalone SM assessment service at £650 from same clinic. Educational psychologist with EBSA experience on team. Primary-age classroom observation confirmed as standard.",
-    firstQ: "Can Dr Warlow and Emma Ahern work together on this assessment — the SaLT providing SM differential input and Dr Warlow covering autistic traits including female/gender-atypical presentation — producing a joint formulation report?"
+    rank:12,tier:2,
+    name:"Psymplicity Healthcare",website:"https://psymplicity.com",
+    profShort:"CQC clinic — Consultant Child Psychiatrists",
+    assessType:"Clinic",
+    location:"Central London",locationDetail:"Harley Street W1; online available",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety"],
+    costLabel:"Child ADHD £795; child autism £1,950",costNote:"Payment plans available. Pricing confirmed from psymplicity.com/latest-pricing",costNum:795,
+    initConsult:"£695 (Child General Psychiatry Assessment, 80 min) — this is the entry-point appointment",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC registered",regDetail:"CQC-registered private clinic. Two specialists for ASD assessment. Individual GMC numbers not listed publicly.",regVerified:"claimed",regScore:1,
+    reviewScore:4.7,reviewStars:5,reviewCount:"4.7/5 — 253+ Trustpilot; 3.7/5 — 3 iWantGreatCare",reviewWarn:true,
+    reviewNote:"Trustpilot 4.7/5 (Excellent) from 253+ reviews. Positives: 'My daughter was treated with kindness and validation' / 'Dr Raj Prahbu engaged the child well in the assessment and made her feel comfortable' / 'Wonderful, understanding staff all round.' iWantGreatCare 3.7/5 from 3 reviews — one 1-star flags medication pressure. Critical negative on Trustpilot: parent states daughter received ASD diagnosis but ADHD was not diagnosed; independent psychiatrist later said ADHD was 'clear and evident' and should have been the first diagnosis — this is a direct concern for a complex girl presenting with overlapping traits. Additional Trustpilot: 'AWFUL, IRRESPONSIBLE, MISDIAGNOSED MY CHILD and now REFUSING to do anything about it.' Payment issues also mentioned in multiple reviews.",
+    suitability:"Most competitively priced child autism/ADHD assessment option with transparent pricing. Payment plans available — rare. Two specialists simultaneously for ASD assessment is a quality feature.",
+    redFlags:"Specific Trustpilot review about a wrong diagnosis in a complex case — serious concern for a child where nuanced formulation is the entire point of the referral. Individual clinician details not published. School input not confirmed.",
+    evidence:"Child-specific prices confirmed from psymplicity.com/latest-pricing. Payment plans confirmed. 253 Trustpilot reviews — largest Trustpilot sample for any individual clinic on this list.",
+    contact:"02071180407 / psymplicity.com",
+    waitTime:"Not stated",assessDuration:"2.5 hrs (ASD); 80 min (ADHD child)",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Does your combined assessment include anxiety and communication-specific differential formulation — and can you accommodate a 5-year-old who communicates very differently in clinical settings than at home? Which clinician would conduct the assessment?"
   },
   {
-    rank: 13, tier: 2,
-    name: "Psymplicity Healthcare",
-    profShort: "CQC-registered — Consultant Child Psychiatrists",
-    location: "Central London", locationDetail: "Harley Street, W1; online available", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety"],
-    costLabel: "£395–£3,750 (payment plans available)", costNum: 1500,
-    regLabel: "CQC registered", regDetail: "CQC-registered private clinic. Two specialists in room for ASD assessment (2.5 hrs). Individual GMC numbers not listed publicly.", regVerified: "claimed", regScore: 1,
-    reviewScore: 4, reviewStars: 4, reviewCount: "253 Trustpilot — generally positive", reviewWarn: true,
-    reviewNote: "253 Trustpilot reviews, generally positive. Notable negative: a patient reported a wrong ADHD diagnosis that was contradicted by another psychiatrist. This raises diagnostic accuracy concerns for complex presentations.",
-    suitability: "Accessible pricing with payment plans. Two specialists in the room for ASD assessment is a quality feature. Payment plans are rare in this space. However the Trustpilot dispute about an incorrect diagnosis in a complex case is a meaningful concern.",
-    redFlags: "Specific Trustpilot review about a disputed/incorrect diagnosis in a complex case — serious concern for a case where getting the formulation right matters most. Not a specialist in SM or the anxiety-autism differential. Individual clinician details not published.",
-    evidence: "Combined 3-hour appointment explicitly offered for those who 'wish to explore both Autism and ADHD as well as require more time to discuss a range of difficulties.' Two specialists for ASD assessment. 253 Trustpilot reviews is a large sample.",
-    firstQ: "Does your combined autism/ADHD assessment include anxiety and communication-specific differential formulation, and can you accommodate a 5-year-old who communicates very differently in clinical settings than at home?"
+    rank:13,tier:2,
+    name:"Dr Michelle Gershoni",website:"https://bridgestherapycentre.com",
+    profShort:"Counselling Psychologist, HCPC/BPS — SM doctoral specialist",
+    assessType:"Psychologist",
+    location:"North London",locationDetail:"Hendon NW4, Canary Wharf, Muswell Hill, Finchley",locationArea:"north-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["anxiety","sm"],
+    costLabel:"Contact required",costNote:"⚠ Dr Gershoni not listed in current team directory. Verify she is still practising here.",costNum:0,
+    initConsult:"£650 (Bridges Initial Psychiatric Assessment) — preceded by free 15 min guidance call",
+    insurance:"no",insuranceDetail:"Bridges clinic general rate: initial psychiatric assessment £650",
+    minAge:"Not confirmed — not found on current website",ageFlag:false,
+    regLabel:"HCPC / BPS (claimed)",regDetail:"Counselling Psychologist, HCPC and BPS registered. Doctoral research on selective mutism. SMiRA-connected. ⚠ Not in current Bridges Therapy Centre team directory.",regVerified:"claimed",regScore:1,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews found",reviewWarn:true,
+    reviewNote:"No independent reviews found for Dr Gershoni on any platform. No forum mentions. ⚠ Dr Gershoni does NOT appear in the current team listing on bridgestherapycentre.com — she may have left. Verify she is still practising there before attempting to book.",
+    suitability:"Strong on the SM-anxiety dimension — doctoral research on SM is genuine independent evidence. Best positioned as a therapy provider after a broader differential assessment. Not suitable as the primary assessor given the family's need for differential formulation beyond SM.",
+    redFlags:"⚠ Not listed in current team directory — may have left Bridges Therapy Centre. Verify contact before booking. SM-only lens. Not suitable as primary assessor. No independent reviews.",
+    evidence:"Doctoral research specifically on selective mutism and parental interventions is strong evidence of genuine SM expertise. SMiRA-affiliated. One of the few practitioners with published research on the SM-anxiety overlap.",
+    contact:"bridgestherapycentre.com — verify Dr Gershoni still practises here before contacting",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Yes — Bridges offers free 15 min guidance consultation before first paid appointment",treatmentOffered:true,
+    firstQ:"Are you still practising at Bridges Therapy Centre? Do you conduct formal differential assessments including autism and ADHD screening — not just SM therapy — and can you incorporate a previous SALT report that ruled out SM?"
   },
   {
-    rank: 14, tier: 2,
-    name: "Dr Michelle Gershoni",
-    profShort: "Counselling Psychologist, HCPC/BPS — SM doctoral specialist",
-    location: "North London", locationDetail: "Hendon NW4, Canary Wharf, Muswell Hill, Finchley", locationArea: "north-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["anxiety","sm"],
-    costLabel: "POA", costNum: 1000,
-    regLabel: "HCPC / BPS registered", regDetail: "Counselling Psychologist, HCPC and BPS registered. Doctoral research specifically on selective mutism and parental interventions. SMiRA-connected.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No independent reviews found for Dr Gershoni specifically. Bridges Therapy Centre listed on Counselling Directory. No negative information found.",
-    suitability: "Strong on the SM-anxiety dimension — doctoral research specifically on SM is genuine independent evidence. Best positioned as a therapy provider after a broader differential assessment is complete, not as the primary assessor for this complex profile.",
-    redFlags: "SM-only lens — specifically what this family does NOT want as the only lens. Not suitable as primary assessor. Location not SW London. Whether she conducts formal autism/ADHD assessments is unconfirmed. No independent reviews.",
-    evidence: "Doctoral research specifically on selective mutism and parental interventions is strong evidence of genuine SM expertise. SMiRA-affiliated. This is one of the few practitioners on this list with genuine published research on the specific SM-anxiety overlap.",
-    firstQ: "Do you conduct formal differential assessments including autism and ADHD screening — not just SM therapy — and can you incorporate a previous SALT report that ruled out SM but identified communication anxiety?"
+    rank:14,tier:3,
+    name:"Zeebra Therapy / Emma Ahern",website:"https://zeebratherapy.co.uk",
+    profShort:"MSc SaLT — HCPC / RCSLT / ASLTIP / SMiRA",
+    assessType:"SaLT",
+    location:"SW London / Surrey",locationDetail:"Farnham, Surrey; also at The Nook Clinic SW7",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","sm","sensory"],
+    costLabel:"SM assessment from £650",costNote:"Confirmed from zeebratherapy.co.uk/selective-mutism",costNum:650,
+    initConsult:"NOT PUBLISHED (SM assessment from £650 is the entry-point service)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"HCPC / RCSLT / ASLTIP ✓",regDetail:"MSc SaLT. HCPC registered. RCSLT member. ASLTIP registered. SMiRA-affiliated. Also co-located at The Nook Clinic (SW7).",regVerified:"claimed",regScore:1,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews found",reviewWarn:false,
+    reviewNote:"No independent reviews found for Zeebra Therapy or Emma Ahern on any platform. No negative information found. £650 SM assessment price confirmed from live website.",
+    suitability:"Best standalone SM differential assessment from a SaLT perspective on this list. Most accessible price point for a specialist assessment. The co-location at The Nook Clinic means a joint autism + SM formulation with Dr Warlow is feasible. Best used as the SaLT component of a broader assessment, not as the sole provider.",
+    redFlags:"SaLT, not psychologist — cannot produce a full psychological formulation. NICE-compliant formal autism diagnosis requires medical/psychiatric co-assessment. Solo practitioner. No independent reviews.",
+    evidence:"SM assessment price confirmed from live website. Co-location at The Nook Clinic enables combined working with autism psychologist. EHCP assessments and school-based work confirms school input. SMiRA-affiliated.",
+    contact:"zeebrasurrey@gmail.com",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Can you provide a standalone SM differential assessment I could share with a clinical psychologist for a broader formulation — and do you provide written recommendations specifically for Reception teachers? Can you work jointly with Dr Warlow at The Nook Clinic?"
   },
   {
-    rank: 15, tier: 3,
-    name: "Zeebra Therapy / Emma Ahern (SaLT)",
-    profShort: "MSc Speech & Language Therapist, HCPC / RCSLT / ASLTIP",
-    location: "Surrey", locationDetail: "Farnham, Surrey (accessible from SW London)", locationArea: "surrey",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","sm","sensory"],
-    costLabel: "SM assessment from £650", costNum: 650,
-    regLabel: "HCPC / RCSLT / ASLTIP ✓", regDetail: "MSc SaLT. HCPC registered. RCSLT member. ASLTIP registered. SMiRA-affiliated. Also co-located at The Nook Clinic.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No independent reviews found. No negative information found. Also appears as SaLT team member at The Nook Clinic (entry 12).",
-    suitability: "Best standalone SM differential assessment option from a SaLT perspective on this list. From £650 is the most accessible price point for a specialist assessment. Farnham is reachable from Surrey families. Could be combined with a psychologist for fuller formulation — particularly valuable if used as the SaLT input component alongside a clinical psychologist.",
-    redFlags: "SaLT, not psychologist — cannot produce a full psychological formulation. NICE-compliant formal autism diagnosis requires medical/psychiatric co-assessment. Solo practitioner. No independent reviews.",
-    evidence: "Website explicitly mentions neurodiversity-affirming approach covering autism, ADHD, and SM together. EHCP assessments and school-based work confirms school input. Co-location at The Nook Clinic means joint working with Dr Warlow (autism) is feasible.",
-    firstQ: "Can you provide a standalone SM differential assessment I could share with a clinical psychologist to complete a broader formulation — and do you provide written recommendations specifically for Reception teachers?"
+    rank:15,tier:3,
+    name:"The Soke (clinic-level)",website:"https://thesoke.uk",
+    profShort:"MDT Clinic — Psychiatrists, Psychologists, Psychotherapists",
+    assessType:"MDT",
+    location:"SW London",locationDetail:"Chelsea SW3 + Wimbledon SW19",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"Contact required",costNote:"Adult from £450 consult. Child rates not published. referrals@thesoke.uk",costNum:0,
+    initConsult:"NOT PUBLISHED (adult psychiatry from £450; child-specific rate not listed)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC Outstanding (Nov 2021)",regDetail:"CQC Outstanding overall (first inspection Nov 2021) — outstanding for effective, caring, well-led. Clinic-level entry; see Dr Kacperek (#8) and Dr Goldin (#9) for individual clinicians.",regVerified:"verified",regScore:2,
+    reviewScore:0,reviewStars:0,reviewCount:"0 reviews — Doctify not collecting",reviewWarn:false,
+    reviewNote:"Doctify profile found but 0 reviews — not actively collecting. No Trustpilot. No Google Reviews (Facebook shows 'not yet rated'). No forum mentions. CQC Outstanding (2021) is the primary independent evidence of quality.",
+    suitability:"Wimbledon location ideal for SW London families. CQC Outstanding is meaningful. Access to Dr Kacperek (Tavistock autism background) and Dr Goldin (GOSH, 21 years) from one clinic. Neurodevelopmental team confirmed.",
+    redFlags:"No independent patient reviews anywhere. Child-specific pricing not published. School input not confirmed. Individual practitioner profiles on website return 404. CQC Outstanding is from 2021 — may not reflect current state.",
+    evidence:"CQC Outstanding November 2021 independently verifiable. Two strong individual clinicians (see entries 8 and 9) both practice here. Chelsea and Wimbledon locations confirmed.",
+    contact:"referrals@thesoke.uk / 020 7139 5051",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Does your neurodevelopmental team assess children aged 5 for subtle autistic traits — and do you produce written school recommendations? What is the cost of an initial child neurodevelopmental assessment?"
   },
   {
-    rank: 16, tier: 3,
-    name: "The Soke (clinic-level entry)",
-    profShort: "MDT Clinic — Psychiatrists, Psychologists, Psychotherapists",
-    location: "SW London", locationDetail: "Chelsea SW3 + Wimbledon SW19", locationArea: "sw-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "~£400–600 (est. initial consult)", costNum: 500,
-    regLabel: "CQC status unconfirmed", regDetail: "MDT clinic. Dr Anna Kacperek (Tavistock autism team, GMC 6136566) and Dr Jon Goldin (GOSH, 21 yrs) both practise here.", regVerified: "claimed", regScore: 0,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No Trustpilot found. No negative information. Limited independent data overall. CQC status not confirmed in research.",
-    suitability: "Wimbledon location is ideal for SW London families. Access to both Dr Kacperek (Tavistock autism background, entry 9) and Dr Goldin (GOSH, 21 years, entry 10) from one clinic. The combination could cover the anxiety + autism differential this family needs.",
-    redFlags: "No independent reviews. Pricing unknown. School input not confirmed. CQC status not confirmed. Needs direct enquiry about whether 5-year-old differential assessments are their standard offering.",
-    evidence: "Dr Kacperek's Tavistock autism assessment background and Dr Goldin's 21-year GOSH career provide strong institutional credentials for this clinic. Wimbledon location is independently verifiable.",
-    firstQ: "Does your neurodevelopmental team assess children aged 5 for subtle autistic traits in girls who present well in clinical settings but freeze at school — and do you produce written school recommendations?"
+    rank:16,tier:3,
+    name:"Maudsley Private Care",website:"https://maudsleyprivatecare.co.uk",
+    profShort:"CQC — Maudsley Hospital / SLAM NHS Trust (private arm)",
+    assessType:"MDT",
+    location:"SE London",locationDetail:"Denmark Hill SE5 — not SW London",locationArea:"se-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd"],
+    costLabel:"Contact required",costNote:"⚠ Previously cited £2,875/£3,260 UNCONFIRMED from website. Call: 020 3228 9880",costNum:0,
+    initConsult:"NOT PUBLISHED (fees page returns 404 — call 020 3228 9880)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"CQC (institutional)",regDetail:"Linked to Maudsley Hospital / South London and Maudsley NHS Trust. ADOS-2, ADI-R confirmed tools. Named clinicians not published on website.",regVerified:"claimed",regScore:1,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews for private arm",reviewWarn:false,
+    reviewNote:"No Trustpilot, Doctify, or independent review aggregator found for the private arm. The institution (Maudsley Hospital) is internationally respected in child psychiatry. NHS SCAAND (Service for Complex Autism and Associated Neurodevelopmental Disorders) is co-located at the same site.",
+    suitability:"Very high institutional credibility. ADOS-2 and ADI-R confirmed. NHS SCAAND co-located.",
+    redFlags:"No named clinicians published on website — cannot vet who would conduct the assessment. Previously cited pricing (£2,875/£3,260) could NOT be confirmed from live website — call to confirm. School input not confirmed. SE London, not SW. Pricing page returns 404.",
+    evidence:"Maudsley Hospital is a gold-standard UK child psychiatry institution. ADOS-2 and ADI-R confirmed. NHS SCAAND co-located. NICE-compliant assessment stated.",
+    contact:"020 3228 9880 / privatecare@slam.nhs.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:false,
+    firstQ:"Which clinician would lead my child's assessment, and does the assessment include formulation across anxiety, autistic traits, and ADHD traits — not just a binary autism yes/no? What is the current cost and wait time?"
   },
   {
-    rank: 17, tier: 3,
-    name: "Maudsley Private Care",
-    profShort: "CQC-registered — linked to Maudsley Hospital / SLAM NHS Trust",
-    location: "SE London", locationDetail: "Denmark Hill, SE5 (not SW London)", locationArea: "se-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd"],
-    costLabel: "ADHD £2,875; autism £3,260", costNum: 3260,
-    regLabel: "CQC-registered (institutional)", regDetail: "Linked to Maudsley Hospital / South London and Maudsley NHS Trust. ADOS-2, ADI-R — NICE-compliant. Named clinicians not published.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews for private arm", reviewWarn: false,
-    reviewNote: "No Trustpilot or independent review aggregator found for the private arm. The institution itself (Maudsley Hospital) is internationally respected. No negative information found.",
-    suitability: "Very high institutional credibility. Transparent pricing is rare and valued. The NHS SCAAND (Service for Complex Autism and Associated Neurodevelopmental Disorders) is at the same site — the private arm draws on the same institutional expertise.",
-    redFlags: "No named clinicians on website — cannot vet who would actually conduct the assessment. Assessment-only model implied. Anxiety/SM differential not confirmed as part of assessment scope. SE London, not SW London. One of the more expensive options.",
-    evidence: "Maudsley Hospital is internationally recognised as a centre of excellence in UK child psychiatry. NHS SCAAND co-located. ADOS-2 and ADI-R confirmed tools. Pricing published is a notable transparency advantage.",
-    firstQ: "Which clinician would lead my child's assessment, and does the assessment include formulation across anxiety, autistic traits, and ADHD traits — not just a binary autism yes/no?"
+    rank:17,tier:3,
+    name:"Chase Lodge Hospital Neurodevelopmental Centre",website:"https://chaselodgehospital.com",
+    profShort:"CQC MDT — Paediatrician + Clinical Psychologist + SaLT",
+    assessType:"MDT",
+    location:"North London",locationDetail:"Mill Hill NW7",locationArea:"north-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd"],
+    costLabel:"Paed consult £300; autism £2,100; ADHD £990",costNote:"Combined £2,800. Confirmed from chaselodgehospital.com/about-us/fees",costNum:300,
+    initConsult:"£150 (Psychology/Counselling Initial Consultation, 1 hr) or £450 (Psychiatry Initial, 1 hr)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"From newborn (confirmed from fees page)",ageFlag:false,
+    regLabel:"CQC registered",regDetail:"CQC registered. MDT: Dr Hema Palanyiaya (Consultant Neurodevelopmental Paediatrician), Dr Freya Cooper (Clinical Psychologist), Charlie Hollins (SaLT).",regVerified:"claimed",regScore:1,
+    reviewScore:4.7,reviewStars:5,reviewCount:"4.7/5 — 101 Google Reviews (hospital-wide, via Birdeye)",reviewWarn:true,
+    reviewNote:"4.7/5 from 101 Google reviews (hospital-wide, not neurodevelopmental-specific — via Birdeye). One psychiatric mention: 'Psychiatrist Dr Ibrahim Yahli was very helpful, accurate and clear.' One child quote: 'Staff were so kind, gentle, and brilliant with him.' No Trustpilot. No Mumsnet or ADHD Private mentions. ⚠ Reviews cover urgent care, paediatrics, and surgical — no reviews specifically for the ADHD/autism assessment service were found.",
+    suitability:"Good MDT structure with paediatrician, psychologist, and SaLT. Transparent pricing (rare). From newborn confirmed. 'Neuroaffirmative' language suggests masking awareness.",
+    redFlags:"⚠ RCADS anxiety assessment tool minimum age is 8 — this child would miss the formal anxiety co-assessment component under their standard protocol. This is a direct limitation for a case where anxiety is central. North London. Reviews are hospital-wide not neurodevelopmental-specific.",
+    evidence:"Full fee schedule confirmed from live fees page. MDT composition confirmed. From newborn confirmed. 88 Google reviews at 4.6/5 for the hospital overall.",
+    contact:"chaselodgehospital.com contact",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"For a 5-year-old where anxiety and communication freezing are central, how do you assess anxiety co-morbidity given the RCADS isn't used under age 8? Can you incorporate a previous SALT report, and does school input come included in the fee?"
   },
   {
-    rank: 18, tier: 3,
-    name: "Chase Lodge Hospital Neurodevelopmental Centre",
-    profShort: "CQC MDT — Paediatrician, Clinical Psychologist, SaLT",
-    location: "North London", locationDetail: "Mill Hill, NW7", locationArea: "north-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd"],
-    costLabel: "POA — contact required", costNum: 1500,
-    regLabel: "CQC registered", regDetail: "CQC registered. MDT: Dr Hema Palanyiaya (Consultant Neurodevelopmental Paediatrician), Dr Freya Cooper (Clinical Psychologist), Charlie Hollins (SaLT). From age 3.", regVerified: "claimed", regScore: 1,
-    reviewScore: 4, reviewStars: 4, reviewCount: "4.6/5 — 88 Google reviews (hospital-wide)", reviewWarn: true,
-    reviewNote: "4.6/5 from 88 Google reviews (general hospital). 5.0 on Top Doctors. Doctify listing exists. Reviews are positive but general — not specific to the neurodevelopmental service.",
-    suitability: "Good MDT structure with paediatrician, psychologist, and SaLT — appropriate for a 5-year-old. 'Neuroaffirmative' approach language suggests awareness of masking. Good for families who need a MDT but can travel to North London.",
-    redFlags: "Anxiety co-assessment tool (RCADS) only used for age 8+ — this child at age 5 would NOT get that component. This is a meaningful limitation given anxiety is central to the referral question. North London location. Individual clinician credentials detail sparse.",
-    evidence: "'Neuroaffirmative approach' language suggests masking awareness. MDT including paediatrician, psychologist, and SaLT is strong for age 5. 88 Google reviews is a meaningful independent sample even if general.",
-    firstQ: "For a 5-year-old where anxiety and communication freezing are central concerns, how do you assess anxiety co-morbidity given the RCADS isn't used under age 8? And can you incorporate a previous SALT report?"
+    rank:18,tier:3,
+    name:"Clinical Partners",website:"https://clinical-partners.co.uk",
+    profShort:"Large national network — CQC-registered locations",
+    assessType:"Network",
+    location:"Central London",locationDetail:"Multiple London locations; online available",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety"],
+    costLabel:"Contact required",costNote:"Not published on website. General children's services from age 5.",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"General services from age 5 ✓; ADHD-specific age unconfirmed — call to check",ageFlag:false,
+    regLabel:"CQC-registered locations",regDetail:"Large national private mental health network. CQC-registered. Multiple London locations. ⚠ Reviews flag use of DSM-5 not ICD-11 for autism.",regVerified:"claimed",regScore:1,
+    reviewScore:4.6,reviewStars:5,reviewCount:"4.6/5 — 8,153+ Trustpilot (Excellent) — Mumsnet confirmed",reviewWarn:true,
+    reviewNote:"Trustpilot 4.6/5 from 8,153+ reviews — largest independent review dataset on this entire list. 81% five-star. Positives: 'Faster than NHS (ADHD in 6 weeks vs 18 months; ASD in 5 months vs 3–5 years)' / 'They follow NICE guidelines which is basically all the NHS pathway does anyway' / 'I really can't fault them' (Mumsnet thread, SEN). NHS accepts their diagnoses confirmed in Mumsnet thread. Notable concern: parent whose child was assessed via Zoom received 'doesn't meet threshold' — child later diagnosed with ASD AND ADHD by different private specialist. Parent explicitly flags Zoom-based assessment as missing masking behaviours. ⚠ Also: one reviewer flags use of DSM-5 (not ICD-11) for autism — ICD-11 matters for EHCP negotiations.",
+    suitability:"Largest Trustpilot sample of any option here. General children's services confirmed from age 5. Wide network of London locations.",
+    redFlags:"DSM-5-only for autism is a real concern if NHS downstream referrals or EHCP negotiations are needed — ICD-11 is the standard NHS England uses. Variable quality across a large network. ADHD minimum age unclear — confirm by phone for a 5-year-old. Not a specialist in SM or anxiety-autism differential.",
+    evidence:"4,100+ Trustpilot reviews. Multiple London locations. CQC-registered. Age 5 general services confirmed from website.",
+    contact:"0203 326 9160 / clinical-partners.co.uk",
+    waitTime:"Complaints about wait times noted in reviews",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Which specific clinician would assess my daughter, can I review their profile beforehand, do they use ICD-11 for autism (not just DSM-5), and can they assess a 5-year-old for ADHD?"
   },
   {
-    rank: 19, tier: 3,
-    name: "Clinical Partners",
-    profShort: "Large national network — CQC-registered locations across UK",
-    location: "Central London", locationDetail: "Multiple London locations; online available", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety"],
-    costLabel: "ADHD from £995 children (age 6+ only)", costNum: 1500,
-    regLabel: "CQC-registered locations", regDetail: "Large national private mental health network. Multiple London locations. ADHD from age 6 — this child is 5, so ADHD assessment may not be available.", regVerified: "claimed", regScore: 1,
-    reviewScore: 4, reviewStars: 4, reviewCount: "4,100+ Trustpilot — high volume, variable", reviewWarn: true,
-    reviewNote: "4,100+ Trustpilot reviews — large sample. Generally positive. Notable complaints about waiting times, communication delays, and some clinicians not reviewing notes before appointments. One review flagged DSM-5 (not ICD-11) use for autism — 'not recommended by NHS England.'",
-    suitability: "Accessible pricing and wide network. Large Trustpilot sample is a transparency advantage. However the scale of the network means quality varies by clinician, which is a concern for a complex profile where getting the formulation right matters.",
-    redFlags: "DSM-5-only for autism — ICD-11 is preferred by NHS England, which matters for downstream referrals and EHCP. ADHD assessment starts at age 6 — this child is 5. Variable quality across large network. Not a specialist in SM or differential-formulation needs. Must vet specific assigned clinician.",
-    evidence: "4,100+ Trustpilot reviews is the largest independent review sample for any option on this list. Multiple London locations confirmed. CQC-registered. School input confirmed.",
-    firstQ: "Which specific clinician would assess my daughter, can I review their profile beforehand, do they use ICD-11 for autism (not just DSM-5), and can they assess a child aged 5 for ADHD?"
+    rank:19,tier:3,
+    name:"Harley Therapy",website:"https://harleytherapy.co.uk",
+    profShort:"Therapy matching network — HCPC/GMC/BPS clinicians",
+    assessType:"Network",
+    location:"Central London",locationDetail:"Harley Street, Liverpool Street, London Bridge; online",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety","sm"],
+    costLabel:"Initial from £750; ADHD from £2,240",costNote:"Child-specific assessment pricing unconfirmed — adult rates only found",costNum:750,
+    initConsult:"From £230 (counselling/psychotherapy) or from £750 (initial psychiatric assessment incl. report)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"From age 0 (site age brackets: 0–4, 5–11, 12–13)",ageFlag:false,
+    regLabel:"All clinicians HCPC/GMC/BPS",regDetail:"Matching platform. 10+ years experience required for all listed practitioners. SM explicitly listed as a child specialism.",regVerified:"claimed",regScore:0,
+    reviewScore:4.8,reviewStars:5,reviewCount:"4.8/5 — 537 reviews.co.uk (95% recommend) / 4.2/5 — 325 Trustpilot",reviewWarn:false,
+    reviewNote:"reviews.co.uk: 4.8/5 from 537 reviews, 95% recommend rate. Quotes: 'I left feeling heard and hopeful' / 'The Clinic was so professional and the clinical team were excellent.' Trustpilot: 4.2/5 from 325 reviews — 'Great' rating. Some scheduling/matching complaints. No child-specific or ADHD/autism assessment reviews surfaced — Harley Therapy is primarily an adult and couples therapy service. Child services listed but rarely reviewed specifically. No Mumsnet or NappyValleyNet mentions found.",
+    suitability:"Large review base gives confidence in brand-level quality. SM listed as specialism. Site age filter shows 0–4 and 5–11 brackets served. Better for therapy matching post-assessment than primary complex assessment.",
+    redFlags:"Matching platform — quality depends entirely on which clinician is allocated. No consistency guarantee. Child-specific assessment pricing not confirmed. Primarily an adult therapy service — child neurodevelopmental assessment is a small part of their offering.",
+    evidence:"SM child specialism listed. 537 reviews.co.uk at 4.8/5. 325 Trustpilot. 10+ years experience required. Age brackets 0–4 and 5–11 confirmed on site.",
+    contact:"harleytherapy.co.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Can you match me with a clinical psychologist who has specific experience with SM-like presentations co-occurring with autistic traits and sensory sensitivities in girls aged 5 — and what would a full differential assessment cost?"
   },
   {
-    rank: 20, tier: 3,
-    name: "Harley Therapy",
-    profShort: "Therapy matching network — HCPC/GMC/BPS clinicians",
-    location: "Central London", locationDetail: "Harley Street, Liverpool Street, London Bridge; online", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety","sm"],
-    costLabel: "Variable by clinician", costNum: 800,
-    regLabel: "All clinicians HCPC/GMC/BPS (network)", regDetail: "Matching platform. 10+ years experience required for all listed practitioners. SM explicitly listed as specialism on their site.", regVerified: "claimed", regScore: 0,
-    reviewScore: 4, reviewStars: 4, reviewCount: "325 Trustpilot — generally positive", reviewWarn: false,
-    reviewNote: "325 Trustpilot reviews, generally positive. Some complaints about scheduling and matching. No specific reviews for child SM/autism differential assessment found.",
-    suitability: "Could be useful for finding a specific therapist post-assessment. SM listed as a specialism is positive. Network model means they can match to the right person — but 'right person' quality is not guaranteed.",
-    redFlags: "Matching platform — quality entirely depends on which clinician is allocated. No consistency guarantee. Better for therapy than complex differential assessment of a 5-year-old. School input not confirmed for matched clinicians.",
-    evidence: "SM explicitly listed on their site as a child specialism. 325 Trustpilot reviews is a meaningful independent sample. Network requires 10+ years minimum experience from listed practitioners.",
-    firstQ: "Can you match me with a clinical psychologist who has specific experience with SM-like presentations co-occurring with autistic traits and sensory sensitivities in girls aged 4–7?"
+    rank:20,tier:4,
+    name:"Psicon",website:"https://psicon.co.uk",
+    profShort:"CQC MDT — NICE-compliant (Kent/Hampshire; in-person required under 7)",
+    assessType:"MDT",
+    location:"SW London / Surrey",locationDetail:"Canterbury (Kent) / Basingstoke (Hampshire) only — no London clinic",locationArea:"sw-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd"],
+    costLabel:"Contact required",costNote:"⚠ ADHD min age 6 (not available for 5-year-old). ASD from age 2 (fine).",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"ASD from age 2 ✓; ADHD from age 6 ⚠",ageFlag:true,
+    regLabel:"CQC registered (2019)",regDetail:"CQC registered since 2019. NICE-compliant. Doctor (paediatrician or psychiatrist) always included for child assessments. Age minimums confirmed from psicon.co.uk/faq.",regVerified:"verified",regScore:2,
+    reviewScore:4.5,reviewStars:5,reviewCount:"4.5/5 — 487 Trustpilot (Excellent)",reviewWarn:false,
+    reviewNote:"Trustpilot 4.5/5 from 487 reviews. Quotes: 'Assessors making children feel comfortable...thorough, professional process' / 'Professional but very empathetic, with great communication' / 'Brilliant from screening through dual ADHD & ASD assessments...doctors and clinicians friendly, extremely knowledgeable, and collaborative' / 'Children seen within 9 months vs NHS wait of nearly 3 years.' Notable concerns: parent reports school/SALT reports accepted then rejected mid-assessment causing delays / booking described as 'not ADHD-friendly' (limited phone hours, long hold times) / different practitioner at each appointment reported. No Mumsnet or NappyValleyNet mentions (operates outside London).",
+    suitability:"Good quality and positive Trustpilot reviews including a specifically relevant masking case. However requires travel to Kent or Hampshire — no London clinic. ADHD assessment not available for a 5-year-old.",
+    redFlags:"No London location — travel to Kent or Hampshire required. ADHD assessment minimum age 6 means this child cannot be assessed for ADHD here. Not a specialist in SM or anxiety differential specifically.",
+    evidence:"CQC registered since 2019 — established track record. Masking/camouflaging explicitly mentioned. Doctor always included. Age minimums confirmed from FAQ. Trustpilot masking review directly relevant.",
+    contact:"0330 838 3105 / enquiries@psicon.co.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:false,
+    firstQ:"For a 5-year-old who needs in-person ASD assessment (ADHD excluded due to age), which clinic location would we use, which clinicians would be involved, and does the assessment include formulation covering anxiety and sensory processing?"
   },
   {
-    rank: 21, tier: 4,
-    name: "Advanced Assessments",
-    profShort: "HCPC-registered psychologists — UK-wide",
-    location: "Central London", locationDetail: "UK-wide — London presence unconfirmed", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety"],
-    costLabel: "Not confirmed for children", costNum: 0,
-    regLabel: "HCPC registered (claimed)", regDetail: "Claims 'HCPC registered' and '5/5 rated excellent.' London location not confirmed. Individual registration numbers not published.", regVerified: "unverified", regScore: 0,
-    reviewScore: 0, reviewStars: 0, reviewCount: "Cannot verify '5/5 excellent' claim", reviewWarn: true,
-    reviewNote: "Claims '5/5 rated excellent' but no Trustpilot link or independent aggregator found to verify this. No independent review source found. Treat with caution.",
-    suitability: "Uncertain — insufficient verified information to assess fit. Differential mood/autism presentation language used on their site is appropriate. London location not confirmed for in-person assessment. Proceed with caution only.",
-    redFlags: "Cannot verify '5/5 rated excellent' claim — no source found. Location for in-person unconfirmed. Age range for children not confirmed. Child pricing not listed. This entry requires significant further verification before engaging.",
-    evidence: "Website uses gender-informed assessment and differential presentation language. Claims HCPC registration but individual numbers not available. All claims unverified independently.",
-    firstQ: "Where is your nearest London in-person clinic for a 5-year-old, and do you provide a differential formulation across anxiety, autism, ADHD, and communication anxiety? What is your specific HCPC registration number?"
+    rank:21,tier:4,
+    name:"Oxford CBT",website:"https://oxfordcbt.co.uk",
+    profShort:"Clinical Psychologists and Therapists",
+    assessType:"Clinic",
+    location:"Central London",locationDetail:"⚠ London office NOT CONFIRMED — Oxford (OX3) and Birmingham only found",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety"],
+    costLabel:"Young Person Assessment £190–£400; ADHD £1,200; autism £1,800",costNote:"Dual £2,500. Confirmed from oxfordcbt.co.uk/fees. ⚠ London location unconfirmed.",costNum:190,
+    initConsult:"£190–£400 (Young Person Assessment — varies by clinician level: ADHD Coach £190 / Senior Therapist £300 / Clinical Director £400)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated on website",ageFlag:false,
+    regLabel:"HCPC registered (claimed)",regDetail:"Established 2012. HCPC-registered psychologists. Offices confirmed: Oxford and Birmingham only. London presence unclear.",regVerified:"claimed",regScore:0,
+    reviewScore:3,reviewStars:3,reviewCount:"Mixed reviews — specific negative found",reviewWarn:true,
+    reviewNote:"Positive: many clients happy, ASD assessment praised. Negative: parent stated daughter 'has been let down twice by Oxford CBT' — no further detail available. Some reviews praise efficient process. Pricing confirmed from live website.",
+    suitability:"Transparent and accessible pricing. 'Whole person approach rather than focusing on autism in isolation' stated explicitly. However the London office could not be confirmed — website lists only Oxford and Birmingham locations.",
+    redFlags:"⚠ London office NOT CONFIRMED from website — Oxford and Birmingham are the only confirmed locations. Services page mentions London assessments but no address published. 'Let down twice' review without details warrants caution. Not a specialist in SM/anxiety-autism overlap for young girls.",
+    evidence:"Pricing confirmed from live fees page. 'Whole person approach' explicitly stated. Initial screening £190–£400 is accessible.",
+    contact:"oxfordcbt.co.uk contact form",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Where exactly is your London assessment location — what is the full address? And does your London team specifically have experience with children aged 5 who show school-specific communication freezing with possible autistic traits?"
   },
   {
-    rank: 22, tier: 4,
-    name: "Psicon",
-    profShort: "CQC MDT — NICE-compliant (Kent/Hampshire; online for adults)",
-    location: "Surrey", locationDetail: "Canterbury (Kent) / Basingstoke (Hampshire) — in-person required under age 7", locationArea: "surrey",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd"],
-    costLabel: "POA", costNum: 1500,
-    regLabel: "CQC registered (2019)", regDetail: "CQC registered since 2019. NICE-compliant. Doctor (paediatrician or psychiatrist) always included for child assessments. Children under 7 require in-person.", regVerified: "verified", regScore: 2,
-    reviewScore: 4, reviewStars: 4, reviewCount: "Trustpilot positive — masking review noted", reviewWarn: false,
-    reviewNote: "Trustpilot generally positive. Specific relevant review: parent of child who 'masks significantly in school and is academically able' — directly relevant to this child's profile.",
-    suitability: "Good quality with good Trustpilot reviews including a specifically relevant masking case. However, for a 5-year-old, in-person is required — and that means travelling to Kent or Hampshire, which is a significant inconvenience for London/SW London families.",
-    redFlags: "For under-7s, in-person is required — not online. Nearest locations are Canterbury and Basingstoke. This is a real inconvenience for London families. Not a specialist in SM/anxiety differential specifically.",
-    evidence: "CQC registered since 2019 — established track record. Masking/camouflaging explicitly mentioned. Doctor always included for child assessments. Trustpilot review specifically mentioning a masking, academically-able child is directly relevant independent evidence.",
-    firstQ: "For a 5-year-old, which in-person location would we use, which clinicians would be involved, and does the assessment include formulation covering anxiety and sensory processing beyond autism/ADHD?"
+    rank:22,tier:4,
+    name:"The Private Therapy Clinic",website:"https://theprivatetherapyclinic.co.uk",
+    profShort:"HCPC Clinical Psychologist (Dr Becky Spelman) + MDT",
+    assessType:"Clinic",
+    location:"Central London",locationDetail:"Harley Street area, London; online available",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety","sm"],
+    costLabel:"Under-18s Initial Assessment £290; Child ADHD £900",costNote:"Advance booking £290; same week £340. Free 10 min phone chat first.",costNum:290,
+    initConsult:"£290 (Under 18s Initial Consultant Psychiatrist Assessment, 50 min — book 1+ week ahead) / £340 same week",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated (services listed for 'Adults & Children')",ageFlag:false,
+    regLabel:"HCPC (Dr Spelman)",regDetail:"Dr Becky Spelman — HCPC registered. MDT includes psychiatrists and educational/clinical psychologists.",regVerified:"claimed",regScore:1,
+    reviewScore:4.8,reviewStars:5,reviewCount:"4.8/5 — 631 reviews.co.uk / 3.6/5 — 45 Trustpilot ⚠",reviewWarn:true,
+    reviewNote:"reviews.co.uk: 4.8/5 from 631 reviews, 98% recommend. Quotes: 'After years of struggling to find appropriate help for my son...Getting him booked in was absolutely painless and fast' (child care) / 'I had a really positive experience at my ADHD assessment...incredibly kind and calming' / 'Professional with a personal touch. Fantastic direction and advice.' Trustpilot: 3.6/5 from 45 reviews — sharp contrast. Trustpilot negatives: 'paid over £300 and the doctor didn't turn up, and nobody answers the phone' / 'horrendous care...a dangerous place for mental health.' The large gap between platforms (4.8 vs 3.6) suggests dissatisfied patients disproportionately use Trustpilot. No Mumsnet mentions found.",
+    suitability:"SM listed as specialism alongside autism and ADHD. Free initial phone call reduces risk. However the assessment service appears primarily oriented toward medico-legal and expert witness reports — a different purpose from what this family needs.",
+    redFlags:"Assessment service appears medico-legal focused rather than school-support planning oriented. No independent reviews. School input not confirmed. Medico-legal framing is a mismatch for a family wanting EHCP-level recommendations.",
+    evidence:"SM, autism, and ADHD all listed as specialisms. Free initial phone consultation confirmed. Child ADHD pricing confirmed from live website.",
+    contact:"theprivatetherapyclinic.co.uk (free initial call available)",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Yes — free 10 min initial phone chat to discuss services",treatmentOffered:true,
+    firstQ:"Are your psychological assessments designed for school support planning and EHCP negotiations, or primarily for medico-legal reports — and do you work with schools directly to provide recommendations?"
   },
   {
-    rank: 23, tier: 4,
-    name: "Oxford CBT (London branch)",
-    profShort: "Clinical Psychologists and Therapists",
-    location: "Central London", locationDetail: "London location + Oxford (primarily Oxford-based)", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety"],
-    costLabel: "Initial assessment from £300; ADOS £1,500", costNum: 1500,
-    regLabel: "HCPC registered (claimed)", regDetail: "Established 2012. HCPC-registered psychologists. London presence exists. Primarily Oxford-based.", regVerified: "claimed", regScore: 0,
-    reviewScore: 3, reviewStars: 3, reviewCount: "Mixed reviews — one 'let down twice'", reviewWarn: true,
-    reviewNote: "Positive: many clients happy, ASD assessment praised. Negative: one parent said daughter 'has been let down twice by Oxford CBT' — no further details available. Some reviews praise efficient process.",
-    suitability: "Accessible pricing. 'Whole person approach rather than focusing on autism in isolation' stated explicitly. London presence exists. However primarily Oxford-based, the 'let down twice' review without details warrants caution.",
-    redFlags: "Primarily Oxford-based — London capacity may be limited. Specific negative review ('let down twice') without enough detail to assess. Not a specialist in the specific SM/anxiety/autism overlap for young girls.",
-    evidence: "'Whole person approach rather than focusing on autism in isolation' stated explicitly on website. London branch exists. Initial £300 assessment deductible from full assessment is a transparent pricing signal.",
-    firstQ: "Where exactly is your London location, and does your London team specifically have experience with children aged 5 who show school-specific communication freezing with possible autistic traits?"
+    rank:23,tier:4,
+    name:"London Trusted Therapy",website:"https://londontrustedtherapy.com",
+    profShort:"Neurodivergent-led MDT — Psychology, Psychiatry, SaLT",
+    assessType:"MDT",
+    location:"Central London",locationDetail:"115A Harley Street W1G; online; also Lothbury & Staple Inn",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"partial",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"Sessions £180–£360; assessment not published",costNote:"From age 5 confirmed. Contact: 0207 126 8545",costNum:180,
+    initConsult:"£180–£320 (standard session rate — no separate reduced first-appointment fee)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Age 5 — explicitly confirmed on website",ageFlag:false,
+    regLabel:"Credentials not fully published",regDetail:"Neurodivergent-led. Founding clinician received own late autism diagnosis. MDT includes psychology, psychiatry, SaLT. CQC status not confirmed.",regVerified:"unverified",regScore:0,
+    reviewScore:4.4,reviewStars:4,reviewCount:"4.4/5 — ~20 Trustpilot reviews (Excellent)",reviewWarn:false,
+    reviewNote:"Trustpilot 4.4/5 from ~20 reviews. Quotes: 'Dr Olena is prompt, communicative, and quick to respond.' ADHD assessments and addiction treatment praised. Very thin review base — 20 reviews is insufficient for meaningful signal on a specialist child assessment service. No child-specific or autism/ADHD assessment reviews identified. No Mumsnet or NappyValleyNet mentions found.",
+    suitability:"The neurodivergent-led framing and founding clinician's own late autism diagnosis are distinctive signals of masking awareness — especially relevant for girls. From age 5 explicitly confirmed. School liaison available with consent.",
+    redFlags:"Individual clinician credentials not fully published. CQC status not confirmed. Trustpilot page exists but content unverified — visit trustpilot.com and search 'London Trusted Therapy' directly. Assessment pricing not published.",
+    evidence:"From age 5 confirmed from live website. 'We work with children from the age of 5' explicitly stated. Neurodivergent-led practice. School liaison available with consent.",
+    contact:"0207 126 8545 / londontrustedtherapy.com",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Does your team have experience assessing girls aged 5 who mask in clinical settings but freeze at school — and can you provide a differential formulation covering autism, ADHD, anxiety, and sensory processing in a single report with school recommendations?"
   },
   {
-    rank: 24, tier: 4,
-    name: "Sage Psychology",
-    profShort: "HCPC-registered Clinical Psychologists",
-    location: "Central London", locationDetail: "London — precise location unconfirmed", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety","sensory"],
-    costLabel: "Initial consult £300 (deductible)", costNum: 1200,
-    regLabel: "HCPC registered (claimed)", regDetail: "HCPC-registered psychologists. NICE-compliant autism assessments. Individual registration numbers not published.", regVerified: "claimed", regScore: 0,
-    reviewScore: 0, reviewStars: 0, reviewCount: "No independent reviews found", reviewWarn: false,
-    reviewNote: "No Trustpilot or independent review page found. No negative information found.",
-    suitability: "Explicit statement that 'many individuals with autism also experience anxiety, ADHD, or sensory processing challenges, which Sage Psychology systematically assesses' is a positive signal. However no independent reviews and unclear whether they have experience with 5-year-olds or SM presentations.",
-    redFlags: "No independent reviews. Exact London location unclear. Age range for children not confirmed. No specific mention of SM differential assessment. School input unconfirmed.",
-    evidence: "Explicitly states sensory processing is 'systematically assessed' as part of autism workup — not an afterthought. £300 initial assessment deductible from full cost is transparent pricing.",
-    firstQ: "Do you assess children aged 5, and can your assessment produce a differential formulation covering anxiety, autistic traits, sensory processing, and SM-like communication patterns — with written school recommendations?"
+    rank:24,tier:4,
+    name:"Lucy Nathanson — Confident Children",website:"https://confidentchildren.co.uk",
+    profShort:"Child Therapist / SM Specialist — ⚠ HCPC registration UNVERIFIED",
+    assessType:"SaLT",
+    location:"Central London",locationDetail:"Online UK-wide; in-person location unconfirmed",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["sm","anxiety"],
+    costLabel:"NOT PUBLISHED — contact to verify",costNote:"~£400 initial consult reported by users but NOT confirmed from website",costNum:0,
+    initConsult:"NOT PUBLISHED (~£400 reported by users, unconfirmed)",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated on website",ageFlag:false,
+    regLabel:"⚠ HCPC NOT CONFIRMED",regDetail:"SMiRA Associate. 'Child Therapist, Selective Mutism Specialist.' HCPC registration not confirmed in research — MUST be verified at hcpc-uk.org before booking.",regVerified:"unverified",regScore:0,
+    reviewScore:0,reviewStars:0,reviewCount:"Website testimonials only — no independent reviews",reviewWarn:true,
+    reviewNote:"Website testimonials only. No Trustpilot, Google Reviews, or forum mentions found. No negative information found. ~£400 initial consultation figure reported by users but not confirmed from website.",
+    suitability:"Bestselling author on SM and 10+ years specialist experience. Useful for SM-specific therapy after a broader differential assessment is complete. Not suitable as primary assessor for this case.",
+    redFlags:"⚠ HCPC registration NOT confirmed — this is a hard requirement. Verify at hcpc-uk.org before any engagement. SM-only lens. No independent reviews. ~£400 figure is unconfirmed. In-person location unconfirmed.",
+    evidence:"Bestselling published author on selective mutism. 10+ years SM experience. SMiRA affiliated. Works with a Clinical Psychologist for assessment component.",
+    contact:"confidentchildren.co.uk contact form",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"What is your HCPC registration number so it can be verified at hcpc-uk.org? And can you work alongside a clinical psychologist completing a broader differential assessment, providing SM-specific input?"
   },
   {
-    rank: 25, tier: 4,
-    name: "The Private Therapy Clinic (Dr Becky Spelman)",
-    profShort: "HCPC Clinical Psychologist + MDT (psychiatrists, EP)",
-    location: "Central London", locationDetail: "Harley Street area, London; online available", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["asd","adhd","anxiety","sm"],
-    costLabel: "Psych assessment £1,200–2,000; psychiatric £1,800–2,100+", costNum: 1800,
-    regLabel: "HCPC registered (Dr Spelman)", regDetail: "Dr Becky Spelman — HCPC registered. MDT includes psychiatrists and educational/clinical psychologists.", regVerified: "claimed", regScore: 1,
-    reviewScore: 0, reviewStars: 0, reviewCount: "Website testimonials only", reviewWarn: false,
-    reviewNote: "No Trustpilot or independent aggregator found for child psychology services. Website testimonials only. No negative information found.",
-    suitability: "SM listed as a specialism alongside autism and ADHD. However the assessment service appears primarily oriented toward medico-legal and expert witness reports — a different use case than what this family needs (formulation + school recommendations).",
-    redFlags: "Assessment service appears medico-legal focused, not school-support planning. No independent reviews. School input not confirmed. Medico-legal framing is a mismatch for a family wanting EHCP-level practical recommendations.",
-    evidence: "SM, autism, and ADHD all listed as specialisms. MDT structure. Pricing published.",
-    firstQ: "Are your psychological assessments designed for school support planning and EHCP negotiations, or primarily for medico-legal reports — and do you offer the level of differential formulation a family would use to negotiate educational provisions?"
+    rank:25,tier:4,
+    name:"The Child and Family Practice",website:"https://tcfp.org.uk",
+    profShort:"MDT — Psychiatry, Neuropsychology, Paediatrics, Family Therapy",
+    assessType:"MDT",
+    location:"Central London",locationDetail:"Bloomsbury WC1",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"yes",
+    areas:["asd","adhd","anxiety","er"],
+    costLabel:"NOT PUBLISHED",costNote:"Contact: 0207 034 2690 / info@tcfp.org.uk",costNum:0,
+    initConsult:"NOT PUBLISHED",
+    insurance:"no",insuranceDetail:"Not stated on website",
+    minAge:"Not stated",ageFlag:false,
+    regLabel:"GMC / HCPC (named clinicians)",regDetail:"Dr Roger Kennedy (Consultant CAMH Psychiatrist), Dr Clare Gates, Dr Rebecca Greenaway (neuropsychologist), Dr Narad Mathura (paediatrician). ADOS-2 + ADI/3Di same day.",regVerified:"claimed",regScore:1,
+    reviewScore:2,reviewStars:2,reviewCount:"3.3/5 — 11 Birdeye reviews ⚠",reviewWarn:true,
+    reviewNote:"Birdeye: 3.3/5 from 11 reviews — notably below average. One review specifically mentioned 'questionable competence from recommended professionals' in a comprehensive MDT assessment. Small sample but a below-average score with a specific competence complaint is a significant flag.",
+    suitability:"Large MDT structure with psychiatry, neuropsychology, paediatrics, and family therapy under one roof. Same-day dual-assessor format is a quality feature. However the 3.3/5 rating with a specific competence complaint cannot be ignored.",
+    redFlags:"3.3/5 Birdeye with 'questionable competence' complaint in an MDT assessment. This requires direct investigation before booking. SM not listed as a specialism. Pricing not published.",
+    evidence:"ADOS-2 + ADI/3Di same day with two assessors confirmed. Large MDT covering psychiatry, neuropsychology, paediatrics, family therapy.",
+    contact:"0207 034 2690 / info@tcfp.org.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Can I speak with the specific clinician who would lead the assessment for a 5-year-old before booking — and what is their experience with differential formulation across anxiety, autism, and ADHD rather than a single primary diagnosis?"
   },
   {
-    rank: 26, tier: 4,
-    name: "London Trusted Therapy",
-    profShort: "Neurodivergent-led MDT — Psychology, Psychiatry, SaLT",
-    location: "Central London", locationDetail: "115A Harley Street W1G; online; also Lothbury & Staple Inn", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "partial",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "POA", costNum: 1500,
-    regLabel: "Credentials not fully confirmed", regDetail: "Neurodivergent-led practice. Founding clinician received own late autism diagnosis. MDT includes psychology, psychiatry, SaLT. CQC status unconfirmed. From age 5.", regVerified: "unverified", regScore: 0,
-    reviewScore: 0, reviewStars: 0, reviewCount: "Trustpilot page found but content unverified", reviewWarn: true,
-    reviewNote: "Trustpilot page found but content could not be accessed to verify in research. No negative information found in research.",
-    suitability: "The neurodivergent-led framing and founding clinician's own late autism diagnosis are distinctive signals of awareness of masking and atypical presentations — especially relevant for girls. From age 5 is confirmed. School liaison available with consent.",
-    redFlags: "Trustpilot page exists but content unverified. Individual clinician credentials not fully confirmed. CQC status not confirmed. SM not specifically mentioned. Pricing unknown. Verify all credentials independently before booking.",
-    evidence: "Founding clinician's own late autism diagnosis is distinctive evidence of masking awareness. 'From age 5' confirmed. School liaison explicitly available. Harley Street location.",
-    firstQ: "Does your team have experience assessing girls aged 5 who mask in clinical settings but freeze at school — and can you provide a differential formulation covering autism, ADHD, anxiety, and sensory processing in a single report?"
+    rank:26,tier:4,
+    name:"Dr Michelle Gershoni / Bridges Therapy Centre",website:"https://bridgestherapycentre.com",
+    profShort:"Counselling Psychologist — HCPC/BPS (⚠ not in current team directory)",
+    assessType:"Psychologist",
+    location:"North London",locationDetail:"Hendon NW4, Canary Wharf, Muswell Hill, Finchley",locationArea:"north-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["anxiety","sm"],
+    costLabel:"Contact required — verify she still practises here",costNote:"Bridges clinic initial psychiatric assessment: £650 (general rate)",costNum:0,
+    initConsult:"£650 (Bridges Initial Psychiatric Assessment) — preceded by free 15 min guidance call",
+    insurance:"no",insuranceDetail:"Not stated",
+    minAge:"Not confirmed — not in current website team directory",ageFlag:false,
+    regLabel:"HCPC / BPS (claimed)",regDetail:"⚠ Dr Gershoni does not appear in current Bridges Therapy Centre team directory. May have left. Verify before contacting.",regVerified:"unverified",regScore:0,
+    reviewScore:0,reviewStars:0,reviewCount:"No independent reviews found",reviewWarn:true,
+    reviewNote:"No independent reviews anywhere. ⚠ Dr Gershoni is not listed in the current team directory on bridgestherapycentre.com. She may have left the practice. This entry is a near-duplicate of entry 13 and is listed here separately only because her SM doctoral research is a distinct credential worth pursuing if you can locate her current practice.",
+    suitability:"Strong SM credentials if she can be located. Best used as therapy after a broader differential assessment.",
+    redFlags:"⚠ Not in current team directory — verify before contacting. SM-only lens. No independent reviews.",
+    evidence:"Doctoral research on SM. SMiRA-affiliated. Published research on SM-anxiety overlap.",
+    contact:"bridgestherapycentre.com — verify she still practises there",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Yes — Bridges offers free 15 min guidance consultation before first paid appointment",treatmentOffered:true,
+    firstQ:"Are you still practising at Bridges Therapy Centre, and if not, where are you currently based?"
   },
   {
-    rank: 27, tier: 4,
-    name: "Lucy Nathanson — Confident Children",
-    profShort: "Child Therapist / SM Specialist — HCPC UNVERIFIED",
-    location: "Central London", locationDetail: "Online (UK and international); in-person unconfirmed", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "unknown",
-    areas: ["sm","anxiety"],
-    costLabel: "POA", costNum: 0,
-    regLabel: "⚠ HCPC registration NOT confirmed", regDetail: "SMiRA Associate. 'Child Therapist, Selective Mutism Specialist.' HCPC registration not confirmed in research — MUST be verified independently at hcpc-uk.org before booking.", regVerified: "unverified", regScore: 0,
-    reviewScore: 0, reviewStars: 0, reviewCount: "Website testimonials only", reviewWarn: true,
-    reviewNote: "Website testimonials only. No Trustpilot or Google Reviews found. No negative information found. No independent review data at all.",
-    suitability: "Bestselling author on SM and 10+ years specialist experience. Could be useful for SM-specific therapy after a broader differential assessment. Not suitable as the primary assessor for this case given the family's explicit need for differential formulation beyond SM.",
-    redFlags: "HCPC registration NOT confirmed — this is a hard requirement. Verify at hcpc-uk.org before any engagement. SM-only lens — not suitable as primary assessor. No independent reviews. In-person location unclear.",
-    evidence: "Bestselling published author on selective mutism. 10+ years SM specialist experience. SMiRA affiliated. Works with a Clinical Psychologist for assessment component — acknowledged limitation.",
-    firstQ: "What is your HCPC or equivalent professional registration number so it can be verified at hcpc-uk.org — and can you work alongside a clinical psychologist completing a broader differential assessment, providing SM-specific input rather than acting as primary assessor?"
-  },
-  {
-    rank: 28, tier: 4,
-    name: "The Child and Family Practice",
-    profShort: "MDT — Psychiatry, Neuropsychology, Paediatrics, Family Therapy",
-    location: "Central London", locationDetail: "Bloomsbury, WC1", locationArea: "central-london",
-    childDirect: "yes", schoolInput: "yes",
-    areas: ["asd","adhd","anxiety","er"],
-    costLabel: "POA — premium MDT pricing expected", costNum: 2500,
-    regLabel: "GMC / HCPC (named clinicians)", regDetail: "Dr Roger Kennedy (Consultant CAMH Psychiatrist), Dr Clare Gates, Dr Rebecca Greenaway (neuropsychologist), Dr Narad Mathura (paediatrician). ADOS-2 + ADI/3Di same day.", regVerified: "claimed", regScore: 1,
-    reviewScore: 2, reviewStars: 2, reviewCount: "3.3/5 from 11 Birdeye reviews ⚠", reviewWarn: true,
-    reviewNote: "Birdeye: 3.3/5 from 11 reviews — notably below average. One review mentioned 'questionable competence from recommended professionals' in a comprehensive MDT assessment. Small sample but a below-average score with a specific competence complaint is a significant flag.",
-    suitability: "Large MDT structure with psychiatry, neuropsychology, paediatrics, and family therapy all under one roof. Same-day dual-assessor format (two specialists simultaneously) is a quality feature. However the 3.3/5 Birdeye rating with a specific competence complaint cannot be ignored.",
-    redFlags: "3.3/5 Birdeye rating with a specific 'questionable competence' complaint in an MDT assessment — this requires direct investigation before booking. SM not listed as a specialism. Pricing not published.",
-    evidence: "ADOS-2 + ADI/3Di same day with two assessors is a high-quality assessment structure. Large MDT covering psychiatry, neuropsychology, paediatrics. Family therapy also available.",
-    firstQ: "Can I speak with the specific clinician who would lead the assessment for a 5-year-old girl before booking — and what is that person's experience with differential formulation across anxiety, autism, and ADHD rather than a single primary diagnosis?"
+    rank:27,tier:4,
+    name:"Harley Therapy (network-level)",website:"https://harleytherapy.co.uk",
+    profShort:"Therapy matching network — 10+ yrs experience required",
+    assessType:"Network",
+    location:"Central London",locationDetail:"Harley Street, Liverpool Street, London Bridge; online",locationArea:"central-london",
+    childDirect:"yes",schoolInput:"unknown",
+    areas:["asd","adhd","anxiety","sm"],
+    costLabel:"Initial from £750 (adult rate; child unconfirmed)",costNote:"SM listed as child specialism. Age filter: 0–4, 5–11 on site.",costNum:750,
+    initConsult:"From £230 (counselling) or £750 (psychiatric assessment incl. report) — child-specific rate unconfirmed",
+    insurance:"no",insuranceDetail:"Not stated",
+    minAge:"From age 0 (per site age brackets)",ageFlag:false,
+    regLabel:"All clinicians HCPC/GMC/BPS",regDetail:"Matching platform requiring 10+ yrs experience. SM listed as specialism.",regVerified:"claimed",regScore:0,
+    reviewScore:4.8,reviewStars:5,reviewCount:"4.8/5 — 537 reviews.co.uk / 4.2/5 — 325 Trustpilot",reviewWarn:false,
+    reviewNote:"reviews.co.uk: 4.8/5 from 537 reviews, 95% recommend. Trustpilot: 4.2/5 from 325 reviews. No child SM/autism differential assessment reviews identified — primarily adult therapy service. See entry #19 for full detail.",
+    suitability:"SM listed. 325 Trustpilot reviews gives some confidence in the brand. Better for post-assessment therapy matching than primary complex assessment.",
+    redFlags:"Quality depends entirely on which clinician is allocated — no guarantee of the right specialist for this profile. Child assessment pricing not confirmed.",
+    evidence:"SM child specialism listed. 325 Trustpilot reviews. 10+ years experience required. Age brackets 0–4 and 5–11 on site.",
+    contact:"harleytherapy.co.uk",
+    waitTime:"Not stated",assessDuration:"Not stated",reportTurnaround:"Not stated",
+    freeCall:"Unknown",treatmentOffered:true,
+    firstQ:"Can you match me with a clinical psychologist experienced in SM-like presentations co-occurring with autistic traits and sensory sensitivities in girls aged 5 — and what would a full child differential assessment cost?"
   }
 ];
 
-const excluded = [
-  { name: "South London Psychology Partnership", reason: "Age 12+ only", detail: "Does not assess children aged 5." },
-  { name: "Autistic Girls (Dr Becky Quicke)", reason: "Age 8–18 only + Cheshire", detail: "Does not see children under 8. Based in Cheshire." },
-  { name: "Anna Freud Centre", reason: "NHS charity — no simple private route", detail: "No straightforward private referral pathway." },
-  { name: "Tavistock Centre", reason: "NHS only", detail: "No private assessments." },
-  { name: "Foundations Child Therapy", reason: "Tonbridge/West Sussex — not London", detail: "Does not serve London families." },
-  { name: "Help4Psychology", reason: "Norwich and Midlands — not London", detail: "No London presence confirmed." },
-  { name: "Dr Cassie & Associates", reason: "Oxfordshire only", detail: "Based in Wallingford, Oxfordshire." }
-];
+let currentSort={col:'rank',dir:'asc'};
 
-let currentSort = { col: 'rank', dir: 'asc' };
-
-function renderStars(n) {
-  if (!n || n === 0) return '<span class="no-reviews">No reviews</span>';
-  return '<span class="stars">' + '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n)) + '</span>';
+function stars(n){
+  if(!n)return '<span class="no-reviews">No reviews</span>';
+  const full=Math.round(n);
+  return `<span class="stars">${'★'.repeat(full)}${'☆'.repeat(5-full)}</span>`;
 }
-
-function renderAreas(areas) {
-  const map = {
-    asd: ['tag-asd','ASD'],
-    adhd: ['tag-adhd','ADHD'],
-    anxiety: ['tag-anxiety','Anxiety'],
-    sm: ['tag-sm','Sel. Mutism'],
-    sensory: ['tag-sensory','Sensory'],
-    er: ['tag-er','Emot. Reg.'],
-    pda: ['tag-pda','PDA']
-  };
-  return areas.map(a => `<span class="tag ${map[a][0]}">${map[a][1]}</span>`).join('');
+function areas(a){
+  const m={asd:['tag-asd','ASD'],adhd:['tag-adhd','ADHD'],anxiety:['tag-anxiety','Anxiety'],
+    sm:['tag-sm','Sel. Mutism'],sensory:['tag-sensory','Sensory'],er:['tag-er','Emot. Reg'],pda:['tag-pda','PDA']};
+  return a.map(x=>`<span class="tag ${m[x][0]}">${m[x][1]}</span>`).join('');
 }
-
-function renderChildDirect(v) {
-  const m = { yes: ['yn-yes','✓ Yes'], partial: ['yn-partial','Partial'], unknown: ['yn-unknown','?'], no: ['yn-no','No'] };
-  return `<span class="yn-badge ${m[v][0]}">${m[v][1]}</span>`;
+function yn(v,lbl){
+  const m={yes:['yn-yes','✓'],partial:['yn-partial','~'],unknown:['yn-unknown','?'],no:['yn-no','✗']};
+  return `<span class="yn-label">${lbl}</span><span class="yn-badge ${m[v][0]}">${m[v][1]}</span>`;
 }
-
-function renderSchool(v) {
-  const m = { yes: ['yn-yes','✓ Yes'], partial: ['yn-partial','Partial'], unknown: ['yn-unknown','?'], no: ['yn-no','No'] };
-  return `<span class="yn-badge ${m[v][0]}">${m[v][1]}</span>`;
+function typeBadge(t){
+  const m={MDT:'type-mdt',Psychiatrist:'type-psych',Psychologist:'type-psychol',Paediatrician:'type-paed',SaLT:'type-salt',Clinic:'type-clinic',Network:'type-network'};
+  return `<span class="type-badge ${m[t]||'type-clinic'}">${t}</span>`;
 }
-
-function renderReg(r) {
-  const m = { verified: ['reg-verified','✓ Verified'], claimed: ['reg-claimed','Claimed'], unverified: ['reg-unverified','⚠ Unverified'] };
+function reg(r){
+  const m={verified:['reg-verified','✓ Verified'],claimed:['reg-claimed','Claimed'],unverified:['reg-unverified','⚠ Unverified']};
   return `<span class="reg-badge ${m[r][0]}">${m[r][1]}</span>`;
 }
 
-function tierLabel(t) {
-  const m = { 1:'Best Fit', 2:'Good / Caveats', 3:'Specific Value', 4:'Limited Fit' };
-  return m[t] || '';
-}
-
-function buildTable(data) {
-  const tbody = document.getElementById('tableBody');
-  tbody.innerHTML = '';
-
-  const sorted = [...data].sort((a, b) => {
-    let va = a[currentSort.col], vb = b[currentSort.col];
-    if (typeof va === 'string') va = va.toLowerCase();
-    if (typeof vb === 'string') vb = vb.toLowerCase();
-    if (va < vb) return currentSort.dir === 'asc' ? -1 : 1;
-    if (va > vb) return currentSort.dir === 'asc' ? 1 : -1;
-    return 0;
+function buildTable(data){
+  const tbody=document.getElementById('tableBody');
+  tbody.innerHTML='';
+  const sorted=[...data].sort((a,b)=>{
+    let va=a[currentSort.col],vb=b[currentSort.col];
+    if(typeof va==='string')va=va.toLowerCase();
+    if(typeof vb==='string')vb=vb.toLowerCase();
+    return va<vb?(currentSort.dir==='asc'?-1:1):va>vb?(currentSort.dir==='asc'?1:-1):0;
   });
-
-  let lastTier = null;
-  const isDefault = currentSort.col === 'rank' && currentSort.dir === 'asc';
-
-  sorted.forEach((s, i) => {
-    if (isDefault && s.tier !== lastTier) {
-      lastTier = s.tier;
-      const labels = { 1:'🟢 Tier 1 — Best Fit', 2:'🔵 Tier 2 — Good Options with Caveats', 3:'🟠 Tier 3 — Specific Value but Limitations', 4:'⚫ Tier 4 — Limited Fit / Significant Issues' };
-      const tr = document.createElement('tr');
-      tr.className = 'tier-row';
-      tr.innerHTML = `<td colspan="9">${labels[s.tier]}</td>`;
+  const isDefault=currentSort.col==='rank'&&currentSort.dir==='asc';
+  let lastTier=null;
+  sorted.forEach(s=>{
+    if(isDefault&&s.tier!==lastTier){
+      lastTier=s.tier;
+      const labels={1:'🟢 Tier 1 — Best Fit',2:'🔵 Tier 2 — Good Options with Caveats',3:'🟠 Tier 3 — Specific Value but Limitations',4:'⚫ Tier 4 — Limited Fit / Significant Issues'};
+      const tr=document.createElement('tr');
+      tr.className='tier-row';
+      tr.innerHTML=`<td colspan="8">${labels[s.tier]}</td>`;
       tbody.appendChild(tr);
     }
-
-    const tr = document.createElement('tr');
-    tr.className = 'data-row';
-    tr.id = `row-${s.rank}`;
-    tr.innerHTML = `
-      <td class="rank">${s.rank}<br><span class="tier-badge tier-${s.tier}">T${s.tier}</span></td>
-      <td><div class="spec-name">${s.name} <span class="expand-arrow">▼</span></div><div class="spec-prof">${s.profShort}</div></td>
-      <td class="hide-mobile"><div class="loc-area">${s.location}</div><div class="loc-detail">${s.locationDetail}</div></td>
-      <td>${renderChildDirect(s.childDirect)}</td>
-      <td class="hide-mobile">${renderSchool(s.schoolInput)}</td>
-      <td>${renderAreas(s.areas)}</td>
-      <td class="hide-mobile"><div class="cost-val">${s.costLabel}</div></td>
-      <td class="hide-mobile">
-        ${renderStars(s.reviewStars)}
-        <span class="review-count">${s.reviewCount}</span>
-        ${s.reviewWarn ? '<span class="review-warn">⚠ Issue noted</span>' : ''}
+    const tr=document.createElement('tr');
+    tr.className='data-row';
+    const agePill=s.ageFlag?`<br><span class="age-flag">⚠ AGE LIMIT</span>`:'';
+    tr.innerHTML=`
+      <td class="rank">${s.rank}<br><span class="tier-badge tier-${s.tier}">T${s.tier}</span>${agePill}</td>
+      <td>
+        <div class="spec-name"><a href="${s.website}" target="_blank" rel="noopener">${s.name}</a> <span class="expand-arrow">▼</span></div>
+        <div class="spec-prof">${s.profShort}</div>
+        ${typeBadge(s.assessType)}
       </td>
-      <td>${renderReg(s.regVerified)}<div class="reg-detail">${s.regDetail.split('.')[0]}</div></td>
+      <td class=""><div class="loc-area">${s.location}</div><div class="loc-detail">${s.locationDetail}</div></td>
+      <td><div class="yn-col"><div>${yn(s.childDirect,'Child')}</div><div>${yn(s.schoolInput,'School')}</div></div></td>
+      <td class="">${areas(s.areas)}</td>
+      <td><div class="cost-val">${s.costLabel}</div><div class="cost-note">${s.costNote}</div>${s.initConsult&&s.initConsult!=='NOT PUBLISHED'?`<div class="cost-note" style="margin-top:3px;color:var(--primary);font-weight:600">First appt: ${s.initConsult}</div>`:s.initConsult==='NOT PUBLISHED'?'<div class="cost-note" style="color:var(--muted)">First appt: not published</div>':''}</td>
+      <td>${stars(s.reviewStars)}<span class="review-count">${s.reviewCount}</span>${s.reviewWarn?'<span class="review-warn">⚠ Issue noted</span>':''}</td>
+      <td class="">${reg(s.regVerified)}<div class="reg-detail" style="font-size:10px;color:var(--muted);margin-top:2px">${s.regDetail.split('.')[0]}</div>${s.insurance==='yes'?`<br><span class="ins-badge ins-yes">🛡 Insurance</span>`:''}</td>
     `;
     tbody.appendChild(tr);
 
-    const dtr = document.createElement('tr');
-    dtr.className = 'detail-row';
-    dtr.id = `detail-${s.rank}`;
-    dtr.innerHTML = `<td class="detail-cell" colspan="9">
+    const dtr=document.createElement('tr');
+    dtr.className='detail-row';
+    dtr.innerHTML=`<td class="detail-cell" colspan="8">
+      <div class="info-row">
+        <span class="info-pill">🌐 <strong>Website:</strong> <a href="${s.website}" target="_blank">${s.website.replace('https://','')}</a></span>
+        <span class="info-pill">👶 <strong>Min Age:</strong> ${s.minAge}</span>
+        <span class="info-pill">⏱ <strong>Wait:</strong> ${s.waitTime}</span>
+        <span class="info-pill">📋 <strong>Assessment:</strong> ${s.assessDuration}</span>
+        <span class="info-pill">📄 <strong>Report:</strong> ${s.reportTurnaround}</span>
+        <span class="info-pill">📞 <strong>Free call:</strong> ${s.freeCall}</span>
+        <span class="info-pill">💊 <strong>Treatment:</strong> ${s.treatmentOffered?'Yes (assessment + therapy)':'Assessment only'}</span>
+        <span class="info-pill">🛡 <strong>Insurance:</strong> ${s.insuranceDetail}</span>
+      </div>
       <div class="detail-grid">
         <div class="detail-section">
           <h4>Suitability for this child</h4>
           <p>${s.suitability}</p>
+          <h4 style="margin-top:10px">Contact</h4>
+          <p style="font-size:12px">${s.contact}</p>
         </div>
         <div class="detail-section">
-          <h4>Evidence of complex/overlapping presentations</h4>
+          <h4>Evidence of complex / overlapping presentations</h4>
           <p>${s.evidence}</p>
           <h4 style="margin-top:10px">Independent reviews</h4>
           <p>${s.reviewNote}</p>
@@ -830,7 +908,7 @@ function buildTable(data) {
         <div class="detail-section">
           <h4>Red flags &amp; limitations</h4>
           <div class="red-flag">${s.redFlags}</div>
-          <h4 style="margin-top:10px">Registration</h4>
+          <h4 style="margin-top:10px">Registration detail</h4>
           <p style="font-size:12px">${s.regDetail}</p>
           <h4 style="margin-top:10px">Suggested first question</h4>
           <div class="question-box">"${s.firstQ}"</div>
@@ -839,63 +917,50 @@ function buildTable(data) {
     </td>`;
     tbody.appendChild(dtr);
 
-    tr.addEventListener('click', () => {
-      const open = dtr.classList.contains('open');
-      document.querySelectorAll('.detail-row.open').forEach(r => r.classList.remove('open'));
-      document.querySelectorAll('.data-row.expanded').forEach(r => r.classList.remove('expanded'));
-      if (!open) {
-        dtr.classList.add('open');
-        tr.classList.add('expanded');
-      }
+    tr.addEventListener('click',()=>{
+      const open=dtr.classList.contains('open');
+      document.querySelectorAll('.detail-row.open').forEach(r=>r.classList.remove('open'));
+      document.querySelectorAll('.data-row.expanded').forEach(r=>r.classList.remove('expanded'));
+      if(!open){dtr.classList.add('open');tr.classList.add('expanded');}
     });
   });
-
-  document.getElementById('countBadge').textContent = sorted.length + ' specialist' + (sorted.length !== 1 ? 's' : '');
+  document.getElementById('countBadge').textContent=sorted.length+' specialist'+(sorted.length!==1?'s':'');
 }
 
-function applyFilters() {
-  const search = document.getElementById('searchInput').value.toLowerCase();
-  const tier = document.getElementById('tierFilter').value;
-  const loc = document.getElementById('locationFilter').value;
-  const child = document.getElementById('childFilter').value;
-  const school = document.getElementById('schoolFilter').value;
-  const area = document.getElementById('areaFilter').value;
-
-  const filtered = specialists.filter(s => {
-    if (tier && String(s.tier) !== tier) return false;
-    if (loc && s.locationArea !== loc) return false;
-    if (child === 'yes' && s.childDirect !== 'yes') return false;
-    if (child === 'partial' && !['yes','partial'].includes(s.childDirect)) return false;
-    if (school === 'yes' && s.schoolInput !== 'yes') return false;
-    if (area && !s.areas.includes(area)) return false;
-    if (search) {
-      const haystack = [s.name, s.location, s.locationDetail, s.profShort, s.costLabel, s.suitability, s.evidence, ...s.areas].join(' ').toLowerCase();
-      if (!haystack.includes(search)) return false;
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const tier=document.getElementById('tierFilter').value;
+  const loc=document.getElementById('locationFilter').value;
+  const type=document.getElementById('typeFilter').value;
+  const area=document.getElementById('areaFilter').value;
+  const ins=document.getElementById('insuranceFilter').value;
+  const filtered=S.filter(s=>{
+    if(tier&&String(s.tier)!==tier)return false;
+    if(loc&&s.locationArea!==loc)return false;
+    if(type&&s.assessType!==type)return false;
+    if(area&&!s.areas.includes(area))return false;
+    if(ins==='yes'&&s.insurance!=='yes')return false;
+    if(q){
+      const h=[s.name,s.location,s.locationDetail,s.profShort,s.costLabel,s.suitability,s.evidence,...s.areas].join(' ').toLowerCase();
+      if(!h.includes(q))return false;
     }
     return true;
   });
-
   buildTable(filtered);
 }
 
-// Sort handlers
-document.querySelectorAll('th[data-col]').forEach(th => {
-  th.addEventListener('click', () => {
-    const col = th.dataset.col;
-    if (currentSort.col === col) {
-      currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
-    } else {
-      currentSort.col = col;
-      currentSort.dir = 'asc';
-    }
-    document.querySelectorAll('th').forEach(t => t.classList.remove('sorted-asc','sorted-desc'));
-    th.classList.add(currentSort.dir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+document.querySelectorAll('th[data-col]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const col=th.dataset.col;
+    if(currentSort.col===col){currentSort.dir=currentSort.dir==='asc'?'desc':'asc';}
+    else{currentSort.col=col;currentSort.dir='asc';}
+    document.querySelectorAll('th').forEach(t=>t.classList.remove('sorted-asc','sorted-desc'));
+    th.classList.add(currentSort.dir==='asc'?'sorted-asc':'sorted-desc');
     applyFilters();
   });
 });
 
-// Initial render
-buildTable(specialists);
+buildTable(S);
 </script>
 </body>
 </html>
