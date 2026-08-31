@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Joshua Tree + Death Valley, Christmas 2026</title>
+<style>
+  :root{
+    --bg:#faf7f2; --panel:#fff; --ink:#2b2420; --muted:#6b6058;
+    --line:#e7e0d3; --accent:#b5651d; --accent2:#5b7a6c; --good:#3f7a4f;
+    --gold:#c9962f; --soft:#f4ede0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--ink);margin:0;line-height:1.55;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 90px;}
+  header{background:linear-gradient(120deg,#3a2e26,#5b4636);color:#fff;padding:44px 24px 36px;text-align:center;}
+  header h1{margin:0 0 8px;font-size:30px;}
+  header p{margin:0;color:#e8d9c9;font-size:15px;}
+  h2{color:#4a3524;font-size:22px;margin-top:56px;padding-bottom:8px;border-bottom:3px solid var(--accent);}
+  h3{color:#5b4636;font-size:17px;}
+
+  /* Top verdict */
+  .verdict{background:linear-gradient(135deg,#fff8ec,#fdf1de);border:2px solid var(--gold);border-radius:16px;padding:28px 32px;margin:28px 0;}
+  .verdict .kicker{text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--gold);font-weight:700;}
+  .verdict h2{border:none;margin:4px 0 6px;padding:0;font-size:26px;color:#3a2e26;}
+  .verdict p.lede{font-size:15.5px;color:#4a3524;margin:0 0 16px;}
+  .statrow{display:flex;flex-wrap:wrap;gap:14px;}
+  .stat{background:#fff;border-radius:10px;padding:10px 16px;min-width:130px;border:1px solid var(--line);}
+  .stat .num{font-size:19px;font-weight:700;color:#3a2e26;}
+  .stat .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+
+  /* Podium cards */
+  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 8px;}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative;}
+  .pcard.gold{border:2px solid var(--gold);}
+  .pcard .rank{position:absolute;top:-12px;left:16px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pcard.gold .rank{background:var(--gold);}
+  .pcard h4{margin:10px 0 4px;font-size:16.5px;color:#3a2e26;}
+  .pcard .tag{font-size:11px;color:var(--muted);}
+  .pcard .price{font-size:22px;font-weight:700;color:var(--accent);margin:8px 0 4px;}
+  .pcard .desc{font-size:13px;color:#5b4636;margin:6px 0 0;}
+  @media(max-width:900px){.podium{grid-template-columns:1fr}}
+
+  /* Comparison table */
+  table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff;}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;}
+  th{background:#3a2e26;color:#fff;font-size:12.5px;font-weight:600;}
+  tr:nth-child(even) td{background:#faf6f0;}
+  .scrollbox{overflow-x:auto;border-radius:10px;border:1px solid var(--line);}
+  td.cost{font-weight:700;color:#3a2e26;white-space:nowrap;}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .pill.ready{background:#e3f2e6;color:var(--good);}
+  .pill.call{background:#fdf1de;color:var(--gold);}
+  .pill.price{background:#f7e3e3;color:#a83232;}
+
+  /* Accordion */
+  details{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden;}
+  details[open]{border-color:var(--accent);}
+  summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:15.5px;color:#3a2e26;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:20px;color:var(--accent);font-weight:400;flex-shrink:0;}
+  details[open] summary::after{content:"\2212";}
+  summary .sumline{display:flex;gap:10px;align-items:center;flex-wrap:wrap;flex:1;}
+  summary .sumcost{color:var(--accent);font-size:14px;}
+  .details-body{padding:0 20px 20px;}
+  .details-body h4{margin:18px 0 8px;color:#7a5a3a;font-size:14px;}
+  .details-body table{font-size:12.5px;}
+
+  .note{background:#fff8ec;border-left:4px solid var(--accent);padding:10px 16px;margin:12px 0;font-size:13.5px;border-radius:0 8px 8px 0;}
+  .good{background:#eaf6ec;border-left:4px solid var(--good);padding:10px 16px;margin:12px 0;font-size:13.5px;border-radius:0 8px 8px 0;}
+  .est{color:var(--muted);font-style:italic;}
+  ul.tight{margin:6px 0;padding-left:20px;}
+  ul.tight li{margin:3px 0;}
+  a{color:var(--accent2);}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:36px 0 10px;}
+  .checklist label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;border-bottom:1px dashed var(--line);}
+  .checklist input{margin-top:4px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Joshua Tree + Death Valley</h1>
+  <p>Christmas trip &middot; Fri 25&ndash;Sun 27 Dec 2026 &middot; 4 adults + girls 5, 10, 12 &middot; from Santee, CA</p>
+</header>
+
+<div class="wrap">
+
+<div class="verdict">
+  <div class="kicker">Our pick</div>
+  <h2>Camp one night, hotel the next</h2>
+  <p class="lede">Christmas night camping in Joshua Tree under a near-full moon, then a real bed and hot shower in Death Valley the second night. Two normal cars &mdash; no RV to wrangle, no rental depot drama, no forced 6am wake-up on the last day.</p>
+  <div class="statrow">
+    <div class="stat"><div class="num">~$2,200</div><div class="lbl">All-in for 7</div></div>
+    <div class="stat"><div class="num">82/100</div><div class="lbl">Memory score</div></div>
+    <div class="stat"><div class="num">2 cars</div><div class="lbl">Pathfinder + 1 rental</div></div>
+    <div class="stat"><div class="num">1 phone call</div><div class="lbl">to be fully booked</div></div>
+  </div>
+</div>
+
+<h2>Top 3, side by side</h2>
+<div class="podium">
+  <div class="pcard gold">
+    <div class="rank">#1 &middot; Best overall</div>
+    <h4>Camp + Hotel</h4>
+    <div class="tag">Joshua Tree camp night &rarr; Death Valley hotel night</div>
+    <div class="price">~$2,200</div>
+    <p class="desc">The full moonlit-desert memory, plus a comfortable reset before the long drive home. See full plan below.</p>
+  </div>
+  <div class="pcard">
+    <div class="rank">#2 &middot; Best value</div>
+    <h4>Death Valley Only</h4>
+    <div class="tag">Skip Joshua Tree, camp 2 nights at Furnace Creek</div>
+    <div class="price">~$735&ndash;1,100</div>
+    <p class="desc">Sandboarding + moonlit dunes + a real Star Wars/Tatooine treasure hunt. One packing, no mid-trip move.</p>
+  </div>
+  <div class="pcard">
+    <div class="rank">#3 &middot; Safest bet</div>
+    <h4>Joshua Tree + Mojave</h4>
+    <div class="tag">Skip the long drive into Death Valley proper</div>
+    <div class="price">~$900&ndash;1,100</div>
+    <p class="desc">Least driving of any two-stop option, still hits Route 66 and the singing Kelso Dunes. Easiest to book with confidence today.</p>
+  </div>
+</div>
+
+<h2>All 8 options at a glance</h2>
+<div class="scrollbox">
+<table>
+<tr><th>Option</th><th>What it is</th><th>Cost (7 people)</th><th>Memory score</th><th>Status</th></tr>
+<tr><td><b>Camp + Hotel</b></td><td>2 cars, JT camp night &rarr; DV hotel night</td><td class="cost">~$2,200</td><td>82</td><td><span class="pill call">1 call away</span></td></tr>
+<tr><td><b>Death Valley Only</b></td><td>2 cars, camp 2 nights at Furnace Creek, no JT</td><td class="cost">~$735&ndash;1,100</td><td>78</td><td><span class="pill ready">Ready to book</span></td></tr>
+<tr><td><b>Joshua Tree + Mojave</b></td><td>2 cars, JT + Route 66/Kelso Dunes, skip full DV</td><td class="cost">~$900&ndash;1,100</td><td>77</td><td><span class="pill ready">Ready to book</span></td></tr>
+<tr><td><b>Joshua Tree Camping</b></td><td>2 cars (or just the Pathfinder), camp 2 nights, JT only</td><td class="cost">~$650&ndash;1,030</td><td>75</td><td><span class="pill call">1 call away</span></td></tr>
+<tr><td><b>Grand Road Trip</b></td><td>2 cars, motel JT &rarr; hotel DV, both parks</td><td class="cost">~$1,450</td><td>75</td><td><span class="pill ready">Ready to book</span></td></tr>
+<tr><td><b>Glamping Hybrid</b></td><td>2 cars, AutoCamp JT &rarr; nice DV hotel, both parks</td><td class="cost">~$2,000&ndash;2,400 <span class="est">est.</span></td><td>75</td><td><span class="pill call">1 call away</span></td></tr>
+<tr><td><b>RV + Support Car</b></td><td>Rented RV + Pathfinder as backup car, camp both nights</td><td class="cost">~$3,000&ndash;3,400</td><td>75</td><td><span class="pill price">Get pricing first</span></td></tr>
+<tr><td><b>Pathfinder Only</b></td><td>Just the friends' car, no rental at all, both parks</td><td class="cost">~$1,390</td><td>71</td><td><span class="pill call">1 call away</span></td></tr>
+</table>
+</div>
+<p class="est">Cost ranges reflect one real unknown: whether the Santee family already owns cold-weather camping gear for 7. If yes, subtract about $375 from any option with camping nights.</p>
+
+<h2>The options, in detail</h2>
+
+<details open>
+<summary><span class="sumline">Camp + Hotel &mdash; the recommended plan <span class="sumcost">~$2,200</span></span></summary>
+<div class="details-body">
+<p>Two cars (the Pathfinder + one rental SUV, picked up at San Diego airport so Christmas Day hours aren't an issue). Night one: Jumbo Rocks Campground in Joshua Tree, under a moon that's 99% full. Night two: a real hotel room in Death Valley &mdash; Stovepipe Wells or The Ranch, whichever has space. Drives direct between parks (no Route 66 detour) to keep the schedule relaxed.</p>
+
+<h4>Day 1, Fri 25 Dec &mdash; Joshua Tree</h4>
+<table>
+<tr><th>Time</th><th>What</th></tr>
+<tr><td>7:00am</td><td>Leave Santee (quick Christmas moment at home first)</td></tr>
+<tr><td>9:55am</td><td>Arrive Joshua Tree, pay park fee</td></tr>
+<tr><td>10:15am&ndash;2:45pm</td><td>Hidden Valley loop &rarr; Barker Dam &rarr; picnic lunch &rarr; Skull Rock &amp; Cap Rock &rarr; Hall of Horrors scrambling (built-in time to move between stops, not back-to-back)</td></tr>
+<tr><td>2:45pm</td><td>Set up camp at Jumbo Rocks, free time scrambling on the boulders right at the campsite</td></tr>
+<tr><td>4:20pm</td><td>Keys View for sunset (sunset is 4:42pm &mdash; short winter days, so this is timed deliberately)</td></tr>
+<tr><td>5:15pm</td><td>Campfire dinner (buy firewood in town first &mdash; the park itself doesn't sell any)</td></tr>
+<tr><td>7:00pm</td><td><b>Moonlit walk among the rock formations</b> &mdash; the signature moment of the whole trip</td></tr>
+<tr><td>9:00pm</td><td>S'mores, bed</td></tr>
+</table>
+
+<h4>Day 2, Sat 26 Dec &mdash; to Death Valley</h4>
+<table>
+<tr><th>Time</th><th>What</th></tr>
+<tr><td>7:00am</td><td>Breakfast, pack up camp</td></tr>
+<tr><td>8:00am</td><td>Drive direct to Furnace Creek (about 5 hours)</td></tr>
+<tr><td>1:00pm</td><td>Arrive, check into the hotel &mdash; real beds and showers tonight</td></tr>
+<tr><td>2:15&ndash;4:15pm</td><td>Badwater Basin (lowest point in North America) &rarr; Devil's Golf Course &rarr; Artists Drive &rarr; Twenty Mule Team Canyon</td></tr>
+<tr><td>4:25pm</td><td>Zabriskie Point for sunset</td></tr>
+<tr><td>6:00pm</td><td>Restaurant dinner, hot showers, relax</td></tr>
+</table>
+
+<h4>Day 3, Sun 27 Dec &mdash; dunes, then home</h4>
+<table>
+<tr><th>Time</th><th>What</th></tr>
+<tr><td>8:00am</td><td>Relaxed hotel breakfast &mdash; no early forced wake-up</td></tr>
+<tr><td>9:30am</td><td>Mesquite Flat Sand Dunes &mdash; sandboarding and dune play</td></tr>
+<tr><td>11:00am</td><td>Short walk at Mosaic Canyon</td></tr>
+<tr><td>12:00pm</td><td>Lunch, then the drive home (about 6 hours)</td></tr>
+<tr><td>~6:15pm</td><td>Arrive Santee</td></tr>
+</table>
+
+<h4>What it costs</h4>
+<table>
+<tr><td>Rental SUV, 3 days</td><td>$350</td></tr>
+<tr><td>Fuel, both cars</td><td>$424</td></tr>
+<tr><td>Park entrance fees (both parks, 2 cars)</td><td>$120</td></tr>
+<tr><td>Joshua Tree campsite (1 night, 2 sites)</td><td>$60</td></tr>
+<tr><td>Camping gear rental, 1 night <span class="est">(skip if already own gear)</span></td><td>$280</td></tr>
+<tr><td>Death Valley hotel, 1 night, 2 rooms</td><td class="est">~$390</td></tr>
+<tr><td>Food, 7 people, 3 days</td><td>$500</td></tr>
+<tr><td>Firewood + sandboard</td><td>$65</td></tr>
+<tr><td><b>Total</b></td><td><b>~$2,189</b></td></tr>
+</table>
+<div class="note">Before booking: get the Death Valley hotel's actual rate for this exact date (hotel booking sites won't show it without a real search), and call Joshua Tree (760-367-5500) to confirm two campsites next to each other are actually available.</div>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Death Valley Only <span class="sumcost">~$735&ndash;1,100</span></span></summary>
+<div class="details-body">
+<p>Skip Joshua Tree entirely. Drive straight to Death Valley (about 6 hours), camp both nights at Furnace Creek Campground &mdash; a single site fits all 7 of you. This is the cheapest way to get a full, unhurried two-park-quality experience out of just one park, and arguably has the single best moment of any option: sandboarding down the dunes at sunset, then walking back out under an almost-full moon.</p>
+
+<h4>Highlights</h4>
+<ul class="tight">
+<li><b>Day 1:</b> arrive early afternoon, Mesquite Flat Sand Dunes at sunset, moonlit dune walk that evening</li>
+<li><b>Day 2:</b> Badwater Basin, Devil's Golf Course, Artists Drive, Twenty Mule Team Canyon, then an afternoon trip to Rhyolite ghost town (just over the Nevada line) &mdash; turn the day into a "find Tatooine" photo hunt using the real Star Wars filming spots</li>
+<li><b>Day 3:</b> pack up, drive home (about 6 hours)</li>
+</ul>
+
+<h4>What it costs</h4>
+<table>
+<tr><td>Fuel</td><td>$205</td></tr>
+<tr><td>Park entrance fee</td><td>$30</td></tr>
+<tr><td>Campsite, 2 nights, 1 site (fits all 7)</td><td>$60</td></tr>
+<tr><td>Camping gear rental, 2 nights <span class="est">(skip if already own gear)</span></td><td>$375</td></tr>
+<tr><td>Food, 7 people, 3 days</td><td>$400</td></tr>
+<tr><td>Sandboard</td><td>$40</td></tr>
+<tr><td><b>Total (gear rented)</b></td><td><b>~$1,110</b></td></tr>
+<tr><td><b>Total (gear already owned)</b></td><td><b>~$735</b></td></tr>
+</table>
+<div class="note">No car rental needed &mdash; the Pathfinder alone works for a Death Valley-only trip. Worth a call to Furnace Creek (760-786-3200) to confirm the general store/restaurant is open Christmas Day.</div>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Joshua Tree + Mojave <span class="sumcost">~$900&ndash;1,100</span></span></summary>
+<div class="details-body">
+<p>Same Joshua Tree day as the recommended plan, but instead of pushing on to Death Valley, spend day two exploring the Route 66/Mojave corridor &mdash; Amboy Crater, Roy's classic roadside motel and cafe, and Kelso Dunes (which genuinely "sing" under the right conditions) &mdash; then turn back. Least total driving of any two-stop option, and still delivers a real sense of desert adventure without the long Death Valley legs.</p>
+<p class="est">Full itinerary mirrors the recommended plan's Day 1, then a relaxed out-and-back along the corridor on Day 2. Ask if you want this built out to the same level of detail.</p>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Joshua Tree Camping (both nights) <span class="sumcost">~$650&ndash;1,030</span></span></summary>
+<div class="details-body">
+<p>Stay at Jumbo Rocks both nights, no Death Valley, no mid-trip packing up. The most relaxed option &mdash; two full days to properly explore Joshua Tree's rock scrambling, plus a second moonlit night. Cheapest realistic option if the Santee family already owns camping gear.</p>
+<table>
+<tr><td>Fuel</td><td>$97</td></tr>
+<tr><td>Park entrance fee</td><td>$30</td></tr>
+<tr><td>Campsite, 2 nights, 2 sites</td><td>$120</td></tr>
+<tr><td>Camping gear rental, 2 nights <span class="est">(skip if already own gear)</span></td><td>$375</td></tr>
+<tr><td>Food, 7 people, 2 days</td><td>$380</td></tr>
+<tr><td>Firewood (bought in town)</td><td>$25</td></tr>
+<tr><td><b>Total (gear rented)</b></td><td><b>~$1,027</b></td></tr>
+<tr><td><b>Total (gear already owned)</b></td><td><b>~$652</b></td></tr>
+</table>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Grand Road Trip <span class="sumcost">~$1,450</span></span></summary>
+<div class="details-body">
+<p>Both parks, both nights in real beds &mdash; a budget motel near Joshua Tree, then Stovepipe Wells in Death Valley. Two cars (Pathfinder + rental SUV). No camping gear needed at all, which removes the biggest cost unknown from the whole comparison. Trades the moonlit-camping memory for simplicity and comfort.</p>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Glamping Hybrid <span class="sumcost">~$2,000&ndash;2,400 est.</span></span></summary>
+<div class="details-body">
+<p>AutoCamp Joshua Tree (Airstream suites, pool, a genuinely fun place for kids) for night one, then a nicer Death Valley hotel for night two. The "wow" option &mdash; but neither property's exact price for these dates could be confirmed without a phone call, so treat the cost as a rough estimate until you actually call AutoCamp at (844) 366-9715.</p>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">RV + Support Car <span class="sumcost">~$3,000&ndash;3,400</span></span></summary>
+<div class="details-body">
+<p>A real motorhome (found: a 2018 Forest River Sunseeker in Escondido, sleeps 8, $225/night) plus the Pathfinder as backup, since the RV can't fit down Death Valley's best scenic drive (Artists Drive bans anything over 25ft). This is the "we lived in a motorhome in the desert" experience &mdash; genuinely memorable &mdash; but turned out considerably more expensive once actual gas costs were added in (an RV gets about 8&ndash;9 miles per gallon), and the rental's Sunday return deadline (3pm in Escondido) means the last day is pure driving with no slack for a lie-in or a last Death Valley stop.</p>
+<div class="note">If this one appeals despite the cost, message the RV owner first to ask whether a later Sunday return is possible &mdash; that alone would make the last day far more relaxed.</div>
+</div>
+</details>
+
+<details>
+<summary><span class="sumline">Pathfinder Only, No Rental <span class="sumcost">~$1,390</span></span></summary>
+<div class="details-body">
+<p>Just the friends' own car, nothing rented at all &mdash; both parks, motel nights. The cheapest way to do both parks properly. The real trade-off: the Pathfinder only has about 16.6 cubic feet of luggage space with all 7 seats in use, so packing needs to be genuinely light, or add a roof box.</p>
+</div>
+</details>
+
+<h2>Good to know before booking anything</h2>
+<div class="good">
+<b>The moon is 99% full on the 25th.</b> Not ideal for stargazing the Milky Way, but it makes a night walk through Joshua Tree's rocks or Death Valley's dunes something special &mdash; lean into it rather than fight it.
+</div>
+<div class="note">
+<b>Shop for groceries and firewood by Dec 24, not Dec 25.</b> The nearest real supermarket (Yucca Valley/Twentynine Palms) is closed Christmas Day, and Joshua Tree doesn't sell firewood inside the park at all &mdash; buy it in town first. Death Valley's Furnace Creek store does sell firewood and groceries on-site.
+</div>
+<div class="note">
+<b>If renting camping gear, pick it up by Dec 24 too</b> &mdash; REI closes Christmas Day, same as most rental-car branches and RV depots. One Christmas Eve errand run can cover gear, groceries, and firewood together.
+</div>
+<div class="note">
+<b>Pick up any rental car at San Diego airport, not a neighborhood branch</b> &mdash; airport desks run 24/7, local branches likely don't on Christmas Day.
+</div>
+<div class="note">
+<b>Daylight is short:</b> sunrise ~6:50am, sunset ~4:40pm all three days. Every itinerary above is built around that &mdash; the boring highway driving is deliberately scheduled for early morning or after dark.
+</div>
+
+<h2>Before you book &mdash; the short list</h2>
+<div class="card checklist" style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 20px;">
+<label><input type="checkbox"> Ask the Santee family: do you already own cold-weather sleeping bags/tents/pads for 7 people? (Changes several totals above by ~$375)</label>
+<label><input type="checkbox"> Confirm the exact hotel rate for your chosen Death Valley night (Stovepipe Wells / The Ranch) &mdash; booking sites won't show it without a real date search</label>
+<label><input type="checkbox"> If two nearby Joshua Tree campsites matter, call the park (760-367-5500) to confirm two adjacent sites that each fit your group</label>
+<label><input type="checkbox"> If considering the RV, message the owner to confirm the Sunday return time and whether it's flexible</label>
+<label><input type="checkbox"> Buy a sandboard in advance &mdash; no rental option exists near the dunes</label>
+<label><input type="checkbox"> Decide whether you're renting a car for the wider California visit anyway &mdash; if so, some of these totals drop</label>
+</div>
+
+<footer>Compiled 31 Aug 2026 for your Christmas 2026 trip. Costs are calculated from real rates where possible and clearly estimated where not &mdash; nothing here is invented.</footer>
+
+</div>
+</body>
+</html>
