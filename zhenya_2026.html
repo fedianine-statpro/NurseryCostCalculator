@@ -1,0 +1,1915 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#101329">
+  <link rel="icon" href="data:,">
+  <title>Женя: The Game</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      overscroll-behavior: none;
+      background: #080a18;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    #game-shell {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, #202754 0, #101329 45%, #080a18 100%);
+    }
+
+    canvas {
+      display: block;
+      width: min(100vw, calc(100dvh * 1.8));
+      height: min(100dvh, calc(100vw / 1.8));
+      max-width: 100vw;
+      max-height: 100dvh;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      outline: none;
+      cursor: pointer;
+      background: #101329;
+      box-shadow: 0 0 0 2px #333b73, 0 0 28px #000a;
+    }
+
+    #sound-toggle {
+      position: fixed;
+      z-index: 4;
+      top: max(8px, env(safe-area-inset-top));
+      right: max(8px, env(safe-area-inset-right));
+      width: 46px;
+      height: 42px;
+      border: 0;
+      border-radius: 0;
+      color: #fff6d2;
+      background: #11162dd9;
+      box-shadow: inset 0 0 0 2px #fff6d2, 3px 3px 0 #080a18;
+      font: 22px/1 sans-serif;
+      cursor: pointer;
+    }
+
+    #sound-toggle:active {
+      transform: translate(2px, 2px);
+      box-shadow: inset 0 0 0 2px #fff6d2, 1px 1px 0 #080a18;
+    }
+
+    #rotate-hint {
+      display: none;
+      position: fixed;
+      z-index: 3;
+      top: max(8px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 7px 11px;
+      color: #fff6d2;
+      background: #11162de8;
+      box-shadow: inset 0 0 0 2px #5962a6;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      pointer-events: none;
+      animation: hint-blink 1.2s steps(2, end) infinite;
+    }
+
+    @media (orientation: portrait) and (max-width: 720px) {
+      #rotate-hint {
+        display: block;
+      }
+    }
+
+    @keyframes hint-blink {
+      50% { opacity: .72; }
+    }
+  </style>
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="game" width="360" height="200" tabindex="0" aria-label="Короткая пиксельная игра-подарок для Жени"></canvas>
+    <div id="rotate-hint">ЛУЧШЕ ПОВЕРНИ ТЕЛЕФОН ГОРИЗОНТАЛЬНО 📱</div>
+    <button id="sound-toggle" type="button" aria-label="Выключить звук">🔊</button>
+  </main>
+
+  <script>
+    "use strict";
+
+    (() => {
+      const W = 360;
+      const H = 200;
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const soundButton = document.getElementById("sound-toggle");
+
+      if (!ctx) {
+        throw new Error("Canvas 2D не поддерживается этим браузером.");
+      }
+
+      ctx.imageSmoothingEnabled = false;
+
+      const C = {
+        ink: "#101329",
+        deep: "#080a18",
+        night: "#202754",
+        purple: "#5962a6",
+        lilac: "#9fa8ff",
+        cream: "#fff6d2",
+        white: "#ffffff",
+        pink: "#ff5f87",
+        red: "#df355d",
+        orange: "#ff9d4d",
+        yellow: "#ffd866",
+        green: "#66c66f",
+        mint: "#91e6a5",
+        cyan: "#57d5e8",
+        blue: "#3a75c4",
+        denim: "#4f79aa",
+        denimDark: "#31537d",
+        skin: "#d99a74",
+        skinLight: "#efbd8e",
+        hair: "#49352f",
+        hairDark: "#2c2326",
+        gray: "#7b8295",
+        grayDark: "#464c60",
+        grayLight: "#b8bdc9",
+        black: "#171722",
+        brown: "#76503a",
+        mountain: "#9e6f55",
+        mountainDark: "#684b48",
+        sand: "#dbb878",
+        sunset: "#e85d68"
+      };
+
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const ease = t => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
+      const rand = (min, max) => min + Math.random() * (max - min);
+      const choose = items => items[Math.floor(Math.random() * items.length)];
+
+      function rect(g, x, y, w, h, color) {
+        g.fillStyle = color;
+        g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+      }
+
+      function line(g, x1, y1, x2, y2, color, width = 1) {
+        g.strokeStyle = color;
+        g.lineWidth = width;
+        g.beginPath();
+        g.moveTo(Math.round(x1) + 0.5, Math.round(y1) + 0.5);
+        g.lineTo(Math.round(x2) + 0.5, Math.round(y2) + 0.5);
+        g.stroke();
+      }
+
+      function pixelText(g, value, x, y, size = 10, color = C.cream, align = "center", shadow = true) {
+        g.save();
+        g.font = `700 ${size}px "Courier New", monospace`;
+        g.textAlign = align;
+        g.textBaseline = "top";
+        if (shadow) {
+          g.fillStyle = C.deep;
+          g.fillText(value, Math.round(x) + 2, Math.round(y) + 2);
+        }
+        g.fillStyle = color;
+        g.fillText(value, Math.round(x), Math.round(y));
+        g.restore();
+      }
+
+      function multiline(g, values, x, y, size = 10, color = C.cream, gap = 2, align = "center") {
+        const lines = Array.isArray(values) ? values : String(values).split("\n");
+        lines.forEach((value, index) => {
+          pixelText(g, value, x, y + index * (size + gap), size, color, align);
+        });
+      }
+
+      function panel(g, x, y, w, h, fill = C.ink, border = C.cream) {
+        rect(g, x + 3, y + 3, w, h, C.deep);
+        rect(g, x, y, w, h, border);
+        rect(g, x + 2, y + 2, w - 4, h - 4, fill);
+      }
+
+      function speech(g, textLines, x, y, w, speakerColor = C.cream) {
+        const lines = Array.isArray(textLines) ? textLines : [textLines];
+        const h = 10 + lines.length * 10;
+        panel(g, x, y, w, h, C.cream, C.deep);
+        rect(g, x + 12, y + h, 7, 4, C.deep);
+        rect(g, x + 14, y + h, 4, 4, C.cream);
+        lines.forEach((value, index) => {
+          pixelText(g, value, x + 6, y + 5 + index * 10, 8, speakerColor === C.cream ? C.ink : speakerColor, "left", false);
+        });
+      }
+
+      function drawCloud(g, x, y, scale = 1, color = C.white) {
+        const p = Math.max(1, Math.round(scale * 2));
+        rect(g, x, y + p * 2, p * 9, p * 2, color);
+        rect(g, x + p * 2, y + p, p * 5, p * 3, color);
+        rect(g, x + p * 4, y, p * 3, p * 4, color);
+      }
+
+      function drawPixelHeart(g, x, y, scale = 1, color = C.pink) {
+        const p = Math.max(1, Math.round(scale));
+        const map = [
+          "0110110",
+          "1111111",
+          "1111111",
+          "0111110",
+          "0011100",
+          "0001000"
+        ];
+        map.forEach((row, yy) => {
+          [...row].forEach((cell, xx) => {
+            if (cell === "1") rect(g, x + xx * p, y + yy * p, p, p, color);
+          });
+        });
+      }
+
+      function drawStar(g, x, y, color = C.cream) {
+        rect(g, x + 1, y, 1, 5, color);
+        rect(g, x, y + 2, 4, 1, color);
+      }
+
+      function drawZhenya(g, x, baseline, options = {}) {
+        const p = Math.max(1, Math.round((options.scale || 1) * 2));
+        const frame = options.frame || 0;
+        const flip = Boolean(options.flip);
+        const jump = options.jump || 0;
+        const bob = options.bob === false ? 0 : (frame % 2);
+
+        g.save();
+        g.translate(Math.round(x), Math.round(baseline + jump - bob));
+        if (flip) g.scale(-1, 1);
+
+        rect(g, -5 * p, -1 * p, 10 * p, p, "#0005");
+
+        const legShift = frame % 2 ? p : 0;
+        rect(g, -4 * p, -8 * p, 4 * p, 7 * p, C.denimDark);
+        rect(g, p, -8 * p, 4 * p, 7 * p, C.denim);
+        rect(g, -5 * p - legShift, -2 * p, 5 * p, 2 * p, C.white);
+        rect(g, -5 * p - legShift, -p, 6 * p, p, C.red);
+        rect(g, p + legShift, -2 * p, 5 * p, 2 * p, C.white);
+        rect(g, p + legShift, -p, 6 * p, p, C.red);
+
+        rect(g, -5 * p, -15 * p, 10 * p, 8 * p, C.black);
+        rect(g, -6 * p, -14 * p, p, 5 * p, C.skin);
+        rect(g, 5 * p, -14 * p, p, 5 * p, C.skinLight);
+        rect(g, 5 * p, -10 * p, 2 * p, p, C.black);
+        drawStar(g, -3 * p, -13 * p, C.white);
+        drawStar(g, p, -10 * p, C.grayLight);
+        rect(g, -4 * p, -8 * p, 9 * p, p, C.denimDark);
+
+        rect(g, -4 * p, -21 * p, 8 * p, 7 * p, C.hairDark);
+        rect(g, -3 * p, -20 * p, 7 * p, 6 * p, C.skinLight);
+        rect(g, -4 * p, -21 * p, 8 * p, 3 * p, C.hair);
+        rect(g, -5 * p, -24 * p, 4 * p, 4 * p, C.hair);
+        rect(g, 2 * p, -24 * p, 4 * p, 4 * p, C.hair);
+        rect(g, -4 * p, -23 * p, 2 * p, p, C.pink);
+        rect(g, 3 * p, -23 * p, 2 * p, p, C.red);
+        rect(g, -3 * p, -18 * p, p, p, C.hairDark);
+        rect(g, 2 * p, -18 * p, p, p, C.hairDark);
+        rect(g, 3 * p, -16 * p, p, p, C.red);
+        rect(g, -2 * p, -15 * p, 4 * p, p, C.skin);
+
+        g.restore();
+      }
+
+      function drawCat(g, x, baseline, options = {}) {
+        const p = Math.max(1, Math.round((options.scale || 1) * 2));
+        const color = options.color || C.gray;
+        const dark = options.dark || C.grayDark;
+        const frame = options.frame || 0;
+        const flip = Boolean(options.flip);
+
+        g.save();
+        g.translate(Math.round(x), Math.round(baseline - (frame % 2)));
+        if (flip) g.scale(-1, 1);
+
+        rect(g, -5 * p, -8 * p, 9 * p, 6 * p, color);
+        rect(g, p, -13 * p, 6 * p, 6 * p, color);
+        rect(g, p, -15 * p, 2 * p, 3 * p, color);
+        rect(g, 5 * p, -15 * p, 2 * p, 3 * p, color);
+        rect(g, 2 * p, -12 * p, p, p, C.cream);
+        rect(g, 5 * p, -12 * p, p, p, C.cream);
+        rect(g, 3 * p, -10 * p, 2 * p, p, C.pink);
+        rect(g, -4 * p, -2 * p, 2 * p, 2 * p, dark);
+        rect(g, 2 * p, -2 * p, 2 * p, 2 * p, dark);
+        rect(g, -7 * p, -10 * p, 2 * p, 7 * p, color);
+        rect(g, -9 * p, -12 * p + (frame % 2) * p, 3 * p, 2 * p, color);
+        rect(g, -3 * p, -7 * p, 2 * p, p, dark);
+
+        g.restore();
+      }
+
+      function drawProfessor(g, x, baseline, frame = 0) {
+        const p = 2;
+        g.save();
+        g.translate(Math.round(x), Math.round(baseline - (frame % 2)));
+        rect(g, -4 * p, -1 * p, 8 * p, p, "#0005");
+        rect(g, -4 * p, -8 * p, 3 * p, 7 * p, C.grayDark);
+        rect(g, p, -8 * p, 3 * p, 7 * p, C.gray);
+        rect(g, -5 * p, -16 * p, 10 * p, 9 * p, C.brown);
+        rect(g, -3 * p, -22 * p, 7 * p, 7 * p, C.skinLight);
+        rect(g, -4 * p, -23 * p, 8 * p, 3 * p, C.grayLight);
+        rect(g, -3 * p, -20 * p, 3 * p, 2 * p, C.ink);
+        rect(g, p, -20 * p, 3 * p, 2 * p, C.ink);
+        rect(g, 0, -19 * p, p, p, C.cream);
+        g.restore();
+      }
+
+      function drawRelative(g, x, baseline, frame = 0) {
+        const p = 2;
+        g.save();
+        g.translate(Math.round(x), Math.round(baseline - (frame % 2)));
+        rect(g, -4 * p, -1 * p, 8 * p, p, "#0005");
+        rect(g, -4 * p, -8 * p, 3 * p, 7 * p, C.grayDark);
+        rect(g, p, -8 * p, 3 * p, 7 * p, C.gray);
+        rect(g, -5 * p, -16 * p, 10 * p, 9 * p, C.blue);
+        rect(g, -3 * p, -22 * p, 7 * p, 7 * p, C.skinLight);
+        rect(g, -4 * p, -23 * p, 9 * p, 3 * p, C.ink);
+        rect(g, 4 * p, -21 * p, 2 * p, p, C.ink);
+        rect(g, -2 * p, -19 * p, p, p, C.ink);
+        rect(g, 2 * p, -19 * p, p, p, C.ink);
+        g.restore();
+      }
+
+      function drawPlant(g, x, y, color = C.green) {
+        rect(g, x, y - 8, 2, 8, C.brown);
+        rect(g, x - 4, y - 7, 4, 2, color);
+        rect(g, x + 2, y - 5, 4, 2, color);
+        rect(g, x - 3, y - 3, 3, 2, color);
+      }
+
+      function drawIsraeliFlag(g, x, y, scale = 1) {
+        const w = 34 * scale;
+        const h = 22 * scale;
+        rect(g, x, y, w, h, C.white);
+        rect(g, x, y + 3 * scale, w, 3 * scale, C.blue);
+        rect(g, x, y + 16 * scale, w, 3 * scale, C.blue);
+        const cx = x + w / 2;
+        const cy = y + h / 2;
+        line(g, cx, cy - 6 * scale, cx - 6 * scale, cy + 4 * scale, C.blue, scale);
+        line(g, cx - 6 * scale, cy + 4 * scale, cx + 6 * scale, cy + 4 * scale, C.blue, scale);
+        line(g, cx + 6 * scale, cy + 4 * scale, cx, cy - 6 * scale, C.blue, scale);
+        line(g, cx, cy + 6 * scale, cx - 6 * scale, cy - 4 * scale, C.blue, scale);
+        line(g, cx - 6 * scale, cy - 4 * scale, cx + 6 * scale, cy - 4 * scale, C.blue, scale);
+        line(g, cx + 6 * scale, cy - 4 * scale, cx, cy + 6 * scale, C.blue, scale);
+      }
+
+      class Input {
+        constructor(target) {
+          this.target = target;
+          this.x = W / 2;
+          this.y = H / 2;
+          this.down = false;
+          this.justPressed = false;
+          this.justReleased = false;
+          this.tap = null;
+          this.keys = new Set();
+          this.keysPressed = new Set();
+
+          const updatePointer = event => {
+            const bounds = target.getBoundingClientRect();
+            this.x = clamp((event.clientX - bounds.left) * W / bounds.width, 0, W);
+            this.y = clamp((event.clientY - bounds.top) * H / bounds.height, 0, H);
+          };
+
+          target.addEventListener("pointerdown", event => {
+            event.preventDefault();
+            updatePointer(event);
+            this.down = true;
+            this.justPressed = true;
+            this.tap = { x: this.x, y: this.y };
+            target.focus({ preventScroll: true });
+            if (target.setPointerCapture) target.setPointerCapture(event.pointerId);
+          });
+
+          target.addEventListener("pointermove", event => {
+            event.preventDefault();
+            updatePointer(event);
+          });
+
+          const release = event => {
+            event.preventDefault();
+            updatePointer(event);
+            this.down = false;
+            this.justReleased = true;
+          };
+
+          target.addEventListener("pointerup", release);
+          target.addEventListener("pointercancel", release);
+
+          window.addEventListener("keydown", event => {
+            const gameKeys = [
+              "Space", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp",
+              "KeyA", "KeyD", "KeyW"
+            ];
+            if (!gameKeys.includes(event.code)) return;
+            event.preventDefault();
+            if (!event.repeat) this.keysPressed.add(event.code);
+            this.keys.add(event.code);
+          });
+
+          window.addEventListener("keyup", event => {
+            this.keys.delete(event.code);
+          });
+        }
+
+        actionPressed() {
+          return this.justPressed
+            || this.keysPressed.has("Space")
+            || this.keysPressed.has("Enter")
+            || this.keysPressed.has("ArrowUp")
+            || this.keysPressed.has("KeyW");
+        }
+
+        actionHeld() {
+          return this.down
+            || this.keys.has("Space")
+            || this.keys.has("Enter")
+            || this.keys.has("ArrowUp")
+            || this.keys.has("KeyW");
+        }
+
+        leftHeld() {
+          return this.keys.has("ArrowLeft") || this.keys.has("KeyA");
+        }
+
+        rightHeld() {
+          return this.keys.has("ArrowRight") || this.keys.has("KeyD");
+        }
+
+        endFrame() {
+          this.justPressed = false;
+          this.justReleased = false;
+          this.tap = null;
+          this.keysPressed.clear();
+        }
+      }
+
+      class AudioManager {
+        constructor(button) {
+          this.button = button;
+          this.enabled = true;
+          this.available = Boolean(window.AudioContext || window.webkitAudioContext);
+          this.context = null;
+          this.master = null;
+          this.musicGain = null;
+          this.sfxGain = null;
+          this.timer = null;
+          this.nextNote = 0;
+          this.step = 0;
+          this.theme = "title";
+          this.musicLevel = 1;
+          this.updateButton();
+        }
+
+        unlock() {
+          if (!this.available) {
+            this.enabled = false;
+            this.updateButton();
+            return;
+          }
+
+          if (!this.context) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            this.context = new AudioContextClass();
+            this.master = this.context.createGain();
+            this.musicGain = this.context.createGain();
+            this.sfxGain = this.context.createGain();
+            this.master.gain.value = this.enabled ? 0.8 : 0;
+            this.musicGain.gain.value = 0.18;
+            this.sfxGain.gain.value = 0.34;
+            this.musicGain.connect(this.master);
+            this.sfxGain.connect(this.master);
+            this.master.connect(this.context.destination);
+            this.nextNote = this.context.currentTime + 0.04;
+            this.timer = window.setInterval(() => this.scheduleMusic(), 50);
+          }
+
+          if (this.context.state === "suspended") {
+            this.context.resume();
+          }
+        }
+
+        updateButton() {
+          this.button.textContent = this.enabled && this.available ? "🔊" : "🔇";
+          this.button.setAttribute("aria-label", this.enabled ? "Выключить звук" : "Включить звук");
+        }
+
+        toggle() {
+          if (!this.available) return;
+          this.enabled = !this.enabled;
+          this.updateButton();
+          if (this.context && this.master) {
+            const now = this.context.currentTime;
+            this.master.gain.cancelScheduledValues(now);
+            this.master.gain.setTargetAtTime(this.enabled ? 0.8 : 0, now, 0.02);
+          }
+        }
+
+        setTheme(theme, level = 1) {
+          this.theme = theme;
+          this.musicLevel = level;
+          this.step = 0;
+          if (this.context && this.musicGain) {
+            this.musicGain.gain.setTargetAtTime(0.18 * level, this.context.currentTime, 0.08);
+          }
+        }
+
+        midi(note) {
+          return 440 * Math.pow(2, (note - 69) / 12);
+        }
+
+        tone(frequency, duration, type = "square", volume = 0.05, when = null, destination = null, endFrequency = null) {
+          if (!this.context || !this.enabled) return;
+          const start = when ?? this.context.currentTime;
+          const oscillator = this.context.createOscillator();
+          const gain = this.context.createGain();
+          oscillator.type = type;
+          oscillator.frequency.setValueAtTime(Math.max(30, frequency), start);
+          if (endFrequency) {
+            oscillator.frequency.exponentialRampToValueAtTime(Math.max(30, endFrequency), start + duration);
+          }
+          gain.gain.setValueAtTime(0.0001, start);
+          gain.gain.exponentialRampToValueAtTime(volume, start + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+          oscillator.connect(gain);
+          gain.connect(destination || this.sfxGain);
+          oscillator.start(start);
+          oscillator.stop(start + duration + 0.02);
+        }
+
+        scheduleMusic() {
+          if (!this.context || this.context.state !== "running") return;
+
+          const themes = {
+            title: {
+              tempo: 0.18,
+              lead: [72, null, 76, 79, 76, null, 74, 71, 69, null, 72, 76, 74, 71, 67, null],
+              bass: [48, 48, 45, 45, 50, 50, 43, 43]
+            },
+            math: {
+              tempo: 0.14,
+              lead: [76, 79, 83, null, 78, 81, 84, null, 79, 83, 86, 83, 81, 78, 74, null],
+              bass: [52, 52, 50, 50, 55, 55, 47, 47]
+            },
+            cats: {
+              tempo: 0.16,
+              lead: [79, 83, 86, 83, 81, 84, 88, 84, 78, 81, 84, 81, 76, 79, 83, null],
+              bass: [48, 55, 50, 57, 47, 54, 43, 50]
+            },
+            calm: {
+              tempo: 0.22,
+              lead: [69, null, 72, null, 74, null, 72, null, 67, null, 71, null, 72, null, 69, null],
+              bass: [45, 45, 43, 43, 41, 41, 40, 40]
+            },
+            israel: {
+              tempo: 0.16,
+              lead: [74, 78, 81, 86, 81, 78, 76, 79, 83, 88, 83, 79, 78, 81, 86, null],
+              bass: [50, 50, 55, 55, 47, 47, 52, 52]
+            },
+            london: {
+              tempo: 0.15,
+              lead: [71, 74, 78, 83, 78, 74, 69, 73, 76, 81, 76, 73, 67, 71, 74, null],
+              bass: [47, 47, 45, 45, 43, 43, 42, 42]
+            },
+            concert: {
+              tempo: 0.12,
+              lead: [76, 76, 83, 81, 79, 79, 86, 83, 74, 74, 81, 79, 72, 76, 79, 83],
+              bass: [40, 40, 43, 43, 45, 45, 47, 47]
+            },
+            mountain: {
+              tempo: 0.17,
+              lead: [67, 71, 74, 79, 74, 71, 69, 72, 76, 81, 76, 72, 71, 74, 79, null],
+              bass: [43, 43, 45, 45, 47, 47, 50, 50]
+            },
+            birthday: {
+              tempo: 0.2,
+              lead: [72, null, 76, null, 79, null, 84, null, 79, null, 76, null, 74, null, 71, null],
+              bass: [48, 48, 45, 45, 41, 41, 43, 43]
+            }
+          };
+
+          const theme = themes[this.theme] || themes.title;
+          const horizon = this.context.currentTime + 0.22;
+
+          while (this.nextNote < horizon) {
+            const lead = theme.lead[this.step % theme.lead.length];
+            const bass = theme.bass[Math.floor(this.step / 2) % theme.bass.length];
+
+            if (lead !== null && this.step % 2 === 0) {
+              this.tone(this.midi(lead), theme.tempo * 0.72, "square", 0.024, this.nextNote, this.musicGain);
+            }
+            if (this.step % 4 === 0) {
+              this.tone(this.midi(bass), theme.tempo * 1.8, "triangle", 0.03, this.nextNote, this.musicGain);
+            }
+            if (this.step % 4 === 2) {
+              this.tone(90, 0.025, "square", 0.008, this.nextNote, this.musicGain, 55);
+            }
+
+            this.nextNote += theme.tempo;
+            this.step += 1;
+          }
+        }
+
+        jump() {
+          this.tone(170, 0.16, "square", 0.09, null, this.sfxGain, 410);
+        }
+
+        collect() {
+          if (!this.context) return;
+          const now = this.context.currentTime;
+          this.tone(660, 0.08, "square", 0.09, now);
+          this.tone(990, 0.12, "square", 0.08, now + 0.07);
+        }
+
+        meow() {
+          if (!this.context) return;
+          const now = this.context.currentTime;
+          this.tone(410, 0.22, "sawtooth", 0.055, now, this.sfxGain, 690);
+          this.tone(690, 0.2, "triangle", 0.045, now + 0.2, this.sfxGain, 360);
+        }
+
+        success() {
+          if (!this.context) return;
+          const now = this.context.currentTime;
+          [72, 76, 79, 84].forEach((note, index) => {
+            this.tone(this.midi(note), 0.15, "square", 0.075, now + index * 0.09);
+          });
+        }
+
+        fanfare() {
+          if (!this.context) return;
+          const now = this.context.currentTime;
+          const notes = [72, 76, 79, 84, 79, 86, 88, 91];
+          const times = [0, 0.12, 0.24, 0.42, 0.58, 0.74, 0.9, 1.08];
+          notes.forEach((note, index) => {
+            this.tone(this.midi(note), index === notes.length - 1 ? 0.6 : 0.19, "square", 0.09, now + times[index]);
+          });
+          [48, 53, 55, 60].forEach((note, index) => {
+            this.tone(this.midi(note), 0.34, "triangle", 0.055, now + index * 0.3);
+          });
+        }
+      }
+
+      class SceneManager {
+        constructor(game) {
+          this.game = game;
+          this.current = null;
+          this.transition = null;
+        }
+
+        start(SceneClass) {
+          this.current = new SceneClass(this.game);
+          this.current.enter();
+        }
+
+        go(SceneClass) {
+          if (this.transition) return;
+          this.transition = {
+            time: 0,
+            duration: 0.62,
+            swapped: false,
+            next: new SceneClass(this.game)
+          };
+        }
+
+        restart() {
+          if (this.current && this.current.exit) this.current.exit();
+          this.transition = null;
+          this.game.popups.length = 0;
+          this.game.particles.length = 0;
+          this.current = new TitleScene(this.game);
+          this.current.enter();
+        }
+
+        update(dt) {
+          if (!this.transition) {
+            this.current.update(dt);
+            return;
+          }
+
+          this.transition.time += dt;
+          if (!this.transition.swapped && this.transition.time >= this.transition.duration / 2) {
+            if (this.current.exit) this.current.exit();
+            this.current = this.transition.next;
+            this.current.enter();
+            this.transition.swapped = true;
+          }
+          if (this.transition.time >= this.transition.duration) {
+            this.transition = null;
+          }
+        }
+
+        draw(g) {
+          this.current.draw(g);
+          if (!this.transition) return;
+
+          const half = this.transition.duration / 2;
+          const t = this.transition.time;
+          const amount = t < half ? t / half : 1 - (t - half) / half;
+          const columns = 12;
+          const columnWidth = W / columns;
+          for (let i = 0; i < columns; i += 1) {
+            const delay = i / columns * 0.35;
+            const local = clamp((amount - delay) / 0.65, 0, 1);
+            const height = Math.ceil(H * ease(local) / 8) * 8;
+            rect(g, i * columnWidth, 0, Math.ceil(columnWidth) + 1, height, C.deep);
+            if (height > 5) rect(g, i * columnWidth, height - 4, Math.ceil(columnWidth) + 1, 4, C.purple);
+          }
+        }
+      }
+
+      class BaseScene {
+        constructor(game) {
+          this.game = game;
+          this.time = 0;
+        }
+
+        enter() {
+          this.time = 0;
+        }
+
+        exit() {}
+      }
+
+      class TitleScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("title");
+          this.clouds = [
+            { x: 22, y: 29, speed: 4, scale: 0.75 },
+            { x: 220, y: 48, speed: 7, scale: 0.55 },
+            { x: 310, y: 20, speed: 5, scale: 0.7 }
+          ];
+        }
+
+        update(dt) {
+          this.time += dt;
+          this.clouds.forEach(cloud => {
+            cloud.x += cloud.speed * dt;
+            if (cloud.x > W + 25) cloud.x = -45;
+          });
+
+          if (this.game.input.actionPressed()) {
+            this.game.audio.unlock();
+            this.game.audio.collect();
+            this.game.manager.go(MathScene);
+          }
+        }
+
+        draw(g) {
+          rect(g, 0, 0, W, H, C.night);
+          for (let y = 0; y < H; y += 16) {
+            rect(g, 0, y, W, 8, y % 32 === 0 ? "#252d61" : "#202754");
+          }
+          for (let i = 0; i < 22; i += 1) {
+            const x = (i * 71 + 13) % W;
+            const y = (i * 37 + 8) % 112;
+            if ((Math.floor(this.time * 3) + i) % 4 !== 0) drawStar(g, x, y, i % 3 ? C.cream : C.cyan);
+          }
+          this.clouds.forEach(cloud => drawCloud(g, cloud.x, cloud.y, cloud.scale, "#cad3ff"));
+
+          rect(g, 0, 157, W, 43, C.deep);
+          rect(g, 0, 157, W, 3, C.purple);
+          for (let x = 0; x < W; x += 24) {
+            rect(g, x, 170 + (x % 48 ? 7 : 0), 18, 30, x % 48 ? "#171d3d" : "#11162d");
+            rect(g, x + 4, 177, 3, 4, C.yellow);
+          }
+
+          const heroBob = Math.floor(this.time * 4) % 2;
+          drawZhenya(g, 47, 183, { frame: heroBob, scale: 0.8 });
+          drawCat(g, 317, 184, { frame: heroBob, scale: 0.72, color: C.orange, dark: C.brown, flip: true });
+
+          pixelText(g, "ЖЕНЯ", W / 2, 22, 33, C.yellow);
+          pixelText(g, "THE GAME", W / 2, 55, 20, C.cyan);
+          multiline(g, ["АБСОЛЮТНО ТОЧНАЯ", "БИОГРАФИЯ"], W / 2, 84, 11, C.cream, 1);
+
+          const blink = Math.floor(this.time * 2) % 2 === 0;
+          panel(g, 79, 126, 202, 28, blink ? C.red : C.pink, C.cream);
+          pixelText(g, "НАЖМИ, ЧТОБЫ НАЧАТЬ", W / 2, 134, 11, C.white);
+          pixelText(g, "ТАП / ПРОБЕЛ", W / 2, 187, 7, C.grayLight);
+        }
+      }
+
+      class MathScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("math");
+          this.playerX = 180;
+          this.score = 90;
+          this.caught = 0;
+          this.symbols = [];
+          this.spawnTimer = 0;
+          this.lastCatch = 0;
+          this.phase = "play";
+          this.phaseTime = 0;
+          this.symbolSet = ["π", "∫", "Σ", "∞", "√", "lim"];
+          for (let i = 0; i < 4; i += 1) this.spawnSymbol(i * -29);
+        }
+
+        spawnSymbol(y = -10) {
+          this.symbols.push({
+            x: rand(34, 326),
+            y,
+            speed: rand(27, 39),
+            value: choose(this.symbolSet),
+            spin: Math.random() * 10
+          });
+        }
+
+        collectSymbol(symbol) {
+          if (this.phase !== "play") return;
+          symbol.dead = true;
+          this.caught += 1;
+          this.score += 10;
+          this.lastCatch = this.time;
+          this.game.audio.collect();
+          this.game.popup("+10 МАТЕМАТИКА", C.yellow);
+          this.game.burst(symbol.x, symbol.y, C.cyan, 12);
+          this.game.shake(0.12, 2);
+
+          if (this.caught >= 3) {
+            this.phase = "maximum";
+            this.phaseTime = 0;
+            this.game.audio.success();
+          }
+        }
+
+        update(dt) {
+          this.time += dt;
+          this.phaseTime += dt;
+
+          if (this.phase === "play") {
+            if (this.game.input.down) {
+              this.playerX += (this.game.input.x - this.playerX) * Math.min(1, dt * 12);
+            }
+            if (this.game.input.leftHeld()) this.playerX -= 105 * dt;
+            if (this.game.input.rightHeld()) this.playerX += 105 * dt;
+            this.playerX = clamp(this.playerX, 18, W - 18);
+
+            this.spawnTimer -= dt;
+            if (this.spawnTimer <= 0 && this.symbols.length < 5) {
+              this.spawnSymbol();
+              this.spawnTimer = 0.75;
+            }
+
+            let nearest = null;
+            this.symbols.forEach(symbol => {
+              symbol.y += symbol.speed * dt;
+              symbol.spin += dt;
+              if (!nearest || symbol.y > nearest.y) nearest = symbol;
+              if (symbol.y > 137 && symbol.y < 172 && Math.abs(symbol.x - this.playerX) < 25) {
+                this.collectSymbol(symbol);
+              } else if (symbol.y > 184) {
+                symbol.y = rand(-42, -8);
+                symbol.x = clamp(this.playerX + rand(-45, 45), 24, W - 24);
+              }
+            });
+            this.symbols = this.symbols.filter(symbol => !symbol.dead);
+
+            const inactiveFor = this.time - this.lastCatch;
+            if (!this.game.input.down && nearest && inactiveFor > 1.5) {
+              this.playerX += Math.sign(nearest.x - this.playerX) * 48 * dt;
+            }
+            if (inactiveFor > 2.8 && nearest) {
+              nearest.x = this.playerX;
+              nearest.y = 145;
+            }
+          } else if (this.phase === "maximum" && this.phaseTime > 1.35) {
+            this.phase = "professor";
+            this.phaseTime = 0;
+          } else if (this.phase === "professor" && this.phaseTime > 2.0) {
+            this.phase = "zhenya";
+            this.phaseTime = 0;
+          } else if (this.phase === "zhenya" && this.phaseTime > 1.25) {
+            this.game.manager.go(CatsScene);
+          }
+        }
+
+        draw(g) {
+          rect(g, 0, 0, W, H, "#c9b58d");
+          rect(g, 0, 0, W, 24, C.ink);
+          pixelText(g, "УРОВЕНЬ 1 · МОСКВА", 8, 7, 9, C.cream, "left");
+
+          rect(g, 16, 34, 328, 80, C.brown);
+          rect(g, 21, 39, 318, 70, "#244f43");
+          pixelText(g, "f(x) = КОТ + ∞", 180, 48, 12, "#cde4ce");
+          pixelText(g, "∫ СЧАСТЬЕ dЖЕНЯ", 180, 72, 11, "#cde4ce");
+          line(g, 36, 97, 108, 97, "#cde4ce", 1);
+          pixelText(g, "Q.E.D.", 300, 92, 8, "#cde4ce");
+
+          rect(g, 0, 114, W, 86, "#927758");
+          for (let x = 0; x < W; x += 42) {
+            rect(g, x, 164, 34, 9, "#684b3b");
+            rect(g, x + 4, 173, 4, 27, "#5b4035");
+            rect(g, x + 25, 173, 4, 27, "#5b4035");
+          }
+
+          this.symbols.forEach(symbol => {
+            const bob = Math.sin(symbol.spin * 5) * 2;
+            panel(g, symbol.x - 12, symbol.y - 5 + bob, 24, 22, C.night, C.cyan);
+            pixelText(g, symbol.value, symbol.x, symbol.y - 1 + bob, symbol.value === "lim" ? 9 : 14, C.yellow);
+          });
+
+          drawZhenya(g, this.playerX, 190, {
+            frame: Math.floor(this.time * 7) % 2,
+            scale: 0.85
+          });
+
+          panel(g, 242, 4, 110, 18, C.night, C.yellow);
+          pixelText(g, `МАТЕМАТИКА: ${this.score}`, 297, 9, 8, C.yellow);
+
+          if (this.phase === "play") {
+            pixelText(g, "← ВЕДИ ПАЛЬЦЕМ →", 180, 187, 7, C.cream);
+          }
+
+          if (this.phase === "maximum") {
+            panel(g, 72, 72, 216, 48, C.red, C.cream);
+            multiline(g, ["МАТЕМАТИКА:", "МАКСИМУМ"], 180, 80, 16, C.white, 1);
+          }
+
+          if (this.phase === "professor" || this.phase === "zhenya") {
+            drawProfessor(g, 304, 190, Math.floor(this.time * 4) % 2);
+            speech(g, ["ПРОФЕССОР:", "Женя, может хватит?"], 183, 116, 168);
+          }
+
+          if (this.phase === "zhenya") {
+            speech(g, ["ЖЕНЯ:", "Нет."], 31, 119, 83);
+          }
+        }
+      }
+
+      class CatsScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("cats");
+          this.levels = [1, 2, 4, 8];
+          this.stage = 0;
+          this.sinceAdvance = 0;
+          this.doneTime = 0;
+          this.positions = [
+            [180, 165], [89, 171], [276, 172], [43, 143],
+            [320, 144], [132, 151], [229, 151], [184, 123]
+          ];
+          this.colors = [
+            [C.orange, C.brown], [C.grayLight, C.grayDark], [C.black, C.grayDark],
+            [C.cream, C.orange], [C.gray, C.ink], [C.pink, C.red],
+            [C.brown, C.hairDark], [C.white, C.gray]
+          ];
+        }
+
+        advanceCats(auto = false) {
+          if (this.stage >= this.levels.length - 1) return;
+          this.stage += 1;
+          this.sinceAdvance = 0;
+          this.game.audio.meow();
+          this.game.popup(auto ? "КОТ САМ ПОЛУЧЕН" : "+1 КОТ", C.pink);
+          const newest = this.positions[this.levels[this.stage] - 1] || this.positions[0];
+          this.game.burst(newest[0], newest[1] - 25, C.yellow, 10);
+          if (this.stage === this.levels.length - 1) {
+            this.game.audio.success();
+            this.game.shake(0.18, 3);
+          }
+        }
+
+        update(dt) {
+          this.time += dt;
+          this.sinceAdvance += dt;
+
+          if (this.stage < this.levels.length - 1) {
+            if (this.game.input.actionPressed()) {
+              this.advanceCats(false);
+            } else if (this.sinceAdvance > 1.7) {
+              this.advanceCats(true);
+            }
+          } else {
+            this.doneTime += dt;
+            if (this.doneTime > 2.55) this.game.manager.go(ProtestScene);
+          }
+        }
+
+        draw(g) {
+          rect(g, 0, 0, W, H, "#6a5080");
+          rect(g, 0, 0, W, 28, C.ink);
+          pixelText(g, "МОСКВА · ДОМА", 10, 8, 9, C.cream, "left");
+
+          rect(g, 18, 39, 85, 62, C.brown);
+          rect(g, 23, 44, 75, 52, "#202754");
+          rect(g, 59, 44, 3, 52, C.brown);
+          rect(g, 23, 68, 75, 3, C.brown);
+          drawCloud(g, 33, 54, 0.35, C.grayLight);
+          rect(g, 116, 52, 96, 61, "#bd8e68");
+          rect(g, 123, 60, 82, 48, "#3f3152");
+          pixelText(g, "ДОМ, МИЛЫЙ ДОМ", 164, 76, 7, C.cream);
+          drawPixelHeart(g, 157, 91, 1, C.pink);
+          rect(g, 250, 47, 83, 68, C.grayDark);
+          for (let shelf = 0; shelf < 3; shelf += 1) {
+            rect(g, 255, 54 + shelf * 19, 73, 3, C.brown);
+            for (let book = 0; book < 6; book += 1) {
+              rect(g, 259 + book * 11, 42 + shelf * 19, 7, 12, choose([C.red, C.blue, C.yellow, C.green]));
+            }
+          }
+
+          rect(g, 0, 116, W, 84, "#b07b61");
+          rect(g, 0, 159, W, 41, "#7b4f50");
+          rect(g, 0, 159, W, 3, C.cream);
+          drawZhenya(g, 180, 193, { frame: Math.floor(this.time * 5) % 2, scale: 0.82 });
+
+          const count = this.levels[this.stage];
+          for (let i = 0; i < count; i += 1) {
+            const [x, y] = this.positions[i];
+            const [color, dark] = this.colors[i];
+            drawCat(g, x, y, {
+              frame: Math.floor(this.time * 4 + i) % 2,
+              scale: i === count - 1 && this.stage < 3 ? 0.76 + Math.sin(this.time * 6) * 0.05 : 0.68,
+              color,
+              dark,
+              flip: i % 2 === 0
+            });
+          }
+
+          panel(g, 254, 5, 98, 19, C.night, C.pink);
+          pixelText(g, `КОШКИ: ${count}`, 303, 10, 9, C.white);
+
+          if (this.stage < 3) {
+            const target = this.positions[count - 1];
+            pixelText(g, "ТАП!", target[0], target[1] - 48, 9, C.yellow);
+            rect(g, target[0] - 17, target[1] - 45, 34, 2, C.yellow);
+          } else {
+            panel(g, 55, 44, 250, 63, C.ink, C.yellow);
+            pixelText(g, "ДОСТИЖЕНИЕ ОТКРЫТО", 180, 53, 10, C.yellow);
+            multiline(g, ["МАТЕМАТИК", "С КОШКАМИ"], 180, 72, 15, C.white, 0);
+          }
+        }
+      }
+
+      class ProtestScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("calm", 0.82);
+          this.courage = 0;
+          this.completed = false;
+          this.completedTime = 0;
+          this.pigeons = [
+            { x: 42, y: 132, dir: 1 },
+            { x: 315, y: 145, dir: -1 }
+          ];
+        }
+
+        update(dt) {
+          this.time += dt;
+          this.pigeons.forEach(pigeon => {
+            pigeon.x += pigeon.dir * 5 * dt;
+          });
+
+          if (!this.completed) {
+            if (this.game.input.actionHeld()) {
+              this.courage += 40 * dt;
+            } else if (this.time > 1.4) {
+              this.courage += 16 * dt;
+            }
+            this.courage = clamp(this.courage, 0, 100);
+            if (this.courage >= 100) {
+              this.completed = true;
+              this.game.audio.success();
+              this.game.popup("СМЕЛОСТЬ +100", C.yellow, 1.5);
+              this.game.shake(0.12, 2);
+            }
+          } else {
+            this.completedTime += dt;
+            if (this.completedTime > 2.8) this.game.manager.go(IsraelScene);
+          }
+        }
+
+        draw(g) {
+          rect(g, 0, 0, W, H, "#a6a9b0");
+          rect(g, 0, 0, W, 64, "#8e97aa");
+          for (let i = 0; i < 13; i += 1) {
+            const x = (i * 59 + Math.floor(this.time * 4)) % (W + 50) - 25;
+            drawCloud(g, x, 18 + (i % 3) * 12, 0.35, "#bfc3ca");
+          }
+          rect(g, 0, 83, W, 117, "#797f8c");
+
+          const buildings = [
+            [0, 58, 47, 75], [43, 43, 58, 90], [98, 68, 46, 65],
+            [140, 35, 71, 98], [207, 54, 51, 79], [254, 41, 70, 92], [321, 64, 43, 69]
+          ];
+          buildings.forEach((building, index) => {
+            const [x, y, w, h] = building;
+            rect(g, x, y, w, h, index % 2 ? "#606675" : "#6b7180");
+            for (let wx = x + 7; wx < x + w - 4; wx += 13) {
+              for (let wy = y + 10; wy < y + h - 5; wy += 16) {
+                rect(g, wx, wy, 5, 7, "#aeb2b9");
+              }
+            }
+          });
+
+          rect(g, 0, 133, W, 67, "#676c76");
+          rect(g, 0, 165, W, 35, "#565b66");
+          rect(g, 0, 164, W, 3, "#b6bac2");
+
+          this.pigeons.forEach((pigeon, index) => {
+            rect(g, pigeon.x, pigeon.y, 5, 3, C.grayDark);
+            rect(g, pigeon.x + (index ? -2 : 4), pigeon.y - 2, 3, 2, C.grayLight);
+          });
+
+          drawZhenya(g, 180, 190, { frame: 0, scale: 0.9, bob: false });
+          rect(g, 176, 86, 4, 61, C.brown);
+          panel(g, 116, 72, 125, 56, C.cream, C.ink);
+          multiline(g, ["НЕТ", "ВОЙНЕ"], 178, 80, 19, C.ink, 0);
+
+          panel(g, 38, 7, 284, 38, C.ink, C.cream);
+          pixelText(g, "СМЕЛОСТЬ", 180, 12, 10, C.cream);
+          rect(g, 57, 28, 246, 9, C.grayDark);
+          const segments = Math.floor(this.courage / 10);
+          for (let i = 0; i < 10; i += 1) {
+            rect(g, 60 + i * 24, 30, 20, 5, i < segments ? C.yellow : "#34394a");
+          }
+
+          if (!this.completed) {
+            pixelText(g, "НАЖМИ И ДЕРЖИ", 180, 51, 8, C.cream);
+          } else if (this.completedTime < 1.25) {
+            panel(g, 96, 139, 168, 26, C.yellow, C.ink);
+            pixelText(g, "СМЕЛОСТЬ +100", 180, 147, 11, C.ink, "center", false);
+          } else {
+            panel(g, 70, 136, 220, 44, C.night, C.cyan);
+            multiline(g, ["ОТКРЫТА НОВАЯ КАРТА", "ИЗРАИЛЬ"], 180, 144, 11, C.white, 2);
+          }
+        }
+      }
+
+      class IsraelScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("israel");
+          this.meowed = false;
+          this.joined = false;
+        }
+
+        update(dt) {
+          this.time += dt;
+          if (this.game.input.actionPressed()) this.time += 0.28;
+
+          if (this.time > 5.0 && !this.meowed) {
+            this.meowed = true;
+            this.game.audio.meow();
+          }
+          if (this.time > 7.05 && !this.joined) {
+            this.joined = true;
+            this.game.audio.success();
+            this.game.popup("КОТ ПОЛУЧЕН", C.pink);
+          }
+          if (this.time > 9.1) this.game.manager.go(LondonScene);
+        }
+
+        drawPlaneMap(g) {
+          rect(g, 0, 0, W, H, C.night);
+          for (let i = 0; i < 18; i += 1) {
+            drawStar(g, (i * 73 + 11) % W, (i * 41 + 8) % 142, i % 3 ? C.cream : C.cyan);
+          }
+          panel(g, 43, 23, 274, 132, "#172044", C.cyan);
+          pixelText(g, "БЫСТРОЕ ПЕРЕМЕЩЕНИЕ", 180, 34, 10, C.yellow);
+          pixelText(g, "МОСКВА", 82, 76, 12, C.cream);
+          pixelText(g, "ИЗРАИЛЬ", 274, 125, 12, C.cream);
+          for (let i = 0; i < 10; i += 1) {
+            rect(g, 111 + i * 14, 91 + i * 3, 7, 2, i % 2 ? C.purple : C.cyan);
+          }
+          const travel = ease(clamp(this.time / 2.4, 0, 1));
+          const px = lerp(106, 266, travel);
+          const py = lerp(78, 120, travel) - Math.sin(travel * Math.PI) * 22;
+          g.save();
+          g.translate(Math.round(px), Math.round(py));
+          rect(g, -10, -2, 22, 5, C.white);
+          rect(g, -3, -8, 7, 14, C.white);
+          rect(g, 8, -4, 8, 2, C.red);
+          rect(g, -9, 3, 5, 2, C.blue);
+          g.restore();
+          pixelText(g, "↓", 274, 101, 14, C.yellow);
+        }
+
+        drawLandscape(g) {
+          rect(g, 0, 0, W, H, "#58c8e5");
+          rect(g, 0, 0, W, 58, "#48b5df");
+          rect(g, 284, 23, 36, 36, C.yellow);
+          rect(g, 290, 17, 24, 48, "#ffe991");
+          rect(g, 278, 29, 48, 24, "#ffe991");
+
+          drawCloud(g, 28 + (this.time * 5) % 90, 31, 0.45, C.white);
+          drawCloud(g, 201 + (this.time * 3) % 100, 50, 0.35, C.cream);
+
+          rect(g, 0, 104, W, 96, C.sand);
+          for (let x = 0; x < W; x += 8) {
+            const hill = 108 - Math.sin(x * 0.035) * 20 - Math.sin(x * 0.071) * 8;
+            rect(g, x, hill, 9, 200 - hill, x < 180 ? "#bd8660" : C.mountain);
+          }
+          for (let x = 0; x < W; x += 16) {
+            const nearHill = 139 - Math.sin(x * 0.05 + 1) * 14;
+            rect(g, x, nearHill, 18, 200 - nearHill, x % 32 ? "#d0a36f" : "#c49364");
+          }
+          rect(g, 0, 169, W, 31, "#d6bd7e");
+          for (let x = 18; x < W; x += 61) drawPlant(g, x, 188, x % 2 ? C.green : C.mint);
+
+          drawZhenya(g, 131, 189, { frame: Math.floor(this.time * 5) % 2, scale: 0.87 });
+          const catX = lerp(385, 234, ease(clamp((this.time - 3.8) / 1.3, 0, 1)));
+          drawCat(g, catX, 189, {
+            frame: Math.floor(this.time * 4) % 2,
+            scale: 0.76,
+            color: C.orange,
+            dark: C.brown,
+            flip: true
+          });
+
+          if (this.time > 4.85 && this.time < 6.1) {
+            speech(g, ["КОТ:", "Мяу?"], 222, 101, 78);
+          }
+          if (this.time >= 6.1 && this.time < 7.3) {
+            speech(g, ["ЖЕНЯ:", "Конечно."], 65, 100, 105);
+          }
+          if (this.time >= 7.25) {
+            panel(g, 72, 46, 216, 43, C.ink, C.yellow);
+            multiline(g, ["КОТ ПРИСОЕДИНИЛСЯ", "К КОМАНДЕ"], 180, 54, 11, C.white, 2);
+          }
+        }
+
+        draw(g) {
+          if (this.time < 2.65) {
+            this.drawPlaneMap(g);
+          } else if (this.time < 3.9) {
+            rect(g, 0, 0, W, H, C.blue);
+            drawIsraeliFlag(g, 151, 31, 1.7);
+            panel(g, 52, 95, 256, 52, C.ink, C.cream);
+            multiline(g, ["НОВАЯ КАРТА ОТКРЫТА", "ИЗРАИЛЬ"], 180, 104, 15, C.yellow, 1);
+          } else {
+            this.drawLandscape(g);
+          }
+        }
+      }
+
+      class LondonScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("london");
+          this.phase = "run";
+          this.phaseTime = 0;
+          this.scroll = 0;
+          this.jumpY = 0;
+          this.jumpVelocity = 0;
+          this.obstacles = [
+            { type: "puddle", worldX: 250, passed: false, label: "ЛУЖА ОБНАРУЖЕНА" },
+            { type: "cone", worldX: 430, passed: false, label: "КОНУС ПЕРЕПРЫГНУТ" },
+            { type: "tourist", worldX: 610, passed: false, label: "ТУРИСТ ОЧЕНЬ МЕДЛЕННЫЙ" }
+          ];
+          this.dances = 0;
+          this.autoDance = 0;
+          this.maxTime = 0;
+        }
+
+        jump(auto = false) {
+          if (this.jumpY < -1) return;
+          this.jumpVelocity = -130;
+          this.game.audio.jump();
+          if (!auto) this.game.burst(78, 173, C.grayLight, 5);
+        }
+
+        update(dt) {
+          this.time += dt;
+          this.phaseTime += dt;
+
+          if (this.phase === "run") {
+            this.scroll += 76 * dt;
+            if (this.game.input.actionPressed()) this.jump(false);
+
+            this.jumpVelocity += 365 * dt;
+            this.jumpY += this.jumpVelocity * dt;
+            if (this.jumpY > 0) {
+              this.jumpY = 0;
+              this.jumpVelocity = 0;
+            }
+
+            this.obstacles.forEach(obstacle => {
+              const screenX = obstacle.worldX - this.scroll;
+              if (!obstacle.passed && screenX < 125 && screenX > 92 && this.jumpY === 0) {
+                this.jump(true);
+              }
+              if (!obstacle.passed && screenX < 66) {
+                obstacle.passed = true;
+                this.game.popup(obstacle.label, obstacle.type === "tourist" ? C.yellow : C.cyan, 1.25);
+                this.game.burst(77, 173, C.cream, 5);
+              }
+            });
+
+            if (this.scroll > 680) {
+              this.phase = "concert";
+              this.phaseTime = 0;
+              this.game.audio.setTheme("concert");
+              this.game.audio.success();
+            }
+          } else if (this.phase === "concert") {
+            this.autoDance += dt;
+            if (this.dances < 3 && this.game.input.actionPressed()) {
+              this.dances += 1;
+              this.autoDance = 0;
+              this.game.audio.collect();
+              this.game.popup("ТАНЦЫ +1", C.pink);
+              this.game.shake(0.08, 2);
+            } else if (this.dances < 3 && this.autoDance > 1.35) {
+              this.dances += 1;
+              this.autoDance = 0;
+              this.game.audio.collect();
+              this.game.popup("ТАНЦЫ +1", C.pink);
+            }
+
+            if (this.dances >= 3) {
+              this.maxTime += dt;
+              if (this.maxTime > 1.85) this.game.manager.go(MountainScene);
+            }
+          }
+        }
+
+        drawHouse(g, x, y, color, doorColor) {
+          rect(g, x, y, 55, 81, color);
+          rect(g, x - 3, y - 7, 61, 9, C.grayDark);
+          rect(g, x + 19, y + 52, 17, 29, doorColor);
+          rect(g, x + 7, y + 14, 14, 19, C.cream);
+          rect(g, x + 34, y + 14, 14, 19, C.cream);
+          rect(g, x + 7, y + 39, 14, 12, "#9dc4d4");
+          rect(g, x + 34, y + 39, 14, 12, "#9dc4d4");
+        }
+
+        drawBus(g, x, y) {
+          rect(g, x, y, 82, 38, C.red);
+          rect(g, x + 5, y - 22, 72, 24, C.red);
+          for (let i = 0; i < 4; i += 1) {
+            rect(g, x + 9 + i * 17, y - 17, 12, 11, "#9ed5e0");
+            rect(g, x + 9 + i * 17, y + 5, 12, 12, "#9ed5e0");
+          }
+          rect(g, x + 63, y + 4, 13, 25, C.cream);
+          rect(g, x + 9, y + 33, 15, 7, C.ink);
+          rect(g, x + 59, y + 33, 15, 7, C.ink);
+          pixelText(g, "23", x + 7, y - 1, 7, C.yellow, "left");
+        }
+
+        drawUnderground(g, x, y) {
+          rect(g, x - 2, y + 17, 4, 25, C.grayDark);
+          rect(g, x - 16, y, 32, 24, C.red);
+          rect(g, x - 11, y + 5, 22, 14, C.cream);
+          rect(g, x - 24, y + 8, 48, 8, C.blue);
+          pixelText(g, "UNDERGROUND", x, y + 8, 5, C.white, "center", false);
+        }
+
+        drawObstacle(g, obstacle, x) {
+          if (obstacle.type === "puddle") {
+            rect(g, x - 18, 174, 37, 4, C.blue);
+            rect(g, x - 11, 171, 22, 3, C.cyan);
+          } else if (obstacle.type === "cone") {
+            rect(g, x - 9, 174, 19, 4, C.white);
+            rect(g, x - 5, 154, 11, 21, C.orange);
+            rect(g, x - 3, 161, 7, 4, C.white);
+          } else {
+            drawRelative(g, x, 178, Math.floor(this.time * 1.5) % 2);
+            rect(g, x - 13, 137, 26, 3, C.yellow);
+            pixelText(g, "...", x, 128, 8, C.cream);
+          }
+        }
+
+        drawRain(g) {
+          for (let i = 0; i < 34; i += 1) {
+            const x = (i * 43 + this.time * 78) % (W + 30) - 15;
+            const y = (i * 29 + this.time * 122) % 180;
+            rect(g, x, y, 2, 6, i % 3 ? "#9ed5e0" : C.cyan);
+          }
+        }
+
+        drawRun(g) {
+          rect(g, 0, 0, W, H, "#778ca8");
+          rect(g, 0, 0, W, 75, "#6f83a0");
+          drawCloud(g, 28 - (this.scroll * 0.05) % 100, 22, 0.6, C.grayLight);
+          drawCloud(g, 216 - (this.scroll * 0.04) % 150, 37, 0.45, "#cbd0d7");
+
+          const houseOffset = -(this.scroll * 0.35) % 220;
+          for (let i = -1; i < 4; i += 1) {
+            const x = houseOffset + i * 110;
+            this.drawHouse(g, x, 80, i % 2 ? "#a85e62" : "#b67c65", i % 2 ? C.blue : C.ink);
+            this.drawHouse(g, x + 55, 86, i % 2 ? "#c28f72" : "#914e59", C.ink);
+          }
+
+          const busX = 260 - (this.scroll * 0.7) % 520;
+          this.drawBus(g, busX, 123);
+          this.drawUnderground(g, 311 - (this.scroll * 0.18) % 410, 87);
+
+          rect(g, 0, 161, W, 39, "#4f5664");
+          rect(g, 0, 162, W, 4, C.grayLight);
+          for (let x = -20; x < W; x += 52) rect(g, x - (this.scroll % 52), 186, 31, 3, C.cream);
+
+          this.obstacles.forEach(obstacle => {
+            const x = obstacle.worldX - this.scroll;
+            if (x > -30 && x < W + 30) this.drawObstacle(g, obstacle, x);
+          });
+
+          drawZhenya(g, 78, 177, {
+            frame: Math.floor(this.time * 10) % 2,
+            scale: 0.83,
+            jump: this.jumpY
+          });
+          this.drawRain(g);
+
+          panel(g, 6, 6, 214, 34, C.ink, C.cream);
+          multiline(g, ["ДОПОЛНИТЕЛЬНЫЙ КВЕСТ", "ВЫХОДНЫЕ В ЛОНДОНЕ"], 13, 12, 9, C.yellow, 2, "left");
+
+          if (this.phaseTime > 1.2 && this.phaseTime < 4.8) {
+            panel(g, 193, 50, 160, 47, C.night, C.cyan);
+            multiline(g, ["БРИТАНСКАЯ ПОГОДА", "ДОЖДЬ: 100%"], 273, 59, 10, C.white, 4);
+          }
+          pixelText(g, "ТАП = ПРЫЖОК", 180, 189, 7, C.yellow);
+        }
+
+        drawConcert(g) {
+          rect(g, 0, 0, W, H, "#17152d");
+          rect(g, 0, 0, W, 68, "#25234a");
+          for (let i = 0; i < 16; i += 1) {
+            drawStar(g, (i * 67 + 17) % W, (i * 31 + 7) % 60, i % 2 ? C.pink : C.cyan);
+          }
+          rect(g, 49, 42, 262, 91, C.deep);
+          rect(g, 55, 48, 250, 79, "#3e295b");
+          rect(g, 66, 54, 228, 27, C.black);
+          pixelText(g, "МОНЕТОЧКА", 180, 59, 16, C.yellow);
+          pixelText(g, "СЕГОДНЯ", 180, 79, 9, C.cream);
+
+          const pulse = (Math.sin(this.time * 9) + 1) / 2;
+          line(g, 83, 84, 47, 154, pulse > 0.5 ? C.pink : C.purple, 5);
+          line(g, 277, 84, 318, 154, pulse > 0.5 ? C.cyan : C.blue, 5);
+          line(g, 180, 84, 180, 153, pulse > 0.5 ? C.yellow : C.orange, 7);
+          rect(g, 158, 105, 44, 29, C.black);
+          rect(g, 166, 98, 28, 12, C.pink);
+
+          rect(g, 0, 143, W, 57, "#0b0c18");
+          for (let i = 0; i < 22; i += 1) {
+            const x = 7 + i * 17;
+            const bounce = Math.floor((Math.sin(this.time * 8 + i) + 1) * 2);
+            rect(g, x, 151 - bounce, 9, 30 + bounce, i % 3 ? C.ink : C.grayDark);
+            rect(g, x + 1, 143 - bounce, 7, 9, choose([C.skin, C.skinLight, C.brown]));
+          }
+
+          const danceBounce = this.dances > 0 ? Math.abs(Math.sin(this.time * 10)) * -7 : 0;
+          drawZhenya(g, 146, 190, {
+            frame: Math.floor(this.time * 10) % 2,
+            scale: 0.83,
+            jump: danceBounce
+          });
+          drawRelative(g, 213, 190 + danceBounce, Math.floor(this.time * 9 + 1) % 2);
+
+          panel(g, 8, 7, 112, 22, C.ink, C.pink);
+          pixelText(g, `ТАНЦЫ: ${this.dances}`, 64, 13, 9, C.white);
+          if (this.dances < 3) {
+            pixelText(g, "ТАП! ТАП! ТАП!", 180, 177, 9, C.yellow);
+          } else {
+            panel(g, 101, 137, 158, 35, C.red, C.cream);
+            multiline(g, ["ТАНЦЫ:", "МАКСИМУМ"], 180, 143, 12, C.white, 0);
+          }
+        }
+
+        draw(g) {
+          if (this.phase === "run") this.drawRun(g);
+          else this.drawConcert(g);
+        }
+      }
+
+      class MountainScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("mountain");
+          this.progress = 0;
+          this.jumpY = 0;
+          this.jumpVelocity = 0;
+          this.summit = false;
+          this.summitTime = 0;
+          this.autoJumpIndex = 0;
+          this.checks = [
+            "МАТЕМАТИКА", "КОШКИ", "СМЕЛОСТЬ",
+            "ИЗРАИЛЬ", "ЛОНДОН", "МУЗЫКА"
+          ];
+          this.thresholds = [0.17, 0.32, 0.48, 0.64, 0.79, 0.93];
+          this.rocks = [0.25, 0.52, 0.76];
+        }
+
+        jump(auto = false) {
+          if (this.jumpY < -1) return;
+          this.jumpVelocity = -118;
+          this.game.audio.jump();
+          if (!auto) this.game.popup("ПРЫЖОК ВВЕРХ", C.cyan, 0.75);
+        }
+
+        update(dt) {
+          this.time += dt;
+
+          if (!this.summit) {
+            if (this.game.input.actionPressed()) this.jump(false);
+            this.jumpVelocity += 330 * dt;
+            this.jumpY += this.jumpVelocity * dt;
+            if (this.jumpY > 0) {
+              this.jumpY = 0;
+              this.jumpVelocity = 0;
+            }
+
+            this.progress = clamp(this.progress + 0.084 * dt, 0, 1);
+            const nextRock = this.rocks[this.autoJumpIndex];
+            if (nextRock !== undefined && this.progress > nextRock - 0.025) {
+              if (this.jumpY === 0) this.jump(true);
+              this.autoJumpIndex += 1;
+              this.game.burst(lerp(53, 274, this.progress), lerp(174, 70, this.progress), C.sand, 7);
+            }
+
+            if (this.progress >= 1) {
+              this.summit = true;
+              this.summitTime = 0;
+              this.game.audio.success();
+              this.game.popup("ВЕРШИНА ПОЛУЧЕНА", C.yellow);
+            }
+          } else {
+            this.summitTime += dt;
+            if (this.summitTime > 3.75) this.game.manager.go(BirthdayScene);
+          }
+        }
+
+        drawBackground(g) {
+          rect(g, 0, 0, W, H, "#54b8d1");
+          rect(g, 0, 0, W, 66, "#418fb9");
+          rect(g, 294, 16, 34, 34, C.yellow);
+          rect(g, 300, 10, 22, 46, "#ffe991");
+          rect(g, 288, 22, 46, 22, "#ffe991");
+          drawCloud(g, 20 + (this.time * 3) % 80, 28, 0.42, C.white);
+          drawCloud(g, 189 - (this.time * 2) % 90, 46, 0.32, C.cream);
+
+          for (let x = 0; x < W; x += 6) {
+            const farY = 110 - Math.sin(x * 0.025) * 19 - Math.sin(x * 0.064) * 13;
+            rect(g, x, farY, 7, H - farY, "#795d6b");
+          }
+          for (let x = 0; x < W; x += 7) {
+            const midY = 135 - Math.sin(x * 0.031 + 1.4) * 25 - Math.sin(x * 0.085) * 7;
+            rect(g, x, midY, 8, H - midY, C.mountainDark);
+          }
+          for (let x = 0; x < W; x += 8) {
+            const nearY = 168 - Math.sin(x * 0.036 + 0.5) * 18;
+            rect(g, x, nearY, 9, H - nearY, C.mountain);
+          }
+
+          const path = [
+            [25, 187], [80, 165], [116, 143], [159, 132],
+            [187, 108], [229, 95], [254, 78], [299, 67]
+          ];
+          for (let i = 0; i < path.length - 1; i += 1) {
+            line(g, path[i][0], path[i][1], path[i + 1][0], path[i + 1][1], C.sand, 8);
+            line(g, path[i][0], path[i][1] - 2, path[i + 1][0], path[i + 1][1] - 2, "#e2c887", 3);
+          }
+          for (let i = 0; i < 9; i += 1) {
+            drawPlant(g, 18 + i * 43, 184 - (i % 3) * 15, i % 2 ? C.green : C.mint);
+          }
+        }
+
+        draw(g) {
+          this.drawBackground(g);
+
+          const heroX = lerp(50, 278, ease(this.progress));
+          const heroY = lerp(179, 72, ease(this.progress)) - Math.sin(this.progress * Math.PI * 5) * 4;
+          drawZhenya(g, heroX, heroY, {
+            frame: Math.floor(this.time * 8) % 2,
+            scale: 0.76,
+            jump: this.jumpY
+          });
+
+          this.rocks.forEach((threshold, index) => {
+            const x = lerp(50, 278, ease(threshold)) + 14;
+            const y = lerp(179, 72, ease(threshold)) + 1;
+            rect(g, x - 7, y - 7, 14, 7, index % 2 ? C.grayDark : C.brown);
+            rect(g, x - 4, y - 10, 8, 4, index % 2 ? C.gray : C.mountainDark);
+          });
+
+          panel(g, 5, 6, 113, 72, "#11162dd9", C.cream);
+          this.checks.forEach((item, index) => {
+            const checked = this.progress >= this.thresholds[index] || this.summit;
+            pixelText(
+              g,
+              `${item} ${checked ? "✓" : "·"}`,
+              11,
+              12 + index * 10,
+              7,
+              checked ? C.mint : C.grayLight,
+              "left"
+            );
+          });
+
+          if (this.time < 2.4) {
+            panel(g, 131, 9, 219, 42, C.ink, C.yellow);
+            multiline(g, ["ГОРА ОБНАРУЖЕНА", "РЕШЕНИЕ: ИДТИ ВВЕРХ"], 240, 17, 10, C.white, 3);
+          } else if (!this.summit) {
+            pixelText(g, "ТАП = ПРЫЖОК", 281, 186, 7, C.yellow);
+          }
+
+          if (this.summit) {
+            drawCat(g, 316, 68, {
+              frame: Math.floor(this.time * 4) % 2,
+              scale: 0.68,
+              color: C.orange,
+              dark: C.brown,
+              flip: true
+            });
+            if (this.summitTime > 0.45) {
+              speech(g, ["КОТ:", "Ты дошла."], 231, 84, 112);
+            }
+            if (this.summitTime > 1.85) {
+              speech(g, ["ЖЕНЯ:", "Естественно."], 122, 105, 127);
+            }
+          }
+        }
+      }
+
+      class BirthdayScene extends BaseScene {
+        enter() {
+          super.enter();
+          this.game.audio.setTheme("birthday", 0.48);
+          this.fanfarePlayed = false;
+          this.cats = [
+            { x: 77, y: 174, color: C.orange, dark: C.brown, flip: false },
+            { x: 287, y: 175, color: C.grayLight, dark: C.grayDark, flip: true },
+            { x: 116, y: 181, color: C.black, dark: C.grayDark, flip: false },
+            { x: 249, y: 182, color: C.cream, dark: C.orange, flip: true },
+            { x: 41, y: 186, color: C.pink, dark: C.red, flip: false },
+            { x: 325, y: 187, color: C.brown, dark: C.hairDark, flip: true }
+          ];
+        }
+
+        update(dt) {
+          this.time += dt;
+          if (this.time > 2.05 && !this.fanfarePlayed) {
+            this.fanfarePlayed = true;
+            this.game.audio.fanfare();
+            this.game.confetti(70);
+            this.game.shake(0.25, 3);
+          }
+
+          if (this.time > 9.25 && this.game.input.actionPressed()) {
+            const tap = this.game.input.tap;
+            const insideButton = !tap || (tap.x >= 87 && tap.x <= 273 && tap.y >= 168 && tap.y <= 196);
+            if (insideButton) {
+              this.game.audio.collect();
+              this.game.manager.restart();
+            }
+          }
+        }
+
+        draw(g) {
+          const sunset = clamp(this.time / 3, 0, 1);
+          rect(g, 0, 0, W, H, sunset < 0.45 ? "#476fa5" : C.sunset);
+          rect(g, 0, 0, W, 49, sunset < 0.45 ? "#334f86" : "#8b3f72");
+          rect(g, 284, 24 + sunset * 22, 33, 33, C.yellow);
+          rect(g, 290, 18 + sunset * 22, 21, 45, "#ffe991");
+          rect(g, 278, 30 + sunset * 22, 45, 21, "#ffe991");
+
+          for (let i = 0; i < 18; i += 1) {
+            if (this.time > 4 || i % 3 !== 0) {
+              drawStar(g, (i * 71 + 9) % W, (i * 37 + 5) % 87, i % 2 ? C.cream : C.cyan);
+            }
+          }
+
+          for (let x = 0; x < W; x += 7) {
+            const farY = 122 - Math.sin(x * 0.027) * 25 - Math.sin(x * 0.08) * 7;
+            rect(g, x, farY, 8, H - farY, C.mountainDark);
+          }
+          for (let x = 0; x < W; x += 9) {
+            const nearY = 154 - Math.sin(x * 0.038 + 1) * 18;
+            rect(g, x, nearY, 10, H - nearY, C.mountain);
+          }
+          rect(g, 0, 179, W, 21, "#493c49");
+          drawPlant(g, 18, 187, C.mint);
+          drawPlant(g, 342, 188, C.green);
+
+          drawZhenya(g, 180, 182, {
+            frame: Math.floor(this.time * 5) % 2,
+            scale: 0.85
+          });
+
+          if (this.time < 1.05) {
+            panel(g, 63, 64, 234, 49, C.ink, C.yellow);
+            multiline(g, ["НОВЫЙ УРОВЕНЬ", "ОТКРЫТ"], 180, 73, 16, C.white, 1);
+          } else if (this.time < 2.0) {
+            pixelText(g, "...", 180, 86, 18, C.cream);
+          } else {
+            panel(g, 17, 36, 326, 62, "#4b2454", C.yellow);
+            pixelText(g, "С ДНЁМ РОЖДЕНИЯ,", 180, 46, 18, C.white);
+            pixelText(g, "ЖЕНЯ!", 166, 69, 22, C.yellow);
+            drawPixelHeart(g, 222, 71, 3, C.pink);
+          }
+
+          let catCount = 0;
+          if (this.time > 4.0) catCount = 1;
+          if (this.time > 4.9) catCount = 2;
+          if (this.time > 5.7) catCount = 4;
+          if (this.time > 6.5) catCount = 6;
+          for (let i = 0; i < catCount; i += 1) {
+            const cat = this.cats[i];
+            drawCat(g, cat.x, cat.y, {
+              frame: Math.floor(this.time * 5 + i) % 2,
+              scale: 0.62,
+              color: cat.color,
+              dark: cat.dark,
+              flip: cat.flip
+            });
+          }
+
+          if (this.time > 4.05 && this.time < 5.35) {
+            pixelText(g, "...", 251, 113, 17, C.cream);
+          }
+
+          if (this.time > 6.75) {
+            panel(g, 66, 103, 228, 60, C.ink, C.pink);
+            multiline(g, ["КОШКИ ТОЖЕ", "ПЕРЕШЛИ", "НА НОВЫЙ УРОВЕНЬ"], 180, 111, 10, C.white, 2);
+          }
+
+          if (this.time > 9.25) {
+            const blink = Math.floor(this.time * 2.5) % 2 === 0;
+            panel(g, 87, 168, 186, 27, blink ? C.blue : C.purple, C.cream);
+            pixelText(g, "СЫГРАТЬ ЕЩЁ РАЗ", 180, 176, 10, C.white);
+          }
+        }
+      }
+
+      class Game {
+        constructor() {
+          this.input = new Input(canvas);
+          this.audio = new AudioManager(soundButton);
+          this.manager = new SceneManager(this);
+          this.popups = [];
+          this.particles = [];
+          this.shakeTime = 0;
+          this.shakePower = 0;
+          this.lastTime = performance.now();
+
+          soundButton.addEventListener("pointerdown", event => {
+            event.preventDefault();
+            event.stopPropagation();
+          });
+          soundButton.addEventListener("click", event => {
+            event.preventDefault();
+            event.stopPropagation();
+            this.audio.unlock();
+            this.audio.toggle();
+          });
+
+          document.addEventListener("touchmove", event => event.preventDefault(), { passive: false });
+          document.addEventListener("gesturestart", event => event.preventDefault(), { passive: false });
+          document.addEventListener("contextmenu", event => event.preventDefault());
+
+          document.addEventListener("visibilitychange", () => {
+            if (!this.audio.context) return;
+            if (document.hidden) {
+              this.audio.context.suspend();
+            }
+          });
+
+          this.manager.start(TitleScene);
+          requestAnimationFrame(time => this.loop(time));
+        }
+
+        popup(message, color = C.yellow, duration = 1.15) {
+          this.popups.push({
+            message,
+            color,
+            life: duration,
+            maxLife: duration,
+            offset: 0
+          });
+          if (this.popups.length > 3) this.popups.shift();
+        }
+
+        burst(x, y, color, count = 8) {
+          for (let i = 0; i < count; i += 1) {
+            this.particles.push({
+              x,
+              y,
+              vx: rand(-42, 42),
+              vy: rand(-65, -18),
+              gravity: rand(60, 110),
+              color,
+              life: rand(0.35, 0.75),
+              size: choose([1, 2, 2, 3])
+            });
+          }
+        }
+
+        confetti(count = 50) {
+          const colors = [C.pink, C.yellow, C.cyan, C.mint, C.white, C.orange];
+          for (let i = 0; i < count; i += 1) {
+            this.particles.push({
+              x: rand(10, W - 10),
+              y: rand(-45, -3),
+              vx: rand(-18, 18),
+              vy: rand(18, 63),
+              gravity: rand(8, 22),
+              color: choose(colors),
+              life: rand(2.4, 4.2),
+              size: choose([2, 2, 3])
+            });
+          }
+        }
+
+        shake(duration = 0.1, power = 2) {
+          this.shakeTime = Math.max(this.shakeTime, duration);
+          this.shakePower = Math.max(this.shakePower, power);
+        }
+
+        updateEffects(dt) {
+          this.popups.forEach((popup, index) => {
+            popup.life -= dt;
+            popup.offset += dt * 12;
+            popup.index = index;
+          });
+          this.popups = this.popups.filter(popup => popup.life > 0);
+
+          this.particles.forEach(particle => {
+            particle.life -= dt;
+            particle.x += particle.vx * dt;
+            particle.y += particle.vy * dt;
+            particle.vy += particle.gravity * dt;
+          });
+          this.particles = this.particles.filter(particle => particle.life > 0 && particle.y < H + 10);
+
+          if (this.shakeTime > 0) {
+            this.shakeTime -= dt;
+          } else {
+            this.shakePower = 0;
+          }
+        }
+
+        drawEffects(g) {
+          this.particles.forEach(particle => {
+            rect(g, particle.x, particle.y, particle.size, particle.size, particle.color);
+          });
+
+          this.popups.forEach((popup, index) => {
+            const alpha = clamp(popup.life / Math.min(0.25, popup.maxLife), 0, 1);
+            g.save();
+            g.globalAlpha = alpha;
+            const width = clamp(popup.message.length * 6 + 18, 95, 286);
+            const x = (W - width) / 2;
+            const y = 44 + index * 24 - popup.offset * 0.35;
+            panel(g, x, y, width, 20, C.ink, popup.color);
+            pixelText(g, popup.message, W / 2, y + 6, 8, C.white);
+            g.restore();
+          });
+        }
+
+        loop(time) {
+          const dt = clamp((time - this.lastTime) / 1000, 0, 0.05);
+          this.lastTime = time;
+
+          this.manager.update(dt);
+          this.updateEffects(dt);
+
+          ctx.save();
+          if (this.shakeTime > 0) {
+            ctx.translate(
+              Math.round(rand(-this.shakePower, this.shakePower)),
+              Math.round(rand(-this.shakePower, this.shakePower))
+            );
+          }
+          this.manager.draw(ctx);
+          this.drawEffects(ctx);
+          ctx.restore();
+
+          this.input.endFrame();
+          requestAnimationFrame(nextTime => this.loop(nextTime));
+        }
+      }
+
+      new Game();
+    })();
+  </script>
+</body>
+</html>
