@@ -1,11 +1,11 @@
 import {drawWorld} from './render-world.js';
 import {maskSprite} from './sprite-masks.js';
-import {water,drawSigns,stampSprite,actionPose,foreground} from './procedural.js';
+import {water,stampSprite,actionPose,foreground} from './procedural.js';
 const sceneAssets={
   gate:['bg_gate','sprite_keeper','sprite_ranger','portrait_keeper','portrait_ranger','pryg','pryg_friends','bridge_gate','open_book','ink_pad'],
   shore:['bg_shore','sprite_sergey','portrait_sergey','chess','cherries','ashtray','ranger_boat','fishing_rod','float','bell','lizard'],
   camp:['bg_camp','sprite_ranger','portrait_ranger','ranger_boat','bell','bell_hung','ladle','fire','sketch_map',...['anton','danka','sanka','sasha','alsu','katya','vinnik'].flatMap(k=>[`sprite_${k}`,`portrait_${k}`])],
-  home:['bg_home','curtain','radio','sweets','cards','kitchen_dishes','sugar_candy','potato_box','ladle','fort_memory','final_table','chess','gift',...['linochka','victor','irina'].flatMap(k=>[`sprite_${k}`,`portrait_${k}`])]
+  home:['bg_home','radio','sweets','cards','kitchen_dishes','sugar_candy','potato_box','ladle','fort_memory','final_table','chess','gift',...['linochka','victor','irina'].flatMap(k=>[`sprite_${k}`,`portrait_${k}`])]
 };
 export class ImageLoader {
   constructor(manifest){this.assets=manifest.assets;this.images={};this.pending=new Map();}
@@ -53,7 +53,7 @@ export class Renderer {
     const c=this.ctx,g=this.scene,f=s.flags,still=s.settings.reducedMotion;
     c.imageSmoothingEnabled=false;c.fillStyle='#1a2b22';c.fillRect(0,0,640,400);c.save();c.translate(0,24);
     this.sprite('bg_gate',0,0,640,328);
-    water(c,g,time,still);drawSigns(c,g);
+    water(c,g,time,still);
     for(let i=0;i<2;i++) {const p=g.friends[i];this.sprite('pryg_friends',p[0]-10,p[1]-19,20,20,i);}
     this.sprite('bridge_gate',...g.gate,f.bridgeOpen || visual.action?.type==='open_gate' && visual.action.progress>.55?1:0);
     this.sprite('sprite_keeper',...g.keeper,visual.speaker==='keeper'?1:0);

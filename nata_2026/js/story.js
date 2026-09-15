@@ -70,6 +70,7 @@ export class Story {
   }
   person(id){
     const f=this.s.flags;
+    if(id==='danka'){this.say('camp/arrival',()=>{},{lines:this.a.lines.filter(l=>l.id==='camp_arrival_03')});return;}
     if(id==='sergey'){this.rod();return;}
     if(id==='linochka'){if(f.rescueBriefed&&!this.seen('home/arrival')&&!f.ladleTaken)this.homeIntro();else this.cupboard();return;}
     if(id==='victor'){this.a.context('Виктор', [['Поговорить',()=>this.say('home/game_memory')],['Попросить удержать коробку',()=>this.hold('victor')]]);return;}

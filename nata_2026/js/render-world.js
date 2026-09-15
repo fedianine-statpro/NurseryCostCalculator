@@ -1,11 +1,10 @@
 // Scene-specific staging; shares the existing Canvas2D renderer and sprite anchors.
-import {water,steam,rope,rescueGeometry,evening,drawSigns,actionPose,foreground,curtain} from './procedural.js';
+import {water,steam,rope,rescueGeometry,evening,actionPose,foreground} from './procedural.js';
 export function drawWorld(r,s,v,time) {
   const c=r.ctx,g=r.scene,f=s.flags,a=v.action,p=a?.progress||0;
   c.imageSmoothingEnabled=false;c.fillStyle='#18251f';c.fillRect(0,0,640,400);c.save();c.translate(0,24);
   r.sprite(`bg_${s.scene}`,0,0,640,328);
-  if(s.scene==='home')curtain(c,r.images.curtain,time,s.settings.reducedMotion);
-  water(c,g,time,s.settings.reducedMotion);drawSigns(c,g);
+  water(c,g,time,s.settings.reducedMotion);
   const draw=(key,rect,frame=0)=>r.sprite(key,...rect,frame);
   if(s.scene==='shore') {
     draw('chess',[549,175,73,35]);draw('cherries',[578,215,40,28]);draw('ashtray',[582,251,32,24]);
