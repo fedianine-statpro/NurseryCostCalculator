@@ -1,0 +1,644 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "A01",
+      "key": "bg_gate",
+      "path": "assets/img/bg_gate.png",
+      "width": 640,
+      "height": 328,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A02",
+      "key": "bg_home",
+      "path": "assets/img/bg_home_clean.png",
+      "width": 640,
+      "height": 328,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A03",
+      "key": "bg_shore",
+      "path": "assets/img/bg_shore.png",
+      "width": 640,
+      "height": 328,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A04",
+      "key": "bg_camp",
+      "path": "assets/img/bg_camp.png",
+      "width": 640,
+      "height": 328,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A09",
+      "key": "portrait_nata",
+      "path": "assets/img/portrait_nata.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A10",
+      "key": "portrait_victor",
+      "path": "assets/img/portrait_victor.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A11",
+      "key": "portrait_linochka",
+      "path": "assets/img/portrait_linochka.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A12",
+      "key": "portrait_irina",
+      "path": "assets/img/portrait_irina.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A13",
+      "key": "portrait_sergey",
+      "path": "assets/img/portrait_sergey.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A14",
+      "key": "portrait_anton",
+      "path": "assets/img/portrait_anton.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A15",
+      "key": "portrait_danka",
+      "path": "assets/img/portrait_danka.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A16",
+      "key": "portrait_sanka",
+      "path": "assets/img/portrait_sanka.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A17",
+      "key": "portrait_sasha",
+      "path": "assets/img/portrait_sasha.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A18",
+      "key": "portrait_alsu",
+      "path": "assets/img/portrait_alsu.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A19",
+      "key": "portrait_katya",
+      "path": "assets/img/portrait_katya.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A20",
+      "key": "portrait_vinnik",
+      "path": "assets/img/portrait_vinnik.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A21",
+      "key": "portrait_keeper",
+      "path": "assets/img/portrait_keeper.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A22",
+      "key": "portrait_ranger",
+      "path": "assets/img/portrait_ranger.png",
+      "width": 128,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A23",
+      "key": "sprite_nata",
+      "path": "assets/img/sprite_nata.png",
+      "width": 256,
+      "height": 288,
+      "frames": 12,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A24",
+      "key": "sprite_victor",
+      "path": "assets/img/sprite_victor.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A25",
+      "key": "sprite_linochka",
+      "path": "assets/img/sprite_linochka.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A26",
+      "key": "sprite_irina",
+      "path": "assets/img/sprite_irina.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A27",
+      "key": "sprite_sergey",
+      "path": "assets/img/sprite_sergey.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A28",
+      "key": "sprite_anton",
+      "path": "assets/img/sprite_anton.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A29",
+      "key": "sprite_danka",
+      "path": "assets/img/sprite_danka.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A30",
+      "key": "sprite_sanka",
+      "path": "assets/img/sprite_sanka.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A31",
+      "key": "sprite_sasha",
+      "path": "assets/img/sprite_sasha.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A32",
+      "key": "sprite_alsu",
+      "path": "assets/img/sprite_alsu.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A33",
+      "key": "sprite_katya",
+      "path": "assets/img/sprite_katya.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A34",
+      "key": "sprite_vinnik",
+      "path": "assets/img/sprite_vinnik.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A35",
+      "key": "sprite_keeper",
+      "path": "assets/img/sprite_keeper.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A36",
+      "key": "sprite_ranger",
+      "path": "assets/img/sprite_ranger.png",
+      "width": 128,
+      "height": 96,
+      "frames": 2,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A37",
+      "key": "nata_actions",
+      "path": "assets/img/nata_actions.png",
+      "width": 384,
+      "height": 96,
+      "frames": 6,
+      "cell": [
+        64,
+        96
+      ]
+    },
+    {
+      "id": "A38",
+      "key": "pryg",
+      "path": "assets/img/pryg.png",
+      "width": 288,
+      "height": 48,
+      "frames": 6,
+      "cell": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "A39",
+      "key": "pryg_friends",
+      "path": "assets/img/pryg_friends.png",
+      "width": 96,
+      "height": 48,
+      "frames": 2,
+      "cell": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "A40",
+      "key": "bridge_gate",
+      "path": "assets/img/bridge_gate.png",
+      "width": 160,
+      "height": 160,
+      "frames": 2,
+      "cell": [
+        80,
+        160
+      ]
+    },
+    {
+      "id": "A41",
+      "key": "bell",
+      "path": "assets/img/bell.png",
+      "width": 48,
+      "height": 48,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A42",
+      "key": "bell_hung",
+      "path": "assets/img/bell_hung.png",
+      "width": 48,
+      "height": 64,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A43",
+      "key": "fishing_rod",
+      "path": "assets/img/fishing_rod.png",
+      "width": 32,
+      "height": 160,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A44",
+      "key": "float",
+      "path": "assets/img/float.png",
+      "width": 32,
+      "height": 32,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A45",
+      "key": "ladle",
+      "path": "assets/img/ladle.png",
+      "width": 32,
+      "height": 64,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A46",
+      "key": "potato_box",
+      "path": "assets/img/potato_box.png",
+      "width": 104,
+      "height": 56,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A47",
+      "key": "open_book",
+      "path": "assets/img/open_book.png",
+      "width": 64,
+      "height": 40,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A48",
+      "key": "ink_pad",
+      "path": "assets/img/ink_pad.png",
+      "width": 48,
+      "height": 28,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A49",
+      "key": "key",
+      "path": "assets/img/key.png",
+      "width": 24,
+      "height": 40,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A50",
+      "key": "apple",
+      "path": "assets/img/apple.png",
+      "width": 24,
+      "height": 24,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A51",
+      "key": "sugar_candy",
+      "path": "assets/img/sugar_candy.png",
+      "width": 64,
+      "height": 32,
+      "frames": 2,
+      "cell": [
+        32,
+        32
+      ]
+    },
+    {
+      "id": "A52",
+      "key": "gift",
+      "path": "assets/img/gift.png",
+      "width": 40,
+      "height": 32,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A53",
+      "key": "chess",
+      "path": "assets/img/chess.png",
+      "width": 96,
+      "height": 48,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A54",
+      "key": "plants",
+      "path": "assets/img/plants.png",
+      "width": 160,
+      "height": 128,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A55",
+      "key": "curtain",
+      "path": "assets/img/curtain.png",
+      "width": 220,
+      "height": 220,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A56",
+      "key": "kitchen_dishes",
+      "path": "assets/img/kitchen_dishes.png",
+      "width": 128,
+      "height": 64,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A57",
+      "key": "radio",
+      "path": "assets/img/radio.png",
+      "width": 48,
+      "height": 32,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A58",
+      "key": "fort_memory",
+      "path": "assets/img/fort_memory.png",
+      "width": 256,
+      "height": 160,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A59",
+      "key": "lizard",
+      "path": "assets/img/lizard.png",
+      "width": 192,
+      "height": 32,
+      "frames": 6,
+      "cell": [
+        32,
+        32
+      ]
+    },
+    {
+      "id": "A60",
+      "key": "fire",
+      "path": "assets/img/fire.png",
+      "width": 192,
+      "height": 48,
+      "frames": 4,
+      "cell": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "A64",
+      "key": "ranger_boat",
+      "path": "assets/img/ranger_boat.png",
+      "width": 128,
+      "height": 64,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A65",
+      "key": "tent_flap",
+      "path": "assets/img/tent_flap.png",
+      "width": 96,
+      "height": 96,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A66",
+      "key": "final_table",
+      "path": "assets/img/final_table.png",
+      "width": 240,
+      "height": 100,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A68",
+      "key": "cards",
+      "path": "assets/img/cards.png",
+      "width": 40,
+      "height": 28,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A69",
+      "key": "cherries",
+      "path": "assets/img/cherries.png",
+      "width": 48,
+      "height": 32,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A70",
+      "key": "ashtray",
+      "path": "assets/img/ashtray.png",
+      "width": 32,
+      "height": 24,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A71",
+      "key": "sweets",
+      "path": "assets/img/sweets.png",
+      "width": 40,
+      "height": 28,
+      "frames": 1,
+      "cell": null
+    },
+    {
+      "id": "A75",
+      "key": "sketch_map",
+      "path": "assets/img/sketch_map.png",
+      "width": 80,
+      "height": 56,
+      "frames": 1,
+      "cell": null
+    }
+  ]
+}

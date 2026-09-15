@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18251f">
+  <title>Наталья и Прыг · Дорога к ужину</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./css/game.css">
+</head>
+<body>
+  <main id="game" aria-label="Наталья и Прыг: дорога к ужину">
+    <canvas id="scene" width="640" height="400" aria-label="У моста: смотритель, лесничий, Прыг и стол с журналом"></canvas>
+    <header id="topbar"><span class="brand">Наталья и Прыг <span class="subtitle">· Дорога к ужину</span></span><nav><button id="travel">Тропа</button><button id="sound" aria-label="Выключить звук">Звук: вкл.</button><button id="settings-open" aria-label="Настройки">⚙</button></nav></header>
+    <footer id="toolbar"><div><span class="eyebrow" id="location-name">У ПОДВЕСНОГО МОСТА</span><span id="hover-label" aria-live="polite">Выберите предмет или собеседника</span></div><div class="tools"><button id="inventory-rod" aria-pressed="false" hidden>Удочка</button><button id="inventory-bell" aria-pressed="false" hidden>Колокол</button><button id="inventory-ladle" aria-pressed="false" title="Выбрать половник из инвентаря" hidden>Половник</button><button id="look" aria-pressed="false" title="Осматривать предметы">◉ Осмотр</button><button id="hint">Подсказка</button><button id="menu-open">Меню</button></div></footer>
+    <section id="start" class="scrim">
+      <div class="panel start-card"><span class="eyebrow">МАЛЕНЬКОЕ ЛЕСНОЕ ПРИКЛЮЧЕНИЕ</span><h1>Наталья и Прыг</h1><p class="tagline">Дорога к ужину</p><div class="divider">◆</div><h2 id="start-heading">Добро пожаловать</h2><p id="start-description">Лесной городок, знакомые лица и маленькое приключение по дороге к семейному ужину.</p><p class="muted">Нажмите на собеседника или предмет. Кнопка «Тропа» ведёт к другим местам.</p><p id="save-notice" role="status"></p><div class="buttons"><button id="continue" hidden>Продолжить</button><button id="start-new" disabled>Загрузка…</button></div><label class="quiet"><input id="start-muted" type="checkbox"> Начать без звука</label></div>
+    </section>
+    <section id="dialogue" class="dialogue panel" role="dialog" aria-modal="true" aria-labelledby="speaker" hidden>
+      <canvas id="portrait" width="128" height="128" aria-hidden="true"></canvas><div class="dialogue-copy"><span class="eyebrow" id="speaker"></span><p id="line" aria-live="polite"></p><div class="dialogue-actions"><span id="line-count" class="muted"></span><button id="dialogue-close" title="Закрыть разговор (Escape)">Закрыть</button><button id="next">Далее →</button></div></div>
+    </section>
+    <section id="context" class="panel context" aria-label="Действия с предметом" hidden></section>
+    <section id="settings" class="scrim" hidden><div class="panel settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title"><h2 id="settings-title">Настройки</h2><label>Голоса <input id="voice-volume" type="range" min="0" max="1" step="0.05"></label><label>Музыка <input id="music-volume" type="range" min="0" max="1" step="0.05"></label><label>Эффекты <input id="sfx-volume" type="range" min="0" max="1" step="0.05"></label><label><input id="muted" type="checkbox"> Без звука</label><label><input id="reduced-motion" type="checkbox"> Уменьшить движение</label><p class="muted">Escape закрывает меню или разговор. Незавершённый разговор можно начать снова.</p><button id="settings-close">Вернуться</button></div></section>
+    <section id="finish" class="scrim" hidden><div class="panel finish-card"><span class="eyebrow">ДОРОГА К УЖИНУ</span><h1 id="finish-title">С днём рождения, Наталья!</h1><p id="finish-text"></p><div class="divider">◆</div><button id="replay">Сыграть заново</button><button id="stay">Остаться здесь</button></div></section>
+    <button id="skip" hidden>Пропустить движение</button><button id="enable-audio" hidden>Включить звук</button><span id="storage-status" role="status"></span>
+  </main>
+  <noscript>Для игры нужен JavaScript. Откройте эту папку через локальный HTTP-сервер.</noscript>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

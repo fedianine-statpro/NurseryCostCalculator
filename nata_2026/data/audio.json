@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "music_forest",
+      "type": "music",
+      "title": "Лёгкая лесная тема",
+      "seconds": 36,
+      "scenes": "gate, camp",
+      "path": "assets/audio/music/forest.wav",
+      "instruction": "Оригинальная небольшая мелодия, тёплый деревянный тембр, без узнаваемых цитат; лагерь на 4 dB тише.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "music_home",
+      "type": "music",
+      "title": "Домашняя тема",
+      "seconds": 40,
+      "scenes": "home, finale",
+      "path": "assets/audio/music/home.wav",
+      "instruction": "Мягкие аккорды и редкая мелодия; финал тише, без драматического нарастания.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "music_shore",
+      "type": "music",
+      "title": "Солнечная тема",
+      "seconds": 32,
+      "scenes": "shore, dance",
+      "path": "assets/audio/music/shore.wav",
+      "instruction": "Ненавязчивый ритм ча-ча, оригинальная мелодия; не воспроизводить песню из памяти.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "jump",
+      "type": "sfx",
+      "title": "Прыжок Прыга",
+      "seconds": 0.2,
+      "scenes": "gate",
+      "path": "assets/audio/sfx/jump.wav",
+      "instruction": "Тихий пружинящий тон, не мультяшный резкий boing.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "box",
+      "type": "sfx",
+      "title": "Коробка по полу",
+      "seconds": 0.45,
+      "scenes": "home",
+      "path": "assets/audio/sfx/box.wav",
+      "instruction": "Короткий негромкий шероховатый шум, огибающая без щелчков.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "bell",
+      "type": "sfx",
+      "title": "Удар колокола",
+      "seconds": 1.3,
+      "scenes": "camp, shore",
+      "path": "assets/audio/sfx/bell.wav",
+      "instruction": "Затухающий металлический тембр из нескольких частот, безопасная громкость. Сигнал три раза, интервал 1 сек.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "water",
+      "type": "ambience",
+      "title": "Вода",
+      "seconds": 8,
+      "scenes": "shore, camp",
+      "path": "assets/audio/sfx/water.wav",
+      "instruction": "Тихий фильтрованный шум, петля с кроссфейдом, не перекрывает голос.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "fire",
+      "type": "ambience",
+      "title": "Костёр",
+      "seconds": 8,
+      "scenes": "camp",
+      "path": "assets/audio/sfx/fire.wav",
+      "instruction": "Редкие мягкие потрескивания, без резких высоких пиков.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "page",
+      "type": "sfx",
+      "title": "Страница",
+      "seconds": 0.3,
+      "scenes": "gate",
+      "path": "assets/audio/sfx/page.wav",
+      "instruction": "Лёгкий шорох.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "stamp",
+      "type": "sfx",
+      "title": "Отпечаток",
+      "seconds": 0.15,
+      "scenes": "gate",
+      "path": "assets/audio/sfx/stamp.wav",
+      "instruction": "Приглушённое мягкое касание.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "gate",
+      "type": "sfx",
+      "title": "Калитка",
+      "seconds": 0.7,
+      "scenes": "gate",
+      "path": "assets/audio/sfx/gate.wav",
+      "instruction": "Тихий деревянный скрип, короткий.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "dishes",
+      "type": "sfx",
+      "title": "Посуда",
+      "seconds": 0.7,
+      "scenes": "home, finale",
+      "path": "assets/audio/sfx/dishes.wav",
+      "instruction": "Тихое касание посуды, может быть записано Виктором или синтезировано.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "wash",
+      "type": "sfx",
+      "title": "Мытьё половника",
+      "seconds": 1.4,
+      "scenes": "finale",
+      "path": "assets/audio/sfx/wash.wav",
+      "instruction": "Короткая вода и касание эмалированного тазика.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    },
+    {
+      "id": "radio",
+      "type": "ambience",
+      "title": "Фон радио",
+      "seconds": 6,
+      "scenes": "home",
+      "path": "assets/audio/sfx/radio.wav",
+      "instruction": "Тихий нейтральный собственный голос о погоде либо только радиошорох. Не выдавать запись за настоящий эфир станции.",
+      "source": "original_local_or_procedural",
+      "status": "planned"
+    }
+  ],
+  "voice_source": "dialogue.json"
+}

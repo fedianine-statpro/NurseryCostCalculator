@@ -1,0 +1,1644 @@
+{
+  "version": 1,
+  "language": "ru",
+  "lines": [
+    {
+      "id": "gate_intro_01",
+      "scene": "gate",
+      "block": "intro",
+      "speaker": "narrator",
+      "mode": "core",
+      "text": "Наталья добралась до городка как раз вовремя: здесь уже возникла небольшая проблема. Ростом примерно по колено.",
+      "audio": "assets/audio/voice/gate_intro_01.mp3"
+    },
+    {
+      "id": "gate_greeting_01",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Почему вы его не пропускаете?",
+      "audio": "assets/audio/voice/gate_greeting_01.mp3"
+    },
+    {
+      "id": "gate_greeting_02",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Подвесной мост. По одному посетителю за раз. Каждый отмечается в журнале.",
+      "audio": "assets/audio/voice/gate_greeting_02.mp3"
+    },
+    {
+      "id": "gate_greeting_03",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "У него нет рук. Отпечаток подойдёт?",
+      "audio": "assets/audio/voice/gate_greeting_03.mp3"
+    },
+    {
+      "id": "gate_greeting_04",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Подойдёт. Только он прыгает. Я наклоняюсь посмотреть. Он перестаёт прыгать. Я выпрямляюсь. Он прыгает.",
+      "audio": "assets/audio/voice/gate_greeting_04.mp3"
+    },
+    {
+      "id": "gate_greeting_05",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Вот.",
+      "audio": "assets/audio/voice/gate_greeting_05.mp3"
+    },
+    {
+      "id": "gate_greeting_06",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Я ему помогу.",
+      "audio": "assets/audio/voice/gate_greeting_06.mp3"
+    },
+    {
+      "id": "gate_greeting_07",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Хорошо. Только сначала нужен ключ. Лесничий забрал его, когда проверял крепления на другом берегу.",
+      "audio": "assets/audio/voice/gate_greeting_07.mp3"
+    },
+    {
+      "id": "gate_greeting_08",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Где он теперь?",
+      "audio": "assets/audio/voice/gate_greeting_08.mp3"
+    },
+    {
+      "id": "gate_greeting_09",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Ушёл к озеру проверять туристов. Обещал вернуться до обеда.",
+      "audio": "assets/audio/voice/gate_greeting_09.mp3"
+    },
+    {
+      "id": "gate_greeting_10",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Давно?",
+      "audio": "assets/audio/voice/gate_greeting_10.mp3"
+    },
+    {
+      "id": "gate_greeting_11",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Вчера утром.",
+      "audio": "assets/audio/voice/gate_greeting_11.mp3"
+    },
+    {
+      "id": "gate_greeting_12",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "И вы его не искали?",
+      "audio": "assets/audio/voice/gate_greeting_12.mp3"
+    },
+    {
+      "id": "gate_greeting_13",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Отправил помощника. Тот вернулся с запиской: «Все найдены, остаюсь ночевать».",
+      "audio": "assets/audio/voice/gate_greeting_13.mp3"
+    },
+    {
+      "id": "gate_greeting_14",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "А ключ почему не передал?",
+      "audio": "assets/audio/voice/gate_greeting_14.mp3"
+    },
+    {
+      "id": "gate_greeting_15",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Вот это и хочу узнать. Сходите, пожалуйста, к лагерю. Кругом по тропе можно, только далековато.",
+      "audio": "assets/audio/voice/gate_greeting_15.mp3"
+    },
+    {
+      "id": "gate_greeting_16",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Схожу. А ты подожди здесь.",
+      "audio": "assets/audio/voice/gate_greeting_16.mp3"
+    },
+    {
+      "id": "gate_greeting_17",
+      "scene": "gate",
+      "block": "greeting",
+      "speaker": "narrator",
+      "mode": "core",
+      "text": "Прыг согласился. Или предложил прыгнуть. В любом случае далеко не ушёл.",
+      "audio": "assets/audio/voice/gate_greeting_17.mp3"
+    },
+    {
+      "id": "gate_recovered_first_01",
+      "scene": "gate",
+      "block": "recovered_first",
+      "speaker": "keeper",
+      "mode": "alternate",
+      "text": "Ключ вернулся! Осталось помочь нашему посетителю с журналом.",
+      "audio": "assets/audio/voice/gate_recovered_first_01.mp3"
+    },
+    {
+      "id": "gate_river_01",
+      "scene": "gate",
+      "block": "river",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Вода проходит без подписи. Наталья решает пока не сообщать об этом смотрителю.",
+      "audio": "assets/audio/voice/gate_river_01.mp3"
+    },
+    {
+      "id": "gate_desk_01",
+      "scene": "gate",
+      "block": "desk",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Стол установлен на удобной высоте. Для смотрителя. Остальным предлагается расти.",
+      "audio": "assets/audio/voice/gate_desk_01.mp3"
+    },
+    {
+      "id": "gate_mug_01",
+      "scene": "gate",
+      "block": "mug",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Кружка стоит точно на своём отпечатке. Дело раскрыто. Наталья решает не отвлекать следствие.",
+      "audio": "assets/audio/voice/gate_mug_01.mp3"
+    },
+    {
+      "id": "gate_pryg_01",
+      "scene": "gate",
+      "block": "pryg",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Небольшое, круглое, упругое. Имя «Прыг» напрашивается само и несколько раз подтверждается.",
+      "audio": "assets/audio/voice/gate_pryg_01.mp3"
+    },
+    {
+      "id": "gate_gate_locked_01",
+      "scene": "gate",
+      "block": "gate_locked",
+      "speaker": "keeper",
+      "mode": "reaction",
+      "text": "Ключ у лесничего. По тропе слева можно обойти, но этот малыш всё время скачет обратно к мосту.",
+      "audio": "assets/audio/voice/gate_gate_locked_01.mp3"
+    },
+    {
+      "id": "gate_gate_hint_01",
+      "scene": "gate",
+      "block": "gate_hint",
+      "speaker": "narrator",
+      "mode": "hint",
+      "text": "Тропа слева ведёт к лагерю у озера.",
+      "audio": "assets/audio/voice/gate_gate_hint_01.mp3"
+    },
+    {
+      "id": "camp_arrival_01",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Вас искал лесничий.",
+      "audio": "assets/audio/voice/camp_arrival_01.mp3"
+    },
+    {
+      "id": "camp_arrival_02",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "Нашёл ещё вчера. Переночевал, а утром решил проверить дальний берег.",
+      "audio": "assets/audio/voice/camp_arrival_02.mp3"
+    },
+    {
+      "id": "camp_arrival_03",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "danka",
+      "mode": "core",
+      "text": "Вон его лодка. В камышах.",
+      "audio": "assets/audio/voice/camp_arrival_03.mp3"
+    },
+    {
+      "id": "camp_arrival_04",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Он застрял?",
+      "audio": "assets/audio/voice/camp_arrival_04.mp3"
+    },
+    {
+      "id": "camp_arrival_05",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "Похоже. У него длинная причальная верёвка. Если бросит конец, вытащим.",
+      "audio": "assets/audio/voice/camp_arrival_05.mp3"
+    },
+    {
+      "id": "camp_arrival_06",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Бросайте верёвку!",
+      "audio": "assets/audio/voice/camp_arrival_06.mp3"
+    },
+    {
+      "id": "camp_arrival_07",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "Ветер относит голос. У нас условный сигнал: три удара колокола означают «бросай верёвку». Вчера договорились, когда лодку причаливали.",
+      "audio": "assets/audio/voice/camp_arrival_07.mp3"
+    },
+    {
+      "id": "camp_arrival_08",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "А колокол?",
+      "audio": "assets/audio/voice/camp_arrival_08.mp3"
+    },
+    {
+      "id": "camp_arrival_09",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "Утром у него язык треснул. На солнечную пристань отнесли чинить.",
+      "audio": "assets/audio/voice/camp_arrival_09.mp3"
+    },
+    {
+      "id": "camp_arrival_10",
+      "scene": "camp",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Принесу.",
+      "audio": "assets/audio/voice/camp_arrival_10.mp3"
+    },
+    {
+      "id": "camp_early_arrival_01",
+      "scene": "camp",
+      "block": "early_arrival",
+      "speaker": "nata",
+      "mode": "alternate",
+      "text": "Что там с лодкой?",
+      "audio": "assets/audio/voice/camp_early_arrival_01.mp3"
+    },
+    {
+      "id": "camp_winter_01",
+      "scene": "camp",
+      "block": "winter",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Родители опять волнуются?",
+      "audio": "assets/audio/voice/camp_winter_01.mp3"
+    },
+    {
+      "id": "camp_winter_02",
+      "scene": "camp",
+      "block": "winter",
+      "speaker": "anton",
+      "mode": "optional",
+      "text": "Мы передали, что у нас тепло.",
+      "audio": "assets/audio/voice/camp_winter_02.mp3"
+    },
+    {
+      "id": "camp_winter_03",
+      "scene": "camp",
+      "block": "winter",
+      "speaker": "sasha",
+      "mode": "optional",
+      "text": "Теперь надо передать, что лесничему тоже.",
+      "audio": "assets/audio/voice/camp_winter_03.mp3"
+    },
+    {
+      "id": "camp_dance_offer_01",
+      "scene": "camp",
+      "block": "dance_offer",
+      "speaker": "vinnik",
+      "mode": "optional",
+      "text": "Натка! Иди сюда!",
+      "audio": "assets/audio/voice/camp_dance_offer_01.mp3"
+    },
+    {
+      "id": "camp_dance_offer_02",
+      "scene": "camp",
+      "block": "dance_offer",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Я лесничего спасаю.",
+      "audio": "assets/audio/voice/camp_dance_offer_02.mp3"
+    },
+    {
+      "id": "camp_dance_offer_03",
+      "scene": "camp",
+      "block": "dance_offer",
+      "speaker": "vinnik",
+      "mode": "optional",
+      "text": "Тогда сначала вытащи. Потом потанцуем.",
+      "audio": "assets/audio/voice/camp_dance_offer_03.mp3"
+    },
+    {
+      "id": "camp_dance_after_01",
+      "scene": "camp",
+      "block": "dance_after",
+      "speaker": "vinnik",
+      "mode": "optional",
+      "text": "Теперь один танец?",
+      "audio": "assets/audio/voice/camp_dance_after_01.mp3"
+    },
+    {
+      "id": "camp_dance_after_02",
+      "scene": "camp",
+      "block": "dance_after",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Один.",
+      "audio": "assets/audio/voice/camp_dance_after_02.mp3"
+    },
+    {
+      "id": "camp_hook_01",
+      "scene": "camp",
+      "block": "hook",
+      "speaker": "katya",
+      "mode": "optional",
+      "text": "Тут крючок!",
+      "audio": "assets/audio/voice/camp_hook_01.mp3"
+    },
+    {
+      "id": "camp_hook_02",
+      "scene": "camp",
+      "block": "hook",
+      "speaker": "alsu",
+      "mode": "optional",
+      "text": "На нём как раз можно подвесить колокол.",
+      "audio": "assets/audio/voice/camp_hook_02.mp3"
+    },
+    {
+      "id": "camp_hook_03",
+      "scene": "camp",
+      "block": "hook",
+      "speaker": "sanka",
+      "mode": "optional",
+      "text": "А меня?",
+      "audio": "assets/audio/voice/camp_hook_03.mp3"
+    },
+    {
+      "id": "camp_hook_04",
+      "scene": "camp",
+      "block": "hook",
+      "speaker": "alsu",
+      "mode": "optional",
+      "text": "Для тебя нужен другой проект.",
+      "audio": "assets/audio/voice/camp_hook_04.mp3"
+    },
+    {
+      "id": "camp_tent_01",
+      "scene": "camp",
+      "block": "tent",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "В палатке есть всё необходимое для жизни. Если понадобится что-нибудь ещё, Антон объяснит, почему это необязательно.",
+      "audio": "assets/audio/voice/camp_tent_01.mp3"
+    },
+    {
+      "id": "camp_fire_01",
+      "scene": "camp",
+      "block": "fire",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Костёр развели сообща. Поэтому теперь каждый знает, как его следовало разводить.",
+      "audio": "assets/audio/voice/camp_fire_01.mp3"
+    },
+    {
+      "id": "camp_pot_01",
+      "scene": "camp",
+      "block": "pot",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "По запаху готово. По мнению Антона, ещё пять минут. Наталья больше доверяет запаху.",
+      "audio": "assets/audio/voice/camp_pot_01.mp3"
+    },
+    {
+      "id": "camp_drawing_01",
+      "scene": "camp",
+      "block": "drawing",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Проект навеса. Санька уже пририсовал башню. Алсу пока не видела.",
+      "audio": "assets/audio/voice/camp_drawing_01.mp3"
+    },
+    {
+      "id": "camp_lisbon_map_01",
+      "scene": "camp",
+      "block": "lisbon_map",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "На карте дорога совершенно ровная. Наталья помнит эту дорогу. Карту составлял человек, который по ней не бегал.",
+      "audio": "assets/audio/voice/camp_lisbon_map_01.mp3"
+    },
+    {
+      "id": "camp_bell_hint_01",
+      "scene": "camp",
+      "block": "bell_hint",
+      "speaker": "anton",
+      "mode": "hint",
+      "text": "Колокол на солнечной пристани. Дорожка вдоль воды.",
+      "audio": "assets/audio/voice/camp_bell_hint_01.mp3"
+    },
+    {
+      "id": "shore_arrival_01",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Пап, где колокол?",
+      "audio": "assets/audio/voice/shore_arrival_01.mp3"
+    },
+    {
+      "id": "shore_arrival_02",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "У причала. На верёвке.",
+      "audio": "assets/audio/voice/shore_arrival_02.mp3"
+    },
+    {
+      "id": "shore_arrival_03",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Он на дне.",
+      "audio": "assets/audio/voice/shore_arrival_03.mp3"
+    },
+    {
+      "id": "shore_arrival_04",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "Доска, значит, не выдержала. Я его на край положил.",
+      "audio": "assets/audio/voice/shore_arrival_04.mp3"
+    },
+    {
+      "id": "shore_arrival_05",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Хорошо, что привязал.",
+      "audio": "assets/audio/voice/shore_arrival_05.mp3"
+    },
+    {
+      "id": "shore_arrival_06",
+      "scene": "shore",
+      "block": "arrival",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "Я же рыбак.",
+      "audio": "assets/audio/voice/shore_arrival_06.mp3"
+    },
+    {
+      "id": "shore_early_01",
+      "scene": "shore",
+      "block": "early",
+      "speaker": "nata",
+      "mode": "alternate",
+      "text": "Пап, что за верёвка у причала?",
+      "audio": "assets/audio/voice/shore_early_01.mp3"
+    },
+    {
+      "id": "shore_early_02",
+      "scene": "shore",
+      "block": "early",
+      "speaker": "sergey",
+      "mode": "alternate",
+      "text": "Колокол. Принесли чинить.",
+      "audio": "assets/audio/voice/shore_early_02.mp3"
+    },
+    {
+      "id": "shore_rod_request_01",
+      "scene": "shore",
+      "block": "rod_request",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Можно удочку?",
+      "audio": "assets/audio/voice/shore_rod_request_01.mp3"
+    },
+    {
+      "id": "shore_rod_request_02",
+      "scene": "shore",
+      "block": "rod_request",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "Сейчас, тут ладья под боем…",
+      "audio": "assets/audio/voice/shore_rod_request_02.mp3"
+    },
+    {
+      "id": "shore_rod_request_03",
+      "scene": "shore",
+      "block": "rod_request",
+      "speaker": "narrator",
+      "mode": "core",
+      "text": "На доске осталось три фигуры. Каждая требует отдельной минутки.",
+      "audio": "assets/audio/voice/shore_rod_request_03.mp3"
+    },
+    {
+      "id": "shore_rook_01",
+      "scene": "shore",
+      "block": "rook",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "У тебя ладью забирают.",
+      "audio": "assets/audio/voice/shore_rook_01.mp3"
+    },
+    {
+      "id": "shore_rook_02",
+      "scene": "shore",
+      "block": "rook",
+      "speaker": "sergey",
+      "mode": "branch",
+      "text": "Кто?!",
+      "audio": "assets/audio/voice/shore_rook_02.mp3"
+    },
+    {
+      "id": "shore_rook_03",
+      "scene": "shore",
+      "block": "rook",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Никто. Можно удочку?",
+      "audio": "assets/audio/voice/shore_rook_03.mp3"
+    },
+    {
+      "id": "shore_rook_04",
+      "scene": "shore",
+      "block": "rook",
+      "speaker": "sergey",
+      "mode": "branch",
+      "text": "Бери. Только ладью не трогай.",
+      "audio": "assets/audio/voice/shore_rook_04.mp3"
+    },
+    {
+      "id": "shore_dragon_01",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Пап, там дракон.",
+      "audio": "assets/audio/voice/shore_dragon_01.mp3"
+    },
+    {
+      "id": "shore_dragon_02",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "sergey",
+      "mode": "branch",
+      "text": "Угу.",
+      "audio": "assets/audio/voice/shore_dragon_02.mp3"
+    },
+    {
+      "id": "shore_dragon_03",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Ладью съест.",
+      "audio": "assets/audio/voice/shore_dragon_03.mp3"
+    },
+    {
+      "id": "shore_dragon_04",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "sergey",
+      "mode": "branch",
+      "text": "Какую ладью?",
+      "audio": "assets/audio/voice/shore_dragon_04.mp3"
+    },
+    {
+      "id": "shore_dragon_05",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Пап. Удочку.",
+      "audio": "assets/audio/voice/shore_dragon_05.mp3"
+    },
+    {
+      "id": "shore_dragon_06",
+      "scene": "shore",
+      "block": "dragon",
+      "speaker": "sergey",
+      "mode": "branch",
+      "text": "А. Бери, конечно.",
+      "audio": "assets/audio/voice/shore_dragon_06.mp3"
+    },
+    {
+      "id": "shore_bell_retrieved_01",
+      "scene": "shore",
+      "block": "bell_retrieved",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Нашёлся!",
+      "audio": "assets/audio/voice/shore_bell_retrieved_01.mp3"
+    },
+    {
+      "id": "shore_bell_retrieved_02",
+      "scene": "shore",
+      "block": "bell_retrieved",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "А чем он должен звонить?",
+      "audio": "assets/audio/voice/shore_bell_retrieved_02.mp3"
+    },
+    {
+      "id": "shore_bell_retrieved_03",
+      "scene": "shore",
+      "block": "bell_retrieved",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "Язык треснул, сняли. Можно снаружи ударить чем-нибудь металлическим.",
+      "audio": "assets/audio/voice/shore_bell_retrieved_03.mp3"
+    },
+    {
+      "id": "shore_need_ladle_01",
+      "scene": "shore",
+      "block": "need_ladle",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Половником?",
+      "audio": "assets/audio/voice/shore_need_ladle_01.mp3"
+    },
+    {
+      "id": "shore_need_ladle_02",
+      "scene": "shore",
+      "block": "need_ladle",
+      "speaker": "sergey",
+      "mode": "core",
+      "text": "Можно. У Линочки есть металлический.",
+      "audio": "assets/audio/voice/shore_need_ladle_02.mp3"
+    },
+    {
+      "id": "shore_have_ladle_01",
+      "scene": "shore",
+      "block": "have_ladle",
+      "speaker": "nata",
+      "mode": "alternate",
+      "text": "У меня как раз половник.",
+      "audio": "assets/audio/voice/shore_have_ladle_01.mp3"
+    },
+    {
+      "id": "shore_have_ladle_02",
+      "scene": "shore",
+      "block": "have_ladle",
+      "speaker": "sergey",
+      "mode": "alternate",
+      "text": "Подойдёт.",
+      "audio": "assets/audio/voice/shore_have_ladle_02.mp3"
+    },
+    {
+      "id": "shore_chess_before_01",
+      "scene": "shore",
+      "block": "chess_before",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Сергей контролирует центр, правый фланг и диагональ. Колокол слева в его планы не входил.",
+      "audio": "assets/audio/voice/shore_chess_before_01.mp3"
+    },
+    {
+      "id": "shore_chess_after_01",
+      "scene": "shore",
+      "block": "chess_after",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "На доске Сергей заметил угрозу за три хода. Исчезновение колокола в двух шагах от него оказалось неожиданностью.",
+      "audio": "assets/audio/voice/shore_chess_after_01.mp3"
+    },
+    {
+      "id": "shore_cherries_01",
+      "scene": "shore",
+      "block": "cherries",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Наталья берёт одну черешню. Потом ещё одну. Рассказчик решает вернуться, когда здесь произойдёт что-нибудь новое.",
+      "audio": "assets/audio/voice/shore_cherries_01.mp3"
+    },
+    {
+      "id": "shore_rocks_01",
+      "scene": "shore",
+      "block": "rocks",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Скалы напоминают Коктебель. Наталья прикидывает, как на них подняться. Для начала нужна ещё черешня.",
+      "audio": "assets/audio/voice/shore_rocks_01.mp3"
+    },
+    {
+      "id": "shore_ashtray_01",
+      "scene": "shore",
+      "block": "ashtray",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Надпись: «Это пепельница». Ниже другим почерком: «Даже если вы купили мороженое».",
+      "audio": "assets/audio/voice/shore_ashtray_01.mp3"
+    },
+    {
+      "id": "shore_boat_01",
+      "scene": "shore",
+      "block": "boat",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "В этой лодке удобно рыбачить. Рыба придерживается другого мнения.",
+      "audio": "assets/audio/voice/shore_boat_01.mp3"
+    },
+    {
+      "id": "shore_lizard_01",
+      "scene": "shore",
+      "block": "lizard",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Ящерица неподвижна и позволяет подробно себя рассмотреть. Наталья наклоняется… Теперь можно подробно рассмотреть камень.",
+      "audio": "assets/audio/voice/shore_lizard_01.mp3"
+    },
+    {
+      "id": "shore_rod_hint_01",
+      "scene": "shore",
+      "block": "rod_hint",
+      "speaker": "narrator",
+      "mode": "hint",
+      "text": "Сергей сейчас думает о шахматах. Стоит сказать что-нибудь о ладье.",
+      "audio": "assets/audio/voice/shore_rod_hint_01.mp3"
+    },
+    {
+      "id": "shore_float_hint_01",
+      "scene": "shore",
+      "block": "float_hint",
+      "speaker": "narrator",
+      "mode": "hint",
+      "text": "На поплавке петля. Её можно зацепить удочкой, а колокол вытянуть за верёвку.",
+      "audio": "assets/audio/voice/shore_float_hint_01.mp3"
+    },
+    {
+      "id": "shore_no_rod_01",
+      "scene": "shore",
+      "block": "no_rod",
+      "speaker": "narrator",
+      "mode": "reaction",
+      "text": "С берега не дотянуться. Нужна удочка.",
+      "audio": "assets/audio/voice/shore_no_rod_01.mp3"
+    },
+    {
+      "id": "shore_test_bell_01",
+      "scene": "shore",
+      "block": "test_bell",
+      "speaker": "narrator",
+      "mode": "reaction",
+      "text": "Работает. Осталось позвонить там, где его ждут.",
+      "audio": "assets/audio/voice/shore_test_bell_01.mp3"
+    },
+    {
+      "id": "home_arrival_01",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Наташа, котлеты будешь?",
+      "audio": "assets/audio/voice/home_arrival_01.mp3"
+    },
+    {
+      "id": "home_arrival_02",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Буду. Можно сначала половник?",
+      "audio": "assets/audio/voice/home_arrival_02.mp3"
+    },
+    {
+      "id": "home_arrival_03",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Зачем?",
+      "audio": "assets/audio/voice/home_arrival_03.mp3"
+    },
+    {
+      "id": "home_arrival_04",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "В колокол ударить. Лесничий застрял в лодке, надо подать сигнал.",
+      "audio": "assets/audio/voice/home_arrival_04.mp3"
+    },
+    {
+      "id": "home_arrival_05",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "В нижнем шкафчике. Только потом вымой.",
+      "audio": "assets/audio/voice/home_arrival_05.mp3"
+    },
+    {
+      "id": "home_arrival_06",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Я же им только позвоню.",
+      "audio": "assets/audio/voice/home_arrival_06.mp3"
+    },
+    {
+      "id": "home_arrival_07",
+      "scene": "home",
+      "block": "arrival",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Вот после этого и вымой.",
+      "audio": "assets/audio/voice/home_arrival_07.mp3"
+    },
+    {
+      "id": "home_early_01",
+      "scene": "home",
+      "block": "early",
+      "speaker": "linochka",
+      "mode": "alternate",
+      "text": "Наташа, заходи. Котлеты будешь?",
+      "audio": "assets/audio/voice/home_early_01.mp3"
+    },
+    {
+      "id": "home_early_02",
+      "scene": "home",
+      "block": "early",
+      "speaker": "nata",
+      "mode": "alternate",
+      "text": "Буду. Я пока осмотрюсь.",
+      "audio": "assets/audio/voice/home_early_02.mp3"
+    },
+    {
+      "id": "home_early_cupboard_01",
+      "scene": "home",
+      "block": "early_cupboard",
+      "speaker": "linochka",
+      "mode": "alternate",
+      "text": "Если половник нужен, бери. В нижнем шкафчике.",
+      "audio": "assets/audio/voice/home_early_cupboard_01.mp3"
+    },
+    {
+      "id": "home_cupboard_01",
+      "scene": "home",
+      "block": "cupboard",
+      "speaker": "narrator",
+      "mode": "core",
+      "text": "Половник внизу. Дверца открывается на себя. Картошка придерживается противоположного мнения.",
+      "audio": "assets/audio/voice/home_cupboard_01.mp3"
+    },
+    {
+      "id": "home_potatoes_01",
+      "scene": "home",
+      "block": "potatoes",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Под столом обитает картошка. Обычно она неподвижна, но при появлении второго ребёнка начинает мигрировать.",
+      "audio": "assets/audio/voice/home_potatoes_01.mp3"
+    },
+    {
+      "id": "home_returned_box_01",
+      "scene": "home",
+      "block": "returned_box",
+      "speaker": "narrator",
+      "mode": "core",
+      "text": "Встречается также возвратная миграция.",
+      "audio": "assets/audio/voice/home_returned_box_01.mp3"
+    },
+    {
+      "id": "home_repeat_box_01",
+      "scene": "home",
+      "block": "repeat_box",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Переговоры идут без участия верхней половины тела.",
+      "audio": "assets/audio/voice/home_repeat_box_01.mp3"
+    },
+    {
+      "id": "home_hold_request_01",
+      "scene": "home",
+      "block": "hold_request",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Вить, подожди. Она дверцу загораживает.",
+      "audio": "assets/audio/voice/home_hold_request_01.mp3"
+    },
+    {
+      "id": "home_hold_request_02",
+      "scene": "home",
+      "block": "hold_request",
+      "speaker": "victor",
+      "mode": "branch",
+      "text": "А мне ноги.",
+      "audio": "assets/audio/voice/home_hold_request_02.mp3"
+    },
+    {
+      "id": "home_hold_request_03",
+      "scene": "home",
+      "block": "hold_request",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Я половник возьму и верну.",
+      "audio": "assets/audio/voice/home_hold_request_03.mp3"
+    },
+    {
+      "id": "home_hold_request_04",
+      "scene": "home",
+      "block": "hold_request",
+      "speaker": "victor",
+      "mode": "branch",
+      "text": "Половник или картошку?",
+      "audio": "assets/audio/voice/home_hold_request_04.mp3"
+    },
+    {
+      "id": "home_hold_request_05",
+      "scene": "home",
+      "block": "hold_request",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Не переживай. Картошку тоже.",
+      "audio": "assets/audio/voice/home_hold_request_05.mp3"
+    },
+    {
+      "id": "home_hold_self_01",
+      "scene": "home",
+      "block": "hold_self",
+      "speaker": "victor",
+      "mode": "branch",
+      "text": "Так можно было?",
+      "audio": "assets/audio/voice/home_hold_self_01.mp3"
+    },
+    {
+      "id": "home_hold_self_02",
+      "scene": "home",
+      "block": "hold_self",
+      "speaker": "nata",
+      "mode": "branch",
+      "text": "Теперь можно.",
+      "audio": "assets/audio/voice/home_hold_self_02.mp3"
+    },
+    {
+      "id": "home_ladle_taken_01",
+      "scene": "home",
+      "block": "ladle_taken",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Когда вытащите, веди его сюда. Пусть поест.",
+      "audio": "assets/audio/voice/home_ladle_taken_01.mp3"
+    },
+    {
+      "id": "home_ladle_taken_02",
+      "scene": "home",
+      "block": "ladle_taken",
+      "speaker": "irina",
+      "mode": "core",
+      "text": "Я ещё тарелку достала.",
+      "audio": "assets/audio/voice/home_ladle_taken_02.mp3"
+    },
+    {
+      "id": "home_ladle_early_01",
+      "scene": "home",
+      "block": "ladle_early",
+      "speaker": "linochka",
+      "mode": "alternate",
+      "text": "Потом верни, пожалуйста.",
+      "audio": "assets/audio/voice/home_ladle_early_01.mp3"
+    },
+    {
+      "id": "home_game_memory_01",
+      "scene": "home",
+      "block": "game_memory",
+      "speaker": "victor",
+      "mode": "optional",
+      "text": "Натка, попробуй сначала осмотреть.",
+      "audio": "assets/audio/voice/home_game_memory_01.mp3"
+    },
+    {
+      "id": "home_game_memory_02",
+      "scene": "home",
+      "block": "game_memory",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Вить, я знаю.",
+      "audio": "assets/audio/voice/home_game_memory_02.mp3"
+    },
+    {
+      "id": "home_game_memory_03",
+      "scene": "home",
+      "block": "game_memory",
+      "speaker": "victor",
+      "mode": "optional",
+      "text": "Точно. Ты управляешь, я смотрю.",
+      "audio": "assets/audio/voice/home_game_memory_03.mp3"
+    },
+    {
+      "id": "home_candy_01",
+      "scene": "home",
+      "block": "candy",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Помнишь?",
+      "audio": "assets/audio/voice/home_candy_01.mp3"
+    },
+    {
+      "id": "home_candy_02",
+      "scene": "home",
+      "block": "candy",
+      "speaker": "victor",
+      "mode": "optional",
+      "text": "Ещё бы. Сахар, огонь и полная уверенность, что мы умеем готовить.",
+      "audio": "assets/audio/voice/home_candy_02.mp3"
+    },
+    {
+      "id": "home_candy_03",
+      "scene": "home",
+      "block": "candy",
+      "speaker": "linochka",
+      "mode": "optional",
+      "text": "Посуду замочите.",
+      "audio": "assets/audio/voice/home_candy_03.mp3"
+    },
+    {
+      "id": "home_fort_01",
+      "scene": "home",
+      "block": "fort",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "За этим пледом расположены гостиная, спальня, столовая и просторный внутренний двор. Наталья приподнимает край. Весь внутренний двор занят Витей.",
+      "audio": "assets/audio/voice/home_fort_01.mp3"
+    },
+    {
+      "id": "home_fort_again_01",
+      "scene": "home",
+      "block": "fort_again",
+      "speaker": "young_victor",
+      "mode": "optional",
+      "text": "Стучи.",
+      "audio": "assets/audio/voice/home_fort_again_01.mp3"
+    },
+    {
+      "id": "home_fort_again_02",
+      "scene": "home",
+      "block": "fort_again",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Во что?",
+      "audio": "assets/audio/voice/home_fort_again_02.mp3"
+    },
+    {
+      "id": "home_fort_again_03",
+      "scene": "home",
+      "block": "fort_again",
+      "speaker": "young_victor",
+      "mode": "optional",
+      "text": "В дверь.",
+      "audio": "assets/audio/voice/home_fort_again_03.mp3"
+    },
+    {
+      "id": "home_fort_again_04",
+      "scene": "home",
+      "block": "fort_again",
+      "speaker": "nata",
+      "mode": "optional",
+      "text": "Это плед.",
+      "audio": "assets/audio/voice/home_fort_again_04.mp3"
+    },
+    {
+      "id": "home_fort_again_05",
+      "scene": "home",
+      "block": "fort_again",
+      "speaker": "young_victor",
+      "mode": "optional",
+      "text": "Тогда звони.",
+      "audio": "assets/audio/voice/home_fort_again_05.mp3"
+    },
+    {
+      "id": "home_tv_01",
+      "scene": "home",
+      "block": "tv",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Телевизор занимал много места. Видимо, передачи хранились внутри.",
+      "audio": "assets/audio/voice/home_tv_01.mp3"
+    },
+    {
+      "id": "home_bed_01",
+      "scene": "home",
+      "block": "bed",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Односпальная кровать. Спать здесь пробовали по одному. Сидеть так и не научились.",
+      "audio": "assets/audio/voice/home_bed_01.mp3"
+    },
+    {
+      "id": "home_blanket_01",
+      "scene": "home",
+      "block": "blanket",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Наталья помнит этот плед. Она садится на привычное место.",
+      "audio": "assets/audio/voice/home_blanket_01.mp3"
+    },
+    {
+      "id": "home_radio_01",
+      "scene": "home",
+      "block": "radio",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "По радио «Эхо Москвы». Линочка готовит. Остальные разговаривают поверх радио. Радио не сдаётся.",
+      "audio": "assets/audio/voice/home_radio_01.mp3"
+    },
+    {
+      "id": "home_books_01",
+      "scene": "home",
+      "block": "books",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Книги занимают всю стену. Линочка знает, где какая. Остальные пользуются Линочкой.",
+      "audio": "assets/audio/voice/home_books_01.mp3"
+    },
+    {
+      "id": "home_wardrobe_01",
+      "scene": "home",
+      "block": "wardrobe",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Если здесь есть проход в другое королевство, перед ним наверняка висят пальто.",
+      "audio": "assets/audio/voice/home_wardrobe_01.mp3"
+    },
+    {
+      "id": "home_sweets_01",
+      "scene": "home",
+      "block": "sweets",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "Те самые «Батончики». Линочка уже заметила, что Наталья заметила.",
+      "audio": "assets/audio/voice/home_sweets_01.mp3"
+    },
+    {
+      "id": "home_cards_01",
+      "scene": "home",
+      "block": "cards",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "«Дурак» и преферанс. Колода одна, степень серьёзности взрослых совершенно разная.",
+      "audio": "assets/audio/voice/home_cards_01.mp3"
+    },
+    {
+      "id": "home_plants_01",
+      "scene": "home",
+      "block": "plants",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "За занавеской стоят горшки с растениями. Они заняли лучшие места у окна ещё до прихода гостей.",
+      "audio": "assets/audio/voice/home_plants_01.mp3"
+    },
+    {
+      "id": "home_box_hint_01",
+      "scene": "home",
+      "block": "box_hint",
+      "speaker": "victor",
+      "mode": "hint",
+      "text": "Ты скажи, если её надо оставить с моей стороны.",
+      "audio": "assets/audio/voice/home_box_hint_01.mp3"
+    },
+    {
+      "id": "camp_hang_01",
+      "scene": "camp",
+      "block": "hang",
+      "speaker": "katya",
+      "mode": "core",
+      "text": "Вот сюда!",
+      "audio": "assets/audio/voice/camp_hang_01.mp3"
+    },
+    {
+      "id": "camp_hang_02",
+      "scene": "camp",
+      "block": "hang",
+      "speaker": "alsu",
+      "mode": "core",
+      "text": "Держится. Можно звонить.",
+      "audio": "assets/audio/voice/camp_hang_02.mp3"
+    },
+    {
+      "id": "camp_no_ladle_01",
+      "scene": "camp",
+      "block": "no_ladle",
+      "speaker": "narrator",
+      "mode": "reaction",
+      "text": "Без языка колокол изображает абажур. Очень убедительно.",
+      "audio": "assets/audio/voice/camp_no_ladle_01.mp3"
+    },
+    {
+      "id": "camp_ring_01",
+      "scene": "camp",
+      "block": "ring",
+      "speaker": "sanka",
+      "mode": "core",
+      "text": "Я тоже!",
+      "audio": "assets/audio/voice/camp_ring_01.mp3"
+    },
+    {
+      "id": "camp_ring_02",
+      "scene": "camp",
+      "block": "ring",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "В следующий раз. Сейчас ровно три удара, это сигнал.",
+      "audio": "assets/audio/voice/camp_ring_02.mp3"
+    },
+    {
+      "id": "camp_rescue_01",
+      "scene": "camp",
+      "block": "rescue",
+      "speaker": "ranger",
+      "mode": "core",
+      "text": "Спасибо. Чуть весло не сломал.",
+      "audio": "assets/audio/voice/camp_rescue_01.mp3"
+    },
+    {
+      "id": "camp_rescue_02",
+      "scene": "camp",
+      "block": "rescue",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "А почему сразу верёвку не бросили?",
+      "audio": "assets/audio/voice/camp_rescue_02.mp3"
+    },
+    {
+      "id": "camp_rescue_03",
+      "scene": "camp",
+      "block": "rescue",
+      "speaker": "ranger",
+      "mode": "core",
+      "text": "Надеялся выбраться сам.",
+      "audio": "assets/audio/voice/camp_rescue_03.mp3"
+    },
+    {
+      "id": "camp_rescue_04",
+      "scene": "camp",
+      "block": "rescue",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "Мы заметили. Камыши тоже.",
+      "audio": "assets/audio/voice/camp_rescue_04.mp3"
+    },
+    {
+      "id": "camp_key_known_01",
+      "scene": "camp",
+      "block": "key_known",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "У вас ключ от моста?",
+      "audio": "assets/audio/voice/camp_key_known_01.mp3"
+    },
+    {
+      "id": "camp_key_known_02",
+      "scene": "camp",
+      "block": "key_known",
+      "speaker": "ranger",
+      "mode": "core",
+      "text": "Здесь. Смотритель сердится?",
+      "audio": "assets/audio/voice/camp_key_known_02.mp3"
+    },
+    {
+      "id": "camp_key_known_03",
+      "scene": "camp",
+      "block": "key_known",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Пока просто хочет домой. Лучше успеть до следующей стадии.",
+      "audio": "assets/audio/voice/camp_key_known_03.mp3"
+    },
+    {
+      "id": "camp_key_early_01",
+      "scene": "camp",
+      "block": "key_early",
+      "speaker": "ranger",
+      "mode": "alternate",
+      "text": "Мне теперь к мосту. Ключ смотрителю вернуть.",
+      "audio": "assets/audio/voice/camp_key_early_01.mp3"
+    },
+    {
+      "id": "camp_rescue_end_01",
+      "scene": "camp",
+      "block": "rescue_end",
+      "speaker": "anton",
+      "mode": "core",
+      "text": "На ужин вернётесь?",
+      "audio": "assets/audio/voice/camp_rescue_end_01.mp3"
+    },
+    {
+      "id": "camp_rescue_end_02",
+      "scene": "camp",
+      "block": "rescue_end",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Все к Линочке. Заодно половник верну.",
+      "audio": "assets/audio/voice/camp_rescue_end_02.mp3"
+    },
+    {
+      "id": "camp_shout_again_01",
+      "scene": "camp",
+      "block": "shout_again",
+      "speaker": "nata",
+      "mode": "reaction",
+      "text": "Он видит нас, но не слышит. Нужен условный сигнал.",
+      "audio": "assets/audio/voice/camp_shout_again_01.mp3"
+    },
+    {
+      "id": "camp_wood_hit_01",
+      "scene": "camp",
+      "block": "wood_hit",
+      "speaker": "narrator",
+      "mode": "reaction",
+      "text": "По дереву получается слишком тихо. Для сигнала нужен колокол.",
+      "audio": "assets/audio/voice/camp_wood_hit_01.mp3"
+    },
+    {
+      "id": "camp_signal_hint_01",
+      "scene": "camp",
+      "block": "signal_hint",
+      "speaker": "narrator",
+      "mode": "hint",
+      "text": "Подвесить колокол на крючок и ударить половником три раза.",
+      "audio": "assets/audio/voice/camp_signal_hint_01.mp3"
+    },
+    {
+      "id": "gate_return_01",
+      "scene": "gate",
+      "block": "return",
+      "speaker": "ranger",
+      "mode": "core",
+      "text": "Ключ. Извините, задержался.",
+      "audio": "assets/audio/voice/gate_return_01.mp3"
+    },
+    {
+      "id": "gate_return_02",
+      "scene": "gate",
+      "block": "return",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Я заметил.",
+      "audio": "assets/audio/voice/gate_return_02.mp3"
+    },
+    {
+      "id": "gate_return_03",
+      "scene": "gate",
+      "block": "return",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Осталась отметка в журнале.",
+      "audio": "assets/audio/voice/gate_return_03.mp3"
+    },
+    {
+      "id": "gate_signature_01",
+      "scene": "gate",
+      "block": "signature",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Можно книгу на землю?",
+      "audio": "assets/audio/voice/gate_signature_01.mp3"
+    },
+    {
+      "id": "gate_signature_02",
+      "scene": "gate",
+      "block": "signature",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Можно. Только страницу чистую откройте.",
+      "audio": "assets/audio/voice/gate_signature_02.mp3"
+    },
+    {
+      "id": "gate_lift_pryg_01",
+      "scene": "gate",
+      "block": "lift_pryg",
+      "speaker": "narrator",
+      "mode": "reaction",
+      "text": "Наталья могла бы поднять Прыга. Но он уже понял, что сегодня передвигать будут мебель.",
+      "audio": "assets/audio/voice/gate_lift_pryg_01.mp3"
+    },
+    {
+      "id": "gate_signature_hint_01",
+      "scene": "gate",
+      "block": "signature_hint",
+      "speaker": "ranger",
+      "mode": "hint",
+      "text": "Книгу и подушку можно положить рядом. Пусть перепрыгнет с одной на другую.",
+      "audio": "assets/audio/voice/gate_signature_hint_01.mp3"
+    },
+    {
+      "id": "gate_signed_01",
+      "scene": "gate",
+      "block": "signed",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Это подпись?",
+      "audio": "assets/audio/voice/gate_signed_01.mp3"
+    },
+    {
+      "id": "gate_signed_02",
+      "scene": "gate",
+      "block": "signed",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Это всё, чем он может подписаться.",
+      "audio": "assets/audio/voice/gate_signed_02.mp3"
+    },
+    {
+      "id": "gate_signed_03",
+      "scene": "gate",
+      "block": "signed",
+      "speaker": "keeper",
+      "mode": "core",
+      "text": "Зато разборчивее, чем у лесничего.",
+      "audio": "assets/audio/voice/gate_signed_03.mp3"
+    },
+    {
+      "id": "gate_signed_04",
+      "scene": "gate",
+      "block": "signed",
+      "speaker": "ranger",
+      "mode": "core",
+      "text": "Я в перчатках был.",
+      "audio": "assets/audio/voice/gate_signed_04.mp3"
+    },
+    {
+      "id": "gate_farewell_01",
+      "scene": "gate",
+      "block": "farewell",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Беги. То есть прыгай.",
+      "audio": "assets/audio/voice/gate_farewell_01.mp3"
+    },
+    {
+      "id": "gate_print_01",
+      "scene": "gate",
+      "block": "print",
+      "speaker": "narrator",
+      "mode": "optional",
+      "text": "След занимает почти всю страницу. Зато никто ничего не допишет.",
+      "audio": "assets/audio/voice/gate_print_01.mp3"
+    },
+    {
+      "id": "finale_arrival_01",
+      "scene": "finale",
+      "block": "arrival",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Половник?",
+      "audio": "assets/audio/voice/finale_arrival_01.mp3"
+    },
+    {
+      "id": "finale_arrival_02",
+      "scene": "finale",
+      "block": "arrival",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Сейчас вымою.",
+      "audio": "assets/audio/voice/finale_arrival_02.mp3"
+    },
+    {
+      "id": "finale_washed_01",
+      "scene": "finale",
+      "block": "washed",
+      "speaker": "linochka",
+      "mode": "core",
+      "text": "Вот и хорошо. Садись.",
+      "audio": "assets/audio/voice/finale_washed_01.mp3"
+    },
+    {
+      "id": "finale_dinner_01",
+      "scene": "finale",
+      "block": "dinner",
+      "speaker": "sanka",
+      "mode": "core",
+      "text": "Я тоже хотел в колокол!",
+      "audio": "assets/audio/voice/finale_dinner_01.mp3"
+    },
+    {
+      "id": "finale_dinner_02",
+      "scene": "finale",
+      "block": "dinner",
+      "speaker": "katya",
+      "mode": "core",
+      "text": "А я нашла, куда повесить!",
+      "audio": "assets/audio/voice/finale_dinner_02.mp3"
+    },
+    {
+      "id": "finale_dinner_03",
+      "scene": "finale",
+      "block": "dinner",
+      "speaker": "irina",
+      "mode": "core",
+      "text": "Все молодцы. Тарелки передавайте.",
+      "audio": "assets/audio/voice/finale_dinner_03.mp3"
+    },
+    {
+      "id": "finale_gift_01",
+      "scene": "finale",
+      "block": "gift",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Ты приготовил подарок?",
+      "audio": "assets/audio/voice/finale_gift_01.mp3"
+    },
+    {
+      "id": "finale_gift_02",
+      "scene": "finale",
+      "block": "gift",
+      "speaker": "victor",
+      "mode": "core",
+      "text": "После того Нового года я стараюсь.",
+      "audio": "assets/audio/voice/finale_gift_02.mp3"
+    },
+    {
+      "id": "finale_gift_03",
+      "scene": "finale",
+      "block": "gift",
+      "speaker": "nata",
+      "mode": "core",
+      "text": "Когда я спросила про подарок маме с папой?",
+      "audio": "assets/audio/voice/finale_gift_03.mp3"
+    },
+    {
+      "id": "finale_gift_04",
+      "scene": "finale",
+      "block": "gift",
+      "speaker": "victor",
+      "mode": "core",
+      "text": "Угу. До этого я считал, что у Деда Мороза всё под контролем.",
+      "audio": "assets/audio/voice/finale_gift_04.mp3"
+    },
+    {
+      "id": "finale_goodnight_01",
+      "scene": "finale",
+      "block": "goodnight",
+      "speaker": "siblings",
+      "mode": "core",
+      "text": "Спокойной ночи мама и папа от Вити и от Наташи.",
+      "audio": "assets/audio/voice/finale_goodnight_01.mp3"
+    },
+    {
+      "id": "finale_greeting_01",
+      "scene": "finale",
+      "block": "greeting",
+      "speaker": "victor",
+      "mode": "core",
+      "text": "Натка, с днём рождения! Я очень счастлив, что у нас такая замечательная семья. Спасибо за все наши приключения. Витя.",
+      "audio": "assets/audio/voice/finale_greeting_01.mp3"
+    }
+  ]
+}
