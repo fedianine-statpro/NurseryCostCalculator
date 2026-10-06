@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24352e">
+  <meta name="description" content="Сергей — юбилейный спецвыпуск семейного журнала. Интерактивный подарок к 70-летию.">
+  <title>СЕРГЕЙ · Юбилейный спецвыпуск</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="story-data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#main" aria-label="Перейти к журналу">СЕРГЕЙ<span>семейное издание · с 1955 года</span></a>
+    <div class="tools"><button id="sound" class="tool" aria-pressed="false">Звук: выкл.</button><button id="menu" class="tool" aria-expanded="false" aria-controls="menu-panel">Меню</button></div>
+  </header>
+  <div id="menu-panel" class="menu-panel" hidden><button id="restart" class="tool">Начать сначала</button><span>Архив сохраняется на этом устройстве.</span></div>
+  <main id="main" tabindex="-1">
+    <div class="edition"><span>ЮБИЛЕЙНЫЙ СПЕЦВЫПУСК</span><span>№ 70 / один экземпляр для главного героя</span></div>
+    <div class="progress-row"><span id="chapter-label"></span><span id="page-label"></span></div>
+    <div class="progress-track" role="progressbar" aria-label="Прочитано страниц" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress"></div></div>
+    <section id="scene" aria-labelledby="scene-title"></section>
+    <footer class="page-footer"><span>Независимое семейное издание, основано в детстве</span><span>Архив открыт. История продолжается.</span></footer>
+  </main>
+  <noscript><p class="noscript">Для открытия семейного архива включите JavaScript в браузере.</p></noscript>
+</body>
+</html>

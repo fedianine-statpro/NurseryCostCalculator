@@ -1,0 +1,1148 @@
+Build a small, polished, self-contained browser game as a 70th birthday present for Sergey.
+
+The game should take approximately 8 to 10 minutes to complete.
+
+It will be hosted on GitHub Pages, so it must be fully static and client-side only. Do not use a backend, database, authentication, external API, build server, or anything that requires server-side execution.
+
+Use plain HTML, CSS and JavaScript unless there is a very strong reason to do otherwise. Keep the project easy to understand and edit manually later.
+
+## 1. Core concept
+
+The game is an interactive special anniversary issue of a fictional family magazine:
+
+**СЕРГЕЙ**
+**Юбилейный спецвыпуск**
+**Независимое семейное издание, основано в детстве**
+
+The framing is based on a real fact: as a child, Sergey made homemade magazines for his family using newspaper clippings, his own drawings and articles.
+
+The conceit of the game is that this childhood editorial office somehow continued operating for the next 60+ years and has now assembled an official archival biography of its founder.
+
+The editorial office is:
+- very serious;
+- slightly pompous;
+- highly bureaucratic;
+- convinced that it is conducting rigorous historical research;
+- occasionally contradicted by family evidence;
+- capable of drawing absurd conclusions from perfectly real events;
+- affectionate rather than mocking.
+
+The player is Sergey himself.
+
+The game should feel like he is opening an archive about his own life and occasionally helping the editorial office verify, classify or interpret events.
+
+The comedy should emerge from the system and presentation rather than from random one-line jokes.
+
+The humour should use:
+- mock-serious journalism;
+- archival investigation;
+- conflicting testimony;
+- absurd bureaucratic classifications;
+- disproportionate celebration of mundane successes;
+- overly rigorous statistics about things that should not be quantified;
+- callbacks;
+- gradual escalation;
+- the contrast between official history and family memory.
+
+Do not make the interface itself confusing or deceptive.
+
+## 2. Critical UX requirement
+
+The player is 70 years old and may not be familiar with games.
+
+At no point should Sergey think that:
+- he broke the game;
+- the browser malfunctioned;
+- he clicked the wrong thing;
+- he is stuck;
+- he failed;
+- he needs gaming knowledge.
+
+Therefore:
+
+- One main action per screen.
+- Maximum 3 large choices at once.
+- Large readable buttons.
+- Large text.
+- Clear visual hierarchy.
+- No hidden buttons.
+- No pixel hunting.
+- No drag and drop.
+- No twitch mechanics.
+- No timers requiring fast reactions.
+- No keyboard combinations.
+- No fake crashes.
+- No disappearing UI.
+- No buttons that move away from the cursor.
+- No misleading navigation.
+- No dead ends.
+- No "Game Over".
+- Any choice should allow the story to continue.
+- If a humorous answer is "wrong", show a funny short consequence and then naturally continue or offer an obvious "Вернуться к фактам" button.
+- Always provide a clearly visible way to proceed.
+
+The humour should happen after a clear action, never instead of a clear action.
+
+## 3. Tone
+
+The game should be funny, warm, intelligent and personal.
+
+Avoid generic birthday-card humour such as:
+- "Level 70 unlocked"
+- "Old but gold"
+- jokes about being ancient
+- jokes about poor memory
+- jokes about ageing bodies
+- "boomer" humour
+- excessive jokes about alcohol
+- random memes
+
+The humour should be specific to Sergey's life.
+
+The editorial narrator should sound like a combination of:
+- Soviet newspaper seriousness;
+- historical archive;
+- corporate audit;
+- family historian;
+- documentary narrator who occasionally discovers that the evidence is inconvenient.
+
+The joke construction should often follow:
+
+setup -> establish rule -> repeat rule -> expectation -> contradiction -> payoff.
+
+Callbacks are important.
+
+## 4. Visual identity
+
+The visual language should combine:
+
+1. Handmade childhood family magazine
+2. Old newspaper clippings
+3. Archival folders and stamps
+4. Period-appropriate visual changes as the decades progress
+5. Family scrapbook
+6. Clean modern interaction controls
+
+The content itself can look tactile and historical, but navigation must remain modern and obvious.
+
+Use:
+- paper textures created with CSS where possible;
+- monochrome or slightly aged newspaper-style panels;
+- clipping edges;
+- typed headings;
+- handwritten-looking annotations sparingly;
+- stamps such as "ПРОВЕРЕНО", "ОСПОРЕНО", "АРХИВ", "СЕКРЕТНО";
+- fake classification marks;
+- dates and issue numbers;
+- old-style newspaper columns for short extracts;
+- clipping cards layered on a desk or archive background.
+
+Do not make long text look like a dense newspaper. Readability is more important than visual authenticity.
+
+For actual personal photographs, create clear placeholder image paths and captions so they can later be replaced easily.
+
+Suggested structure:
+
+assets/
+  photos/
+  audio/
+  illustrations/
+  newspaper/
+  icons/
+
+Use obvious filenames such as:
+- sergey-childhood.jpg
+- sergey-army.jpg
+- sergey-irina.jpg
+- cuba-family.jpg
+- canada-house.jpg
+- sergey-fishing.jpg
+
+If an asset is missing, display a tasteful placeholder rather than a broken image.
+
+## 5. Main game structure
+
+The game should be one continuous story divided into approximately 8 chapters.
+
+Target total playtime: 8 to 10 minutes.
+
+Do not create twenty disconnected mini-games. Reuse the same visual language and editorial office throughout.
+
+### INTRO
+
+Black or dark archival opening.
+
+Text:
+
+"Редакция семейного журнала представляет"
+
+Then reveal:
+
+"СЕРГЕЙ"
+"Юбилейный спецвыпуск"
+
+Small text:
+
+"Материалы собирались с 1955 года."
+
+Then:
+
+"Перед публикацией редакция просит главного героя проверить некоторые спорные факты."
+
+Button:
+
+"Открыть архив"
+
+Then show a mock archive report:
+
+"Обнаружено: 70 лет материалов"
+"Фотографии: имеются"
+"Свидетельства родственников: имеются"
+"Противоречия в свидетельствах: имеются"
+"Редакционная уверенность: необоснованно высокая"
+
+Button:
+"Начать проверку"
+
+## 6. Chapter 1: Dushanbe
+
+Year: 1955 onward.
+
+Facts:
+- Sergey was born in Dushanbe in 1955.
+- His parents were Mira and Yura.
+- As a child he became interested in hockey, probably field hockey.
+- He made magazines for the family from newspaper clippings, drawings and his own articles.
+- He liked chess.
+
+This chapter establishes the magazine itself.
+
+Show an old homemade magazine style page.
+
+Editorial credits:
+
+"Главный редактор: Сергей"
+"Автор статей: Сергей"
+"Художник: Сергей"
+"Отдел газетных вырезок: Сергей"
+"Распространение: среди родственников"
+"Отдел жалоб читателей: отсутствует"
+
+Then introduce three childhood interests as clickable archive pieces:
+- hockey stick / hockey clipping;
+- chess knight;
+- homemade magazine.
+
+Player can inspect them in any order.
+
+Keep each interaction under 10 seconds.
+
+Then the editorial office performs a "career prediction":
+
+"На основании ранних интересов редакция может с высокой точностью определить будущую профессию Сергея."
+
+Choices:
+- Хоккеист
+- Гроссмейстер
+- Медиамагнат
+
+Whatever the player chooses, perform a mock calculation and reveal:
+
+"БУХГАЛТЕР"
+
+Pause.
+
+"Редакционная модель прогнозирования временно снята с эксплуатации."
+
+This should be one of the first strong jokes.
+
+## 7. Chapter 2: Moscow and university
+
+The family moves from Dushanbe to Moscow.
+
+Show this as the editorial archive receiving a change-of-address notice.
+
+Then university.
+
+Sergey studies accounting and also attends a military department.
+
+Present this as a bureaucratic form:
+
+"СПЕЦИАЛЬНОСТЬ: БУХГАЛТЕР"
+button/checkmark: "Подтвердить"
+
+Then:
+"ВОЕННАЯ КАФЕДРА: ПРОЙДЕНА"
+button/checkmark
+
+Then a large official stamp:
+
+"ПОЗДРАВЛЯЕМ.
+ВЫ ЛЕЙТЕНАНТ."
+
+Editorial note:
+
+"Советская система профессиональной ориентации установила, что человек, умеющий сводить баланс, также способен командовать людьми."
+
+Do not imply that this is historically official. It is clearly fictional editorial humour.
+
+## 8. Chapter 3: Army archive
+
+Important facts:
+- Sergey served as a lieutenant.
+- He became interested in boxing.
+- He learned guitar.
+- Vladimir Vysotsky became a lifelong idol.
+- Sergey sometimes allowed ordinary soldiers to sleep in his lieutenant accommodation or space so they could avoid dedovshchina / bullying.
+- As an officer, Sergey himself was not being bullied.
+- There was an incident where Sergey, while drunk, picked flowers and was detained.
+
+Do NOT frame boxing as Sergey being beaten or being vulnerable to hazing.
+
+The army section should show four archive folders:
+
+"БОКС"
+"ГИТАРА"
+"ВЫСОЦКИЙ"
+"ДЕЛО О ЦВЕТАХ"
+
+### Boxing clipping
+
+Use a newspaper clipping:
+
+"СПОРТИВНАЯ ХРОНИКА"
+
+"Лейтенант Сергей начал заниматься боксом."
+
+Then:
+
+"Причины, по которым бухгалтеру потребовался поставленный удар, архив не уточняет."
+
+Possible alternate line:
+"Редакция подтверждает: данный метод впоследствии не применялся при аудите."
+
+Use only one of these, not both, to avoid over-writing the joke.
+
+### Helping soldiers
+
+This should be warm and revealing rather than flippant.
+
+Possible mock article:
+
+"МОЛОДОЙ ЛЕЙТЕНАНТ ПОДОЗРЕВАЕТСЯ В НЕУСТАВНОЙ ДОБРОТЕ"
+
+"По сведениям редакции, некоторые солдаты получали возможность спать у Сергея, чтобы избежать дедовщины."
+
+Small note:
+
+"Военное ведомство не подтвердило существование официальной категории 'нормально выспаться'."
+
+This fact should later become a subtle callback showing Sergey's character.
+
+### Guitar and Vysotsky
+
+Show guitar and Vysotsky as separate small archive items.
+
+For Vysotsky:
+
+"ИНТЕРЕС ОБНАРУЖЕН"
+"Статус: сохранён навсегда"
+
+This status may later appear again in Canada and at the end.
+
+### Flowers incident
+
+Treat this as a classified criminal-history parody only if presented affectionately.
+
+Header:
+
+"ДЕЛО № ███"
+"Повреждение городского цветочного фонда"
+
+Body:
+"Обстоятельства происшествия редакция считает достаточно хорошо известными семье и недостаточно выгодными для дальнейшего уточнения."
+
+Button:
+"Закрыть дело"
+
+After click:
+
+"Дело закрыто."
+
+Then, after a short pause:
+
+"До следующего семейного праздника."
+
+Do not over-focus on alcohol.
+
+## 9. Chapter 4: Irina
+
+This is one of the central comedy scenes.
+
+Sergey meets his future wife Irina.
+
+The editorial archive initially reports:
+
+"Согласно официальной версии, Сергей своевременно прибыл на назначенную встречу."
+
+Immediately stamp the clipping:
+
+"ОСПОРЕНО ИРИНОЙ"
+
+Then revise the report:
+
+"Уточнение: Сергей опоздал."
+
+Pause.
+
+"Дополнительное уточнение: сильно опоздал."
+
+Then:
+
+"Редакция проверяет, каким образом существуют последующие главы."
+
+Large button:
+"Попытаться спасти сюжет"
+
+On click, dramatic celebration:
+
+"ИРИНА ОСТАЛАСЬ"
+
+"КРИТИЧЕСКАЯ СЮЖЕТНАЯ ЛИНИЯ СОХРАНЕНА"
+
+Use disproportionately triumphant animation and sound if audio is enabled.
+
+Then briefly show:
+
+"После армии Сергей и Ирина поженились."
+
+Important recurring device:
+
+Introduce source reliability labels:
+
+"Источник: Сергей"
+"Надёжность: высокая"
+
+For the lateness story:
+
+"Источник: Ирина"
+"Надёжность по вопросам опозданий: очень высокая"
+
+These source reliability labels can return later.
+
+## 10. Chapter 5: Work, Natasha and Cuba
+
+Facts:
+- After the army, Sergey worked at SovIndep.
+- Daughter Natasha was born.
+- The family later went to Cuba for Sergey's work with the Soviet/Russian embassy.
+- They lived in Cuba approximately 1987 to 1991.
+- Victor was born during the Cuba period.
+
+Present Cuba as an international-news section.
+
+Headline:
+
+"МЕЖДУНАРОДНЫЕ НОВОСТИ"
+
+"СЕРГЕЙ НАПРАВЛЕН НА КУБУ"
+
+Subheading:
+
+"Вместе с ним выехали Ирина и Наташа."
+
+"Цель командировки: служебная."
+
+Later show:
+
+"ДЕМОГРАФИЧЕСКОЕ ПРИЛОЖЕНИЕ"
+
+"Во время командировки состав семьи увеличился на одну единицу."
+
+Reveal:
+"Виктор"
+
+Then:
+
+"Новый участник семейной редакции."
+"Опыт работы: 0 лет."
+
+Possible follow-up:
+
+"Дипломатические результаты командировки хранятся в архивах."
+"Семейные результаты сохранились значительно лучше."
+
+Avoid implying Victor's birth was the purpose of the posting.
+
+## 11. Chapter 6: Moscow, KPMG, Ernst & Young, SAP
+
+Facts:
+- Family returned to Moscow after Cuba.
+- Sergey worked for KPMG and Ernst & Young.
+- He became an SAP specialist.
+
+Use the "future museum reconstructs ancient office work" mechanic.
+
+Headline:
+
+"АРХЕОЛОГИЯ КОРПОРАТИВНОЙ ЖИЗНИ"
+
+"Редакция попыталась восстановить обычный рабочий день Сергея."
+
+Show three simple objects:
+- documents;
+- telephone;
+- coffee.
+
+Whatever the player selects, the editorial reconstruction continues.
+
+Possible narration:
+
+"По сохранившимся материалам сотрудники международных компаний переносили цифры между документами, обсуждали перенос цифр на совещаниях, а затем готовили новые документы, объясняющие перемещение цифр."
+
+Then:
+
+"Археологи называют этот период 'консалтингом'."
+
+Next:
+
+"SAP ОБНАРУЖЕН"
+
+Brief fake attempt to decode the acronym:
+
+"S.A.P."
+"Сергей Абсолютно Понимает?"
+
+Then:
+
+"Редакция признаёт расшифровку неофициальной."
+
+Keep the joke brief.
+
+## 12. Chapter 7: Canada, 1999
+
+This should shift tone for approximately 30 to 45 seconds.
+
+Facts:
+- In 1999 Sergey moved with his family to Canada.
+- He had difficulty finding work.
+- The family had very little money.
+- He eventually found work.
+- He worked at companies including Bayer, Oracle and Shell.
+- His career was connected to SAP.
+- The family sold their Moscow apartment very cheaply and later bought a house in Canada.
+
+Do not make the difficult migration period into slapstick.
+
+Use a minimalist interaction.
+
+Screen:
+
+"1999."
+"Новая страна."
+"Работы нет."
+"Денег почти нет."
+"Семья здесь."
+
+One large button:
+
+"Продолжать"
+
+Click.
+
+Show a rejection or empty job result.
+
+Same button again:
+
+"Продолжать"
+
+Click.
+
+Another setback.
+
+Third time:
+
+"Продолжать"
+
+Then gradually reveal:
+
+"BAYER"
+"ORACLE"
+"SHELL"
+
+Editorial note:
+
+"В этой части архива обнаружена необычная закономерность."
+
+"Сергей продолжал нажимать 'Продолжать' значительно дольше, чем система предполагала."
+
+This should be warm and understated.
+
+Then show a callback to the army chapter:
+
+"Архивная справка:"
+"Сергей уже однажды использовал своё положение, чтобы кому-то стало легче."
+"В Канаде положения пока не было."
+"Пришлось использовать упорство."
+
+Keep this optional if it feels too sentimental during implementation.
+
+## 13. Moscow apartment and Canadian house
+
+Treat this as an economic archive.
+
+Show:
+
+"КВАРТИРА В МОСКВЕ"
+"Продана"
+
+The sale value should be visually redacted:
+
+"СУММА: █████████"
+
+Caption:
+
+"Данные скрыты в интересах психологической безопасности семьи."
+
+Then:
+
+"ДОМ В КАНАДЕ"
+"Приобретён"
+
+Editorial statement:
+
+"После многих лет Сергей наконец стал владельцем собственного дома."
+
+Then cut to a camping tent.
+
+"После чего одним из его любимых способов проводить отпуск стало добровольно покидать дом и спать на земле."
+
+This is an important joke. Give it room.
+
+## 14. Chapter 8: Sergey's preferred operating environment
+
+Now show several present-day or lifelong interests:
+- family;
+- camping;
+- hiking;
+- fishing with rod/spinning gear;
+- chess;
+- Vysotsky;
+- chocolate ice cream;
+- making animated films/cartoons.
+
+This chapter can feel like a character profile assembled from the archive.
+
+### Fishing recurring joke
+
+Sergey loves fishing but has never caught a truly enormous fish.
+
+Do not portray him as bad at fishing.
+
+Treat the enormous fish as an unresolved scientific investigation.
+
+First clipping:
+
+"РЫБОЛОВНЫЙ ОТДЕЛ"
+
+"После многолетних наблюдений редакция подтверждает:"
+"рыба существует."
+
+Then show a question:
+
+"Размер крупнейшего экземпляра?"
+
+Buttons:
+- "Нормальный"
+- "Большой"
+- "Вот такой!"
+
+If "Вот такой!" is selected, show arms or a measurement illustration.
+
+Editorial response:
+
+"Единица измерения 'вот такой' Международной комиссией мер и весов пока не признана."
+
+If another option is selected:
+"Редакция благодарит свидетеля за неожиданную сдержанность."
+
+Then:
+
+"КАНАДА ПРЕДОСТАВИЛА СЕРГЕЮ ТЫСЯЧИ ОЗЁР."
+
+"Таким образом были устранены последние географические препятствия для поимки огромной рыбы."
+
+Button:
+"Проверить результат"
+
+Reveal an ordinary-sized fish silhouette/photo.
+
+Pause.
+
+"Исследование продолжается."
+
+Use this again in the final statistics:
+
+"Крупнейшая пойманная рыба: данные оспариваются"
+"Крупнейшая рыба, которая почти попалась: значительно крупнее"
+
+### Chocolate ice cream
+
+Keep this very simple.
+
+Archive classification:
+
+"ШОКОЛАДНОЕ МОРОЖЕНОЕ"
+"Статус: одобрено"
+"Период наблюдения: длительный"
+"Необходимость дальнейших исследований: высокая"
+
+### Chess
+
+Callback to childhood.
+
+Show the same chess knight seen in Chapter 1.
+
+Text:
+"Некоторые материалы из раннего архива не потеряли актуальности."
+
+### Vysotsky
+
+Reuse:
+"ИНТЕРЕС ОБНАРУЖЕН"
+"Статус: по-прежнему сохранён"
+
+This callback matters.
+
+### Animation
+
+Show:
+"НОВАЯ РЕДАКЦИОННАЯ ТЕХНОЛОГИЯ: МУЛЬТФИЛЬМ"
+
+Potential joke:
+"Спустя десятилетия Сергей снова начал создавать истории для семьи."
+"Редакция считает это нарушением своей монополии."
+
+This can help lead into the ending.
+
+## 15. Finale
+
+The finale should connect the childhood magazine with the game itself.
+
+Lay out archive objects from the whole game:
+- childhood magazine;
+- chess piece;
+- hockey item;
+- lieutenant badge;
+- boxing item;
+- guitar;
+- Vysotsky reference;
+- photograph of Irina;
+- Natasha;
+- Cuba;
+- Victor;
+- corporate documents;
+- SAP;
+- Canadian house;
+- tent;
+- fishing rod;
+- chocolate ice cream;
+- animation frame;
+- family photographs.
+
+Editorial screen:
+
+"Для завершения юбилейного выпуска необходимо определить главное достижение Сергея."
+
+Offer four large buttons:
+- КАРЬЕРА
+- ПУТЕШЕСТВИЯ
+- УВЛЕЧЕНИЯ
+- СЕМЬЯ
+
+Allow any choice.
+
+After click:
+
+"Редакция анализирует архив..."
+
+Then:
+
+"Ошибка классификации."
+
+Important: This must clearly look like an editorial message, not a software error.
+
+Use wording such as:
+
+"РЕДАКЦИОННАЯ ОШИБКА КЛАССИФИКАЦИИ"
+
+"Категории слишком сильно пересекаются."
+
+Then the formal archive design gradually turns into a handmade family magazine.
+
+Text:
+
+"Когда-то маленький Сергей делал журналы для своей семьи."
+
+"Спустя много лет семья решила сделать один выпуск для Сергея."
+
+At this point stop joking for a moment.
+
+Show a short sincere birthday message, easily editable in a data/config file.
+
+Placeholder:
+
+"Папа, с 70-летием."
+
+"Спасибо за всё, что ты создал вокруг себя: за семью, истории, поездки, музыку, походы, шахматы, поддержку и за то, что с тобой всегда есть что вспоминать."
+
+"Мы тебя очень любим."
+
+Then final magazine cover:
+
+"СЕРГЕЙ"
+"Юбилейный выпуск"
+
+Small line:
+
+"Главный редактор временно отстранён от работы, поскольку этот номер посвящён ему."
+
+Button:
+
+"Следующий номер"
+
+On click:
+
+"Материалы собираются."
+
+Under it, optionally:
+
+"Рыболовный отдел также продолжает наблюдение."
+
+End.
+
+## 16. Recurring editorial devices
+
+Use these throughout to create consistency.
+
+### Source reliability
+
+Examples:
+
+"Источник: семейный архив"
+"Надёжность: высокая"
+
+"Источник: Сергей"
+"Надёжность: высокая"
+
+"Источник: Ирина"
+"Надёжность по вопросам опозданий: очень высокая"
+
+For the flowers story:
+
+"Источник: Сергей"
+"Надёжность по данному эпизоду: редакция воздержалась от оценки"
+
+Do not overuse this. Approximately 3 to 4 appearances in the whole game.
+
+### Editorial corrections
+
+Occasionally stamp an earlier claim with:
+- "ОСПОРЕНО"
+- "УТОЧНЕНО"
+- "ИСПРАВЛЕНО"
+- "ПРОВЕРЕНО"
+
+This should create callbacks.
+
+### Newspaper clippings
+
+Create several believable sections:
+- Спортивная хроника
+- Международные новости
+- Светская хроника
+- Экономический вестник
+- Криминальная хроника
+- Рыболовный отдел
+- Архив редакции
+
+Use them as short, visually distinct cuttings rather than long articles.
+
+## 17. Interaction model
+
+Create a reusable scene engine.
+
+Each scene should be described in data rather than hard-coded into different pages where practical.
+
+A scene may contain:
+- year/date;
+- section title;
+- headline;
+- body text;
+- image;
+- clipping;
+- 1 to 3 choices;
+- short reaction;
+- transition;
+- optional callback;
+- optional sound.
+
+Prefer a JSON-like JavaScript data structure such as:
+
+const story = [
+  {
+    id: "dushanbe-career",
+    year: "1960-е",
+    type: "choice",
+    ...
+  }
+];
+
+Build reusable rendering functions for:
+- article scene;
+- choice scene;
+- archive folder;
+- photo scene;
+- official document;
+- stamp animation;
+- reveal;
+- transition;
+- final montage.
+
+This is important because the family will likely revise text later.
+
+## 18. Content configuration
+
+Put all editable personal text and facts in a dedicated file if practical:
+
+story-data.js
+
+or:
+
+data/story.js
+
+Do not scatter biography text throughout UI code.
+
+Create clear comments showing:
+- where to edit text;
+- where to replace photos;
+- where to change dates;
+- where to enable/disable scenes.
+
+## 19. Save/progress
+
+The game is only 8 to 10 minutes, but accidental refresh should not be catastrophic.
+
+Use localStorage only for:
+- current chapter/scene;
+- whether the intro has already been seen.
+
+On load, if progress exists, offer:
+
+"Продолжить с места остановки"
+"Начать сначала"
+
+Do not silently resume without asking.
+
+Add a small discreet "Начать сначала" option in the menu.
+
+## 20. Audio
+
+Audio is optional but useful.
+
+Do not autoplay sound before user interaction.
+
+After the first click, audio may be enabled.
+
+Provide a clearly visible sound toggle.
+
+Possible sound types:
+- paper rustle;
+- stamp;
+- typewriter;
+- subtle newspaper press sound;
+- short fanfare for the Irina scene;
+- soft ambient transitions.
+
+Do not use copyrighted Vysotsky recordings unless the family provides audio and has the right to use it.
+
+Instead create a placeholder:
+assets/audio/vysotsky-placeholder.mp3
+
+Do not ship copyrighted music by default.
+
+## 21. Accessibility
+
+Design for an older player.
+
+Minimum preferred body text on desktop: approximately 20px.
+
+Buttons: large touch/click targets.
+
+Strong contrast.
+
+Avoid light grey text.
+
+Avoid very thin fonts.
+
+Avoid all-caps for long sentences.
+
+Respect prefers-reduced-motion.
+
+Animations should be short and skippable by clicking "Дальше".
+
+Do not make understanding dependent on animation.
+
+Support keyboard Enter/Space for focused buttons, but mouse/touch must remain the primary interaction.
+
+## 22. Responsive layout
+
+Primary target:
+- desktop/laptop browser;
+- tablet should also work.
+
+Minimum usable width: 320px.
+
+Do not create horizontal page scrolling.
+
+Newspaper clippings can stack vertically on smaller screens.
+
+Keep the main interactive area centred and not excessively wide.
+
+## 23. Technical requirements
+
+Create:
+
+- index.html
+- styles.css
+- app.js
+- story-data.js
+- README.md
+- assets/ directory structure
+
+No build step should be required.
+
+Opening index.html locally should work wherever browser security permits.
+
+GitHub Pages deployment should require only pushing files.
+
+Avoid dependencies if possible.
+
+If using icons, use inline SVG or Unicode rather than a large external library.
+
+No external fonts required. If using web fonts, provide graceful fallback and do not make the game depend on them.
+
+## 24. README
+
+The README must explain:
+
+1. How to run locally.
+2. How to deploy to GitHub Pages.
+3. Where to edit biography text.
+4. How to replace photographs.
+5. How to replace audio.
+6. How to reorder scenes.
+7. How to disable a scene.
+8. How to change the final birthday message.
+9. How progress saving works.
+
+## 25. Development approach
+
+Implement in stages, but produce a complete playable first version.
+
+First:
+- build the scene engine;
+- implement navigation;
+- implement visual system;
+- implement all chapters using placeholders.
+
+Then:
+- polish animations;
+- add newspaper clippings;
+- add source/reliability stamps;
+- add callbacks;
+- add localStorage progress;
+- test mobile responsiveness;
+- test keyboard and mouse navigation.
+
+Do not leave major scenes as TODOs.
+
+## 26. Quality bar for humour
+
+Before finalizing each joke, ask:
+
+1. Does it depend on something specific about Sergey?
+2. Does it grow naturally out of the editorial/archive premise?
+3. Is there a setup and payoff?
+4. Is it affectionate?
+5. Does it avoid explaining the joke?
+6. Would it still be funny without adding an emoji or meme phrase?
+7. Does it preserve the dignity of the real event?
+
+If the answer to several of these is no, rewrite it.
+
+Avoid inserting random jokes simply to make every screen funny.
+
+Some scenes, especially the Canada job-search section and the final family message, should be allowed to breathe.
+
+## 27. Important factual details
+
+Use these as the current biography source of truth:
+
+- Sergey was born in 1955 in Dushanbe.
+- Parents: Mira and Yura.
+- Childhood interests included hockey, likely field hockey, chess and creating homemade family magazines.
+- The magazines included newspaper cuttings, Sergey's own drawings and articles.
+- The family later moved to Moscow.
+- Sergey studied accounting at university.
+- The university had a military department.
+- Sergey entered military service already holding the rank of lieutenant.
+- In the army he became interested in boxing.
+- He learned to play guitar.
+- Vladimir Vysotsky became a lifelong favourite.
+- As a lieutenant, Sergey sometimes allowed soldiers to sleep in his space to protect them from dedovshchina.
+- Sergey himself was not a victim of hazing.
+- There was an incident where, while intoxicated, he picked flowers and was detained.
+- Sergey met his future wife Irina.
+- On one occasion he was very late for a date and nearly lost the relationship.
+- After returning from the army, Sergey and Irina married.
+- Sergey worked at SovIndep.
+- Daughter Natasha was born.
+- The family moved to Cuba for Sergey's work connected with the embassy.
+- They lived in Cuba approximately 1987 to 1991.
+- Victor was born during the Cuba period.
+- The family returned to Moscow.
+- Sergey worked at KPMG and Ernst & Young.
+- In 1999 the family moved to Canada.
+- Sergey initially struggled to find work and the family had very little money.
+- He eventually established a successful career.
+- Companies included Bayer, Oracle and Shell.
+- Sergey worked as an SAP specialist.
+- The family sold their Moscow apartment for very little money relative to what it later would have been worth.
+- They bought a house in Canada.
+- Sergey loves camping and hiking.
+- Sergey loves fishing with a rod/spinning gear.
+- He has never actually caught a truly enormous fish, which can be used as a gentle recurring joke.
+- Sergey loves his family.
+- Sergey likes chocolate ice cream.
+- Sergey still likes chess.
+- Sergey loves Vysotsky.
+- Sergey enjoys making animated films/cartoons.
+
+Do not invent additional biographical facts as if they are true.
+
+If extra connective material is required, make it clearly fictional editorial commentary.
+
+## 28. Final result
+
+The finished game should feel like:
+
+"Sergey once made a magazine for his family. Seventy years later, his family has made the ultimate issue of that magazine about him."
+
+It should begin as a funny archival investigation, grow into a portrait of his character, and end as a sincere family present.
+
+The player should finish smiling rather than feeling that he completed a quiz.
+
+The game is not about testing how well Sergey remembers his life.
+
+It is about letting him rediscover his life through an affectionate, slightly unreliable family archive.
