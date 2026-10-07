@@ -47,14 +47,17 @@ Put your photographs in `assets/photos/`, using the filenames referenced in the 
 - `sergey-fishing.jpg`
 - `family-together.jpg`
 
-Alternatively, change each scene's `photo` path. Edit `caption` alongside it; the same caption supplies image alternative text. Missing images display a paper placeholder. No personal photographs are included. Landscape or portrait photographs work; images retain their proportions. Resize large originals before uploading for faster loading.
+Alternatively, change each scene's `photo` path. Edit `caption` alongside it; the same caption supplies image alternative text. Missing images display a paper placeholder. Supplied personal photographs are included. Landscape or portrait photographs work; images retain their proportions. Resize large originals before uploading for faster loading.
 
 ### Extra album photographs
 
-There are **24 photo slots in total**: the nine main photographs above plus these fifteen optional images. Put them in `assets/photos/` using these filenames, or edit `photoAlbums` near the top of `story-data.js`. Each album shows only successfully loaded photos; missing optional images do not leave empty frames. Albums show up to three photos side by side on desktop and stack on smaller screens. There is no extra button or automatic slideshow.
+There are **27 distinct image files**: the nine main photographs above plus these eighteen optional images. Put them in `assets/photos/` using these filenames, or edit `photoAlbums` near the top of `story-data.js`. Each album shows only successfully loaded photos; missing optional images do not leave empty frames. Albums show up to three photos side by side on desktop and stack on smaller screens. There is no extra button or automatic slideshow.
 
 | Filename | Photograph / location in the story |
 | --- | --- |
+| `serguei-hockey.jpg` | Later-life hockey photo; inside the childhood hockey folder, explicitly labelled as a later photograph |
+| `serguei-journal.png` | Sergey's childhood journal; inside the homemade magazine folder, displayed at a larger size |
+| `vysozkiy.jpg` | Vysotsky portrait; inside both Vysotsky folders, alongside Sergey's singing |
 | `mira-yura.jpg` | Mira and Yura; childhood chapter |
 | `sergey-young.jpg` | Another young Sergey photo; childhood chapter |
 | `sergey-guitar.jpg` | Sergey with a guitar; inside the guitar folder |
@@ -73,7 +76,7 @@ There are **24 photo slots in total**: the nine main photographs above plus thes
 
 Captions are editable next to each path. An optional `alt` field supplies a separate image description; otherwise the caption is used. Album keys usually match a scene ID; folder items and reactions can explicitly name an `album`. Album photos are optional and do not affect story progress. Captions avoid inferring dates, places or events beyond the supplied story; adjust them to fit the actual photos you choose.
 
-The homemade childhood magazine uses an original SVG illustration labelled as an editorial illustration. No photograph of the original magazine is needed.
+The homemade childhood magazine now uses the supplied `serguei-journal.png`. Its album is wider and has no image-height cap or sepia filter, preserving the full spread for reading. The PNG was recompressed losslessly at its original dimensions to retain the handwriting and clippings. Filename spellings match the supplied files.
 
 ## Audio
 

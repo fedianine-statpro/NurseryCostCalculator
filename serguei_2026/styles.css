@@ -56,6 +56,9 @@ figcaption{font:italic 15px/1.5 var(--serif);margin:12px 5px 0;color:#575747}
 .photo-album .photograph{min-width:0;max-width:100%;transform:rotate(-1deg)}
 .photo-album .photograph:nth-child(even){transform:rotate(1deg)}
 .photo-album img{max-height:300px;background:#ede7da}
+.photo-album.journal-album[data-count="1"]{grid-template-columns:minmax(0,760px)}
+.photo-album .journal-photo{transform:none;max-width:100%}
+.photo-album .journal-photo img{max-height:none;filter:none}
 .audio-card{margin:25px 0;padding:22px 24px;border:1px solid var(--line);border-left:4px solid var(--accent);background:#fffcf280;min-width:0}
 .audio-title{font:600 22px/1.4 var(--sans);margin:0 0 8px}
 .audio-caption,.audio-status{font-size:16px;line-height:1.5;margin:8px 0;color:var(--muted)}

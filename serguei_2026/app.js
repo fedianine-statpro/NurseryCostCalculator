@@ -81,6 +81,7 @@
   function photograph(target, scene, optional = false, onLoad) {
     if (!scene.photo) return;
     const figure = el('figure', 'photograph');
+    if (scene.kind === 'journal') figure.classList.add('journal-photo');
     figure.hidden = optional;
     const placeholder = el('div', 'photo-placeholder');
     placeholder.append(icon('photo'), el('span', '', 'Место для семейной фотографии'));
@@ -102,6 +103,7 @@
     const photos = config.photoAlbums?.[id];
     if (!photos?.length) return;
     const album = el('section', 'photo-album');
+    if (photos.some(photo => photo.kind === 'journal')) album.classList.add('journal-album');
     album.setAttribute('aria-label', 'Фотографии из семейного архива');
     album.hidden = true;
     target.append(album);
