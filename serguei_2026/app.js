@@ -7,9 +7,8 @@
   const storageKey = 'sergey-magazine-progress-v1';
   let index = 0;
   let introSeen = false;
-  let soundEnabled = false;
-  let audioContext;
-  let recording;
+  const sound = window.createArchiveSound(window.ARCHIVE_SOUND);
+  window.bindArchiveSoundControls(sound);
   let inspected = new Set();
   let saved;
   try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch (_) { /* Private browsing still works. */ }
@@ -24,11 +23,11 @@
   function paragraphs(target, lines, className = '') {
     (lines || []).forEach(line => target.append(el('p', className, line)));
   }
-  function button(label, handler, secondary = false, sound = 'paper') {
+  function button(label, handler, secondary = false, cue = null) {
     const node = el('button', secondary ? 'action secondary' : 'action', label);
     node.type = 'button';
     if (label) node.setAttribute('aria-label',label);
-    node.addEventListener('click', () => { if (sound) effect(sound); handler(); });
+    node.addEventListener('click', () => { if (cue) sound.cue(cue); handler(); });
     return node;
   }
   // Small original line drawings. Decorative SVG never replaces a text label.
@@ -118,9 +117,6 @@
   function save() {
     try { localStorage.setItem(storageKey, JSON.stringify({sceneId: scenes[index].id, introSeen})); } catch (_) { /* Continue without saving. */ }
   }
-  function stopRecording() {
-    if (recording) { recording.pause(); recording = null; }
-  }
   function audioPlayer(target, id) {
     const clip = config.audioClips?.[id];
     if (!clip?.src) return;
@@ -131,29 +127,15 @@
     audio.controls = true;
     audio.preload = 'none';
     audio.src = clip.src;
+    audio.dataset.clip = id;
     audio.setAttribute('aria-label', clip.title);
     const status = el('p', 'audio-status', 'Нажмите ▶, чтобы послушать. Можно продолжить чтение в любой момент.');
     status.setAttribute('aria-live', 'polite');
-    audio.addEventListener('play', () => {
-      if (recording !== audio) stopRecording();
-      recording = audio;
-      card.classList.add('playing');
-      if (!soundEnabled) document.getElementById('sound').click();
-      status.textContent = 'Запись звучит. Можно поставить на паузу или продолжить чтение.';
-    });
-    audio.addEventListener('pause', () => {
-      card.classList.remove('playing');
-      if (!audio.ended) status.textContent = 'Запись на паузе. Нажмите ▶, чтобы продолжить.';
-    });
-    audio.addEventListener('ended', () => {
-      card.classList.remove('playing');
-      if (recording === audio) recording = null;
-      status.textContent = 'Запись завершена. Можно послушать ещё раз.';
-    });
-    audio.addEventListener('error', () => {
-      card.classList.remove('playing');
-      if (recording === audio) recording = null;
-      status.textContent = 'Запись недоступна. Можно продолжать чтение.';
+    sound.registerRecording(audio,(state,muted) => {
+      card.classList.toggle('playing',state==='playing');
+      status.textContent = state==='playing' ? muted ? 'Запись запущена без звука. Включите общий звук и семейные записи в настройках.' : 'Запись звучит. Можно поставить на паузу или продолжить чтение.' :
+        state==='paused' ? 'Запись на паузе. Нажмите ▶, чтобы продолжить.' :
+        state==='ended' ? 'Запись завершена. Можно послушать ещё раз.' : 'Запись недоступна. Можно продолжать чтение.';
     });
     card.append(title);
     if (clip.caption) card.append(el('p', 'audio-caption', `${clip.caption} · ${clip.duration}`));
@@ -168,56 +150,21 @@
     paragraphs(details, bonus.body);
     bonus.clips.forEach(clip => audioPlayer(details, clip));
     details.addEventListener('toggle', () => {
-      if (!details.open && recording && details.contains(recording)) stopRecording();
+      if (!details.open) sound.stopContained(details);
     });
     target.append(details);
-  }
-  function effect(kind) {
-    if (!soundEnabled || (recording && !recording.paused)) return;
-    try {
-      const Audio = window.AudioContext || window.webkitAudioContext;
-      if (!Audio) return;
-      audioContext ||= new Audio();
-      if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
-      if (kind !== 'fanfare') {
-        const duration = kind === 'stamp' ? 0.12 : 0.18;
-        const buffer = audioContext.createBuffer(1, Math.ceil(audioContext.sampleRate * duration), audioContext.sampleRate);
-        const samples = buffer.getChannelData(0);
-        for (let i=0;i<samples.length;i++) samples[i]=(Math.random()*2-1)*(1-i/samples.length);
-        const source = audioContext.createBufferSource(); source.buffer=buffer;
-        const filter = audioContext.createBiquadFilter();
-        filter.type = kind === 'stamp' ? 'lowpass' : 'bandpass';
-        filter.frequency.value=kind === 'stamp' ? 350 : 1600;
-        const gain=audioContext.createGain();
-        gain.gain.setValueAtTime(kind === 'stamp' ? 0.12 : 0.045,audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001,audioContext.currentTime+duration);
-        source.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);source.start();
-        return;
-      }
-      const notes = kind === 'fanfare' ? [392, 494, 587, 784] : [kind === 'stamp' ? 110 : 260];
-      notes.forEach((frequency, i) => {
-        const osc = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        const start = audioContext.currentTime + i * 0.12;
-        osc.type = kind === 'paper' ? 'triangle' : 'sine';
-        osc.frequency.setValueAtTime(frequency, start);
-        gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.045, start + 0.01);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.15);
-        osc.connect(gain); gain.connect(audioContext.destination);
-        osc.start(start); osc.stop(start + 0.17);
-      });
-    } catch (_) { /* Sound is optional. */ }
   }
   function focus(node) { node.tabIndex = -1; node.focus({preventScroll: true}); }
   function actions(target) { const area = el('div', 'actions'); target.append(area); return area; }
   function next() {
+    const previous = scenes[index];
     if (scenes[index].id === 'cover') introSeen = true;
     index = Math.min(index + 1, scenes.length - 1);
     render();
+    sound.navigate(previous,scenes[index]);
   }
   function showReaction(scene, reaction) {
-    stopRecording();
+    sound.leaveRecordings();
     archive.applyScene(scene,true);
     root.replaceChildren();
     const article = el('article', 'sheet reaction');
@@ -236,7 +183,7 @@
     photoAlbum(article, reaction.album);
     actions(article).append(button(scene.afterNext || scene.next || 'Дальше', next));
     root.append(article);
-    effect(reaction.celebrate ? 'fanfare' : 'stamp');
+    sound.reaction(scene,reaction);
     focus(article.querySelector('h1'));
   }
   function inspection(target, scene) {
@@ -256,7 +203,8 @@
     };
     scene.items.forEach((item, i) => {
       const b = button('', () => {
-        stopRecording();
+        sound.leaveRecordings();
+        sound.inspect(item);
         inspected.add(i);
         b.classList.add('visited');
         b.querySelector('.folder-state').textContent = 'Просмотрено ✓';
@@ -277,7 +225,7 @@
             paragraphs(detail, item.after.slice(1));
             stamp(detail, 'ДЕЛО ЗАКРЫТО');
             archive.closedCase(detail);
-            effect('stamp'); focus(detail.querySelector('h2'));
+            sound.cue('stamp-official',{delay:100}); focus(detail.querySelector('h2'));
           }, true, null));
         }
         if (item.audio) audioPlayer(detail, item.audio);
@@ -294,8 +242,9 @@
     update();
   }
   function render() {
-    stopRecording(); inspected = new Set();
+    sound.leaveRecordings(); inspected = new Set();
     const scene = scenes[index];
+    sound.changeScene(scene);
     archive.applyScene(scene);
     document.body.dataset.chapter = scene.chapter;
     document.body.dataset.sceneType = scene.type || 'article';
@@ -366,13 +315,7 @@
     area.replaceChildren(button('Начать сначала', restartPrompt, true), el('span','','Архив сохраняется на этом устройстве.'));
     document.getElementById('menu').focus();
   }
-  document.getElementById('sound').addEventListener('click', event => {
-    soundEnabled = !soundEnabled;
-    event.currentTarget.textContent = `Звук: ${soundEnabled ? 'вкл.' : 'выкл.'}`;
-    event.currentTarget.setAttribute('aria-pressed',String(soundEnabled));
-    if (soundEnabled) effect('stamp');
-    else { stopRecording(); if (audioContext) audioContext.suspend().catch(() => {}); }
-  });
+
   document.getElementById('menu').addEventListener('click', () => {
     const area = document.getElementById('menu-panel');
     if (!area.hidden) closeMenu();
@@ -382,6 +325,8 @@
   const savedIndex = saved && scenes.findIndex(scene => scene.id === saved.sceneId);
   if (Number.isInteger(savedIndex) && savedIndex > 0) {
     index = savedIndex; introSeen = Boolean(saved.introSeen);
+    // The bookmark screen is an archive entrance, before the saved chapter opens.
+    sound.changeScene(scenes.find(scene => scene.id === 'cover'));
     const welcome = el('article','sheet resume');
     welcome.append(el('p','eyebrow','Архив ждёт вас'),el('h1','','Выпуск остался открытым'),el('p','',`Вы остановились на странице «${scenes[index].title}».`));
     welcome.querySelector('h1').id = 'scene-title';
@@ -390,4 +335,5 @@
     document.getElementById('chapter-label').textContent = 'Сохранённая закладка';
     document.getElementById('page-label').textContent = `Страница ${index+1} из ${scenes.length}`;
   } else render();
+  sound.startDefault();
 })();

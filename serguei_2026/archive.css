@@ -188,3 +188,6 @@ body[data-theme][data-scene] .sheet{background:repeating-linear-gradient(90deg,#
 .discovery{color:var(--ink)}
 .discovery-intro,.discovery-caption{text-shadow:none}
 body[data-scene="cover"] .tools .tool{color:var(--ink);border-color:#7d8779;background:transparent}
+/* One brief comic pause, aligned with the ledger thump and decisive stamp cues. */
+.accountant-performance .ledger-drop{animation-delay:.32s;animation-fill-mode:both}
+.accountant-performance h1{animation-delay:.68s;animation-fill-mode:both}

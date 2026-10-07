@@ -1,0 +1,433 @@
+{
+  "method": "Original deterministic scores rendered offline from recorded CC0 instruments, edited CC0 foley and field recordings. No oscillator beds or runtime synthesizer.",
+  "seed": 195570,
+  "files": [
+    {
+      "id": "archive-theme",
+      "src": "assets/audio/music/archive-theme.ogg",
+      "duration": 60,
+      "peakDb": -7.760562301301135,
+      "loop": true,
+      "edgeStep": 0,
+      "integratedLUFS": -23,
+      "sha256": "b16fe70e40f504058c28109916fbee8719ae10d57d9e9cb0328e50c9ede4df46"
+    },
+    {
+      "id": "childhood-theme",
+      "src": "assets/audio/music/childhood-theme.ogg",
+      "duration": 66.66666666666667,
+      "peakDb": -7.157303082105397,
+      "loop": true,
+      "edgeStep": 0.0010078968480229378,
+      "integratedLUFS": -23,
+      "sha256": "a96b67f7d24c2f899fe3bf709219b071c073210524ecf01cf77f82fc14150fb6"
+    },
+    {
+      "id": "ledger-theme",
+      "src": "assets/audio/music/ledger-theme.ogg",
+      "duration": 70.58823129251701,
+      "peakDb": -8.192945175317655,
+      "loop": true,
+      "edgeStep": 0.0015054550021886826,
+      "integratedLUFS": -23,
+      "sha256": "65bb2a219eaf046415a10350f9610b12708faa272e48b8d117a98dc37ad3571e"
+    },
+    {
+      "id": "army-theme",
+      "src": "assets/audio/music/army-theme.ogg",
+      "duration": 60,
+      "peakDb": -8.58468863789414,
+      "loop": true,
+      "edgeStep": 0,
+      "integratedLUFS": -23,
+      "sha256": "1aef265b98c76ee19ea82e80e8f197124f0d3da1bb29355c09d056c4fc536340"
+    },
+    {
+      "id": "wedding-theme",
+      "src": "assets/audio/music/wedding-theme.ogg",
+      "duration": 65.45453514739229,
+      "peakDb": -7.514725703789422,
+      "loop": true,
+      "edgeStep": 0.000007840004400350153,
+      "integratedLUFS": -23,
+      "sha256": "38f148e6cade046a573b27c567f41aa1dc78251802d20048680d24cf7162eac4"
+    },
+    {
+      "id": "cuba-theme",
+      "src": "assets/audio/music/cuba-theme.ogg",
+      "duration": 75.78947845804989,
+      "peakDb": -6.520052761984559,
+      "loop": true,
+      "edgeStep": 0,
+      "integratedLUFS": -23,
+      "sha256": "e3341a8245ce866e75ffe1c4a242fe4632e82c548d6ddd836ef6c01f79d67ce6"
+    },
+    {
+      "id": "canada-sparse",
+      "src": "assets/audio/music/canada-sparse.ogg",
+      "duration": 75,
+      "peakDb": -11.723994805546358,
+      "loop": true,
+      "edgeStep": 0,
+      "integratedLUFS": -27,
+      "sha256": "15285706b9f39c476fdec653d4eb9676f5ce263d96300a7a41de78aa0d2d745b"
+    },
+    {
+      "id": "home-theme",
+      "src": "assets/audio/music/home-theme.ogg",
+      "duration": 75,
+      "peakDb": -9.163920706622434,
+      "loop": true,
+      "edgeStep": 0.0026360470801591873,
+      "integratedLUFS": -23,
+      "sha256": "2de34bed7e689f5fc8f25a14f8cea9918a963001be89482e47dd857cd6dfdafd"
+    },
+    {
+      "id": "finale-theme",
+      "src": "assets/audio/music/finale-theme.ogg",
+      "duration": 75,
+      "peakDb": -7.381349482094634,
+      "loop": true,
+      "edgeStep": 0.008656809106469154,
+      "integratedLUFS": -23,
+      "sha256": "1e8a92850f04dbd4f6622cb07d9a117501ccd7a34e86795716fb30ffb3a72f9f"
+    },
+    {
+      "id": "page-a",
+      "src": "assets/audio/effects/page-a.wav",
+      "duration": 0.65,
+      "peakDb": -12.029544468174937,
+      "loop": false,
+      "integratedLUFS": -36.82,
+      "sha256": "5ec13d12aed915add4ce8e904bffa284ccb80c45dc2fb8bc553f85cbef717f55"
+    },
+    {
+      "id": "page-b",
+      "src": "assets/audio/effects/page-b.wav",
+      "duration": 0.62,
+      "peakDb": -12.159696563877233,
+      "loop": false,
+      "integratedLUFS": -36.6,
+      "sha256": "bfc985b1c028a71aca571d6ac4c57752e208de4bc86c4e985d449723723de569"
+    },
+    {
+      "id": "folder-a",
+      "src": "assets/audio/effects/folder-a.wav",
+      "duration": 0.75,
+      "peakDb": -12.020019885223272,
+      "loop": false,
+      "integratedLUFS": -36.36,
+      "sha256": "92e32a7e7f88202d17df14db121f148eef1b546b7733e909040b956db5cec718"
+    },
+    {
+      "id": "folder-b",
+      "src": "assets/audio/effects/folder-b.wav",
+      "duration": 0.8,
+      "peakDb": -11.999946665424783,
+      "loop": false,
+      "integratedLUFS": -35.42,
+      "sha256": "1ebabbf44a1bfa5d5b481802748eca8ca8e0379dc85a92cc57849dac58e55013"
+    },
+    {
+      "id": "document-slide",
+      "src": "assets/audio/effects/document-slide.wav",
+      "duration": 0.6,
+      "peakDb": -11.990454465252043,
+      "loop": false,
+      "integratedLUFS": -40.12,
+      "sha256": "c265a6f8e372ab3744030ed4a563026fb719763cf0e01e7c5ba79f6daac51064"
+    },
+    {
+      "id": "photo-place",
+      "src": "assets/audio/effects/photo-place.wav",
+      "duration": 0.35,
+      "peakDb": -12.020019885223272,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "f93f45964eeade397c768697fa108b92b6090efdce380d72e7aa714aca40fb6a"
+    },
+    {
+      "id": "chess-place",
+      "src": "assets/audio/effects/chess-place.wav",
+      "duration": 0.25,
+      "peakDb": -11.999946665424783,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "991a3a715ff98e903ff90ba69074b58d49de53e2fd2bd8c7670932918e365efa"
+    },
+    {
+      "id": "stamp-a",
+      "src": "assets/audio/effects/stamp-a.wav",
+      "duration": 0.3,
+      "peakDb": -11.999946665424783,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "84020218cbd58bb6901c236b9ca1b94ceff9cb26c3c1c4c1a24376c25e94f69e"
+    },
+    {
+      "id": "stamp-b",
+      "src": "assets/audio/effects/stamp-b.wav",
+      "duration": 0.3,
+      "peakDb": -11.999946665424783,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "3fbd28a8655c9c04da40d5aaf8755c003868f1c38b261f3a0a01ee6fb0ae4800"
+    },
+    {
+      "id": "stamp-official",
+      "src": "assets/audio/effects/stamp-official.wav",
+      "duration": 0.4,
+      "peakDb": -15.150455036927774,
+      "loop": false,
+      "integratedLUFS": -29,
+      "sha256": "1e6a5dc8340ad1e9d8ae60425784737461a268ab8dd46c6cce9590aee784759a"
+    },
+    {
+      "id": "flower-folder",
+      "src": "assets/audio/effects/flower-folder.wav",
+      "duration": 0.65,
+      "peakDb": -12.049686285112283,
+      "loop": false,
+      "integratedLUFS": -34.379999999999995,
+      "sha256": "e13659811ad78d44a09e06c34aa75574057199cb4f7aa1f512fa68a09b56fdff"
+    },
+    {
+      "id": "ledger-drop",
+      "src": "assets/audio/effects/ledger-drop.wav",
+      "duration": 0.3,
+      "peakDb": -12.010505735091389,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "1de195ad3585156ee8924ac4f18195061f6bc0942da0ce4773632cea354da9fc"
+    },
+    {
+      "id": "pencil-correction",
+      "src": "assets/audio/effects/pencil-correction.wav",
+      "duration": 0.6,
+      "peakDb": -16.184887861554948,
+      "loop": false,
+      "integratedLUFS": -29,
+      "sha256": "967fdb875aefa5f4f0b806809eb26110332a4e2f15d31d818f191d67223323a9"
+    },
+    {
+      "id": "measure-tape",
+      "src": "assets/audio/effects/measure-tape.wav",
+      "duration": 0.8,
+      "peakDb": -12.080519391668467,
+      "loop": false,
+      "integratedLUFS": -33.58,
+      "sha256": "5bba81a6a6bacded1d7452acc4de2f1e0cbdb778500fb050bb65b401dfa91b24"
+    },
+    {
+      "id": "water-plop",
+      "src": "assets/audio/effects/water-plop.wav",
+      "duration": 0.35,
+      "peakDb": -12.010505735091389,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "ded699c9d9dce59be9caee297bd2cf8dacb37d1f882085a76149fe10dd1fcdb4"
+    },
+    {
+      "id": "recorder-start",
+      "src": "assets/audio/effects/recorder-start.wav",
+      "duration": 0.2,
+      "peakDb": -12.010505735091389,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "ae2d374cf9075c0a8c8c0e9f95efcd9308977fc029e00f2e0b517729e591296d"
+    },
+    {
+      "id": "recorder-stop",
+      "src": "assets/audio/effects/recorder-stop.wav",
+      "duration": 0.2,
+      "peakDb": -12.080519391668467,
+      "loop": false,
+      "integratedLUFS": null,
+      "sha256": "853568a669f8a357a3a1dda19cc0ccae1f92ee5af74d5167a186544c5ddef3d1"
+    },
+    {
+      "id": "irina-resolution",
+      "src": "assets/audio/effects/irina-resolution.wav",
+      "duration": 1.4,
+      "peakDb": -14.302907148070387,
+      "loop": false,
+      "integratedLUFS": -27,
+      "sha256": "c7a000c5d7bd81695fb58b6b73fdf800a4a67debfcac654d437a7aa8d7113e3f"
+    },
+    {
+      "id": "quiet-room",
+      "src": "assets/audio/ambience/quiet-room.ogg",
+      "duration": 60,
+      "peakDb": -21.419522491179656,
+      "loop": true,
+      "edgeStep": 0.00006251642480492592,
+      "integratedLUFS": -36,
+      "sha256": "8c8bce7a653012d0981b45e714a8ffa5db4b620e6431390a9f4c8a0f7fdb820a"
+    },
+    {
+      "id": "lake-air",
+      "src": "assets/audio/ambience/lake-air.ogg",
+      "duration": 60,
+      "peakDb": -15.174185917751222,
+      "loop": true,
+      "edgeStep": 0.0018146529328078032,
+      "integratedLUFS": -31,
+      "sha256": "d97249e6f125ec9c476747c4e6393497749a374d8cc2d5575a0dc25415181b82"
+    }
+  ],
+  "effects": [
+    {
+      "id": "page-a",
+      "original": "kenney-rpg\\OGG\\bookFlip1.ogg",
+      "options": {},
+      "layers": []
+    },
+    {
+      "id": "page-b",
+      "original": "kenney-rpg\\OGG\\bookFlip2.ogg",
+      "options": {
+        "speed": 0.94
+      },
+      "layers": []
+    },
+    {
+      "id": "folder-a",
+      "original": "kenney-rpg\\OGG\\bookOpen.ogg",
+      "options": {
+        "filter": "lowpass=f=6500"
+      },
+      "layers": [
+        {
+          "original": "kenney-rpg/OGG/bookFlip1.ogg",
+          "offset": 0.11,
+          "gain": 0.27
+        }
+      ]
+    },
+    {
+      "id": "folder-b",
+      "original": "kenney-rpg\\OGG\\bookOpen.ogg",
+      "options": {
+        "speed": 0.9,
+        "filter": "lowpass=f=5200"
+      },
+      "layers": [
+        {
+          "original": "kenney-rpg/OGG/bookFlip2.ogg",
+          "offset": 0.11,
+          "gain": 0.27
+        }
+      ]
+    },
+    {
+      "id": "document-slide",
+      "original": "kenney-rpg\\OGG\\bookFlip3.ogg",
+      "options": {
+        "speed": 0.85,
+        "filter": "highpass=f=180,lowpass=f=6200"
+      },
+      "layers": []
+    },
+    {
+      "id": "photo-place",
+      "original": "kenney-rpg\\OGG\\handleSmallLeather.ogg",
+      "options": {
+        "filter": "highpass=f=200,lowpass=f=4500"
+      },
+      "layers": []
+    },
+    {
+      "id": "chess-place",
+      "original": "impact\\Audio\\impactWood_light_000.ogg",
+      "options": {
+        "filter": "highpass=f=150,lowpass=f=2300"
+      },
+      "layers": []
+    },
+    {
+      "id": "stamp-a",
+      "original": "impact\\Audio\\impactSoft_medium_000.ogg",
+      "options": {
+        "filter": "highpass=f=100,lowpass=f=3000"
+      },
+      "layers": []
+    },
+    {
+      "id": "stamp-b",
+      "original": "impact\\Audio\\impactSoft_medium_001.ogg",
+      "options": {
+        "filter": "highpass=f=100,lowpass=f=3000"
+      },
+      "layers": []
+    },
+    {
+      "id": "stamp-official",
+      "original": "impact\\Audio\\impactSoft_heavy_000.ogg",
+      "options": {
+        "filter": "highpass=f=100,lowpass=f=2600"
+      },
+      "layers": []
+    },
+    {
+      "id": "flower-folder",
+      "original": "kenney-rpg\\OGG\\handleSmallLeather2.ogg",
+      "options": {
+        "speed": 0.9,
+        "filter": "highpass=f=100,lowpass=f=6200"
+      },
+      "layers": []
+    },
+    {
+      "id": "ledger-drop",
+      "original": "kenney-rpg\\OGG\\bookPlace1.ogg",
+      "options": {
+        "speed": 0.88,
+        "filter": "highpass=f=85,lowpass=f=2600"
+      },
+      "layers": []
+    },
+    {
+      "id": "pencil-correction",
+      "original": "pencil\\flac\\pencil_write.flac",
+      "options": {
+        "start": 0.08,
+        "filter": "highpass=f=300,lowpass=f=7200"
+      },
+      "layers": []
+    },
+    {
+      "id": "measure-tape",
+      "original": "kenney-rpg\\OGG\\beltHandle2.ogg",
+      "options": {
+        "speed": 0.9,
+        "filter": "highpass=f=120,lowpass=f=4800"
+      },
+      "layers": []
+    },
+    {
+      "id": "water-plop",
+      "original": "splash.wav",
+      "options": {
+        "start": 0.55,
+        "filter": "highpass=f=130,lowpass=f=5000"
+      },
+      "layers": []
+    },
+    {
+      "id": "recorder-start",
+      "original": "kenney-rpg\\OGG\\metalClick.ogg",
+      "options": {
+        "filter": "highpass=f=250,lowpass=f=2000"
+      },
+      "layers": []
+    },
+    {
+      "id": "recorder-stop",
+      "original": "kenney-rpg\\OGG\\metalLatch.ogg",
+      "options": {
+        "filter": "highpass=f=250,lowpass=f=2000"
+      },
+      "layers": []
+    }
+  ]
+}

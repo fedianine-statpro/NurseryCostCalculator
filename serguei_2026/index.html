@@ -10,13 +10,22 @@
   <link rel="stylesheet" href="archive.css">
   <script defer src="story-data.js"></script>
   <script defer src="archive-ui.js"></script>
+  <script defer src="sound-data.js"></script>
+  <script defer src="sound-manager.js"></script>
+  <script defer src="sound-controls.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
   <header class="masthead">
     <a class="brand" href="#main" aria-label="Перейти к журналу">СЕРГЕЙ<span>семейное издание · с 1955 года</span></a>
-    <div class="tools"><button id="sound" class="tool" aria-pressed="false">Звук: выкл.</button><button id="menu" class="tool" aria-expanded="false" aria-controls="menu-panel">Меню</button></div>
+    <div class="tools"><button id="sound" class="tool" aria-pressed="false">Включить звук</button><button id="sound-settings" class="tool" aria-expanded="false" aria-controls="sound-panel">Настройки звука</button><button id="menu" class="tool" aria-expanded="false" aria-controls="menu-panel">Меню</button></div>
   </header>
+  <section id="sound-panel" class="sound-panel" aria-label="Настройки звука" hidden>
+    <div class="sound-layer"><label><input type="checkbox" data-sound-setting="music"> Музыка</label><label>Громкость музыки <input type="range" min="0" max="1" step="0.01" data-sound-setting="musicVolume"></label></div>
+    <div class="sound-layer"><label><input type="checkbox" data-sound-setting="effects"> Атмосфера и звуки предметов</label><label>Громкость атмосферы и предметов <input type="range" min="0" max="1" step="0.01" data-sound-setting="effectsVolume"></label></div>
+    <div class="sound-layer"><label><input type="checkbox" data-sound-setting="recordings"> Семейные записи</label><label>Громкость семейных записей <input type="range" min="0" max="1" step="0.01" data-sound-setting="recordingVolume"></label></div>
+    <p id="sound-status" role="status"></p>
+  </section>
   <div id="menu-panel" class="menu-panel" hidden><button id="restart" class="tool">Начать сначала</button><span>Архив сохраняется на этом устройстве.</span></div>
   <main id="main" tabindex="-1">
     <div class="edition"><span>ЮБИЛЕЙНЫЙ СПЕЦВЫПУСК</span><span>№ 70 / один экземпляр для главного героя</span></div>

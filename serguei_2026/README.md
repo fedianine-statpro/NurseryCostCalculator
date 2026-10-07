@@ -80,9 +80,11 @@ The homemade childhood magazine now uses the supplied `serguei-journal.png`. Its
 
 ## Audio
 
-The visible sound switch starts off. Short paper, stamp and fanfare effects are synthesized locally with Web Audio after user interaction. Browsers without Web Audio can still play the whole game. Effects are implemented in `effect()` in `app.js` and stay quiet while a family recording is playing.
+For local playback, use `http://127.0.0.1:8080/` rather than opening `index.html` directly: browsers block background audio fetches from `file://`. Run `node tools/serve-local.cjs` from this folder, or run `powershell -ExecutionPolicy Bypass -File .\start-local.ps1` to start the preview and open the browser. Node.js is required only for this local preview. Saved progress stays at its original browser address; localhost has separate storage. GitHub Pages needs no server or build.
 
-Six trimmed family recordings are included. Every recording uses native browser play/pause, seeking and volume controls with a visible title. Nothing autoplays. Pressing play explicitly turns sound on. Only one recording plays at a time; changing a page or archive folder, closing the bonus archive, or switching sound off stops playback. A missing or unsupported recording shows a message and leaves the story available.
+Background music is off by default; ambience, effects and family recordings remain enabled. You can enable music in **Настройки звука**. Where the browser permits autoplay, ambience starts immediately; otherwise the first game click or keypress enables sound. The master switch silences all three layers. Preferences are remembered under `sergey-archive-sound-v1`, including an explicit master mute. This update switches previously saved music settings off once; subsequent explicit music choices are remembered. Family recordings require their own Play action and remain usable with music and effects disabled.
+
+Six trimmed family recordings are included and were preserved without further processing. Every recording uses native browser play/pause, seeking and volume controls with a visible title. Nothing autoplays. Only one recording plays at a time; changing a page or archive folder, closing its bonus sleeve, or using master mute stops playback. Music fades to silence over 650 ms during a recording; ambience drops to 8% of its already quiet level and interaction cues are suppressed. Background restores gently over 1.8 seconds after pause or completion. A missing or unsupported recording shows a message and leaves the story available.
 
 | Prepared file | Original excerpt (minutes:seconds) | Location |
 | --- | --- | --- |
@@ -101,7 +103,7 @@ The source files were stereo containers with an almost silent right channel in t
 
 Clips use two-pass [FFmpeg loudness normalization](https://ffmpeg.org/ffmpeg-filters.html#loudnorm) targeting -18 LUFS, a -1.5 dB true-peak ceiling and 11 LU loudness range. Songs have 0.25-second fade-ins and 0.7-second fade-outs; speech uses short 0.04/0.12-second fades. Output is 44.1kHz, two-channel MP3 at 128kbps, without original metadata. Timestamp boundaries refer to the unmodified source files; MP3 encoder padding can make reported duration a few hundredths of a second longer.
 
-Full original recordings and the preparation report are backed up outside the published site in `C:\Github\dad-audio-originals\20261007-001839`. Only the six prepared clips belong in `assets/audio/`. Preparation used temporary FFmpeg tools; no audio processing dependency or build step is required to play or publish the game. No commercial Vysotsky recording is included; the Vysotsky clip is Sergey's family performance.
+Full original recordings and the preparation report are backed up outside the published site in `C:\Github\dad-audio-originals\20261007-001839`. Only the six prepared family clips are included; new soundtrack assets can be supplied in the `music`, `ambience` and `effects` subfolders. Preparation used temporary FFmpeg tools; no audio processing dependency or build step is required to play or publish the game. No commercial Vysotsky recording is included; the Vysotsky clip is Sergey's family performance.
 
 ## Reorder or disable scenes
 
@@ -121,7 +123,7 @@ The key `sergey-magazine-progress-v1` in `localStorage` contains only `sceneId` 
 
 The game uses system fonts, body text of at least 20px, large native buttons, strong contrast and keyboard focus indicators. Enter/Space activates focused buttons. New pages focus their heading; opened folders focus their detail heading. Reduced-motion settings disable page and stamp animations. Layouts stack at smaller widths, including 320px. Animations never delay reading or navigation. The final editorial classification message is a story result, with a visible continuation.
 
-`styles.css` supplies the base layout; `archive.css` adds the physical archive presentation. `app.js` controls rendering, navigation, saving and sound; `archive-ui.js` creates the opening desk, decorative objects and joke performances. Simple fallback icons remain inline SVG in `app.js`.
+`styles.css` supplies the base layout; `archive.css` adds the physical archive presentation. `app.js` controls rendering, navigation and progress saving; `archive-ui.js` creates the opening desk, decorative objects and joke performances. `sound-manager.js` centrally owns audio, `sound-controls.js` binds its controls, and `sound-data.js` is the audio asset manifest. Simple fallback icons remain inline SVG in `app.js`.
 
 ## Physical archive design
 
@@ -147,3 +149,9 @@ Objects preserve transparency and are composited independently from the environm
 The exact prompt for every asset is recorded in [asset-prompts.json](assets/illustrations/asset-prompts.json). High-resolution generated originals remain in the image tool's default generated-images folder; only optimized copies are shipped. Edit `visuals` near the top of `story-data.js` to change cover lettering, props, performance captions or finale overlap photos. Theme mappings and physical composition live in `archive-ui.js` and `archive.css`; an individual scene can override its chapter theme with `theme`.
 
 Source files before this redesign are backed up outside the site in `C:\Github\dad-before-redesign\20261007-204457`.
+
+## Sound design and supplied assets
+
+See [SOUND-DESIGN.md](SOUND-DESIGN.md) for layer controls, timing, chapter direction, asset delivery and verification instructions. [sound-data.js](sound-data.js) is the canonical runtime manifest. [assets/audio/manifest.json](assets/audio/manifest.json) is a portable snapshot with expanded scene mappings, generation briefs and the existing recording paths. Regenerate that snapshot after editorial changes with `node tests/export-audio-manifest.cjs`; the game itself needs no build step.
+
+Nine original acoustic arrangements, two ambience loops and eighteen effects are included locally and enabled, with two recorder effects reserved for future custom controls. Music uses offline-rendered real acoustic instrument samples; effects and ambience use edited CC0 recordings. Sources and licences are in [assets/audio/LICENSES.md](assets/audio/LICENSES.md), and measured levels and file hashes are in [production-report.json](assets/audio/production-report.json). Missing files still fall back to silence. No streaming service, runtime synthesizer or text-to-speech is used.
