@@ -1,0 +1,118 @@
+{
+  "method": "Built-in image_gen",
+  "note": "Generated decorative assets, not biographical evidence. Actual family photos are separate.",
+  "assets": [
+    {
+      "id": "desk",
+      "file": "assets/illustrations/environments/desk.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: historical-scene. Asset type: photorealistic background for an interactive family archive browser game, landscape 3:2. Strict overhead camera, warm desk lamp illumination from upper left. A real aged Soviet domestic wooden writing desk, walnut grain, selective honest wear, 1950s-1960s atmosphere. A small brass desk lamp barely visible in the upper left corner casts a golden oval pool of light. The central 75 percent of the desk is completely EMPTY continuous wood: a separate dark-green archive folder and readable HTML will be placed over it by the game. Subtle shadows at outer edges, natural photographic detail, quiet intimate discovery. No folder, no book, no paper in centre, no chess piece, no humans, no text, no lettering, no logos, no UI. Camera and illumination should suit separately composited tabletop objects photographed directly from above."
+    },
+    {
+      "id": "notebook",
+      "file": "assets/illustrations/environments/notebook.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: historical-scene. Asset type: photorealistic tabletop browser-game scene background, not a UI mockup. An open Soviet school exercise book on a sunlit wooden desk, directly overhead, landscape 3:2. Blank warm ivory squared pages with faint blue grid and red margins, sewn spine down centre, a few small glue traces at outer margins and a subtly uneven hand-cut empty newspaper clipping at outer lower corner. The central 80 percent of pages are clean blank space for HTML readable story and authentic family photos. Bright warm sunlight from upper left, childhood in Dushanbe, tactile real paper. No writing, no drawings, no letters, no UI, no artificial sepia wash. Wear only at cover edges."
+    },
+    {
+      "id": "archive",
+      "file": "assets/illustrations/environments/archive.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: historical-scene. Asset type: photorealistic tabletop browser-game scene background, not a UI mockup. A Soviet cardboard personal archive folder spread open on a wooden desk, absolutely overhead, landscape 3:2. Tobacco-brown cardboard, blank warm ivory loose typewriter paper forming a large uncluttered central rectangle occupying 80 percent, olive cloth visible as a small border, metal paperclip at far upper right, tab at far left. A small edge of acoustic guitar body visible at lower right outer edge, outside the central readable area. Natural warm upper-left lighting, restrained authentic wear. No letters, no text, no writing, no humans, no UI."
+    },
+    {
+      "id": "wedding",
+      "file": "assets/illustrations/environments/wedding.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: historical-scene. Asset type: photorealistic tabletop browser-game scene background, not a UI mockup. A carefully preserved mid-century Soviet family wedding photo album lying open, absolutely overhead landscape 3:2. Cream album pages, thin translucent tissue interleaf lifted at far outer left, small dark photograph mounting corners at page margins, one modest pressed flower at outer bottom right. Large blank clean central 80 percent for real family photographs and readable HTML captions. Warm intimate golden upper-left light, elegant bottle-green cloth cover edges, subtle genuine texture, no baked-in photographs, no people, no letters, no text, no excessive grime, no UI."
+    },
+    {
+      "id": "cuba",
+      "file": "assets/illustrations/environments/cuba.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: photorealistic-natural. Asset type: separately composited browser-game environment background. An overhead sun-faded family correspondence spread on a turquoise-painted wooden table, landscape 3:2. Large blank cream postcard and ivory letter sheets occupying central 80 percent, coral envelope tucked at far edge, a blank postcard back at outer top right, hints of tropical sunlight and palm-leaf shadow only at edges. Authentic late 1980s domestic travel archive, warm photography, vivid turquoise coral and cream palette, restrained worn paper, no text or lettering, no fake postage words, no people, no UI. Clear centre for readable HTML and real family photographs."
+    },
+    {
+      "id": "canada",
+      "file": "assets/illustrations/environments/canada.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: photorealistic-natural. Asset type: separately composited browser-game environment background. An overhead family moving-and-settling desk, landscape 3:2. Pale natural oak tabletop, a large clean blank ivory letter in central 80 percent, plain kraft envelopes and cardboard moving-label corners at far edges, blue ballpoint pen at far outer right, soft cool daylight from upper left gradually warmed by domestic light. Late 1990s Canada family archive, simple quiet honest composition, no brand, no text, no writing, no people, no baked-in photographs, no UI. Centre is empty readable paper for HTML."
+    },
+    {
+      "id": "camping",
+      "file": "assets/illustrations/environments/camping.webp",
+      "builtInTool": true,
+      "transparentBackground": false,
+      "prompt": "Use case: photorealistic-natural. Asset type: separately composited browser-game environment background. A photorealistic folding camping table beside a peaceful Canadian lake, landscape 3:2, high overhead camera slightly tilted so a narrow strip of distant lake and soft forest appears across the top 18 percent. Main lower 82 percent is a clear light wooden folding-table surface with large EMPTY central area for a separate readable notebook UI. Gentle morning sunlight from upper left. Small fishing line at very far outer edge only, no fishing float, no notebook, no objects in centre, no people, no text, no UI, no watermarks. Peaceful present-day outdoors, same warm natural photographic language as archival desk."
+    },
+    {
+      "id": "folder",
+      "file": "assets/illustrations/objects/folder.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: separately composited photorealistic browser-game prop. A single closed worn dark bottle-green clothbound archival folder, seen absolutely straight from overhead, rectangular portrait shape, slightly softened corners, very fine cloth weave, faded blank embossed rectangular border, no lettering at all. Blank cover leaving broad empty area for HTML Russian title. Subtle thickness and spine on left. Soviet family archive circa 1960, quietly treasured rather than filthy. Fully visible isolated object with generous transparent margins, natural photographic detail, warm light from upper left, small soft cast shadow. No desk, no other objects, no text, no logos."
+    },
+    {
+      "id": "knight",
+      "file": "assets/illustrations/objects/knight.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: separately composited photorealistic browser-game prop. A single recognisable vintage wooden chess knight, carved honey-brown wood, elegant rounded horse head with a small dark eye and simple carved mane, broad round weighted base. Product photography from high overhead three-quarter view so horse head profile is clearly identifiable. Fully visible isolated on transparent background, warm light upper left, subtle contact shadow. Natural wood grain, lightly worn, Soviet domestic chess set 1960s, no board, no other pieces, no text."
+    },
+    {
+      "id": "stamp",
+      "file": "assets/illustrations/objects/stamp.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: separately composited photorealistic browser-game prop. A single vintage rubber office stamp with a short dark turned wooden handle and rectangular rubber base, lying diagonally on its side on a transparent background, straight overhead tabletop photographic view. Warm light from upper left, small cast shadow, selective authentic wear, ink traces muted vermilion. Fully visible with generous clear transparent margin. No writing, no lettering, no surrounding paper, no desk."
+    },
+    {
+      "id": "pencil",
+      "file": "assets/illustrations/objects/pencil.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: separately composited photorealistic browser-game prop. One sharpened vintage yellow-ochre wooden pencil, no eraser, authentic wood texture and graphite point, lying diagonally from lower left to upper right, photographed directly overhead. Entire object fully visible on transparent background, generous clear margins, gentle warm lamp light from upper left, subtle contact shadow, no branding, no text, no other objects."
+    },
+    {
+      "id": "flower",
+      "file": "assets/illustrations/objects/flower.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: independently composited photorealistic family-archive game prop. A single slightly crushed muted red carnation with short green stem and one small leaf, lying diagonally, photographed directly overhead. A detached small red petal alongside it is part of this single object asset. Real flower, tender gently comic archival evidence, no gore. Warm light upper left, transparent background, entire flower visible with generous margins, subtle contact shadow, no vase, no other objects, no words."
+    },
+    {
+      "id": "float",
+      "file": "assets/illustrations/objects/float.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: independently composited photorealistic family-archive game prop. One vintage slender red-and-ivory wooden fishing float with a thin dark stem, photographed directly overhead, lying diagonally. Real weathered painted wood, warm light upper left, transparent background, generous margins, entire object visible, small contact shadow, no fishing line, no water, no text, no other objects."
+    },
+    {
+      "id": "measure",
+      "file": "assets/illustrations/objects/measure.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: independently composited photorealistic family-archive game prop. A vintage small brushed-metal tape-measure housing with a yellow measuring tape extended horizontally to the right across the frame. Direct overhead product photography, warm light upper left, entire housing and tape visible on transparent background with generous margins. Simple black tick marks, no legible numbers or text, no brand. Real tactile metal and fabric tape, no desk, no other objects."
+    },
+    {
+      "id": "recorder",
+      "file": "assets/illustrations/objects/recorder.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: independently composited photorealistic family-archive game prop. A small vintage domestic reel-to-reel tape recorder photographed directly overhead, two circular translucent reels, cream and grey metal body with modest Soviet-era industrial design, two reel hubs clearly visible, no brand or writing or text, fully visible isolated on transparent background. Warm upper-left illumination, authentic real materials, selective wear, generous margins, subtle contact shadow. Keep front panel largely blank; actual playback controls will be HTML outside this asset."
+    },
+    {
+      "id": "fish",
+      "file": "assets/illustrations/objects/fish.webp",
+      "builtInTool": true,
+      "transparentBackground": true,
+      "prompt": "Use case: product-mockup. Asset type: independently composited photorealistic family-archive game prop. A modest ordinary small freshwater perch, a natural realistic fish about palm length, lying horizontally with head left, side view photographed from directly above, subtle silvery olive striped scales and small fins. This is an editorial illustrative object, not a trophy. Fully visible isolated on transparent background, soft warm upper-left light, no hook, no injury, no blood, no human hand, no tape measure, no other objects, no text, generous margins."
+    }
+  ]
+}

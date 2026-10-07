@@ -24,10 +24,11 @@
   function paragraphs(target, lines, className = '') {
     (lines || []).forEach(line => target.append(el('p', className, line)));
   }
-  function button(label, handler, secondary = false) {
+  function button(label, handler, secondary = false, sound = 'paper') {
     const node = el('button', secondary ? 'action secondary' : 'action', label);
     node.type = 'button';
-    node.addEventListener('click', () => { effect('paper'); handler(); });
+    if (label) node.setAttribute('aria-label',label);
+    node.addEventListener('click', () => { if (sound) effect(sound); handler(); });
     return node;
   }
   // Small original line drawings. Decorative SVG never replaces a text label.
@@ -67,6 +68,7 @@
     svg.append(path);
     return svg;
   }
+  const archive = window.createArchiveUI({config, el, icon, button});
   function stamp(target, text) { if (text) target.append(el('div', 'stamp', text)); }
   function facts(target, entries) {
     if (!entries) return;
@@ -95,7 +97,8 @@
     img.addEventListener('error', () => {
       img.hidden = true; placeholder.hidden = false; figure.hidden = optional;
     });
-    figure.append(placeholder, img, el('figcaption', '', scene.caption));
+    const caption = el('figcaption','',scene.caption);
+    figure.append(placeholder,img,caption);
     target.append(figure);
     img.src = scene.photo;
   }
@@ -122,6 +125,7 @@
     const clip = config.audioClips?.[id];
     if (!clip?.src) return;
     const card = el('section', 'audio-card');
+    archive.recordingDecor(card);
     const title = el('h2', 'audio-title', clip.title);
     const audio = el('audio');
     audio.controls = true;
@@ -133,17 +137,21 @@
     audio.addEventListener('play', () => {
       if (recording !== audio) stopRecording();
       recording = audio;
+      card.classList.add('playing');
       if (!soundEnabled) document.getElementById('sound').click();
       status.textContent = 'Запись звучит. Можно поставить на паузу или продолжить чтение.';
     });
     audio.addEventListener('pause', () => {
+      card.classList.remove('playing');
       if (!audio.ended) status.textContent = 'Запись на паузе. Нажмите ▶, чтобы продолжить.';
     });
     audio.addEventListener('ended', () => {
+      card.classList.remove('playing');
       if (recording === audio) recording = null;
       status.textContent = 'Запись завершена. Можно послушать ещё раз.';
     });
     audio.addEventListener('error', () => {
+      card.classList.remove('playing');
       if (recording === audio) recording = null;
       status.textContent = 'Запись недоступна. Можно продолжать чтение.';
     });
@@ -171,6 +179,21 @@
       if (!Audio) return;
       audioContext ||= new Audio();
       if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+      if (kind !== 'fanfare') {
+        const duration = kind === 'stamp' ? 0.12 : 0.18;
+        const buffer = audioContext.createBuffer(1, Math.ceil(audioContext.sampleRate * duration), audioContext.sampleRate);
+        const samples = buffer.getChannelData(0);
+        for (let i=0;i<samples.length;i++) samples[i]=(Math.random()*2-1)*(1-i/samples.length);
+        const source = audioContext.createBufferSource(); source.buffer=buffer;
+        const filter = audioContext.createBiquadFilter();
+        filter.type = kind === 'stamp' ? 'lowpass' : 'bandpass';
+        filter.frequency.value=kind === 'stamp' ? 350 : 1600;
+        const gain=audioContext.createGain();
+        gain.gain.setValueAtTime(kind === 'stamp' ? 0.12 : 0.045,audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001,audioContext.currentTime+duration);
+        source.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);source.start();
+        return;
+      }
       const notes = kind === 'fanfare' ? [392, 494, 587, 784] : [kind === 'stamp' ? 110 : 260];
       notes.forEach((frequency, i) => {
         const osc = audioContext.createOscillator();
@@ -195,11 +218,13 @@
   }
   function showReaction(scene, reaction) {
     stopRecording();
+    archive.applyScene(scene,true);
     root.replaceChildren();
     const article = el('article', 'sheet reaction');
+    archive.decoration(article,scene);
     article.append(el('p', 'eyebrow', scene.section), el('h1', '', reaction.title));
     article.querySelector('h1').id = 'scene-title';
-    if (reaction.icon) article.append(icon(reaction.icon));
+    if (reaction.icon && !['measure','fish'].includes(reaction.icon)) article.append(icon(reaction.icon));
     stamp(article, reaction.stamp);
     const content = el('div', reaction.photo ? 'content with-photo' : 'content');
     const copy = el('div', 'copy');
@@ -207,6 +232,7 @@
     content.append(copy);
     photograph(content, reaction);
     article.append(content);
+    archive.performance(article,scene,reaction);
     photoAlbum(article, reaction.album);
     actions(article).append(button(scene.afterNext || scene.next || 'Дальше', next));
     root.append(article);
@@ -236,6 +262,7 @@
         b.querySelector('.folder-state').textContent = 'Просмотрено ✓';
         detail.replaceChildren(el('h2', '', item.title));
         paragraphs(detail, item.body);
+        archive.exhibit(detail,item);
         photoAlbum(detail, item.album);
         if (item.illustration) {
           const clipping = el('figure', 'magazine-recreation');
@@ -249,8 +276,9 @@
             detail.replaceChildren(el('h2', '', item.after[0]));
             paragraphs(detail, item.after.slice(1));
             stamp(detail, 'ДЕЛО ЗАКРЫТО');
+            archive.closedCase(detail);
             effect('stamp'); focus(detail.querySelector('h2'));
-          }, true));
+          }, true, null));
         }
         if (item.audio) audioPlayer(detail, item.audio);
         detail.hidden = false; update(); focus(detail.querySelector('h2'));
@@ -268,6 +296,7 @@
   function render() {
     stopRecording(); inspected = new Set();
     const scene = scenes[index];
+    archive.applyScene(scene);
     document.body.dataset.chapter = scene.chapter;
     document.body.dataset.sceneType = scene.type || 'article';
     document.getElementById('chapter-label').textContent = scene.chapter ? `${String(scene.chapter).padStart(2,'0')} / ${chapterNames[scene.chapter]}` : chapterNames[0];
@@ -276,7 +305,12 @@
     document.getElementById('progress').style.width = `${percent}%`;
     document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow', percent);
     root.replaceChildren();
+    if (scene.id === 'cover') {
+      const cover = archive.opening(scene,next);
+      root.append(cover); save(); focus(cover.querySelector('h1')); window.scrollTo({top:0,behavior:'instant'}); return;
+    }
     const article = el('article', `sheet ${scene.type || 'article'}`);
+    archive.decoration(article,scene);
     const top = el('div', 'sheet-top');
     top.append(el('span', '', scene.section), el('span', '', scene.year));
     article.append(top, el('h1', '', scene.title));
@@ -295,7 +329,7 @@
     content.append(copy); photograph(content, scene); article.append(content);
     if (scene.type === 'montage') {
       const grid = el('div', 'montage-grid');
-      scene.objects.forEach(([name, label]) => { const card = el('div', 'archive-object'); card.append(icon(name), el('span','',label)); grid.append(card); });
+      scene.objects.forEach(([name, label]) => { const card = el('div', 'archive-object'); card.append(archive.object(name), el('span','',label)); grid.append(card); });
       article.append(grid);
     }
     if (scene.type === 'birthday') {
@@ -307,11 +341,12 @@
     else if (scene.type === 'choice') {
       const area = actions(article); area.classList.add('choices');
       scene.choices.forEach(choice => {
-        const b = button(choice.label, () => showReaction(scene, choice.reaction || scene.reaction));
+        const b = button(choice.label, () => showReaction(scene, choice.reaction || scene.reaction), false, null);
+        if (scene.id === 'prediction') b.classList.add('career-card');
         if (choice.icon) b.prepend(icon(choice.icon, 'choice-icon'));
         area.append(b);
       });
-    } else if (scene.type === 'reveal') actions(article).append(button(scene.next, () => showReaction(scene, scene.reaction)));
+    } else if (scene.type === 'reveal') actions(article).append(button(scene.next, () => showReaction(scene, scene.reaction), false, null));
     else if (scene.type === 'end') actions(article).append(button(scene.next, startOver));
     else actions(article).append(button(scene.next || 'Дальше', next));
     root.append(article); save();

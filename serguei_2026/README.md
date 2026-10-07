@@ -121,4 +121,29 @@ The key `sergey-magazine-progress-v1` in `localStorage` contains only `sceneId` 
 
 The game uses system fonts, body text of at least 20px, large native buttons, strong contrast and keyboard focus indicators. Enter/Space activates focused buttons. New pages focus their heading; opened folders focus their detail heading. Reduced-motion settings disable page and stamp animations. Layouts stack at smaller widths, including 320px. Animations never delay reading or navigation. The final editorial classification message is a story result, with a visible continuation.
 
-`styles.css` controls the visual system; `app.js` controls rendering, navigation, saving and sound. The `assets/illustrations`, `assets/newspaper` and `assets/icons` folders are available for future family additions; current illustrations are original inline SVG in `app.js`, and paper textures are CSS.
+`styles.css` supplies the base layout; `archive.css` adds the physical archive presentation. `app.js` controls rendering, navigation, saving and sound; `archive-ui.js` creates the opening desk, decorative objects and joke performances. Simple fallback icons remain inline SVG in `app.js`.
+
+## Physical archive design
+
+The original quiet beige desk and ivory paper backgrounds are restored throughout, including the opening. Generated environment images remain available in the asset collection but are not displayed as backgrounds. The new objects and interactions remain active.
+
+The first screen is a warm wooden desk with a separate dark-green cloth folder, real childhood photo, wooden chess knight, pencil and stamp. The folder itself is one large native button labelled **Открыть архив**. Opening it brings out the appointment sheet. Russian titles and controls are HTML, not text baked into generated images.
+
+Chapter materials progress through squared childhood notebooks, blue-ink student ledgers, cardboard army files, a wedding album, turquoise/coral Cuban correspondence, modern office sheets, Canadian moving envelopes and an outdoor notebook beside a lake. The finale returns to a rich family album and the childhood notebook. Still compositions are used for the army kindness passage and the difficult Canadian years. All photographs retain their full images; newer chapters show their original colours.
+
+Short performances animate the accountant ledger/stamp, Irina's crossed-out report and emphatic correction, the flower exhibit and protruding petal, the stretching tape, and family photographs overlapping the final classification cards. The same generated knight recurs in childhood, later interests and the final collection. The modest fish is explicitly labelled an editorial illustration, not a photograph of Sergey's catch. Every continuation is immediately available; no animation requires waiting. Reduced-motion settings disable the movement.
+
+Photos use the original static presentation with captions underneath and no flipping controls. Audio players include a separate tape-recorder asset, gently moving reels and a decorative level meter only during playback. The meter is an animation, not a measured audio waveform; native play/pause, seeking and volume controls remain available.
+
+### Generated assets and editing
+
+Sixteen coordinated assets were created using the built-in image generation tool and saved as compressed WebP files:
+
+- `assets/illustrations/environments/`: `desk`, `notebook`, `archive`, `wedding`, `cuba`, `canada`, `camping`.
+- `assets/illustrations/objects/`: `folder`, `knight`, `stamp`, `pencil`, `flower`, `float`, `measure`, `recorder`, `fish`.
+
+Objects preserve transparency and are composited independently from the environments, HTML text and actual family photos. Decorative imagery is generated scene dressing; it supplies no new biographical facts. No extra personal photos are required for this redesign.
+
+The exact prompt for every asset is recorded in [asset-prompts.json](assets/illustrations/asset-prompts.json). High-resolution generated originals remain in the image tool's default generated-images folder; only optimized copies are shipped. Edit `visuals` near the top of `story-data.js` to change cover lettering, props, performance captions or finale overlap photos. Theme mappings and physical composition live in `archive-ui.js` and `archive.css`; an individual scene can override its chapter theme with `theme`.
+
+Source files before this redesign are backed up outside the site in `C:\Github\dad-before-redesign\20261007-204457`.
