@@ -1,4 +1,4 @@
-Build a small, polished, self-contained browser game as a 70th birthday present for Sergey.
+Build a small, polished, self-contained browser game as a 71st birthday present for Sergey.
 
 The game should take approximately 8 to 10 minutes to complete.
 
@@ -48,7 +48,7 @@ Do not make the interface itself confusing or deceptive.
 
 ## 2. Critical UX requirement
 
-The player is 70 years old and may not be familiar with games.
+The player is 71 years old and may not be familiar with games.
 
 At no point should Sergey think that:
 - he broke the game;
@@ -88,7 +88,7 @@ The humour should happen after a clear action, never instead of a clear action.
 The game should be funny, warm, intelligent and personal.
 
 Avoid generic birthday-card humour such as:
-- "Level 70 unlocked"
+- "Level 71 unlocked"
 - "Old but gold"
 - jokes about being ancient
 - jokes about poor memory
@@ -195,7 +195,7 @@ Button:
 
 Then show a mock archive report:
 
-"Обнаружено: 70 лет материалов"
+"Обнаружено: 71 год материалов"
 "Фотографии: имеются"
 "Свидетельства родственников: имеются"
 "Противоречия в свидетельствах: имеются"
@@ -792,7 +792,7 @@ Show a short sincere birthday message, easily editable in a data/config file.
 
 Placeholder:
 
-"Папа, с 70-летием."
+"Папа, с 71-летием."
 
 "Спасибо за всё, что ты создал вокруг себя: за семью, истории, поездки, музыку, походы, шахматы, поддержку и за то, что с тобой всегда есть что вспоминать."
 
@@ -1137,7 +1137,7 @@ If extra connective material is required, make it clearly fictional editorial co
 
 The finished game should feel like:
 
-"Sergey once made a magazine for his family. Seventy years later, his family has made the ultimate issue of that magazine about him."
+"Sergey once made a magazine for his family. Seventy-one years later, his family has made the ultimate issue of that magazine about him."
 
 It should begin as a funny archival investigation, grow into a portrait of his character, and end as a sincere family present.
 
