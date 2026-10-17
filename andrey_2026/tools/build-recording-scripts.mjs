@@ -29,6 +29,7 @@ for(const [speaker,profile]of Object.entries(VOICE_PROFILES)){
 }
 writeFileSync('recording-scripts/README.md',[
  '# Character recording scripts','',
+ 'Victor’s recording guide: [printable PDF](Victor-Recording-Guide.pdf) · [editable Word document](Victor-Recording-Guide.docx) · [browser version](Victor-Recording-Guide.html). Rebuild it after dialogue changes with `node tools/build-victor-guide.mjs`.', '',
  'One document per character for Please Stop Farming Me, story version 4. The scripts include main scenes, all decision branches, optional interactions, hints, and Victor’s final letter. System messages and player choice labels are not spoken. Characters with no current lines need no recording.','',
  ...Object.keys(VOICE_PROFILES).map(name=>`- [${name}](${name}.md)`),'',
  '## Replace browser voices with your recordings','',

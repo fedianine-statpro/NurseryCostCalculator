@@ -1,7 +1,7 @@
 import {CONFIG} from './config.js';
 import {MAP_WIDTH,MAP_HEIGHT,discoveryIds,questTarget} from './map-data.js';
 export const STORY_VERSION=4;
-export const defaultSettings=()=>({audioDefaultsVersion:1,muted:false,music:.24,effects:.5,voiceVolume:1,voiceChoices:{},largeText:false,voices:true,reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false});
+export const defaultSettings=()=>({audioDefaultsVersion:2,muted:false,music:.24,effects:.5,voiceVolume:1,voiceChoices:{},largeText:false,voices:false,reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false});
 export const SCENE_IDS=['bounty','raid','camera','alex','anya','alisa','arisha','capture','claim','reunion','meditation','football','after_party'];
 export function stageOf(s){return !s.bountyStarted?0:s.cameraOwned&&!s.alexTalked?2:!s.raidJoined||!s.cameraOwned?1:!s.anyaTalked?3:!s.alisaTalked||!s.arishaTalked?4:!s.photoTaken?5:!s.hatClaimed?6:!s.reunionDone?7:!s.letterRead?8:9;}
 export function freshState(settings=defaultSettings(),handle='freakybat'){return {saveVersion:CONFIG.saveVersion,storyVersion:STORY_VERSION,handle,started:false,stage:0,playerPosition:{x:9,z:13},facing:Math.PI,bountyStarted:false,raidJoined:false,cameraOwned:false,coverStory:null,alexTalked:false,anyaTalked:false,alisaTalked:false,arishaTalked:false,photoTaken:false,witnessRecorded:false,hatClaimed:false,hatEquipped:false,reunionDone:false,letterRead:false,seenOptional:[],discoveries:[],choices:{},activeScene:null,settings:{...defaultSettings(),...settings}};}
@@ -40,7 +40,7 @@ export function journalSteps(s){
  return steps;
 }
 export function objective(s){if(s.reunionDone)return s.letterRead?'Quest complete. Happy birthday, Freakybat.':'Victor has a birthday message for you.';const target=questTarget(s);return journalSteps(s).find(row=>!row.done&&row.target===target)?.text??'Explore the village.';}
-function settingsOf(data){const s={...defaultSettings(),...data};if(data?.audioDefaultsVersion!==1){s.muted=false;s.voices=true;}s.audioDefaultsVersion=1;for(const k of ['muted','largeText','reducedMotion','voices'])s[k]=!!s[k];for(const k of ['music','effects','voiceVolume'])s[k]=Math.max(0,Math.min(1,Number(s[k])||0));s.voiceChoices=s.voiceChoices&&typeof s.voiceChoices==='object'&&!Array.isArray(s.voiceChoices)?Object.fromEntries(Object.entries(s.voiceChoices).filter(([name,id])=>(Object.hasOwn(CONFIG.appearances,name)||['Robot','Narrator'].includes(name))&&typeof id==='string'&&id.length<300)):{};return s;}
+function settingsOf(data){const s={...defaultSettings(),...data};if(data?.audioDefaultsVersion!==2){if(!data?.audioDefaultsVersion)s.muted=false;s.voices=false;}s.audioDefaultsVersion=2;for(const k of ['muted','largeText','reducedMotion','voices'])s[k]=!!s[k];for(const k of ['music','effects','voiceVolume'])s[k]=Math.max(0,Math.min(1,Number(s[k])||0));s.voiceChoices=s.voiceChoices&&typeof s.voiceChoices==='object'&&!Array.isArray(s.voiceChoices)?Object.fromEntries(Object.entries(s.voiceChoices).filter(([name,id])=>(Object.hasOwn(CONFIG.appearances,name)||['Robot','Narrator'].includes(name))&&typeof id==='string'&&id.length<300)):{};return s;}
 export function validateSave(data){
  if(!data||typeof data!=='object'||Array.isArray(data))return null;
  if(data.storyVersion!==STORY_VERSION||data.saveVersion!==CONFIG.saveVersion){
@@ -61,4 +61,5 @@ export function validateSave(data){
 }
 export function loadSave(storage){try{return validateSave(JSON.parse((storage??globalThis.localStorage).getItem(CONFIG.saveKey)));}catch{return null;}}
 export function saveGame(s,storage){try{(storage??globalThis.localStorage).setItem(CONFIG.saveKey,JSON.stringify(s));return true;}catch{return false;}}
+
 

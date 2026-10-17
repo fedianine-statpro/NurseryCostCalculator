@@ -7,11 +7,12 @@ import {sceneSteps,sceneDefinition} from '../js/quest.js';
 import {DECISIONS,SCRIPT} from '../js/script.js';
 import {findPath,approachPath} from '../js/path.js';
 import {through,prepared,route} from './helpers.js';
-test('sound and voices start enabled, old defaults upgrade once, and later preferences persist',()=>{
- const fresh=freshState();assert.equal(fresh.settings.muted,false);assert.equal(fresh.settings.voices,true);
- const legacy=structuredClone(fresh);delete legacy.settings.audioDefaultsVersion;legacy.settings.muted=true;legacy.settings.voices=false;legacy.settings.music=.1;
- const upgraded=validateSave(legacy);assert.equal(upgraded.settings.muted,false);assert.equal(upgraded.settings.voices,true);assert.equal(upgraded.settings.music,.1);
- upgraded.settings.muted=true;upgraded.settings.voices=false;const loaded=validateSave(JSON.parse(JSON.stringify(upgraded)));assert.equal(loaded.settings.muted,true);assert.equal(loaded.settings.voices,false);
+test('sound starts enabled and voices disabled; upgrade once and remember later preferences',()=>{
+ const fresh=freshState();assert.equal(fresh.settings.muted,false);assert.equal(fresh.settings.voices,false);
+ const legacy=structuredClone(fresh);delete legacy.settings.audioDefaultsVersion;legacy.settings.muted=true;legacy.settings.voices=true;legacy.settings.music=.1;
+ const upgraded=validateSave(legacy);assert.equal(upgraded.settings.muted,false);assert.equal(upgraded.settings.voices,false);assert.equal(upgraded.settings.music,.1);
+ const previous=structuredClone(fresh);previous.settings.audioDefaultsVersion=1;previous.settings.muted=true;previous.settings.voices=true;const migrated=validateSave(previous);assert.equal(migrated.settings.muted,true);assert.equal(migrated.settings.voices,false);
+ upgraded.settings.muted=true;upgraded.settings.voices=true;const loaded=validateSave(JSON.parse(JSON.stringify(upgraded)));assert.equal(loaded.settings.muted,true);assert.equal(loaded.settings.voices,true);
 });
 
 test('both preparation orders and both daughter orders reach one complete family ending',()=>{

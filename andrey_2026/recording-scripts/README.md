@@ -1,5 +1,7 @@
 # Character recording scripts
 
+Victor’s recording guide: [printable PDF](Victor-Recording-Guide.pdf) · [editable Word document](Victor-Recording-Guide.docx) · [browser version](Victor-Recording-Guide.html). It includes cues, delivery notes, all 13 clips, and a recording checklist.
+
 One document per character for Please Stop Farming Me, story version 4. The scripts include main scenes, all decision branches, optional interactions, hints, and Victor’s final letter. System messages and player choice labels are not spoken. Characters with no current lines need no recording.
 
 - [Narrator](Narrator.md)

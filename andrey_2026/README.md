@@ -22,7 +22,7 @@ Click or tap the ground to walk, or a character to speak. During a conversation,
 
 The map provides directions and a destination list with districts and approximate distances. The journal separately checks off registration, the camera, Alex's rehearsal, and each family conversation. Inventory keeps the camera, photographic evidence with testimony, and the partyhat. The hat is granted at the bank and equipped by Alisa at the shore.
 
-On phones, the world uses the full width and panels open as drawers. Controls move to the right in landscape. Settings include larger text, reduced motion, sound, and per-character browser voices. Sound and voices default to on and start after the welcome screen's login click. Existing saves receive those defaults once; subsequent mute and voice preferences persist.
+On phones, the world uses the full width and panels open as drawers. Controls move to the right in landscape. Settings include larger text, reduced motion, sound, and per-character browser voices. Music and effects default to on and start after the welcome screen's login click. Character voices default to off; enable them in Settings. Existing saves receive those defaults once; subsequent mute and voice preferences persist.
 
 The continuous 64×64 map now spreads the required story across the bank square, Centerpoint market, Danya's south-village home, the park entrance, and the family shore. Gardens, cottages, woodland, a bridge, island watchtower, boats, standing stones, flowers, reeds, and eight optional discoveries fill out the routes. Benches are quiet; no ambient narrator interrupts the story.
 
@@ -62,5 +62,6 @@ The browser suite exercises all 24 branches across three complete routes, all th
 The timing tool uses real-time movement, an explicit 180-word-per-minute reading assumption, and fixed decision/photograph/letter delays. Its result is a scripted runtime measurement, not a first-time human playtest. Phone emulation does not establish performance or ergonomics on real hardware. Comic delivery and final visual quality still benefit from ordinary player feedback.
 
 The measured v4 route took **11 minutes 1 second**. [Implementation and verification report](IMPLEMENTATION-v4.md) records the changes, checks, timing assumptions, and remaining practical limits.
+
 
 

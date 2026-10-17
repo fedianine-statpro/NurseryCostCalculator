@@ -70,6 +70,7 @@ The game remains fully static for GitHub Pages. No backend, external runtime lib
 
 ## Dialogue input and audio update
 
-Sound and browser voices now default to on, starting from the login interaction. An audio-defaults version updates existing saves once and preserves later mute/voice choices. Click or tap anywhere in the game, or use Space/Enter, to advance a normal dialogue line. Reply choices remain explicit. Next buttons and conversation counters have been removed. Camera gestures, controls and modal dialogs are protected from accidental advancement. `node tools/dialogue-input-check.mjs` exercises real mouse, touch and keyboard input, saved audio preferences and choice/modal protection.
+Music and effects default to on, starting from the login interaction. Character voices default to off and can be enabled in Settings. An audio-defaults version updates existing saves once and preserves later mute/voice choices. Click or tap anywhere in the game, or use Space/Enter, to advance a normal dialogue line. Reply choices remain explicit. Next buttons and conversation counters have been removed. Camera gestures, controls and modal dialogs are protected from accidental advancement. `node tools/dialogue-input-check.mjs` exercises real mouse, touch and keyboard input, saved audio preferences and choice/modal protection.
+
 
 
