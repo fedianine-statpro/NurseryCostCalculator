@@ -1,0 +1,3656 @@
+[
+  {
+    "id": "banker-bc91d1ba",
+    "speaker": "Banker",
+    "text": "One partyhat for whoever catches Freakybat.",
+    "contexts": [
+      "SCRIPT.bounty_intro.1"
+    ],
+    "file": "assets/voices/banker/banker-bc91d1ba.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-19a1b501",
+    "speaker": "Andrey",
+    "text": "That's me.",
+    "contexts": [
+      "SCRIPT.bounty_intro.2"
+    ],
+    "file": "assets/voices/andrey/andrey-19a1b501.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-ccabee83",
+    "speaker": "Banker",
+    "text": "The hunter or the giant?",
+    "contexts": [
+      "SCRIPT.bounty_intro.3"
+    ],
+    "file": "assets/voices/banker/banker-ccabee83.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-7cd8ddb0",
+    "speaker": "Andrey",
+    "text": "Whichever gets the hat.",
+    "contexts": [
+      "SCRIPT.bounty_intro.4"
+    ],
+    "file": "assets/voices/andrey/andrey-7cd8ddb0.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-9ee94f32",
+    "speaker": "Victor",
+    "text": "It was supposed to be a birthday announcement.",
+    "contexts": [
+      "SCRIPT.bounty_intro.5"
+    ],
+    "file": "assets/voices/victor/victor-9ee94f32.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8daab28c",
+    "speaker": "Andrey",
+    "text": "Read it to me.",
+    "contexts": [
+      "SCRIPT.bounty_intro.6"
+    ],
+    "file": "assets/voices/andrey/andrey-8daab28c.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-60fb8772",
+    "speaker": "Victor",
+    "text": "\"Freakybat. 195. Partyhat. Come and get him.\"",
+    "contexts": [
+      "SCRIPT.bounty_intro.7"
+    ],
+    "file": "assets/voices/victor/victor-60fb8772.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-23cb7190",
+    "speaker": "Andrey",
+    "text": "Did \"happy birthday\" cost extra?",
+    "contexts": [
+      "SCRIPT.bounty_intro.8"
+    ],
+    "file": "assets/voices/andrey/andrey-23cb7190.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-34ebaac4",
+    "speaker": "Victor",
+    "text": "I thought \"partyhat\" covered it.",
+    "contexts": [
+      "SCRIPT.bounty_intro.9"
+    ],
+    "file": "assets/voices/victor/victor-34ebaac4.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-b55d2ada",
+    "speaker": "Banker",
+    "text": "We assumed it was a rare drop.",
+    "contexts": [
+      "SCRIPT.bounty_intro.10"
+    ],
+    "file": "assets/voices/banker/banker-b55d2ada.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-95ab7513",
+    "speaker": "Andrey",
+    "text": "And 195 is my height.",
+    "contexts": [
+      "SCRIPT.bounty_intro.11"
+    ],
+    "file": "assets/voices/andrey/andrey-95ab7513.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-414efa3a",
+    "speaker": "Banker",
+    "text": "Several people have already brought swords.",
+    "contexts": [
+      "SCRIPT.bounty_intro.12"
+    ],
+    "file": "assets/voices/banker/banker-414efa3a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-b1bdaec8",
+    "speaker": "Andrey",
+    "text": "For a hat?",
+    "contexts": [
+      "SCRIPT.bounty_intro.13"
+    ],
+    "file": "assets/voices/andrey/andrey-b1bdaec8.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-230227c3",
+    "speaker": "Banker",
+    "text": "A discontinued hat.",
+    "contexts": [
+      "SCRIPT.bounty_intro.14"
+    ],
+    "file": "assets/voices/banker/banker-230227c3.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-44605c1b",
+    "speaker": "Andrey",
+    "text": "Fine. I'll claim it myself.",
+    "contexts": [
+      "SCRIPT.bounty_intro.15"
+    ],
+    "file": "assets/voices/andrey/andrey-44605c1b.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-518e8fbc",
+    "speaker": "Banker",
+    "text": "You can't collect your own bounty.",
+    "contexts": [
+      "SCRIPT.bounty_intro.16"
+    ],
+    "file": "assets/voices/banker/banker-518e8fbc.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e4650cde",
+    "speaker": "Andrey",
+    "text": "Put the claim under Toldo.",
+    "contexts": [
+      "SCRIPT.bounty_plan.0"
+    ],
+    "file": "assets/voices/andrey/andrey-e4650cde.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-09470c8d",
+    "speaker": "Banker",
+    "text": "Have you hunted under that name before?",
+    "contexts": [
+      "SCRIPT.bounty_plan.1"
+    ],
+    "file": "assets/voices/banker/banker-09470c8d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-47437d15",
+    "speaker": "Andrey",
+    "text": "Yes.",
+    "contexts": [
+      "SCRIPT.bounty_plan.2"
+    ],
+    "file": "assets/voices/andrey/andrey-47437d15.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-b9d4d161",
+    "speaker": "Banker",
+    "text": "Fine. I only check names.",
+    "contexts": [
+      "SCRIPT.bounty_plan.3"
+    ],
+    "file": "assets/voices/banker/banker-b9d4d161.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-753a54b2",
+    "speaker": "Victor",
+    "text": "But you've just watched him...",
+    "contexts": [
+      "SCRIPT.bounty_plan.4"
+    ],
+    "file": "assets/voices/victor/victor-753a54b2.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-24d66dc4",
+    "speaker": "Banker",
+    "text": "If I checked everything I watched, we'd never close.",
+    "contexts": [
+      "SCRIPT.bounty_plan.5"
+    ],
+    "file": "assets/voices/banker/banker-24d66dc4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-998053ca",
+    "speaker": "Andrey",
+    "text": "What does Toldo need?",
+    "contexts": [
+      "SCRIPT.bounty_plan.6"
+    ],
+    "file": "assets/voices/andrey/andrey-998053ca.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-868e2f8b",
+    "speaker": "Banker",
+    "text": "Register with the raid leader. Then bring a photograph of Freakybat and a witness confirming the capture.",
+    "contexts": [
+      "SCRIPT.bounty_plan.7"
+    ],
+    "file": "assets/voices/banker/banker-868e2f8b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-afa08068",
+    "speaker": "Andrey",
+    "text": "And that gets me the hat?",
+    "contexts": [
+      "SCRIPT.bounty_plan.8"
+    ],
+    "file": "assets/voices/andrey/andrey-afa08068.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-063301fc",
+    "speaker": "Banker",
+    "text": "That gets Toldo the hat.",
+    "contexts": [
+      "SCRIPT.bounty_plan.9"
+    ],
+    "file": "assets/voices/banker/banker-063301fc.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5bc48216",
+    "speaker": "Andrey",
+    "text": "I'm beginning to like him.",
+    "contexts": [
+      "SCRIPT.bounty_plan.10"
+    ],
+    "file": "assets/voices/andrey/andrey-5bc48216.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-f349a497",
+    "speaker": "Keeper",
+    "text": "Name?",
+    "contexts": [
+      "SCRIPT.raid_recruit.0"
+    ],
+    "file": "assets/voices/keeper/keeper-f349a497.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-873c8f66",
+    "speaker": "Andrey",
+    "text": "Toldo.",
+    "contexts": [
+      "SCRIPT.raid_recruit.1",
+      "SCRIPT.camera_plan.4",
+      "SCRIPT.alex_rehearsal.5",
+      "SCRIPT.anya_conversation.7"
+    ],
+    "file": "assets/voices/andrey/andrey-873c8f66.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-d51feea1",
+    "speaker": "Keeper",
+    "text": "Good. We need a volunteer to catch the giant.",
+    "contexts": [
+      "SCRIPT.raid_recruit.2"
+    ],
+    "file": "assets/voices/keeper/keeper-d51feea1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-57f7d69a",
+    "speaker": "Andrey",
+    "text": "Where will you be?",
+    "contexts": [
+      "SCRIPT.raid_recruit.3"
+    ],
+    "file": "assets/voices/andrey/andrey-57f7d69a.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-a616e24a",
+    "speaker": "Keeper",
+    "text": "Here. I have important duties.",
+    "contexts": [
+      "SCRIPT.raid_recruit.4"
+    ],
+    "file": "assets/voices/keeper/keeper-a616e24a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5f6c6f9c",
+    "speaker": "Andrey",
+    "text": "Such as?",
+    "contexts": [
+      "SCRIPT.raid_recruit.5"
+    ],
+    "file": "assets/voices/andrey/andrey-5f6c6f9c.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-4b7d1357",
+    "speaker": "Keeper",
+    "text": "Recruiting the next volunteer.",
+    "contexts": [
+      "SCRIPT.raid_recruit.6"
+    ],
+    "file": "assets/voices/keeper/keeper-4b7d1357.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-fccc3081",
+    "speaker": "Keeper",
+    "text": "You're registered. Take a camera to the shore and get your evidence.",
+    "contexts": [
+      "SCRIPT.raid_done.0"
+    ],
+    "file": "assets/voices/keeper/keeper-fccc3081.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-2417f57f",
+    "speaker": "Andrey",
+    "text": "Do I get any equipment?",
+    "contexts": [
+      "SCRIPT.raid_done.1"
+    ],
+    "file": "assets/voices/andrey/andrey-2417f57f.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-91710bae",
+    "speaker": "Keeper",
+    "text": "What did you bring?",
+    "contexts": [
+      "SCRIPT.raid_done.2"
+    ],
+    "file": "assets/voices/keeper/keeper-91710bae.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-2ae62d72",
+    "speaker": "Andrey",
+    "text": "My own clothes.",
+    "contexts": [
+      "SCRIPT.raid_done.3"
+    ],
+    "file": "assets/voices/andrey/andrey-2ae62d72.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-7392e336",
+    "speaker": "Keeper",
+    "text": "Good. You're fully equipped.",
+    "contexts": [
+      "SCRIPT.raid_done.4"
+    ],
+    "file": "assets/voices/keeper/keeper-7392e336.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-3b2cdb34",
+    "speaker": "Andrey",
+    "text": "I'll return them to myself afterwards.",
+    "contexts": [
+      "SCRIPT.raid_done.5"
+    ],
+    "file": "assets/voices/andrey/andrey-3b2cdb34.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-ae9fbe52",
+    "speaker": "Keeper",
+    "text": "Danya has your camera.",
+    "contexts": [
+      "SCRIPT.camera_hint.0"
+    ],
+    "file": "assets/voices/keeper/keeper-ae9fbe52.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c3e294a0",
+    "speaker": "Andrey",
+    "text": "Hand over my camera.",
+    "contexts": [
+      "SCRIPT.camera_plan.0"
+    ],
+    "file": "assets/voices/andrey/andrey-c3e294a0.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-7e750704",
+    "speaker": "Danya",
+    "text": "You have the manners of a beggar.",
+    "contexts": [
+      "SCRIPT.camera_plan.1"
+    ],
+    "file": "assets/voices/danya/danya-7e750704.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-53759782",
+    "speaker": "Andrey",
+    "text": "I wanted to make sure you'd feel comfortable with me.",
+    "contexts": [
+      "SCRIPT.camera_plan.2"
+    ],
+    "file": "assets/voices/andrey/andrey-53759782.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-94d856c3",
+    "speaker": "Alex",
+    "text": "Definitely Andrey.",
+    "contexts": [
+      "SCRIPT.camera_plan.3"
+    ],
+    "file": "assets/voices/alex/alex-94d856c3.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-fc7019e4",
+    "speaker": "Danya",
+    "text": "Same face. Same voice. Still asking for your things back.",
+    "contexts": [
+      "SCRIPT.camera_plan.5"
+    ],
+    "file": "assets/voices/danya/danya-fc7019e4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e83f3b02",
+    "speaker": "Andrey",
+    "text": "What would convince you?",
+    "contexts": [
+      "SCRIPT.camera_plan.6"
+    ],
+    "file": "assets/voices/andrey/andrey-e83f3b02.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-3f1b31f2",
+    "speaker": "Danya",
+    "text": "Say something Andrey would never say.",
+    "contexts": [
+      "SCRIPT.camera_plan.7"
+    ],
+    "file": "assets/voices/danya/danya-3f1b31f2.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-dd030bab",
+    "speaker": "Danya",
+    "text": "Here's your camera. Anya and the girls are at the shore.",
+    "contexts": [
+      "SCRIPT.camera_done.0"
+    ],
+    "file": "assets/voices/danya/danya-dd030bab.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1c3b711a",
+    "speaker": "Andrey",
+    "text": "Will they believe I'm Toldo?",
+    "contexts": [
+      "SCRIPT.camera_done.1"
+    ],
+    "file": "assets/voices/andrey/andrey-1c3b711a.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-820d5394",
+    "speaker": "Alex",
+    "text": "Your children will probably call you Dad.",
+    "contexts": [
+      "SCRIPT.camera_done.2"
+    ],
+    "file": "assets/voices/alex/alex-820d5394.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-41a167f0",
+    "speaker": "Andrey",
+    "text": "A third identity. This is getting out of hand.",
+    "contexts": [
+      "SCRIPT.camera_done.3"
+    ],
+    "file": "assets/voices/andrey/andrey-41a167f0.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-ec94889b",
+    "speaker": "Alex",
+    "text": "Before you go, we should test your cover story.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.0"
+    ],
+    "file": "assets/voices/alex/alex-ec94889b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-3552d966",
+    "speaker": "Andrey",
+    "text": "The banker already accepted it.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.1"
+    ],
+    "file": "assets/voices/andrey/andrey-3552d966.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-57b92a1a",
+    "speaker": "Alex",
+    "text": "Yes, but you haven't tried explaining it to your wife.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.2"
+    ],
+    "file": "assets/voices/alex/alex-57b92a1a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-07a45e7d",
+    "speaker": "Andrey",
+    "text": "Fine. Ask me something.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.3"
+    ],
+    "file": "assets/voices/andrey/andrey-07a45e7d.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-8ef8b90d",
+    "speaker": "Alex",
+    "text": "Name?",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.4"
+    ],
+    "file": "assets/voices/alex/alex-8ef8b90d.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-761b546e",
+    "speaker": "Alex",
+    "text": "Do you know Freakybat?",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.6"
+    ],
+    "file": "assets/voices/alex/alex-761b546e.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c51f36e3",
+    "speaker": "Andrey",
+    "text": "Only personally.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.7"
+    ],
+    "file": "assets/voices/andrey/andrey-c51f36e3.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-32576bcb",
+    "speaker": "Alex",
+    "text": "How personally?",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.8"
+    ],
+    "file": "assets/voices/alex/alex-32576bcb.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9719dbb7",
+    "speaker": "Andrey",
+    "text": "We've never spent a night apart.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.9"
+    ],
+    "file": "assets/voices/andrey/andrey-9719dbb7.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-08c95955",
+    "speaker": "Alex",
+    "text": "Let's try \"we've met.\"",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.10"
+    ],
+    "file": "assets/voices/alex/alex-08c95955.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-e06e83d4",
+    "speaker": "Alex",
+    "text": "What will you do if somebody shouts \"Andrey\"?",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.11"
+    ],
+    "file": "assets/voices/alex/alex-e06e83d4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9609b384",
+    "speaker": "Andrey",
+    "text": "Ignore them.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.12"
+    ],
+    "file": "assets/voices/andrey/andrey-9609b384.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-341997dd",
+    "speaker": "Alex",
+    "text": "Andrey, I'm buying lunch.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.13"
+    ],
+    "file": "assets/voices/alex/alex-341997dd.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-a150fece",
+    "speaker": "Andrey",
+    "text": "Where?",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.14"
+    ],
+    "file": "assets/voices/andrey/andrey-a150fece.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-045022ef",
+    "speaker": "Alex",
+    "text": "Dead. Immediately.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.15"
+    ],
+    "file": "assets/voices/alex/alex-045022ef.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-7bb5b089",
+    "speaker": "Andrey",
+    "text": "Nobody's dying. It's a birthday party.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.16"
+    ],
+    "file": "assets/voices/andrey/andrey-7bb5b089.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-3aab76ce",
+    "speaker": "Alex",
+    "text": "You should put that on the invitation.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.17"
+    ],
+    "file": "assets/voices/alex/alex-3aab76ce.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-86b40833",
+    "speaker": "Andrey",
+    "text": "We're receiving quite a lot of feedback about the invitation.",
+    "contexts": [
+      "SCRIPT.alex_rehearsal.18"
+    ],
+    "file": "assets/voices/andrey/andrey-86b40833.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-39b41c88",
+    "speaker": "Alex",
+    "text": "You know you could just ask us for a birthday hat.",
+    "contexts": [
+      "SCRIPT.alex_done.0"
+    ],
+    "file": "assets/voices/alex/alex-39b41c88.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-d1b2fb8e",
+    "speaker": "Andrey",
+    "text": "Would you give me one?",
+    "contexts": [
+      "SCRIPT.alex_done.1"
+    ],
+    "file": "assets/voices/andrey/andrey-d1b2fb8e.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-95b45f9b",
+    "speaker": "Alex",
+    "text": "Of course.",
+    "contexts": [
+      "SCRIPT.alex_done.2"
+    ],
+    "file": "assets/voices/alex/alex-95b45f9b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c836b8a9",
+    "speaker": "Andrey",
+    "text": "Where is it?",
+    "contexts": [
+      "SCRIPT.alex_done.3"
+    ],
+    "file": "assets/voices/andrey/andrey-c836b8a9.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-d0696165",
+    "speaker": "Alex",
+    "text": "In the bank. There's a procedure.",
+    "contexts": [
+      "SCRIPT.alex_done.4"
+    ],
+    "file": "assets/voices/alex/alex-d0696165.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-a04190a8",
+    "speaker": "Andrey",
+    "text": "I need better friends.",
+    "contexts": [
+      "SCRIPT.alex_done.5"
+    ],
+    "file": "assets/voices/andrey/andrey-a04190a8.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-67a02fd5",
+    "speaker": "Alex",
+    "text": "Too late. We know all your stories.",
+    "contexts": [
+      "SCRIPT.alex_done.6"
+    ],
+    "file": "assets/voices/alex/alex-67a02fd5.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-0df9a886",
+    "speaker": "Anya",
+    "text": "There you are. How's your birthday going?",
+    "contexts": [
+      "SCRIPT.anya_conversation.0"
+    ],
+    "file": "assets/voices/anya/anya-0df9a886.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-340b2b7c",
+    "speaker": "Andrey",
+    "text": "I'm wanted, apparently.",
+    "contexts": [
+      "SCRIPT.anya_conversation.1"
+    ],
+    "file": "assets/voices/andrey/andrey-340b2b7c.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-4825bba1",
+    "speaker": "Anya",
+    "text": "I could have told you that without putting up posters.",
+    "contexts": [
+      "SCRIPT.anya_conversation.2"
+    ],
+    "file": "assets/voices/anya/anya-4825bba1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-f22e6cfd",
+    "speaker": "Andrey",
+    "text": "The banker won't give me my hat unless I catch myself.",
+    "contexts": [
+      "SCRIPT.anya_conversation.3"
+    ],
+    "file": "assets/voices/andrey/andrey-f22e6cfd.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-b0a9965f",
+    "speaker": "Anya",
+    "text": "And you agreed?",
+    "contexts": [
+      "SCRIPT.anya_conversation.4"
+    ],
+    "file": "assets/voices/anya/anya-b0a9965f.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-0eed941c",
+    "speaker": "Andrey",
+    "text": "I found a loophole.",
+    "contexts": [
+      "SCRIPT.anya_conversation.5"
+    ],
+    "file": "assets/voices/andrey/andrey-0eed941c.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-160726ad",
+    "speaker": "Anya",
+    "text": "Of course you did. What's your name now?",
+    "contexts": [
+      "SCRIPT.anya_conversation.6"
+    ],
+    "file": "assets/voices/anya/anya-160726ad.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-e517ee12",
+    "speaker": "Anya",
+    "text": "Hello, Toldo. Are you married?",
+    "contexts": [
+      "SCRIPT.anya_conversation.8"
+    ],
+    "file": "assets/voices/anya/anya-e517ee12.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-61211174",
+    "speaker": "Andrey",
+    "text": "Very.",
+    "contexts": [
+      "SCRIPT.anya_conversation.9"
+    ],
+    "file": "assets/voices/andrey/andrey-61211174.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-62a6d902",
+    "speaker": "Anya",
+    "text": "Shame. I was going to invite you to my husband's birthday.",
+    "contexts": [
+      "SCRIPT.anya_conversation.10"
+    ],
+    "file": "assets/voices/anya/anya-62a6d902.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-3c62f1fb",
+    "speaker": "Andrey",
+    "text": "I hear there's trouble with the invitations.",
+    "contexts": [
+      "SCRIPT.anya_conversation.11"
+    ],
+    "file": "assets/voices/andrey/andrey-3c62f1fb.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-c51a8ed4",
+    "speaker": "Anya",
+    "text": "What exactly did the banker ask for?",
+    "contexts": [
+      "SCRIPT.anya_conversation.12"
+    ],
+    "file": "assets/voices/anya/anya-c51a8ed4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-09cba211",
+    "speaker": "Andrey",
+    "text": "A photograph of Freakybat and a witness confirming the capture.",
+    "contexts": [
+      "SCRIPT.anya_conversation.13"
+    ],
+    "file": "assets/voices/andrey/andrey-09cba211.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-23693363",
+    "speaker": "Anya",
+    "text": "So we capture you on camera.",
+    "contexts": [
+      "SCRIPT.anya_conversation.14"
+    ],
+    "file": "assets/voices/anya/anya-23693363.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6f98636d",
+    "speaker": "Andrey",
+    "text": "That's what I was thinking.",
+    "contexts": [
+      "SCRIPT.anya_conversation.15"
+    ],
+    "file": "assets/voices/andrey/andrey-6f98636d.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-fd9376f3",
+    "speaker": "Anya",
+    "text": "Then why are you still standing outside the photograph?",
+    "contexts": [
+      "SCRIPT.anya_conversation.16"
+    ],
+    "file": "assets/voices/anya/anya-fd9376f3.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-21ccd84d",
+    "speaker": "Andrey",
+    "text": "I was enjoying being wanted.",
+    "contexts": [
+      "SCRIPT.anya_conversation.17"
+    ],
+    "file": "assets/voices/andrey/andrey-21ccd84d.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-d723fb3b",
+    "speaker": "Anya",
+    "text": "Go and speak to the girls. They've heard about the bounty.",
+    "contexts": [
+      "SCRIPT.anya_done.0"
+    ],
+    "file": "assets/voices/anya/anya-d723fb3b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-b6e2669b",
+    "speaker": "Andrey",
+    "text": "Are they worried?",
+    "contexts": [
+      "SCRIPT.anya_done.1"
+    ],
+    "file": "assets/voices/andrey/andrey-b6e2669b.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-10e399f5",
+    "speaker": "Anya",
+    "text": "They have questions.",
+    "contexts": [
+      "SCRIPT.anya_done.2"
+    ],
+    "file": "assets/voices/anya/anya-10e399f5.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-3763b0f1",
+    "speaker": "Andrey",
+    "text": "That sounds worse.",
+    "contexts": [
+      "SCRIPT.anya_done.3"
+    ],
+    "file": "assets/voices/andrey/andrey-3763b0f1.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-6f63bbee",
+    "speaker": "Anya",
+    "text": "They're your children.",
+    "contexts": [
+      "SCRIPT.anya_done.4"
+    ],
+    "file": "assets/voices/anya/anya-6f63bbee.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-c3aac0e0",
+    "speaker": "Alisa",
+    "text": "Dad, I found you.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.0"
+    ],
+    "file": "assets/voices/alisa/alisa-c3aac0e0.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1e662a58",
+    "speaker": "Andrey",
+    "text": "Well done.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.1"
+    ],
+    "file": "assets/voices/andrey/andrey-1e662a58.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-26b00996",
+    "speaker": "Alisa",
+    "text": "Where's my hat?",
+    "contexts": [
+      "SCRIPT.alisa_conversation.2"
+    ],
+    "file": "assets/voices/alisa/alisa-26b00996.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-bade7d52",
+    "speaker": "Andrey",
+    "text": "What hat?",
+    "contexts": [
+      "SCRIPT.alisa_conversation.3"
+    ],
+    "file": "assets/voices/andrey/andrey-bade7d52.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-d2be9b83",
+    "speaker": "Alisa",
+    "text": "The poster says whoever finds you gets a hat.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.4"
+    ],
+    "file": "assets/voices/alisa/alisa-d2be9b83.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6875518d",
+    "speaker": "Andrey",
+    "text": "Catches me.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.5"
+    ],
+    "file": "assets/voices/andrey/andrey-6875518d.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-95228efb",
+    "speaker": "Alisa",
+    "text": "All right. Don't move.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.6"
+    ],
+    "file": "assets/voices/alisa/alisa-95228efb.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-d623bdd8",
+    "speaker": "Andrey",
+    "text": "I'm already catching myself.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.7"
+    ],
+    "file": "assets/voices/andrey/andrey-d623bdd8.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-cc56322a",
+    "speaker": "Alisa",
+    "text": "You can't win your own game.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.8"
+    ],
+    "file": "assets/voices/alisa/alisa-cc56322a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-811bc992",
+    "speaker": "Andrey",
+    "text": "That's what the banker said.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.9"
+    ],
+    "file": "assets/voices/andrey/andrey-811bc992.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-3e5d11c1",
+    "speaker": "Alisa",
+    "text": "He sounds sensible.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.10"
+    ],
+    "file": "assets/voices/alisa/alisa-3e5d11c1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-d11866d3",
+    "speaker": "Andrey",
+    "text": "Please don't join his team.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.11"
+    ],
+    "file": "assets/voices/andrey/andrey-d11866d3.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-ef000117",
+    "speaker": "Alisa",
+    "text": "If I help, can I wear the hat?",
+    "contexts": [
+      "SCRIPT.alisa_conversation.12"
+    ],
+    "file": "assets/voices/alisa/alisa-ef000117.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-97058fc6",
+    "speaker": "Andrey",
+    "text": "Sometimes.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.13"
+    ],
+    "file": "assets/voices/andrey/andrey-97058fc6.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-7cbafe4a",
+    "speaker": "Alisa",
+    "text": "First?",
+    "contexts": [
+      "SCRIPT.alisa_conversation.14"
+    ],
+    "file": "assets/voices/alisa/alisa-7cbafe4a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-55fc7810",
+    "speaker": "Andrey",
+    "text": "It's my birthday.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.15"
+    ],
+    "file": "assets/voices/andrey/andrey-55fc7810.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-98c0873a",
+    "speaker": "Alisa",
+    "text": "You can wear it next birthday.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.16"
+    ],
+    "file": "assets/voices/alisa/alisa-98c0873a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5cb9eed7",
+    "speaker": "Andrey",
+    "text": "That's not \"sometimes.\" That's an appointment.",
+    "contexts": [
+      "SCRIPT.alisa_conversation.17"
+    ],
+    "file": "assets/voices/andrey/andrey-5cb9eed7.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-12bcdee6",
+    "speaker": "Alisa",
+    "text": "You can wear it first.",
+    "contexts": [
+      "SCRIPT.alisa_done.0"
+    ],
+    "file": "assets/voices/alisa/alisa-12bcdee6.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-cc30446d",
+    "speaker": "Andrey",
+    "text": "Thank you.",
+    "contexts": [
+      "SCRIPT.alisa_done.1"
+    ],
+    "file": "assets/voices/andrey/andrey-cc30446d.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-cd2cfc7b",
+    "speaker": "Alisa",
+    "text": "But I'm putting it on you.",
+    "contexts": [
+      "SCRIPT.alisa_done.2"
+    ],
+    "file": "assets/voices/alisa/alisa-cd2cfc7b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-b4194ede",
+    "speaker": "Andrey",
+    "text": "Deal.",
+    "contexts": [
+      "SCRIPT.alisa_done.3"
+    ],
+    "file": "assets/voices/andrey/andrey-b4194ede.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-cd339b73",
+    "speaker": "Alisa",
+    "text": "You'll have to bend down. A lot.",
+    "contexts": [
+      "SCRIPT.alisa_done.4"
+    ],
+    "file": "assets/voices/alisa/alisa-cd339b73.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-d23446db",
+    "speaker": "Andrey",
+    "text": "Finally. Someone read 195 correctly.",
+    "contexts": [
+      "SCRIPT.alisa_done.5"
+    ],
+    "file": "assets/voices/andrey/andrey-d23446db.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-0dee57bd",
+    "speaker": "Arisha",
+    "text": "Dad. You're caught.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.0"
+    ],
+    "file": "assets/voices/arisha/arisha-0dee57bd.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-b5d8973d",
+    "speaker": "Andrey",
+    "text": "How?",
+    "contexts": [
+      "SCRIPT.arisha_conversation.1"
+    ],
+    "file": "assets/voices/andrey/andrey-b5d8973d.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-d7095eb9",
+    "speaker": "Arisha",
+    "text": "I'm holding your hand.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.2"
+    ],
+    "file": "assets/voices/arisha/arisha-d7095eb9.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9f38370b",
+    "speaker": "Andrey",
+    "text": "I could escape.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.3"
+    ],
+    "file": "assets/voices/andrey/andrey-9f38370b.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-297403c5",
+    "speaker": "Arisha",
+    "text": "Go on, then.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.4"
+    ],
+    "file": "assets/voices/arisha/arisha-297403c5.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-77e41c57",
+    "speaker": "Arisha",
+    "text": "See?",
+    "contexts": [
+      "SCRIPT.arisha_conversation.6"
+    ],
+    "file": "assets/voices/arisha/arisha-77e41c57.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6aded95c",
+    "speaker": "Andrey",
+    "text": "Very effective trap.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.7"
+    ],
+    "file": "assets/voices/andrey/andrey-6aded95c.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-939a4604",
+    "speaker": "Arisha",
+    "text": "Thank you.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.8"
+    ],
+    "file": "assets/voices/arisha/arisha-939a4604.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c8dc7698",
+    "speaker": "Andrey",
+    "text": "What happens to prisoners?",
+    "contexts": [
+      "SCRIPT.arisha_conversation.9"
+    ],
+    "file": "assets/voices/andrey/andrey-c8dc7698.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-afd242f2",
+    "speaker": "Arisha",
+    "text": "They stay here.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.10"
+    ],
+    "file": "assets/voices/arisha/arisha-afd242f2.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ea5bf521",
+    "speaker": "Andrey",
+    "text": "Any food?",
+    "contexts": [
+      "SCRIPT.arisha_conversation.11"
+    ],
+    "file": "assets/voices/andrey/andrey-ea5bf521.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-87190800",
+    "speaker": "Arisha",
+    "text": "Birthday cake.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.12"
+    ],
+    "file": "assets/voices/arisha/arisha-87190800.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5c6231fd",
+    "speaker": "Andrey",
+    "text": "I withdraw my escape attempt.",
+    "contexts": [
+      "SCRIPT.arisha_conversation.13"
+    ],
+    "file": "assets/voices/andrey/andrey-5c6231fd.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-055770aa",
+    "speaker": "Andrey",
+    "text": "I do need to go and get the hat.",
+    "contexts": [
+      "SCRIPT.arisha_done.0"
+    ],
+    "file": "assets/voices/andrey/andrey-055770aa.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-70c1ffcb",
+    "speaker": "Arisha",
+    "text": "Then come back.",
+    "contexts": [
+      "SCRIPT.arisha_done.1"
+    ],
+    "file": "assets/voices/arisha/arisha-70c1ffcb.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ff91401f",
+    "speaker": "Andrey",
+    "text": "Straight back.",
+    "contexts": [
+      "SCRIPT.arisha_done.2"
+    ],
+    "file": "assets/voices/andrey/andrey-ff91401f.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-1c357b09",
+    "speaker": "Arisha",
+    "text": "Promise?",
+    "contexts": [
+      "SCRIPT.arisha_done.3"
+    ],
+    "file": "assets/voices/arisha/arisha-1c357b09.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9bf35a83",
+    "speaker": "Andrey",
+    "text": "Promise.",
+    "contexts": [
+      "SCRIPT.arisha_done.4"
+    ],
+    "file": "assets/voices/andrey/andrey-9bf35a83.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-28bc935f",
+    "speaker": "Arisha",
+    "text": "All right. You can have your hand.",
+    "contexts": [
+      "SCRIPT.arisha_done.5"
+    ],
+    "file": "assets/voices/arisha/arisha-28bc935f.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-f8e8786d",
+    "speaker": "Banker",
+    "text": "Toldo. Did you catch Freakybat?",
+    "contexts": [
+      "SCRIPT.bounty_claim.0"
+    ],
+    "file": "assets/voices/banker/banker-f8e8786d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-fb6efd6c",
+    "speaker": "Andrey",
+    "text": "On camera. Here's the photograph and witness statement.",
+    "contexts": [
+      "SCRIPT.bounty_claim.1"
+    ],
+    "file": "assets/voices/andrey/andrey-fb6efd6c.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-f89f5f5b",
+    "speaker": "Banker",
+    "text": "This is a family photograph.",
+    "contexts": [
+      "SCRIPT.bounty_claim.2"
+    ],
+    "file": "assets/voices/banker/banker-f89f5f5b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8a25d878",
+    "speaker": "Andrey",
+    "text": "Yes. We caught several people. I'm only claiming for the tall one.",
+    "contexts": [
+      "SCRIPT.bounty_claim.3"
+    ],
+    "file": "assets/voices/andrey/andrey-8a25d878.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-4b0c61af",
+    "speaker": "Banker",
+    "text": "I meant captured. Unable to leave.",
+    "contexts": [
+      "SCRIPT.bounty_claim.4"
+    ],
+    "file": "assets/voices/banker/banker-4b0c61af.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-a538ef9b",
+    "speaker": "Andrey",
+    "text": "Check the photograph.",
+    "contexts": [
+      "SCRIPT.bounty_claim.5"
+    ],
+    "file": "assets/voices/andrey/andrey-a538ef9b.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-cd3341a7",
+    "speaker": "Banker",
+    "text": "What?",
+    "contexts": [
+      "SCRIPT.bounty_claim.6"
+    ],
+    "file": "assets/voices/banker/banker-cd3341a7.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-35518614",
+    "speaker": "Andrey",
+    "text": "Is he still in it?",
+    "contexts": [
+      "SCRIPT.bounty_claim.7"
+    ],
+    "file": "assets/voices/andrey/andrey-35518614.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-e15259af",
+    "speaker": "Banker",
+    "text": "Yes.",
+    "contexts": [
+      "SCRIPT.bounty_claim.8"
+    ],
+    "file": "assets/voices/banker/banker-e15259af.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-f2cae0af",
+    "speaker": "Andrey",
+    "text": "Excellent camera.",
+    "contexts": [
+      "SCRIPT.bounty_claim.9"
+    ],
+    "file": "assets/voices/andrey/andrey-f2cae0af.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-6cf18bc6",
+    "speaker": "Banker",
+    "text": "The hunter and the target are the same person.",
+    "contexts": [
+      "SCRIPT.bounty_claim.10"
+    ],
+    "file": "assets/voices/banker/banker-6cf18bc6.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-2a0be971",
+    "speaker": "Andrey",
+    "text": "Different names. You checked.",
+    "contexts": [
+      "SCRIPT.bounty_claim.11"
+    ],
+    "file": "assets/voices/andrey/andrey-2a0be971.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-cb9a4156",
+    "speaker": "Banker",
+    "text": "That isn't what I intended.",
+    "contexts": [
+      "SCRIPT.bounty_claim.12"
+    ],
+    "file": "assets/voices/banker/banker-cb9a4156.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-0fac9dbd",
+    "speaker": "Andrey",
+    "text": "Neither was the birthday announcement. Yet here we are.",
+    "contexts": [
+      "SCRIPT.bounty_claim.13"
+    ],
+    "file": "assets/voices/andrey/andrey-0fac9dbd.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-818d4a79",
+    "speaker": "Banker",
+    "text": "I'll have to change the rules.",
+    "contexts": [
+      "SCRIPT.bounty_claim.14"
+    ],
+    "file": "assets/voices/banker/banker-818d4a79.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-80ceaf09",
+    "speaker": "Andrey",
+    "text": "For the next birthday. Hat, please.",
+    "contexts": [
+      "SCRIPT.bounty_claim.15"
+    ],
+    "file": "assets/voices/andrey/andrey-80ceaf09.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-6a8ce094",
+    "speaker": "Banker",
+    "text": "Before you go, could you do me one small favour?",
+    "contexts": [
+      "SCRIPT.bounty_claim.16"
+    ],
+    "file": "assets/voices/banker/banker-6a8ce094.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-27536191",
+    "speaker": "Banker",
+    "text": "Take the hat.",
+    "contexts": [
+      "SCRIPT.claim_done.0"
+    ],
+    "file": "assets/voices/banker/banker-27536191.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-1a63b25e",
+    "speaker": "Anya",
+    "text": "Right. We've found him, caught him, and negotiated custody of the hat. Photograph?",
+    "contexts": [
+      "SCRIPT.family_capture.0"
+    ],
+    "file": "assets/voices/anya/anya-1a63b25e.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-34873266",
+    "speaker": "Andrey",
+    "text": "This is a surprisingly organised bounty hunt.",
+    "contexts": [
+      "SCRIPT.family_capture.1"
+    ],
+    "file": "assets/voices/andrey/andrey-34873266.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-4c820899",
+    "speaker": "Alisa",
+    "text": "I'm in charge.",
+    "contexts": [
+      "SCRIPT.family_capture.2"
+    ],
+    "file": "assets/voices/alisa/alisa-4c820899.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5d8ee5ea",
+    "speaker": "Andrey",
+    "text": "You haven't got the hat yet.",
+    "contexts": [
+      "SCRIPT.family_capture.3"
+    ],
+    "file": "assets/voices/andrey/andrey-5d8ee5ea.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-4e0c5c88",
+    "speaker": "Alisa",
+    "text": "I'm practising.",
+    "contexts": [
+      "SCRIPT.family_capture.4"
+    ],
+    "file": "assets/voices/alisa/alisa-4e0c5c88.mp3",
+    "silent": false
+  },
+  {
+    "id": "robot-9fe9cf63",
+    "speaker": "Robot",
+    "text": "Please identify the target.",
+    "contexts": [
+      "SCRIPT.family_capture.5"
+    ],
+    "file": "assets/voices/robot/robot-9fe9cf63.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-8760c778",
+    "speaker": "Alisa",
+    "text": "Dad.",
+    "contexts": [
+      "SCRIPT.family_capture.6"
+    ],
+    "file": "assets/voices/alisa/alisa-8760c778.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-eee7dc7f",
+    "speaker": "Andrey",
+    "text": "Freakybat.",
+    "contexts": [
+      "SCRIPT.family_capture.7"
+    ],
+    "file": "assets/voices/andrey/andrey-eee7dc7f.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-93cef36b",
+    "speaker": "Anya",
+    "text": "Andrey.",
+    "contexts": [
+      "SCRIPT.family_capture.8"
+    ],
+    "file": "assets/voices/anya/anya-93cef36b.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-9276e61b",
+    "speaker": "Arisha",
+    "text": "He's that one.",
+    "contexts": [
+      "SCRIPT.family_capture.9"
+    ],
+    "file": "assets/voices/arisha/arisha-9276e61b.mp3",
+    "silent": false
+  },
+  {
+    "id": "robot-f1e615a0",
+    "speaker": "Robot",
+    "text": "Thank you. One useful answer.",
+    "contexts": [
+      "SCRIPT.family_capture.10"
+    ],
+    "file": "assets/voices/robot/robot-f1e615a0.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9b6021a7",
+    "speaker": "Andrey",
+    "text": "Everyone look at the camera.",
+    "contexts": [
+      "SCRIPT.family_capture.11"
+    ],
+    "file": "assets/voices/andrey/andrey-9b6021a7.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-5214bbde",
+    "speaker": "Anya",
+    "text": "Including you.",
+    "contexts": [
+      "SCRIPT.family_capture.12"
+    ],
+    "file": "assets/voices/anya/anya-5214bbde.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-17d935f8",
+    "speaker": "Andrey",
+    "text": "I'm checking the framing.",
+    "contexts": [
+      "SCRIPT.family_capture.13"
+    ],
+    "file": "assets/voices/andrey/andrey-17d935f8.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-50a679f2",
+    "speaker": "Anya",
+    "text": "You can criticise it afterwards.",
+    "contexts": [
+      "SCRIPT.family_capture.14"
+    ],
+    "file": "assets/voices/anya/anya-50a679f2.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e378075b",
+    "speaker": "Andrey",
+    "text": "I can do both.",
+    "contexts": [
+      "SCRIPT.family_capture.15"
+    ],
+    "file": "assets/voices/andrey/andrey-e378075b.mp3",
+    "silent": false
+  },
+  {
+    "id": "robot-5d3da05d",
+    "speaker": "Robot",
+    "text": "Say cheese.",
+    "contexts": [
+      "SCRIPT.family_capture.16"
+    ],
+    "file": "assets/voices/robot/robot-5d3da05d.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-9dd8ec34",
+    "speaker": "Arisha",
+    "text": "Cheese.",
+    "contexts": [
+      "SCRIPT.family_capture.17"
+    ],
+    "file": "assets/voices/arisha/arisha-9dd8ec34.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-493732ea",
+    "speaker": "Alisa",
+    "text": "Partyhat.",
+    "contexts": [
+      "SCRIPT.family_capture.18"
+    ],
+    "file": "assets/voices/alisa/alisa-493732ea.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-65af5f3d",
+    "speaker": "Andrey",
+    "text": "Is the focus...",
+    "contexts": [
+      "SCRIPT.family_capture.19"
+    ],
+    "file": "assets/voices/andrey/andrey-65af5f3d.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-95e40509",
+    "speaker": "Anya",
+    "text": "Perfect.",
+    "contexts": [
+      "SCRIPT.family_capture.21"
+    ],
+    "file": "assets/voices/anya/anya-95e40509.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6542ee5c",
+    "speaker": "Andrey",
+    "text": "I was talking.",
+    "contexts": [
+      "SCRIPT.family_capture.22"
+    ],
+    "file": "assets/voices/andrey/andrey-6542ee5c.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-348302ac",
+    "speaker": "Anya",
+    "text": "Yes. It looks just like you.",
+    "contexts": [
+      "SCRIPT.family_capture.23"
+    ],
+    "file": "assets/voices/anya/anya-348302ac.mp3",
+    "silent": false
+  },
+  {
+    "id": "robot-447c5f4c",
+    "speaker": "Robot",
+    "text": "Witness statement required.",
+    "contexts": [
+      "SCRIPT.family_capture.24"
+    ],
+    "file": "assets/voices/robot/robot-447c5f4c.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-10305bcb",
+    "speaker": "Anya",
+    "text": "We confirm that we caught him.",
+    "contexts": [
+      "SCRIPT.family_capture.25"
+    ],
+    "file": "assets/voices/anya/anya-10305bcb.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-f8fe14ce",
+    "speaker": "Alisa",
+    "text": "And he promised to share the hat.",
+    "contexts": [
+      "SCRIPT.family_capture.26"
+    ],
+    "file": "assets/voices/alisa/alisa-f8fe14ce.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8270d41f",
+    "speaker": "Andrey",
+    "text": "That isn't relevant to the claim.",
+    "contexts": [
+      "SCRIPT.family_capture.27"
+    ],
+    "file": "assets/voices/andrey/andrey-8270d41f.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-a5863a0f",
+    "speaker": "Alisa",
+    "text": "Put it in anyway.",
+    "contexts": [
+      "SCRIPT.family_capture.28"
+    ],
+    "file": "assets/voices/alisa/alisa-a5863a0f.mp3",
+    "silent": false
+  },
+  {
+    "id": "robot-7cf9db7d",
+    "speaker": "Robot",
+    "text": "Added.",
+    "contexts": [
+      "SCRIPT.family_capture.29"
+    ],
+    "file": "assets/voices/robot/robot-7cf9db7d.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-e3727a97",
+    "speaker": "Arisha",
+    "text": "And he's coming back.",
+    "contexts": [
+      "SCRIPT.family_capture.30"
+    ],
+    "file": "assets/voices/arisha/arisha-e3727a97.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-b73b1c58",
+    "speaker": "Anya",
+    "text": "Yes. He is.",
+    "contexts": [
+      "SCRIPT.family_capture.31"
+    ],
+    "file": "assets/voices/anya/anya-b73b1c58.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-b1dcd39a",
+    "speaker": "Arisha",
+    "text": "You came back!",
+    "contexts": [
+      "SCRIPT.reunion_open.0"
+    ],
+    "file": "assets/voices/arisha/arisha-b1dcd39a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e233eaf2",
+    "speaker": "Andrey",
+    "text": "I promised.",
+    "contexts": [
+      "SCRIPT.reunion_open.1"
+    ],
+    "file": "assets/voices/andrey/andrey-e233eaf2.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-1be4c8fb",
+    "speaker": "Alisa",
+    "text": "Did you get it?",
+    "contexts": [
+      "SCRIPT.reunion_open.2"
+    ],
+    "file": "assets/voices/alisa/alisa-1be4c8fb.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-450ead4b",
+    "speaker": "Andrey",
+    "text": "One partyhat. Legally acquired.",
+    "contexts": [
+      "SCRIPT.reunion_open.3"
+    ],
+    "file": "assets/voices/andrey/andrey-450ead4b.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-12dc633b",
+    "speaker": "Anya",
+    "text": "That's an unusual thing to say about a birthday present.",
+    "contexts": [
+      "SCRIPT.reunion_open.4"
+    ],
+    "file": "assets/voices/anya/anya-12dc633b.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-5d4af139",
+    "speaker": "Alex",
+    "text": "You should have heard the rest of his defence.",
+    "contexts": [
+      "SCRIPT.reunion_open.5"
+    ],
+    "file": "assets/voices/alex/alex-5d4af139.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-60f1f908",
+    "speaker": "Alisa",
+    "text": "Bend down.",
+    "contexts": [
+      "SCRIPT.reunion_open.6"
+    ],
+    "file": "assets/voices/alisa/alisa-60f1f908.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-a3079af4",
+    "speaker": "Andrey",
+    "text": "As agreed.",
+    "contexts": [
+      "SCRIPT.reunion_open.7"
+    ],
+    "file": "assets/voices/andrey/andrey-a3079af4.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-976d8579",
+    "speaker": "Alisa",
+    "text": "There.",
+    "contexts": [
+      "SCRIPT.reunion_family.0"
+    ],
+    "file": "assets/voices/alisa/alisa-976d8579.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-538b0fef",
+    "speaker": "Arisha",
+    "text": "Now you look like it's your birthday.",
+    "contexts": [
+      "SCRIPT.reunion_family.1"
+    ],
+    "file": "assets/voices/arisha/arisha-538b0fef.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-cb071528",
+    "speaker": "Andrey",
+    "text": "What did I look like before?",
+    "contexts": [
+      "SCRIPT.reunion_family.2"
+    ],
+    "file": "assets/voices/andrey/andrey-cb071528.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-8fcb20d6",
+    "speaker": "Arisha",
+    "text": "Dad.",
+    "contexts": [
+      "SCRIPT.reunion_family.3"
+    ],
+    "file": "assets/voices/arisha/arisha-8fcb20d6.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-09829fbf",
+    "speaker": "Anya",
+    "text": "Happy birthday, love.",
+    "contexts": [
+      "SCRIPT.reunion_family.4",
+      "HINTS.birthday"
+    ],
+    "file": "assets/voices/anya/anya-09829fbf.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e7f190b6",
+    "speaker": "Andrey",
+    "text": "Thank you for helping me catch myself.",
+    "contexts": [
+      "SCRIPT.reunion_family.5"
+    ],
+    "file": "assets/voices/andrey/andrey-e7f190b6.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-a12d9696",
+    "speaker": "Anya",
+    "text": "Any time. You're quite easy to find.",
+    "contexts": [
+      "SCRIPT.reunion_family.6"
+    ],
+    "file": "assets/voices/anya/anya-a12d9696.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c993b88c",
+    "speaker": "Andrey",
+    "text": "Am I?",
+    "contexts": [
+      "SCRIPT.reunion_family.7"
+    ],
+    "file": "assets/voices/andrey/andrey-c993b88c.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-db314117",
+    "speaker": "Anya",
+    "text": "We just stand together. You turn up with a camera.",
+    "contexts": [
+      "SCRIPT.reunion_family.8"
+    ],
+    "file": "assets/voices/anya/anya-db314117.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-8872e6cc",
+    "speaker": "Alex",
+    "text": "Shall I take one of all of you?",
+    "contexts": [
+      "SCRIPT.reunion_family.9"
+    ],
+    "file": "assets/voices/alex/alex-8872e6cc.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-cae5759d",
+    "speaker": "Andrey",
+    "text": "Yes. The settings are...",
+    "contexts": [
+      "SCRIPT.reunion_family.10"
+    ],
+    "file": "assets/voices/andrey/andrey-cae5759d.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-4cbe60ac",
+    "speaker": "Alex",
+    "text": "I press this one?",
+    "contexts": [
+      "SCRIPT.reunion_family.11"
+    ],
+    "file": "assets/voices/alex/alex-4cbe60ac.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-3cdc782a",
+    "speaker": "Andrey",
+    "text": "Yes, but...",
+    "contexts": [
+      "SCRIPT.reunion_family.12"
+    ],
+    "file": "assets/voices/andrey/andrey-3cdc782a.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-a4451040",
+    "speaker": "Anya",
+    "text": "Another perfect one.",
+    "contexts": [
+      "SCRIPT.reunion_family.14"
+    ],
+    "file": "assets/voices/anya/anya-a4451040.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-b0bdfb62",
+    "speaker": "Victor",
+    "text": "Happy birthday, mate.",
+    "contexts": [
+      "SCRIPT.reunion_victor.0"
+    ],
+    "file": "assets/voices/victor/victor-b0bdfb62.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-342055f0",
+    "speaker": "Victor",
+    "text": "Still letting someone else pay for lunch?",
+    "contexts": [
+      "SCRIPT.callbacks.money.0"
+    ],
+    "file": "assets/voices/victor/victor-342055f0.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1f264430",
+    "speaker": "Andrey",
+    "text": "No. Lunch is on me.",
+    "contexts": [
+      "SCRIPT.callbacks.money.1"
+    ],
+    "file": "assets/voices/andrey/andrey-1f264430.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-c926aba1",
+    "speaker": "Victor",
+    "text": "Welcome back.",
+    "contexts": [
+      "SCRIPT.callbacks.money.2"
+    ],
+    "file": "assets/voices/victor/victor-c926aba1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8ad6b21c",
+    "speaker": "Andrey",
+    "text": "Danya's old bill is still Toldo's problem.",
+    "contexts": [
+      "SCRIPT.callbacks.money.3"
+    ],
+    "file": "assets/voices/andrey/andrey-8ad6b21c.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-89db8db1",
+    "speaker": "Victor",
+    "text": "Still staying indoors this weekend?",
+    "contexts": [
+      "SCRIPT.callbacks.outdoors.0"
+    ],
+    "file": "assets/voices/victor/victor-89db8db1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-7dc8759d",
+    "speaker": "Andrey",
+    "text": "There's a short walk I want to do.",
+    "contexts": [
+      "SCRIPT.callbacks.outdoors.1"
+    ],
+    "file": "assets/voices/andrey/andrey-7dc8759d.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-4f78869f",
+    "speaker": "Victor",
+    "text": "How short?",
+    "contexts": [
+      "SCRIPT.callbacks.outdoors.2"
+    ],
+    "file": "assets/voices/victor/victor-4f78869f.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-99367019",
+    "speaker": "Andrey",
+    "text": "Why does everyone need numbers?",
+    "contexts": [
+      "SCRIPT.callbacks.outdoors.3"
+    ],
+    "file": "assets/voices/andrey/andrey-99367019.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-6fb3b4fb",
+    "speaker": "Victor",
+    "text": "Still think a phone is as good as a DSLR?",
+    "contexts": [
+      "SCRIPT.callbacks.camera.0"
+    ],
+    "file": "assets/voices/victor/victor-6fb3b4fb.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-99cd7e8a",
+    "speaker": "Andrey",
+    "text": "Absolutely.",
+    "contexts": [
+      "SCRIPT.callbacks.camera.1"
+    ],
+    "file": "assets/voices/andrey/andrey-99cd7e8a.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-fe5eb0be",
+    "speaker": "Victor",
+    "text": "Really?",
+    "contexts": [
+      "SCRIPT.callbacks.camera.2"
+    ],
+    "file": "assets/voices/victor/victor-fe5eb0be.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e40353ee",
+    "speaker": "Andrey",
+    "text": "You can use it to order a DSLR.",
+    "contexts": [
+      "SCRIPT.callbacks.camera.3"
+    ],
+    "file": "assets/voices/andrey/andrey-e40353ee.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-9887c55c",
+    "speaker": "Keeper",
+    "text": "I'm meditating.",
+    "contexts": [
+      "OPTIONAL.meditation.0"
+    ],
+    "file": "assets/voices/keeper/keeper-9887c55c.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-74e240f0",
+    "speaker": "Andrey",
+    "text": "On what?",
+    "contexts": [
+      "OPTIONAL.meditation.1"
+    ],
+    "file": "assets/voices/andrey/andrey-74e240f0.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-9f7d3778",
+    "speaker": "Keeper",
+    "text": "Doing nothing. Wanting nothing.",
+    "contexts": [
+      "OPTIONAL.meditation.2"
+    ],
+    "file": "assets/voices/keeper/keeper-9f7d3778.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-dc523f4e",
+    "speaker": "Andrey",
+    "text": "Good. I need nothing from you.",
+    "contexts": [
+      "OPTIONAL.meditation.3"
+    ],
+    "file": "assets/voices/andrey/andrey-dc523f4e.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-6d4d7596",
+    "speaker": "Keeper",
+    "text": "Then why are you here?",
+    "contexts": [
+      "OPTIONAL.meditation.4"
+    ],
+    "file": "assets/voices/keeper/keeper-6d4d7596.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-4bfd536d",
+    "speaker": "Andrey",
+    "text": "Checking you could deliver.",
+    "contexts": [
+      "OPTIONAL.meditation.5"
+    ],
+    "file": "assets/voices/andrey/andrey-4bfd536d.mp3",
+    "silent": false
+  },
+  {
+    "id": "igor-1e105d74",
+    "speaker": "Igor",
+    "text": "We're picking teams. You're on both.",
+    "contexts": [
+      "OPTIONAL.football.0"
+    ],
+    "file": "assets/voices/igor/igor-1e105d74.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-50501960",
+    "speaker": "Andrey",
+    "text": "How does that work?",
+    "contexts": [
+      "OPTIONAL.football.1"
+    ],
+    "file": "assets/voices/andrey/andrey-50501960.mp3",
+    "silent": false
+  },
+  {
+    "id": "igor-64d0454c",
+    "speaker": "Igor",
+    "text": "Whoever's losing gets you.",
+    "contexts": [
+      "OPTIONAL.football.2"
+    ],
+    "file": "assets/voices/igor/igor-64d0454c.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-0c71e3f4",
+    "speaker": "Andrey",
+    "text": "So if I score, I switch sides?",
+    "contexts": [
+      "OPTIONAL.football.3"
+    ],
+    "file": "assets/voices/andrey/andrey-0c71e3f4.mp3",
+    "silent": false
+  },
+  {
+    "id": "igor-47631b83",
+    "speaker": "Igor",
+    "text": "We've finally found a way to stop you winning.",
+    "contexts": [
+      "OPTIONAL.football.4"
+    ],
+    "file": "assets/voices/igor/igor-47631b83.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-41202172",
+    "speaker": "Danya",
+    "text": "Next year, let me write the invitation.",
+    "contexts": [
+      "OPTIONAL.after_party.0"
+    ],
+    "file": "assets/voices/danya/danya-41202172.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-75d4bc27",
+    "speaker": "Andrey",
+    "text": "What will you put?",
+    "contexts": [
+      "OPTIONAL.after_party.1"
+    ],
+    "file": "assets/voices/andrey/andrey-75d4bc27.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-b701e0c0",
+    "speaker": "Danya",
+    "text": "\"Andrey. Birthday. No weapons.\"",
+    "contexts": [
+      "OPTIONAL.after_party.2"
+    ],
+    "file": "assets/voices/danya/danya-b701e0c0.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-07662651",
+    "speaker": "Andrey",
+    "text": "Put the last bit first.",
+    "contexts": [
+      "OPTIONAL.after_party.3"
+    ],
+    "file": "assets/voices/andrey/andrey-07662651.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-c5f0ecb3",
+    "speaker": "Andrey",
+    "text": "What happens if nobody catches me?",
+    "contexts": [
+      "DECISIONS.bounty_reaction.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-c5f0ecb3.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-f22b731c",
+    "speaker": "Banker",
+    "text": "I keep the hat.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.0.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-f22b731c.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9e6a0070",
+    "speaker": "Andrey",
+    "text": "For how long?",
+    "contexts": [
+      "DECISIONS.bounty_reaction.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-9e6a0070.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-f95e1fc4",
+    "speaker": "Banker",
+    "text": "I wish you a very long and healthy life.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.0.lines.3"
+    ],
+    "file": "assets/voices/banker/banker-f95e1fc4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-92db9f49",
+    "speaker": "Andrey",
+    "text": "How much would it cost to buy it?",
+    "contexts": [
+      "DECISIONS.bounty_reaction.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-92db9f49.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-063183a1",
+    "speaker": "Banker",
+    "text": "You can't afford it.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.1.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-063183a1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ebf2e2eb",
+    "speaker": "Andrey",
+    "text": "You haven't checked.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-ebf2e2eb.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-9110f7bd",
+    "speaker": "Banker",
+    "text": "You asked the price.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.1.lines.3"
+    ],
+    "file": "assets/voices/banker/banker-9110f7bd.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1c5bffde",
+    "speaker": "Andrey",
+    "text": "You're right. I'll stick to robbing you legally.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.1.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-1c5bffde.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-4afe41ed",
+    "speaker": "Andrey",
+    "text": "Can I come back when you're more helpful?",
+    "contexts": [
+      "DECISIONS.bounty_reaction.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-4afe41ed.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-ea6fc11d",
+    "speaker": "Banker",
+    "text": "Certainly.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.2.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-ea6fc11d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ac33a4da",
+    "speaker": "Andrey",
+    "text": "When's that?",
+    "contexts": [
+      "DECISIONS.bounty_reaction.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-ac33a4da.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-1cafdd71",
+    "speaker": "Banker",
+    "text": "I'm on holiday in June.",
+    "contexts": [
+      "DECISIONS.bounty_reaction.2.lines.3"
+    ],
+    "file": "assets/voices/banker/banker-1cafdd71.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ba983046",
+    "speaker": "Andrey",
+    "text": "Lead the way.",
+    "contexts": [
+      "DECISIONS.raid_tactics.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-ba983046.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-dda7c558",
+    "speaker": "Keeper",
+    "text": "Of course. You go first.",
+    "contexts": [
+      "DECISIONS.raid_tactics.0.lines.1"
+    ],
+    "file": "assets/voices/keeper/keeper-dda7c558.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-44b58bf4",
+    "speaker": "Andrey",
+    "text": "That's following.",
+    "contexts": [
+      "DECISIONS.raid_tactics.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-44b58bf4.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-b036fa37",
+    "speaker": "Keeper",
+    "text": "Only if you look back.",
+    "contexts": [
+      "DECISIONS.raid_tactics.0.lines.3"
+    ],
+    "file": "assets/voices/keeper/keeper-b036fa37.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-d59eb879",
+    "speaker": "Andrey",
+    "text": "Why don't you catch him?",
+    "contexts": [
+      "DECISIONS.raid_tactics.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-d59eb879.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-7bf95c9b",
+    "speaker": "Keeper",
+    "text": "I have never lost a fight.",
+    "contexts": [
+      "DECISIONS.raid_tactics.1.lines.1"
+    ],
+    "file": "assets/voices/keeper/keeper-7bf95c9b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-454e1fcf",
+    "speaker": "Andrey",
+    "text": "Have you been in one?",
+    "contexts": [
+      "DECISIONS.raid_tactics.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-454e1fcf.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-5b4e85d5",
+    "speaker": "Keeper",
+    "text": "I don't see why I should risk a perfect record.",
+    "contexts": [
+      "DECISIONS.raid_tactics.1.lines.3"
+    ],
+    "file": "assets/voices/keeper/keeper-5b4e85d5.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-97ddec45",
+    "speaker": "Andrey",
+    "text": "You're very brave from here.",
+    "contexts": [
+      "DECISIONS.raid_tactics.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-97ddec45.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-fdb12bc5",
+    "speaker": "Keeper",
+    "text": "Thank you. I considered that carefully when choosing where to stand.",
+    "contexts": [
+      "DECISIONS.raid_tactics.2.lines.1"
+    ],
+    "file": "assets/voices/keeper/keeper-fdb12bc5.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-abdc124b",
+    "speaker": "Andrey",
+    "text": "Someone else can pay.",
+    "contexts": [
+      "DECISIONS.cover_story.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-abdc124b.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-0993f58d",
+    "speaker": "Danya",
+    "text": "Excellent. You owe me for lunch.",
+    "contexts": [
+      "DECISIONS.cover_story.0.lines.1"
+    ],
+    "file": "assets/voices/danya/danya-0993f58d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-b1a4e119",
+    "speaker": "Andrey",
+    "text": "Andrey owes you for lunch.",
+    "contexts": [
+      "DECISIONS.cover_story.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-b1a4e119.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-ad7fb9e8",
+    "speaker": "Alex",
+    "text": "He's getting quite good at this.",
+    "contexts": [
+      "DECISIONS.cover_story.0.lines.3"
+    ],
+    "file": "assets/voices/alex/alex-ad7fb9e8.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1d5879bc",
+    "speaker": "Andrey",
+    "text": "I'd rather stay indoors this weekend.",
+    "contexts": [
+      "DECISIONS.cover_story.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-1d5879bc.mp3",
+    "silent": false
+  },
+  {
+    "id": "igor-d2f6c654",
+    "speaker": "Igor",
+    "text": "Doing what?",
+    "contexts": [
+      "DECISIONS.cover_story.1.lines.1"
+    ],
+    "file": "assets/voices/igor/igor-d2f6c654.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-949b096f",
+    "speaker": "Andrey",
+    "text": "Planning a hike.",
+    "contexts": [
+      "DECISIONS.cover_story.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-949b096f.mp3",
+    "silent": false
+  },
+  {
+    "id": "igor-fafef039",
+    "speaker": "Igor",
+    "text": "You lasted four words.",
+    "contexts": [
+      "DECISIONS.cover_story.1.lines.3"
+    ],
+    "file": "assets/voices/igor/igor-fafef039.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-742208ae",
+    "speaker": "Andrey",
+    "text": "A phone is just as good as a DSLR.",
+    "contexts": [
+      "DECISIONS.cover_story.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-742208ae.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-a0d58926",
+    "speaker": "Danya",
+    "text": "Great. I'll keep the camera.",
+    "contexts": [
+      "DECISIONS.cover_story.2.lines.1"
+    ],
+    "file": "assets/voices/danya/danya-a0d58926.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-4ada1e1a",
+    "speaker": "Andrey",
+    "text": "For making calls. I hadn't finished.",
+    "contexts": [
+      "DECISIONS.cover_story.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-4ada1e1a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-363fde12",
+    "speaker": "Andrey",
+    "text": "You could pretend to be Toldo.",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-363fde12.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-d7cf998d",
+    "speaker": "Alex",
+    "text": "And collect your hat?",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.1"
+    ],
+    "file": "assets/voices/alex/alex-d7cf998d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-697065b0",
+    "speaker": "Andrey",
+    "text": "Then give it to me.",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-697065b0.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-f46cc7a1",
+    "speaker": "Alex",
+    "text": "Sorry. Do I know you?",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.3"
+    ],
+    "file": "assets/voices/alex/alex-f46cc7a1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-da46a742",
+    "speaker": "Andrey",
+    "text": "You're enjoying this far too much.",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-da46a742.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-cc8aa973",
+    "speaker": "Alex",
+    "text": "Only professionally.",
+    "contexts": [
+      "DECISIONS.alex_cover.0.lines.5"
+    ],
+    "file": "assets/voices/alex/alex-cc8aa973.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-cc3015ab",
+    "speaker": "Andrey",
+    "text": "Just say you don't recognise me.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-cc3015ab.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-863d1d49",
+    "speaker": "Alex",
+    "text": "Never seen this man before.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.1"
+    ],
+    "file": "assets/voices/alex/alex-863d1d49.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-cebc26eb",
+    "speaker": "Andrey",
+    "text": "Good.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-cebc26eb.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-5987a576",
+    "speaker": "Alex",
+    "text": "Although I recognise my camera strap.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.3"
+    ],
+    "file": "assets/voices/alex/alex-5987a576.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ef1b0bd2",
+    "speaker": "Andrey",
+    "text": "That's mine.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-ef1b0bd2.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-7ce06b3c",
+    "speaker": "Alex",
+    "text": "And we've found him again.",
+    "contexts": [
+      "DECISIONS.alex_cover.1.lines.5"
+    ],
+    "file": "assets/voices/alex/alex-7ce06b3c.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e09d5744",
+    "speaker": "Andrey",
+    "text": "I'll handle the questions.",
+    "contexts": [
+      "DECISIONS.alex_cover.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-e09d5744.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-32e4d0c9",
+    "speaker": "Alex",
+    "text": "What if the banker asks why you look exactly like Freakybat?",
+    "contexts": [
+      "DECISIONS.alex_cover.2.lines.1"
+    ],
+    "file": "assets/voices/alex/alex-32e4d0c9.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-7bed21ea",
+    "speaker": "Andrey",
+    "text": "Budget cuts.",
+    "contexts": [
+      "DECISIONS.alex_cover.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-7bed21ea.mp3",
+    "silent": false
+  },
+  {
+    "id": "alex-18992f30",
+    "speaker": "Alex",
+    "text": "...Actually, use that.",
+    "contexts": [
+      "DECISIONS.alex_cover.2.lines.3"
+    ],
+    "file": "assets/voices/alex/alex-18992f30.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-5f269db0",
+    "speaker": "Andrey",
+    "text": "Will you be my witness?",
+    "contexts": [
+      "DECISIONS.anya_reply.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-5f269db0.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-67bedf6b",
+    "speaker": "Anya",
+    "text": "What am I agreeing to?",
+    "contexts": [
+      "DECISIONS.anya_reply.0.lines.1"
+    ],
+    "file": "assets/voices/anya/anya-67bedf6b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8590dab2",
+    "speaker": "Andrey",
+    "text": "Just confirming that I'm me.",
+    "contexts": [
+      "DECISIONS.anya_reply.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-8590dab2.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-d2a1c9f4",
+    "speaker": "Anya",
+    "text": "I did that at our wedding.",
+    "contexts": [
+      "DECISIONS.anya_reply.0.lines.3"
+    ],
+    "file": "assets/voices/anya/anya-d2a1c9f4.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-7e9b74a5",
+    "speaker": "Andrey",
+    "text": "Apparently the bank needs a second opinion.",
+    "contexts": [
+      "DECISIONS.anya_reply.0.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-7e9b74a5.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6cc52556",
+    "speaker": "Andrey",
+    "text": "You worked that out very quickly.",
+    "contexts": [
+      "DECISIONS.anya_reply.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-6cc52556.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-2bff1585",
+    "speaker": "Anya",
+    "text": "I've had years of practice understanding your plans.",
+    "contexts": [
+      "DECISIONS.anya_reply.1.lines.1"
+    ],
+    "file": "assets/voices/anya/anya-2bff1585.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-23c6eb1b",
+    "speaker": "Andrey",
+    "text": "My plans are clear.",
+    "contexts": [
+      "DECISIONS.anya_reply.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-23c6eb1b.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-34a0704f",
+    "speaker": "Anya",
+    "text": "You came here to arrest yourself under a false name.",
+    "contexts": [
+      "DECISIONS.anya_reply.1.lines.3"
+    ],
+    "file": "assets/voices/anya/anya-34a0704f.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-803a0006",
+    "speaker": "Andrey",
+    "text": "This one has some details.",
+    "contexts": [
+      "DECISIONS.anya_reply.1.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-803a0006.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-57ddb8f0",
+    "speaker": "Andrey",
+    "text": "Would you still love me if I were Toldo?",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-57ddb8f0.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-fc6f29e3",
+    "speaker": "Anya",
+    "text": "Same man?",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.1"
+    ],
+    "file": "assets/voices/anya/anya-fc6f29e3.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-a28cc3f6",
+    "speaker": "Andrey",
+    "text": "Same man.",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-a28cc3f6.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-9e02dbde",
+    "speaker": "Anya",
+    "text": "Same terrible jokes?",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.3"
+    ],
+    "file": "assets/voices/anya/anya-9e02dbde.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ffa0474d",
+    "speaker": "Andrey",
+    "text": "Improved branding.",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-ffa0474d.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-47eeec6d",
+    "speaker": "Anya",
+    "text": "Then yes. But I'm not learning another birthday.",
+    "contexts": [
+      "DECISIONS.anya_reply.2.lines.5"
+    ],
+    "file": "assets/voices/anya/anya-47eeec6d.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-74234ae9",
+    "speaker": "Andrey",
+    "text": "We could share it.",
+    "contexts": [
+      "DECISIONS.alisa_hat.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-74234ae9.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-9e9ba7fd",
+    "speaker": "Alisa",
+    "text": "I get it in the daytime. You get it at night.",
+    "contexts": [
+      "DECISIONS.alisa_hat.0.lines.1"
+    ],
+    "file": "assets/voices/alisa/alisa-9e9ba7fd.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e40275a6",
+    "speaker": "Andrey",
+    "text": "When I'm asleep?",
+    "contexts": [
+      "DECISIONS.alisa_hat.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-e40275a6.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-e048ad9e",
+    "speaker": "Alisa",
+    "text": "You won't have to wait for your turn.",
+    "contexts": [
+      "DECISIONS.alisa_hat.0.lines.3"
+    ],
+    "file": "assets/voices/alisa/alisa-e048ad9e.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ff992618",
+    "speaker": "Andrey",
+    "text": "That is a very suspicious benefit.",
+    "contexts": [
+      "DECISIONS.alisa_hat.0.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-ff992618.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-61343190",
+    "speaker": "Andrey",
+    "text": "What would you do with a partyhat?",
+    "contexts": [
+      "DECISIONS.alisa_hat.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-61343190.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-0e8607f9",
+    "speaker": "Alisa",
+    "text": "Be in charge of the party.",
+    "contexts": [
+      "DECISIONS.alisa_hat.1.lines.1"
+    ],
+    "file": "assets/voices/alisa/alisa-0e8607f9.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-28f0b2a5",
+    "speaker": "Andrey",
+    "text": "That's not how hats work.",
+    "contexts": [
+      "DECISIONS.alisa_hat.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-28f0b2a5.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-c27db25b",
+    "speaker": "Alisa",
+    "text": "Then why do you want it so much?",
+    "contexts": [
+      "DECISIONS.alisa_hat.1.lines.3"
+    ],
+    "file": "assets/voices/alisa/alisa-c27db25b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-ede67a8b",
+    "speaker": "Andrey",
+    "text": "I preferred your first question.",
+    "contexts": [
+      "DECISIONS.alisa_hat.1.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-ede67a8b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-0ffb5988",
+    "speaker": "Andrey",
+    "text": "What if I give you a hug instead?",
+    "contexts": [
+      "DECISIONS.alisa_hat.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-0ffb5988.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-c5bdc9f8",
+    "speaker": "Alisa",
+    "text": "I can get those for free.",
+    "contexts": [
+      "DECISIONS.alisa_hat.2.lines.1"
+    ],
+    "file": "assets/voices/alisa/alisa-c5bdc9f8.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-72fb26e3",
+    "speaker": "Andrey",
+    "text": "True. Very poor business model.",
+    "contexts": [
+      "DECISIONS.alisa_hat.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-72fb26e3.mp3",
+    "silent": false
+  },
+  {
+    "id": "alisa-b8b764a8",
+    "speaker": "Alisa",
+    "text": "I'll have one anyway.",
+    "contexts": [
+      "DECISIONS.alisa_hat.2.lines.3"
+    ],
+    "file": "assets/voices/alisa/alisa-b8b764a8.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-381e1b76",
+    "speaker": "Andrey",
+    "text": "I'm actually Toldo.",
+    "contexts": [
+      "DECISIONS.arisha_capture.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-381e1b76.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-a3a614e7",
+    "speaker": "Arisha",
+    "text": "You're Dad.",
+    "contexts": [
+      "DECISIONS.arisha_capture.0.lines.1"
+    ],
+    "file": "assets/voices/arisha/arisha-a3a614e7.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-8855bafd",
+    "speaker": "Andrey",
+    "text": "How can you tell?",
+    "contexts": [
+      "DECISIONS.arisha_capture.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-8855bafd.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-3613c591",
+    "speaker": "Arisha",
+    "text": "Your face.",
+    "contexts": [
+      "DECISIONS.arisha_capture.0.lines.3"
+    ],
+    "file": "assets/voices/arisha/arisha-3613c591.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-2d900ab6",
+    "speaker": "Andrey",
+    "text": "Alex said that might be a problem.",
+    "contexts": [
+      "DECISIONS.arisha_capture.0.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-2d900ab6.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-4fb7ebda",
+    "speaker": "Andrey",
+    "text": "What if I need this hand?",
+    "contexts": [
+      "DECISIONS.arisha_capture.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-4fb7ebda.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-22d3ad7b",
+    "speaker": "Arisha",
+    "text": "You have another one.",
+    "contexts": [
+      "DECISIONS.arisha_capture.1.lines.1"
+    ],
+    "file": "assets/voices/arisha/arisha-22d3ad7b.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-babc6a76",
+    "speaker": "Andrey",
+    "text": "You've thought of everything.",
+    "contexts": [
+      "DECISIONS.arisha_capture.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-babc6a76.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-965907ff",
+    "speaker": "Arisha",
+    "text": "Give me that one too.",
+    "contexts": [
+      "DECISIONS.arisha_capture.1.lines.3"
+    ],
+    "file": "assets/voices/arisha/arisha-965907ff.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-e75098c3",
+    "speaker": "Andrey",
+    "text": "Can I be released for good behaviour?",
+    "contexts": [
+      "DECISIONS.arisha_capture.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-e75098c3.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-a1fb1a5c",
+    "speaker": "Arisha",
+    "text": "What's good behaviour?",
+    "contexts": [
+      "DECISIONS.arisha_capture.2.lines.1"
+    ],
+    "file": "assets/voices/arisha/arisha-a1fb1a5c.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-1921e0cb",
+    "speaker": "Andrey",
+    "text": "Being nice. Giving hugs.",
+    "contexts": [
+      "DECISIONS.arisha_capture.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-1921e0cb.mp3",
+    "silent": false
+  },
+  {
+    "id": "arisha-49160b2f",
+    "speaker": "Arisha",
+    "text": "No. Then you have to stay longer.",
+    "contexts": [
+      "DECISIONS.arisha_capture.2.lines.3"
+    ],
+    "file": "assets/voices/arisha/arisha-49160b2f.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-bc8d6a3a",
+    "speaker": "Andrey",
+    "text": "The rules here are excellent.",
+    "contexts": [
+      "DECISIONS.arisha_capture.2.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-bc8d6a3a.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-f6b269c8",
+    "speaker": "Andrey",
+    "text": "No. I've played this game before.",
+    "contexts": [
+      "DECISIONS.final_favour.0.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-f6b269c8.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-75e169cf",
+    "speaker": "Banker",
+    "text": "It's just a short walk.",
+    "contexts": [
+      "DECISIONS.final_favour.0.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-75e169cf.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-9247e98b",
+    "speaker": "Andrey",
+    "text": "To someone who needs a favour?",
+    "contexts": [
+      "DECISIONS.final_favour.0.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-9247e98b.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-9f4b2efc",
+    "speaker": "Banker",
+    "text": "You have played it before.",
+    "contexts": [
+      "DECISIONS.final_favour.0.lines.3"
+    ],
+    "file": "assets/voices/banker/banker-9f4b2efc.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-27d6b529",
+    "speaker": "Andrey",
+    "text": "What's the reward?",
+    "contexts": [
+      "DECISIONS.final_favour.1.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-27d6b529.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-72c2d6c1",
+    "speaker": "Banker",
+    "text": "My gratitude.",
+    "contexts": [
+      "DECISIONS.final_favour.1.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-72c2d6c1.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-fa7ac546",
+    "speaker": "Andrey",
+    "text": "I'll give you mine if you do it yourself.",
+    "contexts": [
+      "DECISIONS.final_favour.1.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-fa7ac546.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-72f33440",
+    "speaker": "Banker",
+    "text": "That's worthless.",
+    "contexts": [
+      "DECISIONS.final_favour.1.lines.3"
+    ],
+    "file": "assets/voices/banker/banker-72f33440.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-80e8e787",
+    "speaker": "Andrey",
+    "text": "You set the price.",
+    "contexts": [
+      "DECISIONS.final_favour.1.lines.4"
+    ],
+    "file": "assets/voices/andrey/andrey-80e8e787.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-21c898d1",
+    "speaker": "Andrey",
+    "text": "Ask Toldo.",
+    "contexts": [
+      "DECISIONS.final_favour.2.lines.0"
+    ],
+    "file": "assets/voices/andrey/andrey-21c898d1.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-19c067db",
+    "speaker": "Banker",
+    "text": "You're Toldo.",
+    "contexts": [
+      "DECISIONS.final_favour.2.lines.1"
+    ],
+    "file": "assets/voices/banker/banker-19c067db.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-6ad62140",
+    "speaker": "Andrey",
+    "text": "For payments. Complaints go to Freakybat.",
+    "contexts": [
+      "DECISIONS.final_favour.2.lines.2"
+    ],
+    "file": "assets/voices/andrey/andrey-6ad62140.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-055a9213",
+    "speaker": "Victor",
+    "text": "Come to the bank. I've slightly misadvertised your birthday.",
+    "contexts": [
+      "HINTS.opening"
+    ],
+    "file": "assets/voices/victor/victor-055a9213.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-78aec692",
+    "speaker": "Banker",
+    "text": "A photograph and a witness statement. You've brought yourself again.",
+    "contexts": [
+      "HINTS.proof"
+    ],
+    "file": "assets/voices/banker/banker-78aec692.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-ceb7c02b",
+    "speaker": "Keeper",
+    "text": "Danya has your camera. Collect it, then head to the shore.",
+    "contexts": [
+      "HINTS.keeperCamera"
+    ],
+    "file": "assets/voices/keeper/keeper-ceb7c02b.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-d45de93a",
+    "speaker": "Keeper",
+    "text": "Anya and the girls are at the shore. I'll secure this bit.",
+    "contexts": [
+      "HINTS.keeperShore"
+    ],
+    "file": "assets/voices/keeper/keeper-d45de93a.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-ec12cabe",
+    "speaker": "Danya",
+    "text": "Register with the raid leader at the park entrance. Remember: Toldo.",
+    "contexts": [
+      "HINTS.register"
+    ],
+    "file": "assets/voices/danya/danya-ec12cabe.mp3",
+    "silent": false
+  },
+  {
+    "id": "danya-7292c403",
+    "speaker": "Danya",
+    "text": "Anya and the girls are at the shore. Try not to invent another name on the way.",
+    "contexts": [
+      "HINTS.shore"
+    ],
+    "file": "assets/voices/danya/danya-7292c403.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-aa26ec32",
+    "speaker": "Anya",
+    "text": "Danya has your camera. We've supplied the family.",
+    "contexts": [
+      "HINTS.familyCamera"
+    ],
+    "file": "assets/voices/anya/anya-aa26ec32.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-1011ed1f",
+    "speaker": "Anya",
+    "text": "Register with the raid leader first. Apparently being yourself needs approval.",
+    "contexts": [
+      "HINTS.familyRegister"
+    ],
+    "file": "assets/voices/anya/anya-1011ed1f.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-8dc95522",
+    "speaker": "Anya",
+    "text": "Come and speak to me first.",
+    "contexts": [
+      "HINTS.anyaFirst"
+    ],
+    "file": "assets/voices/anya/anya-8dc95522.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-50341ae5",
+    "speaker": "Anya",
+    "text": "Go and speak to Alisa and Arisha.",
+    "contexts": [
+      "HINTS.girls"
+    ],
+    "file": "assets/voices/anya/anya-50341ae5.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-35934fef",
+    "speaker": "Anya",
+    "text": "Alisa wanted a word with you before the photograph.",
+    "contexts": [
+      "HINTS.alisa"
+    ],
+    "file": "assets/voices/anya/anya-35934fef.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-518491ef",
+    "speaker": "Anya",
+    "text": "Arisha wanted a word with you before the photograph.",
+    "contexts": [
+      "HINTS.arisha"
+    ],
+    "file": "assets/voices/anya/anya-518491ef.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-80c9106a",
+    "speaker": "Anya",
+    "text": "Everyone's here. Let's take the photograph.",
+    "contexts": [
+      "HINTS.ready"
+    ],
+    "file": "assets/voices/anya/anya-80c9106a.mp3",
+    "silent": false
+  },
+  {
+    "id": "anya-d96485ff",
+    "speaker": "Anya",
+    "text": "Take the photograph and witness statement to the bank.",
+    "contexts": [
+      "HINTS.bank"
+    ],
+    "file": "assets/voices/anya/anya-d96485ff.mp3",
+    "silent": false
+  },
+  {
+    "id": "banker-1cf1b8ff",
+    "speaker": "Banker",
+    "text": "If anyone asks, you got that somewhere else.",
+    "contexts": [
+      "HINTS.claimed"
+    ],
+    "file": "assets/voices/banker/banker-1cf1b8ff.mp3",
+    "silent": false
+  },
+  {
+    "id": "keeper-8d7ab819",
+    "speaker": "Keeper",
+    "text": "Another successful raid under my leadership.",
+    "contexts": [
+      "HINTS.keeperDone.0"
+    ],
+    "file": "assets/voices/keeper/keeper-8d7ab819.mp3",
+    "silent": false
+  },
+  {
+    "id": "andrey-4f23930f",
+    "speaker": "Andrey",
+    "text": "You're welcome.",
+    "contexts": [
+      "HINTS.keeperDone.1"
+    ],
+    "file": "assets/voices/andrey/andrey-4f23930f.mp3",
+    "silent": false
+  },
+  {
+    "id": "victor-0c12d17f",
+    "speaker": "Victor",
+    "text": "Andrey, happy birthday, mate. We started out sharing one portion of fries and spending our lunches at Danya's. Since then, we've shared islands, road trips, Christmases, and a lot of very good days. I love that you're still the person who makes friends everywhere and is always up for an adventure. Seeing you with Anya, Alisa, and Arisha makes me especially happy. I'm grateful we grew up together, and that we're still adding to the stories. Here's to the next one. Victor",
+    "contexts": [
+      "Final letter — record as one continuous clip"
+    ],
+    "file": "assets/voices/victor/victor-0c12d17f.mp3",
+    "silent": false
+  }
+]
