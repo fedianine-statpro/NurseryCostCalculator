@@ -1,0 +1,1 @@
+{"name":"london-fare-check","private":true,"scripts":{"test":"node --test --test-isolation=none tests/*.test.cjs","start":"node serve.cjs"}}

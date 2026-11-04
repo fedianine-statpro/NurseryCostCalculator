@@ -1,0 +1,73 @@
+/* Keep secondary information readable at ordinary zoom, and controls easy to tap. */
+.eyebrow,.intro .eyebrow,.how .eyebrow{font-size:11px}
+.intro-meta{font-size:13px}
+.header-link,.text-button{font-size:14px;min-height:44px}
+.segmented label>span{font-size:14px;min-height:48px}
+.modes i{display:none}
+legend{font-size:18px}
+.zone-label>label,.zone-label .text-button{font-size:13px}
+.mini-label{font-size:11px}
+.check-row,.field-hint,.days-caption,.hint,.small{font-size:13px}
+.check-row{min-height:44px}
+.day-count label>span{font-size:17px;min-height:46px}
+.weekday-picker label{font-size:14px;min-height:44px}
+.time-options label{min-height:60px}
+.time-options span{align-items:start;flex-direction:column;gap:1px}
+.time-options strong{font-size:14px}
+.time-options small{font-size:12px}
+.optional summary{font-size:14px;min-height:64px}
+.summary-value{font-size:11px}
+.details-body label:not(.check-row){font-size:13px}
+.details-body input:not([type=checkbox]),.details-body select{font-size:16px}
+.two-col{grid-template-columns:1fr}
+.auto-note{font-size:12px}
+.result-intro,.comparison-label{font-size:14px}
+.recommend-badge{font-size:12px}
+.saving small,.result-footnote,.result-details summary,.result-details dl,.result-details p,.result-details li{font-size:13px}
+.comparison-heading{font-size:11px}
+.result-details summary{min-height:48px}
+.best-tag{font-size:9px}
+.tip strong{font-size:14px}
+.tip p,.source-stamp,.source-stamp a,.explainer-grid p,.sources summary,.sources-body,#source-links a,.map-links{font-size:13px}
+.explainer-grid h3{font-size:16px}
+.journey-list table{font-size:12px}
+footer p,footer>span{font-size:11px}
+.ticket-plan{font-size:13px;color:#c2cbd5;padding:14px 0 0}.ticket-plan strong{color:var(--lime)}.ticket-plan ul{padding-left:17px}.ticket-plan li{margin:5px 0}
+.mobile-result{display:none}
+.share-panel{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:12px;background:white}
+.share-panel button,.analytics-actions button{font:600 13px 'DM Sans',Arial,sans-serif;min-height:46px;border-radius:8px;padding:10px 14px;border:1px solid var(--green);background:var(--green);color:white;cursor:pointer}
+.share-panel button:disabled{opacity:.5;cursor:default}.share-panel p,.share-panel label,.shared-notice{font-size:12px;color:var(--muted);line-height:1.7;margin:8px 0 0}
+.share-panel #native-share{margin-left:5px;background:white;color:var(--green)}
+.share-panel input{width:100%;font-size:14px;min-height:44px;border:1px solid #cbd5ca;border-radius:6px;padding:8px;margin-top:6px}
+.shared-notice{background:var(--soft);border-radius:9px;padding:12px}
+.search-guide{border-top:1px solid var(--line);margin-top:38px;padding-top:32px}.search-guide>.eyebrow{color:var(--muted)}
+.search-guide>p{font-size:14px;color:var(--muted);line-height:1.9}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 36px;margin:25px 0}
+.question-grid h3{font-size:16px;line-height:1.5;margin:0 0 8px}.question-grid p{font-size:13px;color:var(--muted);line-height:1.9;margin:0}.question-grid a{color:var(--green)}
+.search-guide .guide-author{font-size:12px}.analytics-actions{display:flex;flex-wrap:wrap;gap:10px}.analytics-actions button+button{background:white;color:var(--green)}
+@media(max-width:650px){.question-grid{grid-template-columns:1fr;gap:22px}.intro .eyebrow{letter-spacing:1px;font-size:9px}.result-column{position:static}.share-panel button{width:100%}.share-panel #native-share{margin:8px 0 0}}
+.journey-counts{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:12px}
+.journey-count-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 12px}
+.journey-count-row+.journey-count-row{border-top:1px solid var(--line)}
+.journey-count-row label{display:block;font-size:15px;font-weight:700}
+.count-description{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.stepper{display:flex;align-items:center;border:1px solid #cbd5ca;border-radius:8px;overflow:hidden;flex-shrink:0}
+.stepper button{border:0;background:var(--soft);font-size:22px;color:var(--green);height:46px;width:43px}
+.stepper button:disabled{color:#8a958a;background:#f7f8f5;cursor:default}
+.stepper input{width:39px;min-height:46px;text-align:center;border:0;color:var(--ink);font-size:18px;font-weight:700;appearance:textfield;-moz-appearance:textfield}
+.stepper input::-webkit-inner-spin-button,.stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.stepper input:focus-visible,.stepper button:focus-visible{outline-offset:-3px}
+.travel-pattern{font-size:13px;line-height:1.8;color:#d5dfd0;border-top:1px solid #ffffff20;padding-top:15px;margin-top:18px}
+.travel-pattern ul{list-style:none;padding:0;margin:8px 0 0}.travel-pattern li{padding:5px 0;border-top:1px solid #ffffff10}.travel-pattern li b{display:inline-block;min-width:32px;color:var(--lime)}
+.week-toggle{margin-top:8px}.week-plan{display:grid;gap:8px;margin-top:15px}
+.day-card{border:1px solid var(--line);border-radius:10px;background:#fafbf8;overflow:hidden}
+.day-card>summary{padding:12px;gap:10px;min-height:62px;align-items:center;font-size:12px}
+.day-name{font-size:14px;font-weight:700;min-width:31px}.day-description{flex:1;color:var(--muted);font-weight:400;line-height:1.6}
+.day-card[open]>summary{border-bottom:1px solid var(--line);background:var(--soft)}
+.day-body{padding:0 12px 10px}.day-actions,.day-copy{display:flex;justify-content:space-between;gap:10px}
+.day-body .journey-count-row{padding:10px 0}.day-body .journey-count-row label{font-size:13px}
+.day-body label:not(.check-row){font-size:13px;font-weight:600}.day-body select{font-size:14px;min-height:44px;width:100%;border:1px solid #cbd5ca;border-radius:7px;padding:7px;background:white;color:var(--ink)}
+.day-zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.day-time-label{display:block;margin:10px 0 5px}
+.day-copy{border-top:1px solid var(--line);margin-top:12px}.day-copy .text-button,.day-actions .text-button{font-size:12px}
+@media(max-width:370px){.journey-count-row{padding:12px 9px;gap:7px}.journey-count-row label{font-size:13px}.stepper button{width:35px}.stepper input{width:30px}.count-description{font-size:11px}}
+@media(max-width:650px){body{padding-bottom:85px}.mobile-result{display:flex;position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:16px;right:16px;z-index:10;min-height:54px;align-items:center;justify-content:center;background:var(--green);color:white;padding:12px 14px;border-radius:12px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;box-shadow:0 4px 24px #182e4933}}
+@media(max-width:650px){.intro-meta{font-size:11px;gap:12px}.modes label>span{font-size:12px}.optional summary{font-size:13px}.zone-label{flex-wrap:wrap}.zone-label .text-button{max-width:none}.time-options span{flex-direction:column;align-items:start}.result-card{padding:25px 22px}.comparison-label{font-size:13px}.comparison-label>span{flex-wrap:wrap}.summary-value{display:none}.explainer-grid p{font-size:13px}.intro>p{font-size:15px}}
