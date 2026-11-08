@@ -264,3 +264,18 @@
   width: clamp(170px, 24vw, 320px);
   height: clamp(145px, 20vw, 260px);
 }
+.wish-quiet {
+  background: transparent;
+  border: 0;
+  color: #e8d8b4;
+  font:
+    12px Georgia,
+    serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+.wish-quiet:disabled {
+  opacity: 0.5;
+}

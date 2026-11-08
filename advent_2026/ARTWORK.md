@@ -4,7 +4,7 @@ Generated with the built-in image generation tool, using the user's references f
 
 ## Animated fairy update
 
-The animation source is `artwork/fairy-wingbeats.png`, generated with the built-in image tool. `npm run build:fairy` splits the 4×2 sheet and encodes `public/images/world/winter-fairy-flying.gif` (8 frames, 50 ms each, infinite loop) and `winter-fairy-rest.webp` for reduced motion. The final sheet was checked on the dark woodland background before use.
+The animation source is `artwork/fairy-wingbeats.png`, generated with the built-in image tool. `npm run build:fairy` splits the 4×2 sheet and encodes `src/assets/winter-fairy-flying.gif` (8 frames, 50 ms each, infinite loop) and `winter-fairy-rest.webp` for reduced motion. The final sheet was checked on the dark woodland background before use.
 
 Animation prompt:
 

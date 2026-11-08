@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 const sheet = fileURLToPath(
   new URL("../artwork/fairy-wingbeats.png", import.meta.url),
 );
-const dest = fileURLToPath(new URL("../public/images/world/", import.meta.url));
+const dest = fileURLToPath(new URL("../src/assets/", import.meta.url));
 const { width, height } = await sharp(sheet).metadata();
 const frames = [];
 for (let i = 0; i < 8; i++) {

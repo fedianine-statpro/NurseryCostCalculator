@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import "../styles/wish-magic.css";
+import fairyFlight from "../assets/winter-fairy-flying.gif";
+import fairyStill from "../assets/winter-fairy-rest.webp";
 
 interface WishMagicProps {
   onAwaken?: () => void;
@@ -111,6 +113,15 @@ function FairySilhouette() {
 
 export default function WishMagic({ onAwaken }: WishMagicProps) {
   const [active, setActive] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  useEffect(() => {
+    const media = matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setPrefersReduced(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   const [hasWished, setHasWished] = useState(false);
   const [fairyLoaded, setFairyLoaded] = useState(false);
   const [status, setStatus] = useState("");
@@ -133,14 +144,14 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
     setStatus("Your wish is on its way.");
   }, []);
 
-  function makeWish() {
+  function makeWish(animate: boolean) {
     if (active) return;
     const bounds = button.current?.getBoundingClientRect();
     startPoint.current = {
       x: bounds ? bounds.left + bounds.width / 2 : innerWidth / 2,
       y: bounds ? bounds.top + bounds.height / 2 : innerHeight / 2,
     };
-    reduced.current = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    reduced.current = !animate;
     completed.current = false;
     setStatus("");
     setActive(true);
@@ -340,9 +351,16 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
         ref={button}
         className={`wish-magic-button${active ? " is-casting" : ""}`}
         type="button"
-        aria-label={hasWished ? "Make another wish" : "Make a wish"}
+        aria-label={
+          prefersReduced
+            ? "Watch the fairy fly"
+            : hasWished
+              ? "Make another wish"
+              : "Make a wish"
+        }
+        aria-description="Plays the fairy flight with flapping wings. Press Escape to skip."
         disabled={active}
-        onClick={makeWish}
+        onClick={() => makeWish(true)}
       >
         <span className="wish-magic-orbit" aria-hidden="true" />
         <svg viewBox="0 0 80 80" aria-hidden="true">
@@ -360,9 +378,23 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
           <path d="M40 15V40L18 40L35 35Z" fill="#fffcec" opacity=".9" />
         </svg>
         <span className="wish-magic-label">
-          {hasWished ? "Make another wish" : "Make a wish"}
+          {prefersReduced
+            ? "Watch the fairy fly"
+            : hasWished
+              ? "Make another wish"
+              : "Make a wish"}
         </span>
       </button>
+      {prefersReduced && (
+        <button
+          className="wish-quiet"
+          type="button"
+          disabled={active}
+          onClick={() => makeWish(false)}
+        >
+          Make a quiet wish
+        </button>
+      )}
       <p className="wish-magic-status" role="status" aria-live="polite">
         {status}
       </p>
@@ -389,12 +421,7 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
                     ? "wish-fairy-image is-loaded"
                     : "wish-fairy-image"
                 }
-                src={
-                  import.meta.env.BASE_URL +
-                  (reduced.current
-                    ? "images/world/winter-fairy-rest.webp"
-                    : "images/world/winter-fairy-flying.gif")
-                }
+                src={reduced.current ? fairyStill : fairyFlight}
                 alt=""
                 onLoad={() => setFairyLoaded(true)}
                 onError={() => setFairyLoaded(false)}

@@ -55,6 +55,23 @@ try {
     });
     await page.clock.install({ time: new Date("2026-11-30T23:59:30Z") });
     await page.goto(`http://127.0.0.1:${port}${prefix}`);
+    await page
+      .getByRole("button", { name: "Make a wish", exact: true })
+      .click();
+    await page
+      .locator(".wish-fairy-image.is-loaded")
+      .waitFor({ state: "attached" });
+    const gifURL = await page.locator(".wish-fairy-image").getAttribute("src");
+    assert.match(gifURL, /assets\/winter-fairy-flying-[\w-]+\.gif$/);
+    const gifResponse = await page.request.get(
+      new URL(gifURL, page.url()).href,
+    );
+    assert.equal(gifResponse.status(), 200);
+    assert.equal(
+      (await gifResponse.body()).subarray(0, 6).toString(),
+      "GIF89a",
+    );
+    await page.getByRole("button", { name: "Skip", exact: true }).click();
     await page.getByLabel("Your answer").fill("Фрэнк Гери");
     await page.getByRole("button", { name: "Reveal the magic" }).click();
     await page.locator(".clue").waitFor();
