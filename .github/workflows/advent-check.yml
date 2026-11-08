@@ -1,0 +1,30 @@
+name: Check Advent static files
+on:
+  push:
+    paths: ['advent_2026/**', '.github/workflows/advent-check.yml']
+  pull_request:
+    paths: ['advent_2026/**', '.github/workflows/advent-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: advent_2026
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: advent_2026/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:pages
+      - name: Ensure published files match the source
+        run: |
+          git diff --exit-code -- index.html assets images
+          test -z "$(git ls-files --others --exclude-standard -- index.html assets images)"
