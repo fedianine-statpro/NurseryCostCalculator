@@ -170,7 +170,7 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
     resize();
     window.addEventListener("resize", resize);
     document.body.classList.add("wish-is-flying");
-    const duration = reduced.current ? 2100 : 6700;
+    const duration = reduced.current ? 2100 : 8500;
     const started = performance.now();
     let burst = false;
     const emit = (x: number, y: number, count: number, explosive = false) => {
@@ -390,7 +390,10 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
                     : "wish-fairy-image"
                 }
                 src={
-                  import.meta.env.BASE_URL + "images/world/winter-fairy.webp"
+                  import.meta.env.BASE_URL +
+                  (reduced.current
+                    ? "images/world/winter-fairy-rest.webp"
+                    : "images/world/winter-fairy-flying.gif")
                 }
                 alt=""
                 onLoad={() => setFairyLoaded(true)}

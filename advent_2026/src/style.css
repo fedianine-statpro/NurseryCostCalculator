@@ -145,23 +145,17 @@ header {
   margin: auto;
 }
 h1 {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Great Vibes", cursive;
   font-weight: 400;
-  line-height: 0.98;
-  font-size: clamp(42px, 5vw, 72px);
-  color: #ffeac5;
+  line-height: 1.15;
+  font-size: clamp(56px, 6vw, 88px);
+  color: #fff1d3;
   text-shadow:
     0 3px 35px #000,
     0 1px 4px #02102e;
   margin: 0 0 18px;
 }
-h1 > span {
-  font-family: "Great Vibes", cursive;
-  display: block;
-  font-size: clamp(44px, 4.5vw, 68px);
-  margin-bottom: 5px;
-  color: #fff6e6;
-}
+
 h2 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
@@ -750,14 +744,12 @@ aside p {
     min-height: 320px;
   }
   h1 {
-    font-size: 43px;
+    font-size: 60px;
     line-height: 1.05;
     max-width: 340px;
     margin: 0 auto 16px;
   }
-  h1 > span {
-    font-size: 48px;
-  }
+
   .parchment {
     margin: 24px 18px 0;
     width: calc(100% - 36px);
@@ -846,5 +838,9 @@ aside p {
   }
 }
 
-.woodland-art {transition: filter 1.8s ease;}
-.awakened .woodland-art {filter: brightness(1.06) saturate(1.08);}
+.woodland-art {
+  transition: filter 1.8s ease;
+}
+.awakened .woodland-art {
+  filter: brightness(1.06) saturate(1.08);
+}

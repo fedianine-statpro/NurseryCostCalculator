@@ -1,4 +1,4 @@
-# Alsu’s Enchanted Advent
+# Alsu’s Advent
 
 A personal Christmas woodland built with React, TypeScript, Vite and original painted Christmas artwork and custom animation. All assets are local. No runtime service, account or API is needed. Audio is omitted to keep the woodland quiet and lightweight.
 
@@ -16,7 +16,7 @@ npm run build
 npm run preview
 ```
 
-Open the URL printed by Vite. The development workshop at the bottom lets you simulate any date, including 1–25 December 2026. Development progress is isolated from public progress. Reset development progress clears only the current development namespace. The public preview has its own “Reset preview” control.
+Open the URL printed by Vite. The development workshop at the bottom lets you simulate any date, including 1–25 December 2026. Development progress is isolated from public progress. Reset development progress clears only the current development namespace. Preview attempts and answers live only in memory and reset every time you reload. There is no public reset button. Real December progress still saves across reloads.
 
 ## Personalise the gifts
 
@@ -38,7 +38,7 @@ Edit quiz questions, aliases, three distractors and trivia in `src/data/question
 
 The season is December 2026. `Intl.DateTimeFormat` uses Europe/London, independent of the device timezone. Before December only Day 1 preview is available. During Advent today appears directly, with doors for past days. From Christmas Day all 24 doors remain playable. A one-second check and focus/visibility checks update an open page. A date change returns to today automatically.
 
-Storage keys are `alsu-enchanted-advent:2026:v1:real` and `:preview`, with an extra `development:` namespace locally. Preserve these keys across releases. Wrong text attempts (capped at two), multiple choice, completion and reveal are stored independently for each day. Browser storage is specific to a device and browser; clearing browser data removes progress. If saving fails the page continues in memory and displays a message. No public real-progress reset is exposed. Future content is excluded from rendering, though all questions are intentionally present in the client bundle.
+Real progress uses `alsu-enchanted-advent:2026:v1:real`, with an extra `development:` namespace locally. Old `:preview` records are ignored: preview progress is never loaded or saved. Preserve these keys across releases. Wrong text attempts (capped at two), multiple choice, completion and reveal are stored independently for each day. Browser storage is specific to a device and browser; clearing browser data removes progress. If saving fails the page continues in memory and displays a message. No public real-progress reset is exposed. Future content is excluded from rendering, though all questions are intentionally present in the client bundle.
 
 ## GitHub Pages deployment
 
@@ -50,8 +50,12 @@ The original development HTML entry is `src/index.html`. After editing questions
 
 The workflow at `../.github/workflows/advent-check.yml` checks the build and static site without changing the repository’s Pages deployment settings. It fails if the committed published files are out of date. Publication happens through the existing branch deployment after pushing; local verification does not publish the site.
 
-Run `npm run test:pages` to test the actual published folder through an ordinary static HTTP server at both URL prefixes. This verifies asset loading, the answer/reveal flow, saved preview progress, the London midnight transition, mobile overflow and absence of development controls. No Vite server or source transformation is used for this check.
+Run `npm run test:pages` to test the actual published folder through an ordinary static HTTP server at both URL prefixes. This verifies asset loading, the answer/reveal flow, preview reset on reload, the London midnight transition, mobile overflow and absence of development controls. No Vite server or source transformation is used for this check.
 
 ## Verification and accessibility
 
 Vitest covers all aliases and distractors, whole-answer rejection, date boundaries and progress transitions. Playwright covers preview help, reloads, reveal, past doors, return navigation and mobile overflow. The woodland, fairy, doors and gift illustration were generated for this project using the built-in image generation tool, then saved locally as compressed WebP. Cormorant Garamond and Great Vibes are bundled locally, with their OFL licenses in `licenses/`. No fonts or images are loaded from external services. See `ARTWORK.md` for the artwork prompts and file locations. Decorative art is hidden from assistive technology. Forms have labels, feedback uses live status, doors are keyboard buttons and reduced motion removes decorative movement and shortens door transitions.
+
+## Fairy animation
+
+The live fairy uses `public/images/world/winter-fairy-flying.gif`: eight transparent wing-beat frames, looping every 400 ms, while the page moves her along a flight path. Reduced-motion users receive `winter-fairy-rest.webp` and a short stationary effect. The source sheet is `artwork/fairy-wingbeats.png`; run `npm run build:fairy` to regenerate the GIF and still, then `npm run build` to refresh the directly hosted files. Trivia references for all 24 notes are in `TRIVIA-SOURCES.md`.

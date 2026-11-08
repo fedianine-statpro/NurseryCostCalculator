@@ -33,7 +33,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Kandinsky", "Chagall", "Repin"],
     interestingFact:
-      "Malevich first exhibited Black Square in 1915, opening a bold new chapter in abstract art.",
+      "When Black Square was first exhibited in 1915, Malevich hung it high across a corner of the room—the place traditionally reserved for a religious icon in a Russian home.",
   },
   {
     day: 3,
@@ -44,7 +44,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Athene", "Афина", "Pallas Athena"],
     incorrectOptions: ["Hera", "Aphrodite", "Artemis"],
     interestingFact:
-      "Athena helps Odysseus with wisdom, disguises and divine encouragement throughout the Odyssey.",
+      "Athena does not always arrive looking like a goddess. In the Odyssey, she borrows the appearance of Mentor, an old family friend, to guide Odysseus’s son Telemachus.",
   },
   {
     day: 4,
@@ -55,7 +55,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Юпитер"],
     incorrectOptions: ["Saturn", "Mars", "Neptune"],
     interestingFact:
-      "Jupiter spins once in about ten hours, giving it the shortest day of any planet in our Solar System.",
+      "Jupiter spins once in about ten hours, giving it the shortest day of any planet in our Solar System. Even its largest moon, Ganymede, is bigger than the planet Mercury.",
   },
   {
     day: 5,
@@ -66,7 +66,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Antonio Vivaldi", "Вивальди", "Антонио Вивальди"],
     incorrectOptions: ["Bach", "Handel", "Mozart"],
     interestingFact:
-      "Published in 1725, The Four Seasons brings birdsong, thunderstorms and icy winds to life through music.",
+      "Vivaldi’s Four Seasons came with poems describing the scenes in the music. In Spring, the viola even plays the part of a barking dog beside a sleeping shepherd.",
   },
   {
     day: 6,
@@ -82,7 +82,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Patrick", "George", "Andrew"],
     interestingFact:
-      "Nicholas was a bishop of Myra, in what is now Türkiye. Stories of his generosity helped inspire Christmas gift giving.",
+      "In paintings, Saint Nicholas often carries three golden balls. They represent the bags of gold he secretly gave to three young women in a famous legend about his generosity.",
   },
   {
     day: 7,
@@ -101,7 +101,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Moscow", "Riga", "Sochi"],
     interestingFact:
-      "First broadcast on 1 January 1976, The Irony of Fate became a much loved New Year viewing tradition.",
+      "Nadya’s “Leningrad” apartment building in The Irony of Fate was actually filmed in Moscow. Her home and Zhenya’s were on the same avenue, at numbers 113 and 125.",
   },
   {
     day: 8,
@@ -112,7 +112,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Gustav Klimt", "Климт", "Густав Климт"],
     incorrectOptions: ["Monet", "Munch", "Mucha"],
     interestingFact:
-      "Klimt used real gold leaf in The Kiss. Today it glows in the collection of the Belvedere in Vienna.",
+      "The Kiss does not shimmer with gold alone: Klimt also used silver and platinum leaf. Its precious surface changes as the light moves across it.",
   },
   {
     day: 9,
@@ -123,7 +123,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Прана"],
     incorrectOptions: ["Mantra", "Asana", "Mudra"],
     interestingFact:
-      "Pranayama, the yogic practice of working with the breath, takes part of its name from prana.",
+      "Yoga traditions describe prana as moving through five vayus, or “winds”. Each has a different role, from drawing energy inward to carrying it throughout the body.",
   },
   {
     day: 10,
@@ -134,7 +134,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["The Gherkin"],
     incorrectOptions: ["Shard", "Cheesegrater", "Scalpel"],
     interestingFact:
-      "The Gherkin opened in 2004. Its spiralling bands of glass make its rounded silhouette instantly recognisable.",
+      "Despite the Gherkin’s rounded shape, its exterior glass panels are flat. Just one curved piece crowns the very top: a lens-shaped pane 2.4 metres across.",
   },
   {
     day: 11,
@@ -145,7 +145,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Slovenija", "Словения"],
     incorrectOptions: ["Austria", "Switzerland", "Croatia"],
     interestingFact:
-      "Legend says that ringing the wishing bell in the church on Bled Island can help a heartfelt wish come true.",
+      "Bled Island’s church is reached by 99 stone steps. A local wedding tradition asks the groom to carry his bride up every one of them before they marry there.",
   },
   {
     day: 12,
@@ -156,7 +156,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Venezia", "Венеция"],
     incorrectOptions: ["Florence", "Rome", "Verona"],
     interestingFact:
-      "Othello begins in Venice before the action moves to Cyprus. The sea connects two very different worlds.",
+      "Venice is spread across 118 small islands. Its canals are the spaces between them, with bridges stitching the city together over the lagoon.",
   },
   {
     day: 13,
@@ -167,7 +167,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Frida Kahlo", "Фрида Кало", "Кало"],
     incorrectOptions: ["Rivera", "O'Keeffe", "Carrington"],
     interestingFact:
-      "Kahlo’s beloved Blue House in Mexico City, where she was born, is now a museum celebrating her life and work.",
+      "Frida Kahlo had a mirror fitted beneath the canopy of her bed, allowing her to paint self-portraits while lying down. That bed can still be seen in her Blue House museum.",
   },
   {
     day: 14,
@@ -178,7 +178,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Queen Victoria", "Виктория", "Королева Виктория"],
     incorrectOptions: ["Charlotte", "Elizabeth", "Anne"],
     interestingFact:
-      "The Illustrated London News published the royal family’s tree in 1848, inspiring households to decorate trees of their own.",
+      "Victoria and Albert’s family exchanged presents on Christmas Eve, following German tradition. The royal family still follows that custom today.",
   },
   {
     day: 15,
@@ -194,7 +194,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Gropius", "Aalto", "Neutra"],
     interestingFact:
-      "Wright designed Fallingwater in 1935. Its terraces reach over Bear Run, bringing the sound of water into everyday life.",
+      "A glass hatch in Fallingwater’s living room opens onto a staircase that descends towards Bear Run, the stream beneath the house.",
   },
   {
     day: 16,
@@ -205,7 +205,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Паддингтон"],
     incorrectOptions: ["Rupert", "Winnie", "Baloo"],
     interestingFact:
-      "Michael Bond’s first Paddington book appeared in 1958. The little bear has a great fondness for marmalade.",
+      "Paddington began with a real toy bear Michael Bond spotted alone on a Selfridges shelf on Christmas Eve in 1956. Bond bought it for his wife, and a story soon followed.",
   },
   {
     day: 17,
@@ -216,7 +216,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Sakura", "Сакура", "Вишня"],
     incorrectOptions: ["Maple", "Pine", "Apple"],
     interestingFact:
-      "Hanami means flower viewing. The brief cherry blossom season is an invitation to enjoy beauty while it lasts.",
+      "Hanami was not always about cherry blossom. Early flower-viewing celebrations in Japan admired plum blossom; cherries became the best-known stars of the tradition later.",
   },
   {
     day: 18,
@@ -232,7 +232,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Rainbow", "Eclipse", "Halo"],
     interestingFact:
-      "Auroras glow when charged particles interact with gases in Earth’s atmosphere. Oxygen can create their familiar green light.",
+      "The northern lights get their colours from different gases: oxygen glows green or red, while nitrogen can glow blue or purple. Even the height of the glowing gas changes the colours you see.",
   },
   {
     day: 19,
@@ -243,7 +243,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Jane Austen", "Остин", "Джейн Остин"],
     incorrectOptions: ["Bronte", "Dickens", "Eliot"],
     interestingFact:
-      "Pride and Prejudice was published in 1813. Austen’s playful dialogue still sparkles two centuries later.",
+      "Austen first called Pride and Prejudice First Impressions. She began that early version around 1796, years before Elizabeth Bennet and Mr Darcy finally reached readers in 1813.",
   },
   {
     day: 20,
@@ -254,7 +254,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Incas", "Инки", "Инка"],
     incorrectOptions: ["Maya", "Aztec", "Olmec"],
     interestingFact:
-      "Built in the fifteenth century, Machu Picchu’s carefully fitted stone buildings sit high above Peru’s Urubamba valley.",
+      "The Incas fitted the finest stone walls at Machu Picchu together without mortar. Each block was shaped to meet its neighbours, like pieces of an enormous stone puzzle.",
   },
   {
     day: 21,
@@ -265,7 +265,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Шотландия"],
     incorrectOptions: ["Ireland", "Wales", "Denmark"],
     interestingFact:
-      "First footers may bring symbolic gifts such as shortbread or coal, wishing the household food and warmth.",
+      "Christmas Day only became a public holiday in Scotland in 1958. At Hogmanay, a first-footer may bring shortbread or coal, wishing the household food and warmth for the year ahead.",
   },
   {
     day: 22,
@@ -282,7 +282,7 @@ export const questions: Question[] = [
     ],
     incorrectOptions: ["Sondheim", "Bernstein", "Gershwin"],
     interestingFact:
-      "Cats was inspired by T. S. Eliot’s cat poems. It opened in London in 1981, five years before The Phantom of the Opera.",
+      "Cats grew from T. S. Eliot’s poems rather than a conventional script. Grizabella, the cat who sings Memory, came from an unpublished poem supplied by Eliot’s widow.",
   },
   {
     day: 23,
@@ -293,7 +293,7 @@ export const questions: Question[] = [
     acceptedAnswers: ["Howard Carter", "Картер", "Говард Картер"],
     incorrectOptions: ["Evans", "Petrie", "Champollion"],
     interestingFact:
-      "Carter’s discovery revealed treasures that had rested in Tutankhamun’s tomb for more than three thousand years.",
+      "Before finding Tutankhamun, Carter went to Egypt at just seventeen to work as an archaeological artist. His careful watercolours recorded ancient paintings as well as the birds and wildlife around him.",
   },
   {
     day: 24,
@@ -304,6 +304,6 @@ export const questions: Question[] = [
     acceptedAnswers: ["The Nutcracker", "Щелкунчик"],
     incorrectOptions: ["Cinderella", "Giselle", "Coppélia"],
     interestingFact:
-      "Tchaikovsky’s ballet premiered in 1892. The Sugar Plum Fairy’s shimmering music features the bell-like celesta.",
+      "The Nutcracker premiered in 1892. The Sugar Plum Fairy’s bell-like celesta looks a little like a piano, but its felt hammers strike metal plates rather than strings.",
   },
 ];

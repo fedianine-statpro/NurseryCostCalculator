@@ -70,7 +70,9 @@ function Experience({
   storeKey: string;
   dev: React.ReactNode;
 }) {
-  const [progress, setProgress] = useState(() => load(storeKey));
+  const [progress, setProgress] = useState<ReturnType<typeof load>>(() =>
+    date.preview ? {} : load(storeKey),
+  );
   const [selected, setSelected] = useState<number | null>(date.today);
   const [opening, setOpening] = useState<number | null>(null);
   const [answer, setAnswer] = useState("");
@@ -92,6 +94,7 @@ function Experience({
   }, [selected]);
   function persist(next: typeof progress) {
     setProgress(next);
+    if (date.preview) return;
     try {
       localStorage.setItem(storeKey, JSON.stringify(next));
       setSaveError(false);
@@ -107,7 +110,7 @@ function Experience({
     setAnswer("");
     setFeedback(
       correct
-        ? "You found it! ✨"
+        ? ""
         : next.multiple
           ? "A little help: choose an answer below."
           : "Not quite. Try once more. ✨",
@@ -136,7 +139,7 @@ function Experience({
   }
   function reset() {
     persist({});
-    setFeedback("A fresh sprinkle of preview magic.");
+    setFeedback("");
     setCelebrate(false);
   }
   const complete = Object.entries(progress).filter(
@@ -161,9 +164,7 @@ function Experience({
         ))}
       </div>
       <header>
-        <h1>
-          <span>Alsu’s</span> Enchanted Advent
-        </h1>
+        <h1>Alsu’s Advent</h1>
         <WishMagic onAwaken={() => setAwakened(true)} />
       </header>
       <main>
@@ -188,13 +189,11 @@ function Experience({
               <span className="seal" aria-hidden="true">
                 ✧
               </span>
-              <div className="eyebrow ink">
-                {date.preview
-                  ? "A LITTLE PREVIEW"
-                  : selected === date.today
-                    ? "TODAY"
-                    : "FROM YOUR ADVENT"}
-              </div>
+              {!date.preview && (
+                <div className="eyebrow ink">
+                  {selected === date.today ? "TODAY" : "FROM YOUR ADVENT"}
+                </div>
+              )}
               <p className="date">
                 {q.day} December <span>· {q.category}</span>
               </p>
@@ -212,12 +211,7 @@ function Experience({
                       ))}
                     </div>
                   )}
-                  <div className="success" role="status">
-                    {celebrate
-                      ? "✦ You found the magic! ✦"
-                      : "✦ Your little treasure awaits ✦"}
-                  </div>
-                  <p className="clue">
+                  <p className="clue" role="status">
                     {gifts[q.day].giftClue ||
                       "Your secret hiding place will be revealed here."}
                   </p>
@@ -317,15 +311,6 @@ function Experience({
               Your browser could not save progress. Keep this page open to keep
               your discoveries.
             </p>
-          )}
-          {date.preview && (
-            <button
-              className="reset"
-              title="Clears preview answers only. Real December progress is separate."
-              onClick={reset}
-            >
-              ↻ Reset preview
-            </button>
           )}
         </section>
         {date.past.length > 0 && (

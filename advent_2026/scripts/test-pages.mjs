@@ -15,6 +15,7 @@ const mime = {
   ".webp": "image/webp",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".gif": "image/gif",
 };
 const prefixes = ["/advent_2026/", "/NurseryCostCalculator/advent_2026/"];
 const server = http.createServer(async (req, res) => {
@@ -64,7 +65,8 @@ try {
       0,
     );
     await page.reload();
-    await page.locator(".clue").waitFor();
+    await page.getByLabel("Your answer").waitFor();
+    assert.equal(await page.locator(".clue").count(), 0);
     await page.clock.fastForward(31000);
     await page.getByLabel("Your answer").waitFor();
     assert.equal(await page.getByText("TODAY").count(), 1);
@@ -83,15 +85,36 @@ try {
     });
     await page.clock.setFixedTime(new Date("2026-12-11T12:00:00Z"));
     await page.clock.runFor(1100);
-    await page.getByRole("button", {name:"Open 1 December", exact:true}).waitFor();
-    assert.equal(await page.getByRole("button", {name:/Open .* December/}).count(),10);
-    const textures = await page.locator(".door-leaf").evaluateAll(doors=>Array.from(new Set(doors.map(d=>getComputedStyle(d).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1]).filter(Boolean))));
-    assert.equal(textures.length,6);
-    for (const texture of textures) assert.equal((await page.request.get(texture)).status(),200);
+    await page
+      .getByRole("button", { name: "Open 1 December", exact: true })
+      .waitFor();
+    assert.equal(
+      await page.getByRole("button", { name: /Open .* December/ }).count(),
+      10,
+    );
+    const textures = await page
+      .locator(".door-leaf")
+      .evaluateAll((doors) =>
+        Array.from(
+          new Set(
+            doors
+              .map(
+                (d) =>
+                  getComputedStyle(d).backgroundImage.match(
+                    /url\(["']?(.*?)["']?\)/,
+                  )?.[1],
+              )
+              .filter(Boolean),
+          ),
+        ),
+      );
+    assert.equal(textures.length, 6);
+    for (const texture of textures)
+      assert.equal((await page.request.get(texture)).status(), 200);
     assert.deepEqual(errors, []);
     await context.close();
     console.log(
-      `PASS: static ${prefix}, assets, Cyrillic answer, persisted preview, London midnight, no development controls, no overflow or browser errors`,
+      `PASS: static ${prefix}, assets, Cyrillic answer, preview reset on reload, London midnight, no development controls, no overflow or browser errors`,
     );
   }
 } finally {
