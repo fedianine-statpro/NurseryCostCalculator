@@ -1,6 +1,6 @@
 # Alsu’s Enchanted Advent
 
-A personal Christmas woodland built with React, TypeScript, Vite and original SVG/CSS artwork. All assets are local. No runtime service, account or API is needed. Audio is omitted to keep the woodland quiet and lightweight.
+A personal Christmas woodland built with React, TypeScript, Vite and original painted Christmas artwork and custom animation. All assets are local. No runtime service, account or API is needed. Audio is omitted to keep the woodland quiet and lightweight.
 
 ## Local development
 
@@ -16,7 +16,7 @@ npm run build
 npm run preview
 ```
 
-Open the URL printed by Vite. The development workshop at the bottom lets you simulate any date, including 1–25 December 2026. Development progress is isolated from public progress. Reset development progress clears only the current development namespace. The public preview has its own “Begin the preview again” control.
+Open the URL printed by Vite. The development workshop at the bottom lets you simulate any date, including 1–25 December 2026. Development progress is isolated from public progress. Reset development progress clears only the current development namespace. The public preview has its own “Reset preview” control.
 
 ## Personalise the gifts
 
@@ -54,4 +54,4 @@ Run `npm run test:pages` to test the actual published folder through an ordinary
 
 ## Verification and accessibility
 
-Vitest covers all aliases and distractors, whole-answer rejection, date boundaries and progress transitions. Playwright covers preview help, reloads, reveal, past doors, return navigation and mobile overflow. All illustrations are original SVG/CSS. Georgia and system fonts avoid external downloads. Decorative art is hidden from assistive technology. Forms have labels, feedback uses live status, doors are keyboard buttons and reduced motion removes decorative movement and shortens door transitions.
+Vitest covers all aliases and distractors, whole-answer rejection, date boundaries and progress transitions. Playwright covers preview help, reloads, reveal, past doors, return navigation and mobile overflow. The woodland, fairy, doors and gift illustration were generated for this project using the built-in image generation tool, then saved locally as compressed WebP. Cormorant Garamond and Great Vibes are bundled locally, with their OFL licenses in `licenses/`. No fonts or images are loaded from external services. See `ARTWORK.md` for the artwork prompts and file locations. Decorative art is hidden from assistive technology. Forms have labels, feedback uses live status, doors are keyboard buttons and reduced motion removes decorative movement and shortens door transitions.

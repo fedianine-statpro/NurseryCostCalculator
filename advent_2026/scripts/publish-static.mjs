@@ -13,6 +13,13 @@ for (const name of await readdir(assets)) {
   }
 }
 await cp(path.join(dist, "assets"), assets, { recursive: true });
-await cp(path.join(dist, "images"), path.join(root, "images"), { recursive: true });
-await writeFile(path.join(root, "index.html"), await readFile(path.join(dist, "index.html")));
-console.log("GitHub Pages files refreshed: index.html, assets/, images/. Commit these with source changes.");
+await cp(path.join(dist, "images"), path.join(root, "images"), {
+  recursive: true,
+});
+await writeFile(
+  path.join(root, "index.html"),
+  await readFile(path.join(dist, "index.html")),
+);
+console.log(
+  "GitHub Pages files refreshed: index.html, assets/, images/. Commit these with source changes.",
+);

@@ -12,6 +12,10 @@ import {
   shuffled,
 } from "./logic";
 import { World } from "./World";
+import "@fontsource/cormorant-garamond/latin-400.css";
+import "@fontsource/cormorant-garamond/latin-500.css";
+import "@fontsource/great-vibes/latin-400.css";
+import WishMagic from "./components/WishMagic";
 import "./style.css";
 function App() {
   const [override, setOverride] = useState("");
@@ -72,7 +76,7 @@ function Experience({
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [celebrate, setCelebrate] = useState(false);
-  const [star, setStar] = useState(false);
+  const [awakened, setAwakened] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -103,10 +107,10 @@ function Experience({
     setAnswer("");
     setFeedback(
       correct
-        ? "The magic was in you all along. ✨"
+        ? "You found it! ✨"
         : next.multiple
-          ? "A little elf has brought you four choices. Your present is waiting patiently."
-          : "Not quite! A little Christmas magic says you should try once more. ✨",
+          ? "A little help: choose an answer below."
+          : "Not quite. Try once more. ✨",
     );
     setCelebrate(correct);
   }
@@ -139,7 +143,11 @@ function Experience({
     ([d, p]) => p.completed && (date.past.includes(+d) || date.today === +d),
   ).length;
   return (
-    <div className={date.finale ? "app finale" : "app"}>
+    <div
+      className={
+        "app" + (date.finale ? " finale" : "") + (awakened ? " awakened" : "")
+      }
+    >
       <a className="skip" href="#experience">
         Skip to your Christmas question
       </a>
@@ -153,28 +161,10 @@ function Experience({
         ))}
       </div>
       <header>
-        <span className="eyebrow">A CHRISTMAS STORY • MADE JUST FOR YOU</span>
         <h1>
-          Alsu’s <em>Enchanted Advent</em>
+          <span>Alsu’s</span> Enchanted Advent
         </h1>
-        <p>A little magic, a little mystery, and a surprise just for you.</p>
-        <div className="dedication">
-          My darling Alsu, follow the little lights.
-          <br />
-          Something wonderful is waiting to be found.
-        </div>
-        <button
-          className={"wish " + (star ? "twinkled" : "")}
-          aria-label="Touch the wishing star"
-          onClick={() => setStar(!star)}
-        >
-          ✧
-        </button>
-        <span className="wish-note" role="status">
-          {star
-            ? "A tiny wish, sent into the winter sky."
-            : "Touch a star. Make a wish."}
-        </span>
+        <WishMagic onAwaken={() => setAwakened(true)} />
       </header>
       <main>
         <section
@@ -200,10 +190,10 @@ function Experience({
               </span>
               <div className="eyebrow ink">
                 {date.preview
-                  ? "AN EARLY CHRISTMAS PREVIEW"
+                  ? "A LITTLE PREVIEW"
                   : selected === date.today
-                    ? "TODAY’S LITTLE WONDER"
-                    : "A LITTLE WONDER TO REVISIT"}
+                    ? "TODAY"
+                    : "FROM YOUR ADVENT"}
               </div>
               <p className="date">
                 {q.day} December <span>· {q.category}</span>
@@ -213,6 +203,15 @@ function Experience({
               </h2>
               {p.completed ? (
                 <div className="reveal">
+                  {celebrate && (
+                    <div className="reveal-sparks" aria-hidden="true">
+                      {Array.from({ length: 18 }, (_, i) => (
+                        <i key={i} style={{ "--i": i } as React.CSSProperties}>
+                          ✦
+                        </i>
+                      ))}
+                    </div>
+                  )}
                   <div className="success" role="status">
                     {celebrate
                       ? "✦ You found the magic! ✦"
@@ -229,7 +228,8 @@ function Experience({
                       gifts[q.day].giftImage
                         ? import.meta.env.BASE_URL +
                           gifts[q.day].giftImage!.replace(/^\//, "")
-                        : import.meta.env.BASE_URL + "images/gift.svg"
+                        : import.meta.env.BASE_URL +
+                          "images/gift-illustration.webp"
                     }
                     alt={
                       gifts[q.day].giftImage
@@ -238,7 +238,8 @@ function Experience({
                     }
                     onError={(e) => {
                       e.currentTarget.src =
-                        import.meta.env.BASE_URL + "images/gift.svg";
+                        import.meta.env.BASE_URL +
+                        "images/gift-illustration.webp";
                       e.currentTarget.alt =
                         "An illustrated gift — photograph unavailable";
                     }}
@@ -257,11 +258,6 @@ function Experience({
                 </div>
               ) : (
                 <>
-                  <p className="hint">
-                    {p.multiple
-                      ? "A little woodland help has arrived. Choose an answer below."
-                      : "One little answer will unlock your surprise. English or Russian, as you wish."}
-                  </p>
                   {p.multiple ? (
                     <div className="choices">
                       {choices.map((c) => (
@@ -295,10 +291,7 @@ function Experience({
                     </form>
                   )}
                   <p className="feedback" role="status">
-                    {feedback ||
-                      (p.wrong === 1
-                        ? "A little Christmas magic says you should try once more. ✨"
-                        : "Take your time. A little wonder is worth wondering about.")}
+                    {feedback || (p.wrong === 1 ? "Try once more. ✨" : "")}
                   </p>
                 </>
               )}
@@ -326,73 +319,64 @@ function Experience({
             </p>
           )}
           {date.preview && (
-            <button className="reset" onClick={reset}>
-              ↻ Begin the preview again
+            <button
+              className="reset"
+              title="Clears preview answers only. Real December progress is separate."
+              onClick={reset}
+            >
+              ↻ Reset preview
             </button>
           )}
         </section>
-        <section className="village" aria-labelledby="village-title">
-          <div className="section-ornament" aria-hidden="true">
-            ──── ✧ ────
-          </div>
-          <span className="eyebrow">DOWN THE LANTERN PATH</span>
-          <h2 id="village-title">
-            {date.past.length
-              ? "The village of little wonders"
-              : "The woodland is keeping its secrets"}
-          </h2>
-          <p>
-            {date.past.length
-              ? "Old doors, warm memories. Every little wonder is still here for you."
-              : "For now, settle in and enjoy your first little taste of Christmas."}
-          </p>
-          {complete > 0 && (
-            <p className="progress">
-              {"✦ ".repeat(Math.min(complete, 24))}
-              <span>
-                {complete} {complete === 1 ? "little light" : "little lights"}{" "}
-                kindled
-              </span>
-            </p>
-          )}
-          <div className="doors">
-            {date.past.map((d) => (
-              <button
-                key={d}
-                className={
-                  "door-scene variant-" +
-                  (d % 6) +
-                  (opening === d ? " opening" : "") +
-                  (progress[d]?.completed ? " completed" : "")
-                }
-                aria-label={
-                  "Open " +
-                  d +
-                  " December" +
-                  (progress[d]?.completed ? ", completed" : "")
-                }
-                onClick={() => visit(d)}
-              >
-                <span className="cottage">
-                  <span className="roof" />
-                  <span className="door-frame">
-                    <span className="light" />
-                    <span className="door-leaf">
-                      <span className="wreath">❧</span>
-                      <span className="number">{d}</span>
-                      <span className="handle" />
+        {date.past.length > 0 && (
+          <section className="village" aria-labelledby="village-title">
+            <h2 id="village-title">Your Advent doors</h2>
+            {complete > 0 && (
+              <div className="progress" aria-label={complete + " discoveries"}>
+                {"✦ ".repeat(Math.min(complete, 24))}
+              </div>
+            )}
+            <div className="doors">
+              {date.past.map((d) => (
+                <button
+                  key={d}
+                  className={
+                    "door-scene variant-" +
+                    (d % 6) +
+                    (opening === d ? " opening" : "") +
+                    (progress[d]?.completed ? " completed" : "")
+                  }
+                  aria-label={
+                    "Open " +
+                    d +
+                    " December" +
+                    (progress[d]?.completed ? ", completed" : "")
+                  }
+                  onClick={() => visit(d)}
+                >
+                  <span className="cottage">
+                    <span className="roof" />
+                    <span className="door-frame">
+                      <span className="light" />
+                      <span className="door-leaf">
+                        <span className="door-spark" aria-hidden="true">
+                          ✦
+                        </span>
+                        <span className="number">{d}</span>
+                        <span className="handle" />
+                      </span>
+                    </span>
+                    <span className="step" />
+                    <span className="completed-star" aria-hidden="true">
+                      {progress[d]?.completed ? "✦" : ""}
                     </span>
                   </span>
-                  <span className="step" />
-                  <span className="completed-star" aria-hidden="true">
-                    {progress[d]?.completed ? "✦" : ""}
-                  </span>
-                </span>
-                <span className="door-caption">{d} December</span>
-              </button>
-            ))}
-          </div>
-        </section>
+                  <span className="door-caption">{d} December</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
         {import.meta.env.DEV && (
           <button className="reset" onClick={reset}>
             Reset development progress
@@ -400,10 +384,6 @@ function Experience({
         )}
         {dev}
       </main>
-      <footer>
-        Made with love, and a little Christmas magic.
-        <span>Alsu’s enchanted woodland · Christmas 2026</span>
-      </footer>
     </div>
   );
 }
