@@ -155,39 +155,18 @@ test("wish creates a visible star flight and fairy, and can be replayed", async 
     .evaluate((el) => getComputedStyle(el).transform);
   expect(initial).not.toBe(later);
   await page.screenshot({ path: "test-results/wish-magic.png" });
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  await page.getByRole("button", { name: "Skip animation", exact: true }).click();
   await expect(page.locator(".wish-magic-sky")).toHaveCount(0);
   await expect(page.locator(".app")).toHaveClass(/awakened/);
   await page
-    .getByRole("button", { name: "Make another wish", exact: true })
+    .getByRole("button", { name: "Make a wish", exact: true })
     .click();
   await expect(page.locator(".wish-magic-canvas")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.locator(".wish-magic-sky")).toHaveCount(0);
 });
 
-test("reduced motion wish completes and leaves the form usable", async ({
-  page,
-}) => {
-  await page.clock.install({ time: new Date("2026-11-20T12:00:00Z") });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  await page
-    .getByRole("button", { name: "Make a quiet wish", exact: true })
-    .click();
-  await expect(page.locator(".wish-magic-reduced")).toBeVisible();
-  await expect(page.locator(".wish-fairy-image")).toHaveAttribute(
-    "src",
-    /winter-fairy-rest\.webp$/,
-  );
-  await page.clock.runFor(2200);
-  await expect(
-    page.getByRole("button", { name: "Watch the fairy fly", exact: true }),
-  ).toBeEnabled({ timeout: 4000 });
-  await page.getByLabel("Your answer").fill("Gehry");
-  await page.getByRole("button", { name: "Reveal the magic" }).click();
-  await expect(page.locator(".clue")).toBeVisible();
-});
+test("wish controls contain only the star, including with reduced motion",async({page})=>{await page.emulateMedia({reducedMotion:"reduce"});await page.goto("/");await expect(page.locator(".wish-magic-button")).toHaveText("");await expect(page.locator(".wish-magic button")).toHaveCount(1);await expect(page.getByRole("button",{name:"Make a wish",exact:true})).toBeVisible();});
 
 test("full fairy flight can be explicitly played with reduced motion enabled", async ({
   page,
@@ -196,7 +175,7 @@ test("full fairy flight can be explicitly played with reduced motion enabled", a
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await page
-    .getByRole("button", { name: "Watch the fairy fly", exact: true })
+    .getByRole("button", { name: "Make a wish", exact: true })
     .click();
   await expect(page.locator(".wish-fairy-image")).toHaveAttribute(
     "src",
@@ -212,7 +191,7 @@ test("full fairy flight can be explicitly played with reduced motion enabled", a
     .locator(".wish-fairy")
     .evaluate((el) => el.style.transform);
   expect(second).not.toBe(first);
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  await page.getByRole("button", { name: "Skip animation", exact: true }).click();
 });
 
 test("fairy GIF contains visible changing wing frames", async ({ page }) => {
@@ -227,5 +206,5 @@ test("fairy GIF contains visible changing wing frames", async ({ page }) => {
   await page.waitForTimeout(130);
   const second = await page.locator(".wish-fairy-image").screenshot();
   expect(first.equals(second)).toBe(false);
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  await page.getByRole("button", { name: "Skip animation", exact: true }).click();
 });

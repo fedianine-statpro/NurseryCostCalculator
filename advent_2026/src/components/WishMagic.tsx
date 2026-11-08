@@ -113,16 +113,6 @@ function FairySilhouette() {
 
 export default function WishMagic({ onAwaken }: WishMagicProps) {
   const [active, setActive] = useState(false);
-  const [prefersReduced, setPrefersReduced] = useState(
-    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-  useEffect(() => {
-    const media = matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setPrefersReduced(media.matches);
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-  const [hasWished, setHasWished] = useState(false);
   const [fairyLoaded, setFairyLoaded] = useState(false);
   const [status, setStatus] = useState("");
   const button = useRef<HTMLButtonElement>(null);
@@ -140,7 +130,6 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
       callback.current?.();
     }
     setActive(false);
-    setHasWished(true);
     setStatus("Your wish is on its way.");
   }, []);
 
@@ -351,13 +340,7 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
         ref={button}
         className={`wish-magic-button${active ? " is-casting" : ""}`}
         type="button"
-        aria-label={
-          prefersReduced
-            ? "Watch the fairy fly"
-            : hasWished
-              ? "Make another wish"
-              : "Make a wish"
-        }
+        aria-label="Make a wish"
         aria-description="Plays the fairy flight with flapping wings. Press Escape to skip."
         disabled={active}
         onClick={() => makeWish(true)}
@@ -377,31 +360,12 @@ export default function WishMagic({ onAwaken }: WishMagicProps) {
           />
           <path d="M40 15V40L18 40L35 35Z" fill="#fffcec" opacity=".9" />
         </svg>
-        <span className="wish-magic-label">
-          {prefersReduced
-            ? "Watch the fairy fly"
-            : hasWished
-              ? "Make another wish"
-              : "Make a wish"}
-        </span>
       </button>
-      {prefersReduced && (
-        <button
-          className="wish-quiet"
-          type="button"
-          disabled={active}
-          onClick={() => makeWish(false)}
-        >
-          Make a quiet wish
-        </button>
-      )}
       <p className="wish-magic-status" role="status" aria-live="polite">
         {status}
       </p>
       {active && (
-        <button className="wish-magic-finish" type="button" onClick={finish}>
-          Skip
-        </button>
+        <button className="wish-magic-finish" type="button" aria-label="Skip animation" onClick={finish}><span aria-hidden="true">×</span></button>
       )}
       {active &&
         createPortal(

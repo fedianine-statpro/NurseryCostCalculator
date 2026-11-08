@@ -17,7 +17,7 @@
   border: 0;
   color: #fff0c7;
   padding: 0 22px 8px;
-  min-height: 85px;
+  min-height: 64px;
   isolation: isolate;
 }
 .wish-magic-button svg {
@@ -66,15 +66,7 @@
     -35px 41px 0 -1px #ffedb6;
   border-radius: 50%;
 }
-.wish-magic-label {
-  display: block;
-  font:
-    italic 14px/1.5 Georgia,
-    serif;
-  letter-spacing: 0.4px;
-  margin-top: 7px;
-  text-shadow: 0 2px 10px #091d31;
-}
+
 .wish-magic-status {
   position: absolute;
   width: 1px;
@@ -245,9 +237,7 @@
   .wish-magic {
     margin-top: 14px;
   }
-  .wish-magic-label {
-    font-size: 13px;
-  }
+
 }
 @media (prefers-reduced-motion: reduce) {
   .wish-magic *,
@@ -263,19 +253,4 @@
 .wish-fairy {
   width: clamp(170px, 24vw, 320px);
   height: clamp(145px, 20vw, 260px);
-}
-.wish-quiet {
-  background: transparent;
-  border: 0;
-  color: #e8d8b4;
-  font:
-    12px Georgia,
-    serif;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  padding: 10px 12px;
-  min-height: 44px;
-}
-.wish-quiet:disabled {
-  opacity: 0.5;
 }

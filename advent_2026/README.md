@@ -58,6 +58,6 @@ Vitest covers all aliases and distractors, whole-answer rejection, date boundari
 
 ## Fairy animation
 
-The live fairy uses `src/assets/winter-fairy-flying.gif`: eight transparent wing-beat frames, looping every 400 ms, while the page moves her along a flight path. Reduced-motion users see an explicit “Watch the fairy fly” control for full animation and a separate “Make a quiet wish” control for the static frame and short stationary effect. The source sheet is `artwork/fairy-wingbeats.png`; run `npm run build:fairy` to regenerate the GIF and still, then `npm run build` to refresh the directly hosted files. Trivia references for all 24 notes are in `TRIVIA-SOURCES.md`.
+The live fairy uses `src/assets/winter-fairy-flying.gif`: eight transparent wing-beat frames, looping every 400 ms, while the page moves her along a flight path. The wish control is a star with an accessible label and no visible text. Clicking it plays the full fairy animation. The source sheet is `artwork/fairy-wingbeats.png`; run `npm run build:fairy` to regenerate the GIF and still, then `npm run build` to refresh the directly hosted files. Trivia references for all 24 notes are in `TRIVIA-SOURCES.md`.
 
-Fairy assets are imported from `src/assets/`, so Vite emits content-hashed filenames and avoids stale image caches. Full animation always uses the GIF; the still frame is selected only by the explicit quiet-wish control.
+Fairy assets are imported from `src/assets/`, so Vite emits content-hashed filenames and avoids stale image caches. The star always uses the animated GIF.

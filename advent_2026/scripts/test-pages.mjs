@@ -71,7 +71,7 @@ try {
       (await gifResponse.body()).subarray(0, 6).toString(),
       "GIF89a",
     );
-    await page.getByRole("button", { name: "Skip", exact: true }).click();
+    await page.getByRole("button", { name: "Skip animation", exact: true }).click();
     await page.getByLabel("Your answer").fill("Фрэнк Гери");
     await page.getByRole("button", { name: "Reveal the magic" }).click();
     await page.locator(".clue").waitFor();
