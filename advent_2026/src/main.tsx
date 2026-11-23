@@ -95,7 +95,7 @@ function Experience({
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
   const q = questions.find((q) => q.day === selected);
-  const gift = q && !date.preview ? gifts[q.day] : undefined;
+  const gift = q ? gifts[q.day] : undefined;
   const p = selected ? progress[selected] || fresh() : fresh();
   const [choices, setChoices] = useState<string[]>([]);
   useEffect(() => {

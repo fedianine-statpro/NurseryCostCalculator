@@ -22,7 +22,7 @@ Open the URL printed by Vite. The development workshop at the bottom lets you si
 
 Save each hiding-place photo as `photo.jpg` in the matching folder under `public/images/gifts/`, from `day-01` through `day-24`. For December 21, save the photo of the books as `photo.jpg` and the photo of the spot behind glass as `photo-2.jpg` in `day-21`. Keep the surprises out of the frame.
 
-The Russian clues and photo descriptions are in `src/data/gifts.ts`. Export photos around 1600 pixels on the longest side, ideally below 500 KB. The site fits each photo without cropping, uses an illustration when a photo is missing, and shows a generic reveal during the pre-December preview.
+The Russian clues and photo descriptions are in `src/data/gifts.ts`. Export photos around 1600 pixels on the longest side, ideally below 500 KB. The site fits each photo without cropping and uses an illustration when a photo is missing. The pre-December preview reveals the real December 1 clue and photo after a correct answer.
 
 Edit quiz questions, aliases, three distractors and trivia in `src/data/questions.ts`. Matching ignores case, accents, punctuation and spacing and compares the complete normalised answer to explicit aliases. It does not use substring or fuzzy matching.
 

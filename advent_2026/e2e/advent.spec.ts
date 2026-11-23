@@ -74,9 +74,8 @@ test("preview resets on every reload without reset controls", async ({
   await expect(page.locator(".choices button")).toHaveCount(0);
   await page.getByLabel("Your answer").fill("Gehry");
   await page.getByRole("button", { name: "Reveal the magic" }).click();
-  await expect(page.locator(".clue")).toHaveText(
-    "Your secret hiding place will be revealed here.",
-  );
+  await expect(page.locator(".clue")).toContainText("розеточки и мисочки");
+  await expect(page.locator(".gift-photo")).toHaveAttribute("src", /day-01\/photo\.jpg$/);
   await expect(page.locator("aside")).toContainText("1997");
   await expect(page.locator(".success")).toHaveCount(0);
   await page.reload();
