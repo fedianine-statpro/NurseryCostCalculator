@@ -20,17 +20,9 @@ Open the URL printed by Vite. The development workshop at the bottom lets you si
 
 ## Personalise the gifts
 
-Edit `src/data/gifts.ts`. Each entry has `giftClue`, `giftImage` and `imageAlt`. Place a photo in `public/images/gifts/day-01/` (and the matching folder for each day). Example:
+Save each hiding-place photo as `photo.jpg` in the matching folder under `public/images/gifts/`, from `day-01` through `day-24`. For December 21, save the photo of the books as `photo.jpg` and the photo of the spot behind glass as `photo-2.jpg` in `day-21`. Keep the surprises out of the frame.
 
-```ts
-"1": {
-  "giftClue": "Your own hiding-place description here.",
-  "giftImage": "images/gifts/day-01/photo.webp",
-  "imageAlt": "A useful description of the hiding place"
-}
-```
-
-JPEG, PNG and WebP work. Export photographs around 1600 pixels on the longest side, ideally below 500 KB. Images fit inside the frame without cropping details. Null clues and images show an illustrated placeholder; failed image loads also fall back to that illustration. No house locations have been invented.
+The Russian clues and photo descriptions are in `src/data/gifts.ts`. Export photos around 1600 pixels on the longest side, ideally below 500 KB. The site fits each photo without cropping, uses an illustration when a photo is missing, and shows a generic reveal during the pre-December preview.
 
 Edit quiz questions, aliases, three distractors and trivia in `src/data/questions.ts`. Matching ignores case, accents, punctuation and spacing and compares the complete normalised answer to explicit aliases. It does not use substring or fuzzy matching.
 

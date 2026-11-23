@@ -18,7 +18,18 @@ import "@fontsource/great-vibes/latin-400.css";
 import WishMagic from "./components/WishMagic";
 import "./style.css";
 function App() {
-  const [override, setOverride] = useState("");
+  const [override, setOverride] = useState(() => {
+    if (!import.meta.env.DEV) return "";
+    const value = new URLSearchParams(window.location.search).get("demoDate") || "";
+    return /^2026-12-(0[1-9]|1\d|2[0-5])$/.test(value) ? value : "";
+  });
+  function changeDemoDate(value: string) {
+    setOverride(value);
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set("demoDate", value);
+    else url.searchParams.delete("demoDate");
+    window.history.replaceState(null, "", url);
+  }
   const [now, setNow] = useState(new Date());
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -50,10 +61,10 @@ function App() {
                 <input
                   type="date"
                   value={override}
-                  onChange={(e) => setOverride(e.target.value)}
+                  onChange={(e) => changeDemoDate(e.target.value)}
                 />
               </label>
-              <button onClick={() => setOverride("")}>Use real clock</button>
+              <button onClick={() => changeDemoDate("")}>Use real clock</button>
             </details>
           )}
         </>
@@ -84,6 +95,7 @@ function Experience({
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
   const q = questions.find((q) => q.day === selected);
+  const gift = q && !date.preview ? gifts[q.day] : undefined;
   const p = selected ? progress[selected] || fresh() : fresh();
   const [choices, setChoices] = useState<string[]>([]);
   useEffect(() => {
@@ -211,34 +223,28 @@ function Experience({
                       ))}
                     </div>
                   )}
-                  <p className="clue" role="status">
-                    {gifts[q.day].giftClue ||
-                      "Your secret hiding place will be revealed here."}
+                  <p className="clue" role="status" lang={gift ? "ru" : undefined}>
+                    {gift?.clue || "Your secret hiding place will be revealed here."}
                   </p>
-                  <img
-                    key={q.day}
-                    className="gift-photo"
-                    src={
-                      gifts[q.day].giftImage
-                        ? import.meta.env.BASE_URL +
-                          gifts[q.day].giftImage!.replace(/^\//, "")
-                        : import.meta.env.BASE_URL +
-                          "images/gift-illustration.webp"
-                    }
-                    alt={
-                      gifts[q.day].giftImage
-                        ? gifts[q.day].imageAlt
-                        : "An illustrated wrapped gift — photograph coming soon"
-                    }
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        import.meta.env.BASE_URL +
-                        "images/gift-illustration.webp";
-                      e.currentTarget.alt =
-                        "An illustrated gift — photograph unavailable";
-                    }}
-                    loading="lazy"
-                  />
+                  {(gift?.photos ?? [
+                    { path: "images/gift-illustration.webp", alt: "An illustrated wrapped gift" },
+                  ]).map((photo) => (
+                    <img
+                      key={photo.path}
+                      className="gift-photo"
+                      src={import.meta.env.BASE_URL + photo.path}
+                      alt={photo.alt}
+                      lang={gift ? "ru" : undefined}
+                      onError={(e) => {
+                        const img = e.currentTarget;
+                        const fallback = import.meta.env.BASE_URL + "images/gift-illustration.webp";
+                        if (img.getAttribute("src") === fallback) return;
+                        img.src = fallback;
+                        img.alt = "Иллюстрация подарка — фотография тайника недоступна";
+                      }}
+                      loading="lazy"
+                    />
+                  ))}
                   <aside>
                     <span>A little discovery · {q.answer}</span>
                     <p>{q.interestingFact}</p>

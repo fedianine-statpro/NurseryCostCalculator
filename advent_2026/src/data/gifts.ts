@@ -1,127 +1,157 @@
-export interface Gift {
-  giftClue: string | null;
-  giftImage: string | null;
-  imageAlt: string;
+interface LocationPhoto {
+  path: string;
+  alt: string;
 }
+
+interface Gift {
+  clue: string;
+  photos: LocationPhoto[];
+}
+
 export const gifts: Record<number, Gift> = {
-  "1": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  1: {
+    clue: "На кухне открой шкаф, где хранятся розеточки и мисочки для снеков. Загляни на верхнюю полку.",
+    photos: [
+      { path: "images/gifts/day-01/photo.jpg", alt: "Верхняя полка с розеточками и мисочками" },
+    ],
   },
-  "2": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  2: {
+    clue: "В зимнем саду найди Катин рюкзачок со Стичем на вешалке над микроволновкой. Загляни внутрь.",
+    photos: [
+      { path: "images/gifts/day-02/photo.jpg", alt: "Рюкзачок со Стичем над микроволновкой" },
+    ],
   },
-  "3": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  3: {
+    clue: "На кухне открой шкаф над духовкой и загляни в коробку с рожками для мороженого.",
+    photos: [
+      { path: "images/gifts/day-03/photo.jpg", alt: "Коробка с рожками в шкафу над духовкой" },
+    ],
   },
-  "4": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  4: {
+    clue: "В зимнем саду найди бежевый стеллаж ИКЕА с четырьмя ячейками. Во второй ячейке снизу загляни в розовую сумочку.",
+    photos: [
+      { path: "images/gifts/day-04/photo.jpg", alt: "Розовая сумочка во второй ячейке снизу" },
+    ],
   },
-  "5": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  5: {
+    clue: "В гардеробе под лестницей проверь карман Витиного чёрного пальто.",
+    photos: [
+      { path: "images/gifts/day-05/photo.jpg", alt: "Карман чёрного пальто" },
+    ],
   },
-  "6": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  6: {
+    clue: "В шкафу с одеждой Виктора загляни на самую нижнюю полку. Слева, за красной книгой «Room», тебя ждёт сюрприз.",
+    photos: [
+      { path: "images/gifts/day-06/photo.jpg", alt: "Красная книга «Room» слева на нижней полке" },
+    ],
   },
-  "7": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  7: {
+    clue: "В зимнем саду открой шкаф с инструментами и посмотри на второй полке сверху.",
+    photos: [
+      { path: "images/gifts/day-07/photo.jpg", alt: "Вторая полка сверху в шкафу с инструментами" },
+    ],
   },
-  "8": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  8: {
+    clue: "На кухне посмотри на самом верху шкафа, в котором находится духовка и хранятся крупы.",
+    photos: [
+      { path: "images/gifts/day-08/photo.jpg", alt: "Верх кухонного шкафа с духовкой" },
+    ],
   },
-  "9": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  9: {
+    clue: "В офисе найди плакат из Musée de Préhistoire и посмотри на его обратную сторону.",
+    photos: [
+      { path: "images/gifts/day-09/photo.jpg", alt: "Плакат из Musée de Préhistoire" },
+    ],
   },
-  "10": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  10: {
+    clue: "В зимнем саду найди коричневую коробку за книжным шкафом и загляни внутрь.",
+    photos: [
+      { path: "images/gifts/day-10/photo.jpg", alt: "Коричневая коробка за книжным шкафом" },
+    ],
   },
-  "11": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  11: {
+    clue: "В нашей спальне посмотри на маленькой полке над шкафом со спортивной одеждой Алсу.",
+    photos: [
+      { path: "images/gifts/day-11/photo.jpg", alt: "Маленькая полка над шкафом со спортивной одеждой" },
+    ],
   },
-  "12": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  12: {
+    clue: "В зимнем саду найди на верхней полке книжного шкафа белую книгу Далай-ламы. Открой её на странице 30.",
+    photos: [
+      { path: "images/gifts/day-12/photo.jpg", alt: "Белая книга Далай-ламы на верхней полке" },
+    ],
   },
-  "13": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  13: {
+    clue: "В гардеробе под лестницей загляни в рукав Витиного чёрного пальто.",
+    photos: [
+      { path: "images/gifts/day-13/photo.jpg", alt: "Рукав чёрного пальто" },
+    ],
   },
-  "14": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  14: {
+    clue: "В зимнем саду посмотри на книжном шкафу под настольным хоккеем.",
+    photos: [
+      { path: "images/gifts/day-14/photo.jpg", alt: "Место под настольным хоккеем на книжном шкафу" },
+    ],
   },
-  "15": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  15: {
+    clue: "На кухне найди шкаф, где стоят бобы. Загляни за ними на верхней полке.",
+    photos: [
+      { path: "images/gifts/day-15/photo.jpg", alt: "Бобы на верхней полке кухонного шкафа" },
+    ],
   },
-  "16": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  16: {
+    clue: "Разложи синий диван в гостиной и загляни внутрь.",
+    photos: [
+      { path: "images/gifts/day-16/photo.jpg", alt: "Синий диван в гостиной" },
+    ],
   },
-  "17": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  17: {
+    clue: "В зимнем саду загляни на среднюю полку книжного шкафа за книгой Карела Чапека.",
+    photos: [
+      { path: "images/gifts/day-17/photo.jpg", alt: "Книга Карела Чапека на средней полке" },
+    ],
   },
-  "18": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  18: {
+    clue: "В зимнем саду найди белый стеллаж ИКЕА с восемью ячейками. Посмотри в крайней левой нижней ячейке под пакетом с игрушками.",
+    photos: [
+      { path: "images/gifts/day-18/photo.jpg", alt: "Пакет с игрушками в крайней левой нижней ячейке" },
+    ],
   },
-  "19": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  19: {
+    clue: "В зимнем саду загляни на самое дно коробки с обувью.",
+    photos: [
+      { path: "images/gifts/day-19/photo.jpg", alt: "Коробка с обувью в зимнем саду" },
+    ],
   },
-  "20": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  20: {
+    clue: "В шкафу с одеждой Виктора найди белые подвесные полки. На самой верхней полке загляни под Витины плавки.",
+    photos: [
+      { path: "images/gifts/day-20/photo.jpg", alt: "Верхняя белая подвесная полка" },
+    ],
   },
-  "21": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  21: {
+    clue: "Сегодня в ванной два тайника. Первый — среди книг за унитазом, между книгой о Клее и книгой о японской архитектуре. Второй — за стеклом, сразу за коробкой с полотенцами.",
+    photos: [
+      { path: "images/gifts/day-21/photo.jpg", alt: "Книги о Клее и японской архитектуре за унитазом" },
+      { path: "images/gifts/day-21/photo-2.jpg", alt: "Коробка с полотенцами за стеклом в ванной" },
+    ],
   },
-  "22": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  22: {
+    clue: "В шкафу с одеждой Виктора загляни в чёрную коробку под вешалками.",
+    photos: [
+      { path: "images/gifts/day-22/photo.jpg", alt: "Чёрная коробка под вешалками" },
+    ],
   },
-  "23": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  23: {
+    clue: "В офисе найди коробку с бумагой на белом шкафу и загляни на самое дно.",
+    photos: [
+      { path: "images/gifts/day-23/photo.jpg", alt: "Коробка с бумагой на белом шкафу" },
+    ],
   },
-  "24": {
-    giftClue: null,
-    giftImage: null,
-    imageAlt: "Your secret gift location",
+  24: {
+    clue: "В ванной загляни за стекло. Ищи в самой глубине, за коробкой с полотенцем с фламинго.",
+    photos: [
+      { path: "images/gifts/day-24/photo.jpg", alt: "Коробка с полотенцем с фламинго за стеклом" },
+    ],
   },
 };

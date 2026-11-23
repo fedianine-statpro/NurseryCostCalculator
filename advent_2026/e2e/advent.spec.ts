@@ -1,4 +1,47 @@
 import { test, expect } from "@playwright/test";
+
+test("December 21 reveals both hiding places and falls back for a missing photo", async ({ page }) => {
+  await page.clock.install({ time: new Date("2026-12-21T12:00:00Z") });
+  await page.route("**/day-21/photo.jpg", (route) =>
+    route.fulfill({
+      contentType: "image/svg+xml",
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>',
+    }),
+  );
+  await page.route("**/day-21/photo-2.jpg", (route) => route.abort());
+  await page.goto("/");
+  await expect(page.locator(".clue")).toHaveCount(0);
+  await page.getByLabel("Your answer").fill("Scotland");
+  await page.getByRole("button", { name: "Reveal the magic" }).click();
+  await expect(page.locator(".clue")).toContainText("два тайника");
+  const photos = page.locator(".gift-photo");
+  await expect(photos).toHaveCount(2);
+  for (const photo of await photos.all()) {
+    await photo.scrollIntoViewIfNeeded();
+  }
+  await expect(photos.nth(0)).toHaveAttribute("src", /day-21\/photo\.jpg$/);
+  await expect(photos.nth(1)).toHaveAttribute("src", /gift-illustration\.webp$/);
+  await photos.nth(0).evaluate((img) => img.decode());
+  await photos.nth(1).evaluate((img) => img.decode());
+});
+
+test("local date demo shows December 9 and survives reload", async ({ page }) => {
+  await page.clock.install({ time: new Date("2026-11-20T12:00:00Z") });
+  await page.goto("/?demoDate=2026-12-09");
+  await expect(page.locator("#question-heading")).toContainText("Sanskrit");
+  await expect(page.getByRole("button", { name: /Open .* December/ })).toHaveCount(8);
+  await page.reload();
+  await expect(page.locator("#question-heading")).toContainText("Sanskrit");
+  await page.getByText("Development workshop").click();
+  await page.locator("input[type=date]").fill("2026-12-25");
+  await expect(page.getByRole("button", { name: /Open .* December/ })).toHaveCount(24);
+  await expect(page).toHaveURL(/demoDate=2026-12-25/);
+  await page.getByText("Development workshop").click();
+  await page.getByRole("button", { name: "Use real clock" }).click();
+  await expect(page.locator("#question-heading")).toContainText("Guggenheim");
+  await expect(page.getByRole("button", { name: /Open .* December/ })).toHaveCount(0);
+  await expect(page).not.toHaveURL(/demoDate/);
+});
 test("preview resets on every reload without reset controls", async ({
   page,
 }) => {
@@ -31,6 +74,9 @@ test("preview resets on every reload without reset controls", async ({
   await expect(page.locator(".choices button")).toHaveCount(0);
   await page.getByLabel("Your answer").fill("Gehry");
   await page.getByRole("button", { name: "Reveal the magic" }).click();
+  await expect(page.locator(".clue")).toHaveText(
+    "Your secret hiding place will be revealed here.",
+  );
   await expect(page.locator("aside")).toContainText("1997");
   await expect(page.locator(".success")).toHaveCount(0);
   await page.reload();
