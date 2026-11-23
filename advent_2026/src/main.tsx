@@ -183,7 +183,7 @@ function Experience({
         <section
           className={"parchment " + (celebrate ? "celebrate" : "")}
           id="experience"
-          aria-labelledby="question-heading"
+          aria-labelledby={q && p.completed ? "hiding-clue" : "question-heading"}
         >
           {selected !== date.today && (
             <button
@@ -209,9 +209,11 @@ function Experience({
               <p className="date">
                 {q.day} December <span>· {q.category}</span>
               </p>
-              <h2 id="question-heading" tabIndex={-1} ref={heading}>
-                {p.completed ? "A secret, just for you" : q.question}
-              </h2>
+              {!p.completed && (
+                <h2 id="question-heading" tabIndex={-1} ref={heading}>
+                  {q.question}
+                </h2>
+              )}
               {p.completed ? (
                 <div className="reveal">
                   {celebrate && (
@@ -223,7 +225,7 @@ function Experience({
                       ))}
                     </div>
                   )}
-                  <p className="clue" role="status" lang={gift ? "ru" : undefined}>
+                  <p id="hiding-clue" className="clue" role="status" lang={gift ? "ru" : undefined}>
                     {gift?.clue || "Your secret hiding place will be revealed here."}
                   </p>
                   {(gift?.photos ?? [
